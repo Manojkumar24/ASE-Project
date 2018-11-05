@@ -55,7 +55,7 @@ coverage.xml
 # Django stuff:
 *.log
 local_settings.py
-canteendb
+
 
 # Flask stuff:
 instance/
@@ -117,4 +117,4 @@ dmypy.json
 .idea/
 .atom/
 .vscode/
-Canteen_System_Automation/.idea/
+ASE-Project/.idea/
