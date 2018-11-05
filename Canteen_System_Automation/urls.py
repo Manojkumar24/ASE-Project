@@ -20,4 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('manager/', include('Manager.urls')),
     path('canteen/',include('history.urls')),
+    path('ec/',include('eat_at_canteen.urls')),
+
 ]

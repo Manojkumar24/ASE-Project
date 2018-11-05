@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Manager',
     'history',
+    'eat_at_canteen'
 ]
 
 MIDDLEWARE = [
