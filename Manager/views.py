@@ -61,7 +61,7 @@ def check_update_food(request):
         food_temp.Food_Price = price
         food_temp.save()
         qu = request.POST['quantity']
-        if qu > 0:
+        if int(qu) > 0:
             qu_temp = Quantity.objects.get(Food_id=f_id)
             qu_temp.quantity = qu
             qu_temp.save()
