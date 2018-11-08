@@ -11,7 +11,7 @@ class HD_FoodOrder(models.Model):
     quantity = models.PositiveIntegerField(null=False)
     price = models.FloatField(validators=[MinValueValidator(0.0)], null=False)
     Food_id = models.ForeignKey(Food_items, on_delete=models.CASCADE)
-    date = models.DateTimeField()
+    date = models.DateField()
 
 
 class HD_Address(models.Model):
