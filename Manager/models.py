@@ -26,7 +26,7 @@ class Tables(models.Model):
     availability = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.Table_id
+        return str(self.Table_id)
 
 
 class Available_Towns(models.Model):
