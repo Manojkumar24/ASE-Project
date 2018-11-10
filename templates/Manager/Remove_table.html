@@ -14,11 +14,13 @@ Remove tables<br>
         <tr>
             <th>ID</th>
             <th>Availability</th>
+            <th>Size</th>
         </tr>
         {% for items in item %}
         <tr>
             <td>{{ items.Table_id }}</td>
             <td>{{ items.availability }}</td>
+            <td>{{ items.size }}</td>
         </tr>
         {% endfor %}
         </table>
@@ -28,5 +30,6 @@ Remove tables<br>
     {{ form.errors }}
     <input type="submit" value="Remove">
 </form>
+<a href="{% url 'index' %}"><input type="button" id="index" value="Go to index" ></a>
 </body>
 </html>

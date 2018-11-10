@@ -14,11 +14,13 @@ Update table<br>
     <tr>
         <th>ID</th>
         <th>Availability</th>
+        <th>Size</th>
     </tr>
     {% for items in item %}
     <tr>
         <td>{{ items.Table_id }}</td>
         <td>{{ items.availability }}</td>
+        <td>{{ items.size }}</td>
     </tr>
     {% endfor %}
     </table>
@@ -38,6 +40,7 @@ Update table<br>
     <tr>
         <th>ID</th>
         <th>Availability</th>
+        <th>Size</th>
     </tr>
     <tr>
         <td><input type="number" value="{{ update.Table_id }}" name="Id"  id="Id" readonly="readonly" /></td>
@@ -46,6 +49,7 @@ Update table<br>
                 <option value=False>False</option>
             </select>
         </td>
+        <td><input type="number" value="{{ update.size }}" name="size" id="size" /></td>
     </tr>
     </table>
     <input type="submit" value="Update"><br>
