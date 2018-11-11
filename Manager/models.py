@@ -15,10 +15,14 @@ class Food_items(models.Model):
         return self.Food_Name
 
 
+dining_table_zone = (('Normal', 'Normal'), ('Party', 'Party'), ('Family', 'Family'))
+
+
 class Dining_Tables(models.Model):
     Table_id = models.IntegerField(null=False, unique=True, primary_key=True)
     availability = models.BooleanField(default=True)
     size = models.IntegerField(default=2)
+    zone = models.CharField(default='Normal', max_length=10, choices=dining_table_zone)
 
     def __str__(self):
         return str(self.Table_id)

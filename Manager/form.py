@@ -15,9 +15,11 @@ class get_id(forms.Form):
 
 
 class Add_tables(forms.Form):
+    Choices = (('Normal', 'Normal'), ('Party', 'Party'), ('Family', 'Family'))
     Id = forms.IntegerField()
     availability = forms.BooleanField(required=False)
     size = forms.IntegerField()
+    zone = forms.ChoiceField(choices=Choices)
 
 
 class Add_city(forms.Form):

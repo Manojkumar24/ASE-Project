@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add Towns</title>
-</head>
-<body>
-Add towns<br>
+{% extends "Manager/base.html" %}
+{% block title_block %}
+<h4>Add Town</h4>
+{% endblock %}
+{% block body_block %}
 <form  method="post" action="{% url 'add_towns' %}">
     {{ form.as_p }}
     {% csrf_token %}
     <input type="submit" value="ADD">
 </form>
-
-</body>
-</html>
+{% endblock %}
