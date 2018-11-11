@@ -6,7 +6,7 @@ class Add_food(forms.Form):
     Name = forms.CharField()
     Price = forms.FloatField()
     Quantity = forms.IntegerField()
-    image = forms.ImageField()
+    image = forms.ImageField(allow_empty_file=True)
     Category = forms.CharField()
 
 
