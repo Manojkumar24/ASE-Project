@@ -1,5 +1,6 @@
 {% extends "Manager/base.html" %}
 {% block body_block %}
+    <div class="container">
 <form  method="post" action="{% url 'remove_food' %}">
     {% if item %}
         <table>
@@ -26,7 +27,7 @@
     {{ form.as_p }}
     {% csrf_token %}
     {{ form.errors }}
-    <input type="submit" value="Remove">
+    <input type="submit" class="btn btn-primary" value="Remove">
 </form>
-<a href="{% url 'index' %}"><input type="button" id="index" value="Go to index" ></a>
+    </div>
 {% endblock %}

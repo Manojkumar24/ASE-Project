@@ -1,5 +1,10 @@
 {% extends "Manager/base.html" %}
 {% block body_block %}
+    <script>
+         $(document).ready(function() {
+    $('select').material_select();
+  });
+    </script>
 {% if item %}
     <table>
     <tr>
@@ -19,9 +24,8 @@
     </table>
     <form method="post" action="{% url 'update_table' %}">
     {% csrf_token %}
-        Enter Id :
-        <input type="number" name="f_Id" id="f_Id"><br>
-        <input type="submit" value="Update">
+        <label for="f_Id">Enter Id to Update</label><input type="number" name="f_Id" id="f_Id"><br>
+        <input type="submit" class="btn btn-primary" value="Update">
     </form>
 {% endif %}
 
@@ -38,13 +42,13 @@
     </tr>
     <tr>
         <td><input type="number" value="{{ update.Table_id }}" name="Id"  id="Id" readonly="readonly" /></td>
-        <td><select name="availability" id="availability" >
+        <td><select name="availability" id="availability">
                 <option value=True>True</option>
                 <option value=False>False</option>
             </select>
         </td>
         <td><input type="number" value="{{ update.size }}" name="size" id="size" /></td>
-        <td><select name="zone" id="zone" >
+        <td><select name="zone" id="zone">
                 <option value='Normal'>Normal</option>
                 <option value='Party'>Party</option>
                 <option value='Family'>Family</option>
@@ -52,8 +56,7 @@
         </td>
     </tr>
     </table>
-    <input type="submit" value="Update"><br>
+    <input type="submit" class="btn btn-primary" value="Update"><br>
     </form>
 {% endif %}
-<a href="{% url 'index' %}"><input type="button" id="index" value="Go to index" ></a>
 {% endblock %}

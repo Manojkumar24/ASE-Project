@@ -18,7 +18,6 @@
     {{ form.as_p }}
     {% csrf_token %}
     {{ form.errors }}
-    <input type="submit" value="Remove">
+    <input type="submit" class="btn btn-primary" value="Remove">
 </form>
-<a href="{% url 'index' %}"><input type="button" id="index" value="Go to index" ></a>
 {% endblock %}

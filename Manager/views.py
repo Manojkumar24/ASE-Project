@@ -71,11 +71,15 @@ def check_update_food(request):
 
 
 def food_home(request):
-    return render(request, 'Manager/Food_home.html')
+    item = Food_items.objects.all()
+    content = {'item': item}
+    return render(request, 'Manager/Food_home.html', content)
 
 
 def tables_home(request):
-    return render(request, 'Manager/tables_home.html')
+    item = Dining_Tables.objects.all()
+    content = {'item': item}
+    return render(request, 'Manager/tables_home.html', content)
 
 
 def remove_tables(request):
@@ -106,7 +110,9 @@ def add_tables(request):
 
 
 def town_home(request):
-    return render(request, 'Manager/town_home.html')
+    item = Available_Towns.objects.all()
+    content = {'item': item}
+    return render(request, 'Manager/town_home.html', content)
 
 
 def remove_towns(request):
