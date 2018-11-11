@@ -1,0 +1,44 @@
+{%  load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cafeteria</title>
+    <link rel = "stylesheet" type="text/css" href="{% static 'User/main.css' %}">
+</head>
+    <header>
+        <div class = "Heading">Cafeteria</div>
+        <div href="Homepage.html" class = "HomeBtn">
+            Home
+        </div>
+        <div href="#" class = "AboutBtn">
+            About us
+        </div>
+        <div href="#" class = "ContBtn">
+            Contact us
+        </div>
+        <div href="#" class = "SignInBtn" >
+            Sign in
+        </div>
+        <div href="#" class = "SignUpBtn" >
+            Sign up
+        </div>
+    </header>
+    {% block content %}
+    {% endblock %}
+    <footer>
+            <div class="Contact">
+                <h4 style="text-align: left;font-size: 30px">Contact US</h4>
+            </div>
+            <div class="Footer">
+                <ul>
+                    <li>Home</li>
+                    <li>About Us</li>
+                    <li>Contact Us</li>
+                    <li>SignIn</li>
+                    <li>SignUp</li>
+                </ul>
+            </div>
+    </footer>
+
+</html>
