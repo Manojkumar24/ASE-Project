@@ -1,29 +1,26 @@
-<!DOCTYPE html>
-{% load  staticfiles %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Update Food </title>
-    <link type="text/css" rel="stylesheet" href="{% static 'Manager/css/table_style.css' %}">
-</head>
-<body>
-Update food items<br>
-
+{% extends "Manager/base.html" %}
+{% block body_block %}
 {% if item %}
     <table>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Price</th>
-    </tr>
-    {% for items in item %}
-    <tr>
-        <td>{{ items.Food_id }}</td>
-        <td>{{ items.Food_Name }}</td>
-        <td>{{ items.Food_Price }}</td>
-    </tr>
-    {% endfor %}
-    </table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Categories</th>
+            <th>Image</th>
+        </tr>
+        {% for items in item %}
+        <tr>
+            <td>{{ items.Food_id }}</td>
+            <td>{{ items.Food_Name }}</td>
+            <td>{{ items.Food_Price }}</td>
+            <td>{{ items.quantity }}</td>
+            <td>{{ items.Category }}</td>
+            <td>{{ items.image }}</td>
+        </tr>
+        {% endfor %}
+        </table>
     <form method="post" action="{% url 'update_food' %}">
     {% csrf_token %}
         Enter Id :
@@ -36,27 +33,26 @@ Update food items<br>
     <form method="post" action="{% url 'check_update_food' %}">
     Update Values:<br>
     {% csrf_token %}
-    <table>
+    <table class="table table-bordered">
     <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Price</th>
-        {% if qu_update %}
-            <th>Quantity</th>
-        {% endif %}
+        <th>Quantity</th>
+        <th>Categories</th>
+        <th>Image</th>
     </tr>
     <tr>
         <td><input type="number" value="{{ update.Food_id }}" name="Id"  id="Id" readonly="readonly" /></td>
         <td><input type="text" value="{{ update.Food_Name }}" name="Name" id="Name" /></td>
         <td><input type="number" value="{{ update.Food_Price }}" name="Price" id="Price" /></td>
-        {% if qu_update %}
-            <td><input type="number" value="{{ qu_update.quantity }}" name="quantity" id="quantity" /></td>
-        {% endif %}
+        <td><input type="number" value="{{ update.quantity }}" name="Quantity" id="Quantity" /></td>
+        <td><input type="text" value="{{ update.Category }}" name="Category" id="Category" /></td>
+        <td><input type="file" value="{{ update.image }}" name="image" id="image" /></td>
     </tr>
     </table>
     <input type="submit" value="Update"><br>
     </form>
 {% endif %}
 <a href="{% url 'index' %}"><input type="button" id="index" value="Go to index" ></a>
-</body>
-</html>
+{% endblock %}

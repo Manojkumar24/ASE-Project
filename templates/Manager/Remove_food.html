@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-{% load  staticfiles %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Remove Food </title>
-    <link type="text/css" rel="stylesheet" href="{% static 'Manager/css/table_style.css' %}">
-</head>
-<body>
-Remove food items<br>
+{% extends "Manager/base.html" %}
+{% block body_block %}
 <form  method="post" action="{% url 'remove_food' %}">
     {% if item %}
         <table>
@@ -15,12 +7,18 @@ Remove food items<br>
             <th>ID</th>
             <th>Name</th>
             <th>Price</th>
+            <th>Quantity</th>
+            <th>Categories</th>
+            <th>Image</th>
         </tr>
         {% for items in item %}
         <tr>
             <td>{{ items.Food_id }}</td>
             <td>{{ items.Food_Name }}</td>
             <td>{{ items.Food_Price }}</td>
+            <td>{{ items.quantity }}</td>
+            <td>{{ items.Category }}</td>
+            <td>{{ items.image }}</td>
         </tr>
         {% endfor %}
         </table>
@@ -30,5 +28,5 @@ Remove food items<br>
     {{ form.errors }}
     <input type="submit" value="Remove">
 </form>
-</body>
-</html>
+<a href="{% url 'index' %}"><input type="button" id="index" value="Go to index" ></a>
+{% endblock %}

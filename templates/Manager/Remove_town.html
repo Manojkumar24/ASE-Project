@@ -1,22 +1,16 @@
-<!DOCTYPE html>
-{% load  staticfiles %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Remove towns </title>
-    <link type="text/css" rel="stylesheet" href="{% static 'Manager/css/table_style.css' %}">
-</head>
-<body>
-Remove towns<br>
+{% extends "Manager/base.html" %}
+{% block body_block %}
 <form  method="post" action="{% url 'remove_towns' %}">
     {% if item %}
         <table>
             <tr>
                 <th>Name of town</th>
+                <th>Pin code</th>
             </tr>
             {% for items in item %}
                 <tr>
                     <td>{{ items.Towns }}</td>
+                    <td>{{ items.pincode }}</td>
                 </tr>
             {% endfor %}
         </table>
@@ -26,5 +20,5 @@ Remove towns<br>
     {{ form.errors }}
     <input type="submit" value="Remove">
 </form>
-</body>
-</html>
+<a href="{% url 'index' %}"><input type="button" id="index" value="Go to index" ></a>
+{% endblock %}
