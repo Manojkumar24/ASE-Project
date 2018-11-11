@@ -1,32 +1,26 @@
-<!DOCTYPE html>
-{% load  staticfiles %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Update table </title>
-    <link type="text/css" rel="stylesheet" href="{% static 'Manager/css/table_style.css' %}">
-</head>
-<body>
-Update table<br>
-
+{% extends "Manager/base.html" %}
+{% block body_block %}
 {% if item %}
-    <table>
+    <table class="table table-bordered">
     <tr>
         <th>ID</th>
         <th>Availability</th>
+        <th>Size</th>
+        <th>Zone</th>
     </tr>
     {% for items in item %}
     <tr>
         <td>{{ items.Table_id }}</td>
         <td>{{ items.availability }}</td>
+        <td>{{ items.size }}</td>
+        <td>{{ items.zone }}</td>
     </tr>
     {% endfor %}
     </table>
     <form method="post" action="{% url 'update_table' %}">
     {% csrf_token %}
-        Enter Id :
-        <input type="number" name="f_Id" id="f_Id"><br>
-        <input type="submit" value="Update">
+        <label for="f_Id">Enter Id to Update</label><input type="number" name="f_Id" id="f_Id"><br>
+        <input type="submit" class="btn btn-primary" value="Update">
     </form>
 {% endif %}
 
@@ -34,23 +28,30 @@ Update table<br>
     <form method="post" action="{% url 'check_update_table' %}">
     Update Values:<br>
     {% csrf_token %}
-    <table>
+    <table class="table table-bordered">
     <tr>
         <th>ID</th>
         <th>Availability</th>
+        <th>Size</th>
+        <th>Zone</th>
     </tr>
     <tr>
         <td><input type="number" value="{{ update.Table_id }}" name="Id"  id="Id" readonly="readonly" /></td>
-        <td><select name="availability" id="availability" >
+        <td><select name="availability" id="availability">
                 <option value=True>True</option>
                 <option value=False>False</option>
             </select>
         </td>
+        <td><input type="number" value="{{ update.size }}" name="size" id="size" /></td>
+        <td><select name="zone" id="zone">
+                <option value='Normal'>Normal</option>
+                <option value='Party'>Party</option>
+                <option value='Family'>Family</option>
+            </select>
+        </td>
     </tr>
     </table>
-    <input type="submit" value="Update"><br>
+    <input type="submit" class="btn btn-primary" value="Update"><br>
     </form>
 {% endif %}
-<a href="{% url 'index' %}"><input type="button" id="index" value="Go to index" ></a>
-</body>
-</html>
+{% endblock %}

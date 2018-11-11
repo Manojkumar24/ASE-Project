@@ -20,10 +20,18 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('manager/', include('Manager.urls')),
     path('canteen/', include('history.urls')),
+<<<<<<< HEAD
     path('', include('Homepage.urls')),
 
 
     path('registration', include('Registration.urls')),
     #path('ec/',include('eat_at_canteen.urls'))
 
+=======
+    path('HomePage/', include('Homepage.urls')),
+    path('canteen/',include('history.urls')),
+    #path('HomePage/',include('User.urls')),
+    path('registration',include('Registration.urls')),
+    path('ec/',include('eat_at_canteen.urls'))
+>>>>>>> 7ebfe8cc2289f41ebf3612408c614a5aac040dbb
 ]

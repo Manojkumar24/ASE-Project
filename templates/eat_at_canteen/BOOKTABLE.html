@@ -1,41 +1,134 @@
 {% extends "eat_at_canteen/base.html" %}
+    {% load staticfiles %}
+
     {% block body_block %}
 <div class="jumbotron">
-<h1> Please Select </h1>
+        {% if t %}
+    <h1 style="text-align: center"> Please Select the table </h1>
 
-    <form action="{% url 'eat_at_canteen:checkout' %}"  method="POST">
-        {% csrf_token %}
-        <table>
-            <thead>
-            <th>Table No</th>
-            <th>Status</th>
-            <th>Booking</th>
-            </thead>
-            <tr>
-                <td><input type="text" name="no" value="{{ table1.Table_No }}"></td>
+    <div class="main">
 
-                {% if table1.Status == "Not Reserved" %}
-                    <td><input type="text" name="status" value="{{ table1.Status }}"></td>
-                    <td>Book <input type="checkbox" value="" name="table1"></td>
-                {% else %}
-                    <td colspan="2"><input type="text" name="status" value="{{ table1.Status }}"></td>
-                {% endif %}
 
-            </tr>
-            <tr>
-                <td><input type="text" name="no" value="{{ table2.Table_No }}"></td>
 
-                {% if table2.Status == "Not Reserved" %}
-                    <td><input type="text" name="status" value="{{ table2.Status }}"></td>
-                    <td>Book <input type="checkbox" value="" name="table2"></td>
-                {% else %}
-                    <td colspan="2"><input type="text" name="status" value="{{ table2.Status }}"></td>
-                {% endif %}
-
-            </tr>
-        </table>
-
-        <input type="submit" name="" value="CHECK OUT">
-    </form>
-    {% endblock %}
+<div id="myBtnContainer">
+  <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+  <button class="btn" onclick="filterSelection('nature')"> Normal</button>
+  <button class="btn" onclick="filterSelection('cars')"> Party</button>
+  <button class="btn" onclick="filterSelection('people')"> Family</button>
 </div>
+<form action="{% url 'eat_at_canteen:checkout' %}"  method="POST">
+        {% csrf_token %}
+<!-- Portfolio Gallery Grid -->
+<div class="row">
+
+    {% for acc in t %}
+        {% if acc.zone == "Normal" %}
+            <div class="column nature">
+                <div class="content">
+                    <img src="{% static 'eat_at_canteen/images/table.jpg' %}" alt="Mountains" style="width:100%">
+                    <h4>Table_No:{{ acc.Table_id }}</h4>
+                    <h4>Max_size:{{ acc.size }} category:{{ acc.zone }} </h4>
+                    {% if acc.availability == True %}
+                        <input type="text" value="BOOK"><input type="checkbox" value="Book" name="{{ acc.Table_id }}">
+                    {% else %}
+                        <input type="text" value="RESERVED">
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+
+    {% for acc in t %}
+        {% if acc.zone == "Party" %}
+            <div class="column cars">
+                <div class="content">
+                    <img src="{% static 'eat_at_canteen/images/table.jpg' %}" alt="Mountains" style="width:100%">
+                    <h4>Table_No:{{ acc.Table_id }}</h4>
+                    <h4>Max_size:{{ acc.size }} category:{{ acc.zone }} </h4>
+                    {% if acc.availability == True %}
+                        <input type="text" value="BOOK"><input type="checkbox" value="Book" name="{{ acc.Table_id}}">
+                    {% else %}
+                        <input type="text" value="RESERVED">
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    {% for acc in t %}
+        {% if acc.zone == "Family" %}
+            <div class="column people">
+                <div class="content">
+                    <img src="{% static 'eat_at_canteen/images/table.jpg' %}" alt="Mountains" style="width:100%">
+                    <h4>Table_No:{{ acc.Table_id }}</h4>
+                    <h4>Max_size:{{ acc.size }} category:{{ acc.zone }} </h4>
+                    {% if acc.availability == True %}
+                        <input type="text" value="BOOK"><input type="checkbox" value="Book" name="{{ acc.Table_id }}">
+                    {% else %}
+                        <input type="text" value="RESERVED">
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+<!-- END GRID -->
+</div>
+        <div style="text-content: center"><input type="submit" class="button1" value="checkout"></div>
+
+</form>
+
+<!-- END MAIN -->
+</div>
+
+<script>
+filterSelection("all")
+function filterSelection(c) {
+  var x, i;
+  x = document.getElementsByClassName("column");
+  if (c == "all") c = "";
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+  }
+}
+
+function w3AddClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
+  }
+}
+
+function w3RemoveClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);
+    }
+  }
+  element.className = arr1.join(" ");
+}
+
+
+// Add active class to the current button (highlight it)
+var btnContainer = document.getElementById("myBtnContainer");
+var btns = btnContainer.getElementsByClassName("btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function(){
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
+</script>
+{% else %}
+   NO TABLES
+{% endif %}
+</div>
+    {% endblock %}
+
