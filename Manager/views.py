@@ -99,7 +99,8 @@ def add_tables(request):
             fid = f1.cleaned_data['Id']
             availabilty = f1.cleaned_data['availability']
             size = f1.cleaned_data['size']
-            Dining_Tables.objects.create(Table_id=fid, availability=availabilty, size=size)
+            zone = f1.cleaned_data['zone']
+            Dining_Tables.objects.create(Table_id=fid, availability=availabilty, size=size, zone=zone)
             return render(request, 'Manager/tables_home.html')
     return render(request, 'Manager/Add_tables.html', {'form': f1})
 
@@ -138,9 +139,11 @@ def check_update_table(request):
         f_id = request.POST['Id']
         ava = request.POST['availability']
         size = request.POST['size']
+        zone = request.POST['zone']
         table_temp = Dining_Tables.objects.get(Table_id=f_id)
         table_temp.availability = ava
         table_temp.size = size
+        table_temp.zone = zone
         table_temp.save()
         item = Dining_Tables.objects.all()
         content = {'item': item}
