@@ -1,10 +1,13 @@
 {% extends "Manager/base.html" %}
 {% block title_block %}
-<h3>Add Tables</h3>
+Add Tables
 {% endblock %}
 {% block body_block %}
+    <div class="container">
 <form  method="post" action="{% url 'add_tables' %}">
     {{ form.as_p }}
     {% csrf_token %}
-    <input type="submit" value="ADD">
+    <input type="submit" class="btn btn-primary" value="ADD">
+</form>
+    </div>
 {% endblock %}

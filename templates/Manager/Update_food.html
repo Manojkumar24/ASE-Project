@@ -1,7 +1,8 @@
 {% extends "Manager/base.html" %}
 {% block body_block %}
+    <div class="container">
 {% if item %}
-    <table>
+    <table class="table table-bordered">
         <tr>
             <th>ID</th>
             <th>Name</th>
@@ -17,20 +18,19 @@
             <td>{{ items.Food_Price }}</td>
             <td>{{ items.quantity }}</td>
             <td>{{ items.Category }}</td>
-            <td>{{ items.image }}</td>
+            <td><img src="{{ items.image }}" alt="None"></td>
         </tr>
         {% endfor %}
         </table>
     <form method="post" action="{% url 'update_food' %}">
     {% csrf_token %}
-        Enter Id :
-        <input type="number" name="f_Id" id="f_Id"><br>
-        <input type="submit" value="Update">
+        <br><label for="f_Id">Enter Id: </label><input type="number" name="f_Id" id="f_Id"><br>
+        <input type="submit" class="btn btn-primary" value="Update">
     </form>
 {% endif %}
 
 {% if update %}
-    <form method="post" action="{% url 'check_update_food' %}">
+    <form method="post" action="{% url 'check_update_food' %}" enctype="multipart/form-data">
     Update Values:<br>
     {% csrf_token %}
     <table class="table table-bordered">
@@ -48,11 +48,11 @@
         <td><input type="number" value="{{ update.Food_Price }}" name="Price" id="Price" /></td>
         <td><input type="number" value="{{ update.quantity }}" name="Quantity" id="Quantity" /></td>
         <td><input type="text" value="{{ update.Category }}" name="Category" id="Category" /></td>
-        <td><input type="file" value="{{ update.image }}" name="image" id="image" /></td>
+        <td><input type="file" name="image" /></td>
     </tr>
     </table>
-    <input type="submit" value="Update"><br>
+    <input type="submit" class="btn btn-primary" value="Update"><br>
     </form>
 {% endif %}
-<a href="{% url 'index' %}"><input type="button" id="index" value="Go to index" ></a>
+    </div>
 {% endblock %}

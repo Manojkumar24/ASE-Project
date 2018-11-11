@@ -11,65 +11,113 @@ body{
     text-align: center;
     padding-left : 5%;
     float : left;
-    width : 83.9%;
-    padding-top : 0.5%;
-    padding-bottom: 0.15%;
-    font-size : 40px;
-    cursor : pointer;
+    width : 65.9%;
+    padding-top : 0.22%;
+    padding-bottom: 0.1%;
+    font-size : 41px;
 }
-.Option1{
+.HomeBtn{
     color : white;
     background-color : #333333;
-    font-size :20px;
+    text-decoration : none;
+    font-size : 20px ;
     width : 5.7%;
-    height : 39px;
+    height : 35px;
     text-align : center;
     padding-top : 17px;
-    margin-right: 4.9% ;
-    margin-left: 88.9%;
+    margin-left : 70.9%;
 }
-.Option2{
+.SignInBtn{
     color : white;
     background-color : #333333;
+    text-decoration : none;
+    font-size : 20px;
+    width : 5.7%;
+    height : 35px;
+    text-align : center;
+    padding-top : 17px;
+    margin-left: 88.9%;
+    margin-top: -3.4%;
+}
+.SignUpBtn{
+    color : white;
+    background-color : #333333;
+    text-decoration: none;
     font-size :20px;
     width : 5.45%;
-    height : 39px;
+    height : 36px;
+    text-align : center;
+    padding-top : 16px;
+    margin-left: 94.569%;
+    margin-top :-3.46%;
+}
+.AboutBtn{
+    color : white;
+    background-color : #333333;
+    text-decoration : none;
+    font-size : 20px ;
+    width : 5.7%;
+    height : 35px;
     text-align : center;
     padding-top : 17px;
-    margin-left: 94.569%;
-    margin-top : -3.68%;
+    margin-left : 76.6%;
+    margin-top : -3.4%;
+}
+.ContBtn{
+    color : white;
+    background-color : #333333;
+    text-decoration : none;
+    font-size : 20px ;
+    width : 6.44%;
+    height : 35px;
+    text-align : center;
+    padding-top : 17px;
+    padding-left: 2px;
+    margin-left : 82.3%;
+    margin-top : -3.45%;
 }
 .SlideImage{
     vertical-align: middle;
-    height : 40%;
-    width : 50%;
-    margin-right:25%;
-    margin-left:25%;
-}
-.Option1:hover{
-    transition : 0.5s;
-    cursor : pointer;
-    color : white;
-    background-color : orange;
-}
-.Option2:hover{
-    transition : 0.5s;
-    cursor : pointer;
-    color : white;
-    background-color : orange;
-}
-.SlideShow {
     background-color : #333333;
-    margin-top:-1.15%;
-    height : 150%;
+    margin-left:5%;
+    margin-right: 5%;
+    margin-top : 0.02%;
+    width : 90%;
+    height : 600px;
 }
+.HomeBtn:hover{
+    transition : 0.5s;
+    color : white;
+    background-color : orange;
+}
+.AboutBtn:hover{
+    transition : 0.5s;
+    color : white;
+    background-color : orange;
+}
+.ContBtn:hover{
+    transition : 0.5s;
+    color : white;
+    background-color : orange;
+}
+.SignInBtn:hover{
+    transition : 0.5s;
+    color : white;
+    background-color : orange;
+}
+.SignUpBtn:hover{
+    transition : 0.5s;
+    color : white;
+    background-color : orange;
+}
+
 .prev, .next {
     cursor: pointer;
     position: absolute;
     top: 50%;
     width: auto;
     padding: 16px;
-    margin-top: -22px;
+    margin-top: 22%;
     color: white;
     font-weight: bold;
     font-size: 18px;
@@ -86,21 +134,22 @@ body{
     left: 25%;
 }
 .prev:hover, .next:hover {
-  background-color: rgba(1,1,1,1);
+    background-color: rgba(1,1,1,1);
 }
 .dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin : 0 2px 2px;
-  background-color: white;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin : 0 2px 2px;
+    background-color: white;
+    border-radius: 50%;
+    display: inline-block;
+
 }
 
 .dot:hover {
-  background-color: darkgray;
+    transition: background-color 0.6s ease;
+    background-color: darkgray;
 }
 
 .About{
@@ -116,12 +165,13 @@ body{
 h1{
     text-align : left;
 }
-#Food{
+.Food{
     background-color: #333333;
     color : orange;
-    height : auto;
-    margin-top: -2.6%;
-    font-size: 30px;
+    height : 50%;
+    margin-top: -1.4%;
+    padding-bottom: 12.6%;
+
 }
 .card {
     background-color: bisque;
@@ -134,14 +184,39 @@ h1{
 }
 
 .card:hover {
-    box-shadow: 4px 2px 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 4px 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 .container {
+    color:#333333;
+    font-size: 20px;
     padding: 2px 16px;
 }
 .CardImage{
     width : 100%;
     height : 60%;
 
+}
+Footer{
+    background-color: orange;
+    color: white;
+    margin-top: 8.5%;
+}
+.Contact {
+    background-color: #333333;
+    text-align: center;
+    width : 40%;
+    height : 40%;
+    font-size: 20px;
+    padding-top: 12px;
+}
+.Footer{
+    background-color: #333333;
+    color: white;
+    float:left;
+    width:60%;
+    height:40%;
+    font-size: 20px;
+    margin-left: 40%;
+    margin-top: -8.35%;
 }

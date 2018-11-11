@@ -11,15 +11,15 @@ def index(request):
 def add_food(request):
     f1 = form.Add_food()
     if request.method == 'POST':
-        f1 = form.Add_food(request.POST)
+        f1 = form.Add_food(request.POST, request.FILES)
         if f1.is_valid():
             fid = f1.cleaned_data['Id']
             name = f1.cleaned_data['Name']
             price = f1.cleaned_data['Price']
             qu = f1.cleaned_data['Quantity']
-            image = f1.cleaned_data['image']
+            img = f1.cleaned_data['image']
             category = f1.cleaned_data['Category']
-            Food_items.objects.create(Food_id=fid, Food_Name=name, Food_Price=price, quantity=qu, image=image, Category=category)
+            Food_items.objects.create(Food_id=fid, Food_Name=name, Food_Price=price, quantity=qu, image=img, Category=category)
             return render(request, 'Manager/index.html')
     return render(request, 'Manager/Add_food.html', {'form': f1})
 
@@ -56,14 +56,14 @@ def check_update_food(request):
         name = request.POST['Name']
         price = request.POST['Price']
         qu = request.POST['Quantity']
-        image = request.POST['image']
+        img = request.FILES['image']
         category = request.POST['Category']
         food_temp = Food_items.objects.get(Food_id=f_id)
         food_temp.Food_Name = name
         food_temp.Food_Price = price
         food_temp.quantity = qu
-        Food_items.image = image
-        Food_items.Category = category
+        food_temp.image = img
+        food_temp.Category = category
         food_temp.save()
     item = Food_items.objects.all()
     content = {'item': item}
@@ -71,11 +71,15 @@ def check_update_food(request):
 
 
 def food_home(request):
-    return render(request, 'Manager/Food_home.html')
+    item = Food_items.objects.all()
+    content = {'item': item}
+    return render(request, 'Manager/Food_home.html', content)
 
 
 def tables_home(request):
-    return render(request, 'Manager/tables_home.html')
+    item = Dining_Tables.objects.all()
+    content = {'item': item}
+    return render(request, 'Manager/tables_home.html', content)
 
 
 def remove_tables(request):
@@ -106,7 +110,9 @@ def add_tables(request):
 
 
 def town_home(request):
-    return render(request, 'Manager/town_home.html')
+    item = Available_Towns.objects.all()
+    content = {'item': item}
+    return render(request, 'Manager/town_home.html', content)
 
 
 def remove_towns(request):

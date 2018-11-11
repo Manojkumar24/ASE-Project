@@ -1,11 +1,13 @@
 {% extends "Manager/base.html" %}
 {% block title_block %}
-<h4>Add Town</h4>
+Add Town
 {% endblock %}
 {% block body_block %}
+    <div class="container">
 <form  method="post" action="{% url 'add_towns' %}">
     {{ form.as_p }}
     {% csrf_token %}
-    <input type="submit" value="ADD">
+    <input type="submit" class="btn btn-primary" value="ADD">
 </form>
+    </div>
 {% endblock %}
