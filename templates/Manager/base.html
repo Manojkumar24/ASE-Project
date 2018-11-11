@@ -4,20 +4,19 @@
   <head>
     <meta charset="utf-8">
     <title>
-      {# Title Extensions go inside the block#}
       {% block title_block %}
 
       {% endblock %}
     </title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
   <body>
-    <nav class="navbar navbar-default navbar-static-top">
-        <ul class="nav navbar-nav">
-          <li><a class="navbar-brand" href="{% url 'index' %}">Home</a></li>
-          <li><a class="navbar-brand" href="{% url 'food_home' %}">Update Food</a></li>
-          <li><a class="navbar-brand" href="{% url 'tables_home' %}">Update Tables</a></li>
-          <li><a class="navbar-brand" href="{% url 'town_home' %}">Update Towns</a></li>
+    <nav class="nav-wrapper">
+        <ul class="left hide-on-med-and-down">
+          <li><a href="{% url 'index' %}" id="Home">Home</a></li>
+          <li><a href="{% url 'food_home' %}" id="Food">Update Food</a></li>
+          <li><a href="{% url 'tables_home' %}" id="Table">Update Tables</a></li>
+          <li><a href="{% url 'town_home' %}" id="Town">Update Towns</a></li>
         </ul>
     </nav>
 
@@ -28,9 +27,5 @@
     </div>
 
   </body>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script
-  src="https://code.jquery.com/jquery-3.2.0.min.js"
-  integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I="
-  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </html>

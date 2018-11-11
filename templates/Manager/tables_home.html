@@ -1,7 +1,24 @@
 {% extends "Manager/base.html" %}
 {% block body_block %}
-<a href="{% url 'add_tables' %}"><input type="button" id="Add" value="Add Table" ></a><br><br>
-<a href="{% url 'remove_tables' %}"><input type="button" id="Remove" value="Remove Table" ></a><br><br>
-<a href="{% url 'update_table' %}"><input type="button" id="update" value="Update" ></a><br><br>
-<a href="{% url 'index' %}"><input type="button" id="Add" value="Go to home" ></a><br><br>
+<a href="{% url 'add_tables' %}"><input type="button" class="btn btn-primary" id="Add" value="Add Table" ></a>
+<a href="{% url 'remove_tables' %}"><input type="button" class="btn btn-primary" id="Remove" value="Remove Table" ></a>
+<a href="{% url 'update_table' %}"><input type="button" class="btn btn-primary" id="update" value="Update" ></a><br>
+    {% if item %}
+        <table>
+        <tr>
+            <th>ID</th>
+            <th>Availability</th>
+            <th>Size</th>
+            <th>Zone</th>
+        </tr>
+        {% for items in item %}
+        <tr>
+            <td>{{ items.Table_id }}</td>
+            <td>{{ items.availability }}</td>
+            <td>{{ items.size }}</td>
+            <td>{{ items.zone }}</td>
+        </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
 {% endblock %}
