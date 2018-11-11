@@ -2,7 +2,7 @@
 {% block body_block %}
     <div class="container">
 {% if item %}
-    <table>
+    <table class="table table-bordered">
         <tr>
             <th>ID</th>
             <th>Name</th>
@@ -30,10 +30,10 @@
 {% endif %}
 
 {% if update %}
-    <form method="post" action="{% url 'check_update_food' %}">
+    <form method="post" action="{% url 'check_update_food' %}" enctype="multipart/form-data">
     Update Values:<br>
     {% csrf_token %}
-    <table>
+    <table class="table table-bordered">
     <tr>
         <th>ID</th>
         <th>Name</th>

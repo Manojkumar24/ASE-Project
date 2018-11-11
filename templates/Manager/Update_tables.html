@@ -1,12 +1,7 @@
 {% extends "Manager/base.html" %}
 {% block body_block %}
-    <script>
-         $(document).ready(function() {
-    $('select').material_select();
-  });
-    </script>
 {% if item %}
-    <table>
+    <table class="table table-bordered">
     <tr>
         <th>ID</th>
         <th>Availability</th>
@@ -33,7 +28,7 @@
     <form method="post" action="{% url 'check_update_table' %}">
     Update Values:<br>
     {% csrf_token %}
-    <table>
+    <table class="table table-bordered">
     <tr>
         <th>ID</th>
         <th>Availability</th>

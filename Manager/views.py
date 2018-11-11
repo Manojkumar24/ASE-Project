@@ -11,7 +11,7 @@ def index(request):
 def add_food(request):
     f1 = form.Add_food()
     if request.method == 'POST':
-        f1 = form.Add_food(request.POST)
+        f1 = form.Add_food(request.POST, request.FILES)
         if f1.is_valid():
             fid = f1.cleaned_data['Id']
             name = f1.cleaned_data['Name']
