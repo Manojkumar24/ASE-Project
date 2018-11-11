@@ -4,7 +4,7 @@ Add Food Items
 {% endblock %}
 {% block body_block %}
      <div class="container">
-<form  method="post" action="{% url 'add_food' %}">
+<form  method="post" action="{% url 'add_food' %}" enctype="multipart/form-data">
     {{ form.as_p }}
     {% csrf_token %}
     <input type="submit" class="btn btn-primary" value="ADD">

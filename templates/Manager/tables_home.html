@@ -4,7 +4,7 @@
 <a href="{% url 'remove_tables' %}"><input type="button" class="btn btn-primary" id="Remove" value="Remove Table" ></a>
 <a href="{% url 'update_table' %}"><input type="button" class="btn btn-primary" id="update" value="Update" ></a><br>
     {% if item %}
-        <table>
+        <table class="table table-bordered">
         <tr>
             <th>ID</th>
             <th>Availability</th>
