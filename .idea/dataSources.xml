@@ -21,14 +21,5 @@
         <property name="enable_load_extension" value="true" />
       </driver-properties>
     </data-source>
-    <data-source source="LOCAL" name="canteendb [2]" uuid="88e0f8b3-5997-4999-bf58-c4d3c4f4c584">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:G:\ASE\ASE-Project\canteendb</jdbc-url>
-      <driver-properties>
-        <property name="enable_load_extension" value="true" />
-      </driver-properties>
-    </data-source>
   </component>
 </project>
