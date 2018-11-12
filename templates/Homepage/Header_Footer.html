@@ -1,0 +1,48 @@
+{%  load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Cafeteria</title>
+    <link rel = "stylesheet" type="text/css" href="{% static 'User/main.css' %}"/>
+</head>
+    <header>
+        <div class = "Heading">Cafeteria</div>
+        <div class = "HomeBtn">
+            <a href="Homepage.html">Home</a>
+        </div>
+        <div  class = "AboutBtn">
+            <a href="#">About us</a>
+        </div>
+        <div class = "ContBtn">
+            <a href="#">Contact us</a>
+        </div>
+        <div class = "SignInBtn" >
+            <a href="#">Sign in</a>
+        </div>
+        <div class = "SignUpBtn" >
+            <a href="#">Sign up</a>
+        </div>
+    </header>
+    {% block content %}
+    {% endblock %}
+    <footer>
+            <div class="Contact">
+                <h4 style="text-align: left;font-size: 30px">Contact US</h4>
+                <p>
+                    Bh-2,IIIT Sricty,sricity,
+                    Chittoor,Andhra Pradesh
+                </p>
+            </div>
+            <div class="Footer">
+                <ul>
+                    <li>Home</li>
+                    <li>About Us</li>
+                    <li>Contact Us</li>
+                    <li>SignIn</li>
+                    <li>SignUp</li>
+                </ul>
+            </div>
+    </footer>
+
+</html>
