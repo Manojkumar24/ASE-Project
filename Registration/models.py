@@ -11,13 +11,14 @@ class Admin(models.Model):
     canteen_pincode = models.IntegerField(null=True)
 
 class User(models.Model):
+    user_id = models.AutoField(primary_key=True)
     firstname = models.CharField(max_length = 200)
     lastname = models.CharField(max_length=200)
     email = models.EmailField()
     password = models.CharField(max_length=50)
     address = models.CharField(max_length=250)
     city = models.CharField(max_length=150)
-    profile_pic = models.ImageField(upload_to='user_profile_pics',blank=True)
+   # profile_pic = models.ImageField(upload_to='user_profile_pics',blank=True)
 
 class Staff(models.Model):
     firstname = models.CharField(max_length = 200)

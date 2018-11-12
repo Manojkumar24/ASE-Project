@@ -15,14 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+#from Registration import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('manager/', include('Manager.urls')),
     path('canteen/', include('history.urls')),
+    path('', include('Homepage.urls')),
+    #path('ec/',include('eat_at_canteen.urls'))
     path('HomePage/', include('Homepage.urls')),
-    path('canteen/',include('history.urls')),
     #path('HomePage/',include('User.urls')),
-    path('registration',include('Registration.urls')),
-    path('ec/',include('eat_at_canteen.urls'))
+    path('registration/',include('Registration.urls')),
+    #path('ec/',include('eat_at_canteen.urls'))
+    #path('ec/',include('eat_at_canteen.urls'))
 ]

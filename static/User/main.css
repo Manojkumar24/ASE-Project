@@ -72,10 +72,35 @@ body{
     width : 6.8%;
     height : 35px;
     text-align : center;
+    padding-left: 2px;
+    padding-top : 16px;
+    margin-left: 94.569%;
+    margin-top :-3.46%;
+}
+.AboutBtn{
+    color : white;
+    background-color : #333333;
+    text-decoration : none;
+    font-size : 20px ;
+    width : 5.7%;
+    height : 35px;
+    text-align : center;
+    padding-top : 17px;
+    margin-left : 76.6%;
+    margin-top : -3.4%;
+}
+.ContBtn{
+    color : white;
+    background-color : #333333;
+    text-decoration : none;
+    font-size : 20px ;
+    width : 6.44%;
+    height : 35px;
+    text-align : center;
     padding-top : 17px;
     padding-left: 2px;
-    margin-left : 82%;
-    margin-top : -3.65%;
+    margin-left : 82.3%;
+    margin-top : -3.45%;
 }
 .SlideImage{
     vertical-align: middle;
@@ -111,7 +136,16 @@ body{
     color : white;
     background-color : orange;
 }
-
+.SignInBtn:hover{
+    transition : 0.5s;
+    color : white;
+    background-color : orange;
+}
+.SignUpBtn:hover{
+    transition : 0.5s;
+    color : white;
+    background-color : orange;
+}
 .prev, .next {
     cursor: pointer;
     position: absolute;
@@ -134,14 +168,17 @@ body{
 }
 .prev:hover, .next:hover {
     background-color: rgba(1,1,1,1);
+
     color: white;
+
+
 }
 .dot {
     cursor: pointer;
     height: 15px;
     width: 15px;
     margin : 0 2px 2px;
-    background-color: black;
+    background-color: white;
     border-radius: 50%;
     display: inline-block;
 
@@ -169,8 +206,8 @@ h1{
     background-color: #333333;
     color : orange;
     height : 50%;
-    margin-top: 0.1%;
     padding-top: 2px;
+    margin-top: -1.4%;
     padding-bottom: 12.6%;
 
 }
@@ -207,6 +244,7 @@ Footer{
     background-color: #333333;
     text-align: center;
     width : 40%;
+
     height : 60%;
     font-size: 20px;
     padding-top: 12px;
