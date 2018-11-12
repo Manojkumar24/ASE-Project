@@ -11,6 +11,7 @@ class Admin(models.Model):
     canteen_pincode = models.IntegerField(null=True)
 
 class User(models.Model):
+    user_id = models.AutoField(primary_key=True)
     firstname = models.CharField(max_length = 200)
     lastname = models.CharField(max_length=200)
     email = models.EmailField()
