@@ -2,6 +2,7 @@ body{
     background: white;
     color: #333333;
     margin-top: 0;
+    margin-bottom: 0;
     margin-left : 0;
     margin-right: 0;
 }
@@ -37,7 +38,7 @@ body{
     text-align : center;
     padding-top : 17px;
     margin-left: 88.9%;
-    margin-top: -3.4%;
+    margin-top: -3.6%;
 }
 .SignUpBtn{
     color : white;
@@ -47,6 +48,31 @@ body{
     width : 5.45%;
     height : 36px;
     text-align : center;
+    padding-top : 16px;
+    margin-left: 94.6%;
+    margin-top :-3.6%;
+}
+.AboutBtn{
+    color : white;
+    background-color : #333333;
+    text-decoration : none;
+    font-size : 20px ;
+    width : 5.7%;
+    height : 35px;
+    text-align : center;
+    padding-top : 17px;
+    margin-left : 76.3%;
+    margin-top : -3.6%;
+}
+.ContBtn{
+    color : white;
+    background-color : #333333;
+    text-decoration : none;
+    font-size : 20px ;
+    width : 6.8%;
+    height : 35px;
+    text-align : center;
+    padding-left: 2px;
     padding-top : 16px;
     margin-left: 94.569%;
     margin-top :-3.46%;
@@ -110,31 +136,42 @@ body{
     color : white;
     background-color : orange;
 }
-
+.SignInBtn:hover{
+    transition : 0.5s;
+    color : white;
+    background-color : orange;
+}
+.SignUpBtn:hover{
+    transition : 0.5s;
+    color : white;
+    background-color : orange;
+}
 .prev, .next {
     cursor: pointer;
     position: absolute;
-    top: 50%;
     width: auto;
     padding: 16px;
-    margin-top: 22%;
-    color: white;
+    margin-top: 6%;
+    color: orange;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 30px;
     transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
+    border-radius: 3px 3px 3px 3px;
 }
 .next {
     top : 42%;
-    right: 25%;
-    border-radius: 3px 0 0 3px;
+    right: 1%;
 }
 .prev {
     top : 42%;
-    left: 25%;
+    left: 1%;
 }
 .prev:hover, .next:hover {
     background-color: rgba(1,1,1,1);
+
+    color: white;
+
+
 }
 .dot {
     cursor: pointer;
@@ -169,6 +206,7 @@ h1{
     background-color: #333333;
     color : orange;
     height : 50%;
+    padding-top: 2px;
     margin-top: -1.4%;
     padding-bottom: 12.6%;
 
@@ -200,23 +238,31 @@ h1{
 Footer{
     background-color: orange;
     color: white;
-    margin-top: 8.5%;
+    margin-top: 9.5%;
 }
 .Contact {
     background-color: #333333;
     text-align: center;
     width : 40%;
-    height : 40%;
+
+    height : 60%;
     font-size: 20px;
     padding-top: 12px;
+    padding-bottom: 12px;
 }
 .Footer{
     background-color: #333333;
     color: white;
     float:left;
-    width:60%;
-    height:40%;
+    width:59.83%;
+    height:60%;
     font-size: 20px;
-    margin-left: 40%;
-    margin-top: -8.35%;
+    margin-left: 40.2%;
+    margin-top: -14.1%;
+}
+.SlideShow{
+    background-color: #333333;
+}
+li{
+    margin:1.54%
 }
