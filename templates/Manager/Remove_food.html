@@ -1,5 +1,6 @@
 {% extends "Manager/base.html" %}
 {% block body_block %}
+    {% load bootstrap %}
     <div class="container">
 <form  method="post" action="{% url 'remove_food' %}">
     {% if item %}
@@ -10,7 +11,6 @@
             <th>Price</th>
             <th>Quantity</th>
             <th>Categories</th>
-            <th>Image</th>
         </tr>
         {% for items in item %}
         <tr>
@@ -19,12 +19,11 @@
             <td>{{ items.Food_Price }}</td>
             <td>{{ items.quantity }}</td>
             <td>{{ items.Category }}</td>
-            <td><img src="{{ items.image }}" alt="None"></td>
         </tr>
         {% endfor %}
         </table>
     {% endif %}
-    {{ form.as_p }}
+    {{ form|bootstrap }}
     {% csrf_token %}
     {{ form.errors }}
     <input type="submit" class="btn btn-primary" value="Remove">
