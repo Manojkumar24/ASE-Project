@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'Registration',
     'eat_at_canteen',
     'User',
+    'bootstrapform'
 ]
 
 MIDDLEWARE = [

@@ -1,5 +1,6 @@
 {% extends "Manager/base.html" %}
 {% block body_block %}
+    {% load bootstrap %}
     <div class="container">
 <form  method="post" action="{% url 'remove_tables' %}">
     {% if item %}
@@ -20,7 +21,7 @@
     {% endfor %}
     </table>
     {% endif %}
-    {{ form.as_p }}
+    {{ form|bootstrap }}
     {% csrf_token %}
     {{ form.errors }}
     <input type="submit" class="btn btn-primary" value="Remove">
