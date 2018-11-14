@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cafeteria</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'User/main.css' %}">
+
+
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+<div class="container-fluid">
+  <div class="navbar-header">
+  </div>
+  <ul class="nav navbar-nav">
+    <li class="active"><a href="#">HOME</a></li>
+    <li><a href="#">SIGNUP</a></li>
+    <li><a href="#">SIGNIN</a></li>
+    <li><a href="#">ABOUT US</a></li>
+    <li><a href="#">CONTACT US</a></li>
+  </ul>
+</div>
+</nav>
+{% block body_block %}
+{% endblock %}
+
+</body>
+  </html>

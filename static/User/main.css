@@ -17,27 +17,9 @@ body{
     font-size : 40px;
     cursor : pointer;
 }
-.Option1{
-    color : white;
-    background-color : #333333;
-    font-size :20px;
-    width : 5.7%;
-    height : 39px;
-    text-align : center;
-    padding-top : 17px;
-    margin-right: 4.9% ;
-    margin-left: 88.9%;
-}
-.Option2{
-    color : white;
-    background-color : #333333;
-    font-size :20px;
-    width : 5.45%;
-    height : 39px;
-    text-align : center;
-    padding-top : 17px;
-    margin-left: 94.569%;
-    margin-top : -3.68%;
+.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse.navbar-nav > li > a:focus {
+    background-color: orange;
+    color: black
 }
 .SlideImage{
     vertical-align: middle;

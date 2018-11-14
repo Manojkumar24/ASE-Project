@@ -1,23 +1,7 @@
-{% load static %}
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Cafeteria</title>
-    <link rel = "stylesheet" type="text/css" href="{% static 'User/main.css' %}">
-</head>
-<body>
-    <header>
-        <div class = "Heading">cafeteria</div>
-        <div class = "Option1" >
-            Sign in
-        </div>
-        <div class = "Option2" >
-            Sign up
-        </div>
-    </header>
-    <br>
+{% extends "Homepage/base.html" %}
+{% load static %}
+{% block body_block %}
     <div class = "SlideShow">
         <img class = "SlideImage" src = "{%static "Homepage/cafeteria_01.jpg" %}" >
     </div>
@@ -62,8 +46,6 @@
         </div>
         <br>
     </div>
-</body>
-</html>
 <script type = "text/javascript">
     let slideIndex = 1;
     showSlides(slideIndex);
@@ -92,3 +74,4 @@
       dots[slideIndex-1].className += " active";
     }
 </script>
+{% endblock %}
