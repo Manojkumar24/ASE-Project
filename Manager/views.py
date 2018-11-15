@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from . import form
-from .models import Food_items, Quantity, Tables, Available_Towns
+from .models import Food_items, Dining_Tables, Available_Towns
 
 
 # Create your views here.
@@ -11,15 +11,18 @@ def index(request):
 def add_food(request):
     f1 = form.Add_food()
     if request.method == 'POST':
-        f1 = form.Add_food(request.POST)
+        f1 = form.Add_food(request.POST, request.FILES)
         if f1.is_valid():
             fid = f1.cleaned_data['Id']
             name = f1.cleaned_data['Name']
             price = f1.cleaned_data['Price']
             qu = f1.cleaned_data['Quantity']
-            f_item = Food_items.objects.create(Food_id=fid, Food_Name=name, Food_Price=price)
-            Quantity.objects.create(Food_id=f_item, quantity=qu)
-            return render(request, 'Manager/index.html')
+            # img = f1.cleaned_data['image']
+            category = f1.cleaned_data['Category']
+            Food_items.objects.create(Food_id=fid, Food_Name=name, Food_Price=price, quantity=qu, Category=category)
+            item = Food_items.objects.all()
+            content = {'item': item}
+            return render(request, 'Manager/Food_home.html', content)
     return render(request, 'Manager/Add_food.html', {'form': f1})
 
 
@@ -30,7 +33,6 @@ def remove_food(request):
         if f2.is_valid():
             fid = f2.cleaned_data['Id']
             f_item = Food_items.objects.get(Food_id__exact=fid)
-            Quantity.objects.get(Food_id__exact=fid).delete()
             f_item.delete()
             return render(request, 'Manager/index.html')
     item = Food_items.objects.all()
@@ -42,8 +44,7 @@ def update_food(request):
     if request.method == "POST":
         f_id = request.POST['f_Id']
         update = Food_items.objects.get(Food_id=f_id)
-        qu_update = Quantity.objects.get(Food_id__exact=f_id)
-        content = {'update': update, 'qu_update': qu_update}
+        content = {'update': update}
         return render(request, 'Manager/Update_food.html', content)
     else:
         item = Food_items.objects.all()
@@ -56,26 +57,31 @@ def check_update_food(request):
         f_id = request.POST['Id']
         name = request.POST['Name']
         price = request.POST['Price']
+        qu = request.POST['Quantity']
+        # img = request.FILES['image']
+        category = request.POST['Category']
         food_temp = Food_items.objects.get(Food_id=f_id)
         food_temp.Food_Name = name
         food_temp.Food_Price = price
+        food_temp.quantity = qu
+        # food_temp.image = img
+        food_temp.Category = category
         food_temp.save()
-        qu = request.POST['quantity']
-        if qu > 0:
-            qu_temp = Quantity.objects.get(Food_id=f_id)
-            qu_temp.quantity = qu
-            qu_temp.save()
     item = Food_items.objects.all()
     content = {'item': item}
     return render(request, 'Manager/Update_food.html', content)
 
 
 def food_home(request):
-    return render(request, 'Manager/Food_home.html')
+    item = Food_items.objects.all()
+    content = {'item': item}
+    return render(request, 'Manager/Food_home.html', content)
 
 
 def tables_home(request):
-    return render(request, 'Manager/tables_home.html')
+    item = Dining_Tables.objects.all()
+    content = {'item': item}
+    return render(request, 'Manager/tables_home.html', content)
 
 
 def remove_tables(request):
@@ -84,9 +90,9 @@ def remove_tables(request):
         f2 = form.get_id(request.POST)
         if f2.is_valid():
             fid = f2.cleaned_data['Id']
-            Tables.objects.get(Table_id__exact=fid).delete()
+            Dining_Tables.objects.get(Table_id__exact=fid).delete()
             return render(request, 'Manager/tables_home.html')
-    item = Tables.objects.all()
+    item = Dining_Tables.objects.all()
     content = {'form': f2, 'item': item}
     return render(request, 'Manager/Remove_table.html', content)
 
@@ -98,19 +104,25 @@ def add_tables(request):
         if f1.is_valid():
             fid = f1.cleaned_data['Id']
             availabilty = f1.cleaned_data['availability']
-            Tables.objects.create(Table_id=fid, availability=availabilty)
+            size = f1.cleaned_data['size']
+            zone = f1.cleaned_data['zone']
+            Dining_Tables.objects.create(Table_id=fid, availability=availabilty, size=size, zone=zone)
+            item = Dining_Tables.objects.all()
+            content = {'item': item}
             return render(request, 'Manager/tables_home.html')
     return render(request, 'Manager/Add_tables.html', {'form': f1})
 
 
 def town_home(request):
-    return render(request, 'Manager/town_home.html')
+    item = Available_Towns.objects.all()
+    content = {'item': item}
+    return render(request, 'Manager/town_home.html', content)
 
 
 def remove_towns(request):
-    f2 = form.Add_city()
+    f2 = form.Remove_city()
     if request.method == 'POST':
-        f2 = form.Add_city(request.POST)
+        f2 = form.Remove_city(request.POST)
         if f2.is_valid():
             fname = f2.cleaned_data['town']
             Available_Towns.objects.get(Towns__exact=fname).delete()
@@ -126,7 +138,8 @@ def add_towns(request):
         f1 = form.Add_city(request.POST)
         if f1.is_valid():
             fname = f1.cleaned_data['town']
-            Available_Towns.objects.create(Towns=fname)
+            pincode = f1.cleaned_data['pincode']
+            Available_Towns.objects.create(Towns=fname, pincode=pincode)
             return render(request, 'Manager/town_home.html')
     return render(request, 'Manager/Add_town.html', {'form': f1})
 
@@ -135,14 +148,18 @@ def check_update_table(request):
     if request.method == "POST":
         f_id = request.POST['Id']
         ava = request.POST['availability']
-        table_temp = Tables.objects.get(Table_id=f_id)
+        size = request.POST['size']
+        zone = request.POST['zone']
+        table_temp = Dining_Tables.objects.get(Table_id=f_id)
         table_temp.availability = ava
+        table_temp.size = size
+        table_temp.zone = zone
         table_temp.save()
-        item = Tables.objects.all()
+        item = Dining_Tables.objects.all()
         content = {'item': item}
         return render(request, 'Manager/Update_tables.html', content)
     else:
-        item = Tables.objects.all()
+        item = Dining_Tables.objects.all()
         content = {'item': item}
         return render(request, 'Manager/Update_tables.html', content)
 
@@ -150,10 +167,10 @@ def check_update_table(request):
 def update_table(request):
     if request.method == "POST":
         f_id = request.POST['f_Id']
-        update = Tables.objects.get(Table_id=f_id)
+        update = Dining_Tables.objects.get(Table_id=f_id)
         content = {'update': update}
         return render(request, 'Manager/Update_tables.html', content)
     else:
-        item = Tables.objects.all()
+        item = Dining_Tables.objects.all()
         content = {'item': item}
         return render(request, 'Manager/Update_tables.html', content)

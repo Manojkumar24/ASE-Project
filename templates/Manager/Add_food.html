@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add Food Items</title>
-</head>
-<body>
-Add food items<br>
-<form  method="post" action="{% url 'add_food' %}">
-    {{ form.as_p }}
+{% extends "Manager/base.html" %}
+{% block title_block %}
+{% load bootstrap %}
+Add Food Items
+{% endblock %}
+{% block body_block %}
+    <div class="container">
+<form  method="post" action="{% url 'add_food' %}" enctype="multipart/form-data">
+    {{ form|bootstrap}}
     {% csrf_token %}
-    <input type="submit" value="ADD">
+    <input type="submit" class="btn btn-primary" value="ADD">
 </form>
-
-</body>
-</html>
+    </div>
+{% endblock %}
