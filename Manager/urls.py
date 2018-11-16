@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from Manager import views
 
 
@@ -17,4 +17,5 @@ urlpatterns = [
     path('remove_towns/', views.remove_towns, name='remove_towns'),
     path('update_table/', views.update_table, name='update_table'),
     path('check_update_table/', views.check_update_table , name='check_update_table'),
+    path('history/', include('history.urls')),
 ]
