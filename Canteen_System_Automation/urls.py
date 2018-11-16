@@ -21,10 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('manager/', include('Manager.urls')),
     path('', include('Homepage.urls')),
-    #path('ec/',include('eat_at_canteen.urls'))
-    path('HomePage/', include('Homepage.urls')),
-    #path('HomePage/',include('User.urls')),
+    path('User/', include('User.urls')),
     path('registration/',include('Registration.urls')),
-    #path('ec/',include('eat_at_canteen.urls'))
-    #path('ec/',include('eat_at_canteen.urls'))
 ]
