@@ -7,27 +7,22 @@ body{
     margin-right: 0;
 }
 .Heading{
-    top:0px;
-    left:0px;
     position:absolute;
     color : orange ;
     background-color : #333333;
     text-align: center;
-    padding-left : 5%;
     float : left;
     width : 65.9%;
-    padding-top : 0.22%;
-    padding-bottom: 0.1%;
     font-size : 41px;
 }
-.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse.navbar-nav > li > a:focus {
-    background-color: orange;
-    color: black
-  }
+
+ul{
+    list-style-type: none;
+}
 .HomeBtn{
-   top:0px;
-   right:350px;
-   position: absolute;
+    top:0;
+    right:350px;
+    position: absolute;
     color : white;
     background-color : #333333;
     text-decoration : none;
