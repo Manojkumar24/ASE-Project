@@ -7,14 +7,8 @@ class foodorders(models.Model):
    username=models.CharField(max_length=256)
    quantity=models.IntegerField()
 
-class date(models.Model):
-      FROM=models.DateField(auto_now=False,auto_now_add=False)
-      TO=models.DateField(auto_now=False,auto_now_add=False)
 
 
 class new1(models.Model):
     item=models.CharField(max_length=200)
     frequency=models.IntegerField()
-from django.db import models
-
-# Create your models here.
