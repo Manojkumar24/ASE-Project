@@ -7,17 +7,22 @@ body{
     margin-right: 0;
 }
 .Heading{
+    position:absolute;
     color : orange ;
     background-color : #333333;
     text-align: center;
-    padding-left : 5%;
     float : left;
     width : 65.9%;
-    padding-top : 0.22%;
-    padding-bottom: 0.1%;
     font-size : 41px;
 }
+
+ul{
+    list-style-type: none;
+}
 .HomeBtn{
+    top:0;
+    right:350px;
+    position: absolute;
     color : white;
     background-color : #333333;
     text-decoration : none;
@@ -29,6 +34,9 @@ body{
     margin-left : 70.9%;
 }
 .SignInBtn{
+   top:49px;
+   right:280px;
+   position: absolute;
     color : white;
     background-color : #333333;
     text-decoration : none;
@@ -41,6 +49,9 @@ body{
     margin-top: -3.6%;
 }
 .SignUpBtn{
+  top:49px;
+  right:210px;
+  position: absolute;
     color : white;
     background-color : #333333;
     text-decoration: none;
@@ -53,6 +64,9 @@ body{
     margin-top :-3.6%;
 }
 .AboutBtn{
+  top:46px;
+  right:135px;
+  position: absolute;
     color : white;
     background-color : #333333;
     text-decoration : none;
@@ -65,6 +79,9 @@ body{
     margin-top : -3.6%;
 }
 .ContBtn{
+  top:47px;
+  right:47px;
+  position: absolute;
     color : white;
     background-color : #333333;
     text-decoration : none;
@@ -101,6 +118,7 @@ body{
     padding-left: 2px;
     margin-left : 82.3%;
     margin-top : -3.45%;
+
 }
 .SlideImage{
     vertical-align: middle;
@@ -205,7 +223,7 @@ h1{
 .Food{
     background-color: #333333;
     color : orange;
-    height : 50%;
+    height : 210px;
     padding-top: 2px;
     margin-top: -1.4%;
     padding-bottom: 12.6%;
@@ -235,27 +253,27 @@ h1{
     height : 60%;
 
 }
-Footer{
-    background-color: orange;
-    color: white;
-    margin-top: 9.5%;
-}
-.Contact {
-    background-color: #333333;
-    text-align: center;
-    width : 40%;
 
-    height : 60%;
+.Contact {
+    background-color:orange;
+    color:white;
+    text-align: center;
+    width : 100%;
+    top:1293px;
+    position:absolute;
+    height : 250px;
     font-size: 20px;
     padding-top: 12px;
     padding-bottom: 12px;
 }
 .Footer{
+    top:1700px;
+    right:0px;
+    position:absolute;
     background-color: #333333;
     color: white;
     float:left;
-    width:59.83%;
-    height:60%;
+    width:100%;
     font-size: 20px;
     margin-left: 40.2%;
     margin-top: -14.1%;
