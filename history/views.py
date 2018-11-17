@@ -111,4 +111,8 @@ def users2(request):
 
 
             print(dict2)
+<<<<<<< HEAD
        return render(request,'history/history1.html',context={'d1':dict2})
+=======
+       return render(request,'history/history1.html',context={'d1':dict2})
+>>>>>>> 76e5e320e1fa433c0ce48a136d140fe5e264a3bb

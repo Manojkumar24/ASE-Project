@@ -60,7 +60,11 @@ def user_login(request):
         if user:
             if user.is_active:
                 login(request,user)
+<<<<<<< HEAD
                 return HttpResponseRedirect(reverse('User:home'))
+=======
+                return HttpResponseRedirect(reverse('Registration:index'))
+>>>>>>> 76e5e320e1fa433c0ce48a136d140fe5e264a3bb
             else:
                 return HttpResponse("ACCOUNT NOT ACTIVE")
         else:

@@ -20,4 +20,8 @@ class UserProfileInfoForm(forms.ModelForm):
     class Meta():
         model = User
         fields = ('firstname','lastname','email','password','address','city')
+<<<<<<< HEAD
 """
+=======
+"""
+>>>>>>> 76e5e320e1fa433c0ce48a136d140fe5e264a3bb
