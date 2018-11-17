@@ -106,13 +106,15 @@ Footer{
     color: white;
     margin-top: 40.5%;
 }
+
 .Contact {
     background-color:orange;
+    color:white;
     text-align: center;
     width : 100%;
     margin-top:12%;
     position:absolute;
-    height : 200px;
+    height : 250px;
     font-size: 20px;
     padding-top: 12px;
     padding-bottom: 12px;
