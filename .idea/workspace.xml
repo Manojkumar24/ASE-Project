@@ -267,8 +267,16 @@
         <entry file="file://$PROJECT_DIR$/Manager/views.py">
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+<<<<<<< HEAD
+            <state relative-caret-position="164">
+              <caret line="585" selection-start-line="585" selection-end-line="585" />
+            </state>
+            <state relative-caret-position="483">
+              <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
+=======
             <state relative-caret-position="21">
               <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+>>>>>>> 3999e350df9a12fd32bd715283b7a5ed698e11cb
 =======
             <state relative-caret-position="252">
               <caret line="24" column="50" lean-forward="true" selection-start-line="24" selection-start-column="50" selection-end-line="24" selection-end-column="50" />
@@ -276,6 +284,7 @@
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
+>>>>>>> 36dbb946cc052b9283f9ea16841b2587f730e719
             </state>
           </provider>
         </entry>
@@ -616,6 +625,11 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <editor active="true" />
     <layout>
+<<<<<<< HEAD
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49710983" visible="true" weight="0.14697987" />
+      <window_info id="Structure" order="1" sideWeight="0.50289017" side_tool="true" weight="0.14697987" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4992908" visible="true" weight="0.14899328" />
+=======
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4992908" visible="true" weight="0.15100671" />
 >>>>>>> 36dbb946cc052b9283f9ea16841b2587f730e719
       <window_info id="Structure" order="1" sideWeight="0.50070924" side_tool="true" weight="0.13892618" />
@@ -866,6 +880,10 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/Canteen_System_Automation/urls.py">
+=======
+>>>>>>> 36dbb946cc052b9283f9ea16841b2587f730e719
     <entry file="file://$PROJECT_DIR$/static/User/main.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -893,7 +911,11 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/Canteen_System_Automation/settings.py">
+=======
     <entry file="file://$PROJECT_DIR$/User/views.py">
+>>>>>>> 36dbb946cc052b9283f9ea16841b2587f730e719
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
           <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
@@ -912,11 +934,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/Homepage/Homepage.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+<<<<<<< HEAD
+        <state relative-caret-position="168">
+          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/User/urls.py">
+=======
+        <state>
+          <caret column="32" selection-start-column="32" selection-end-column="32" />
+=======
         <state relative-caret-position="21">
           <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
           <folding>
             <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+>>>>>>> 3999e350df9a12fd32bd715283b7a5ed698e11cb
         </state>
       </provider>
     </entry>
@@ -924,6 +962,7 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/Manager/Add_tables.html">
+>>>>>>> 36dbb946cc052b9283f9ea16841b2587f730e719
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
         <state relative-caret-position="378">
@@ -970,11 +1009,19 @@
         <state relative-caret-position="441">
           <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
           <folding>
+<<<<<<< HEAD
+            <element signature="e#0#28#0" expanded="true" />
+=======
             <element signature="e#649#681#0" expanded="true" />
+>>>>>>> 36dbb946cc052b9283f9ea16841b2587f730e719
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/socket.py">
+=======
     <entry file="file://$PROJECT_DIR$/User/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1010,11 +1057,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-630">
           <caret line="45" column="21" lean-forward="true" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="21" />
+>>>>>>> 3999e350df9a12fd32bd715283b7a5ed698e11cb
 =======
     <entry file="file://$PROJECT_DIR$/templates/Manager/Add_food.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/static/Manager/css/image_style.css">
+>>>>>>> 36dbb946cc052b9283f9ea16841b2587f730e719
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
           <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
@@ -1024,6 +1073,17 @@
     <entry file="file://$PROJECT_DIR$/Canteen_System_Automation/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
+<<<<<<< HEAD
+          <caret line="29" column="74" selection-start-line="29" selection-start-column="74" selection-end-line="29" selection-end-column="74" />
+          <folding>
+            <element signature="n#style#0;n#p#0;n#nav#0;n#header#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h4#0;n#div#0;n#footer#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/User/UserAccount.html">
+=======
           <caret line="125" column="19" selection-start-line="125" selection-start-column="19" selection-end-line="125" selection-end-column="19" />
         </state>
       </provider>
@@ -1036,6 +1096,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Manager/models.py">
+>>>>>>> 36dbb946cc052b9283f9ea16841b2587f730e719
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="11" column="41" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
