@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'Manager/base.html' %}
+{% block body_block %}
+{% load static %}
+
+
+<body>
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">
+
+            google.charts.load('current', {'packages':['corechart']});
+
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+              var data = google.visualization.arrayToDataTable([
+              ['Task', 'Hours per Day'],
+              {% for key,value in d.items%}
+              ['{{key}}',{{value}}],
+              {%endfor%}
+            ]);
+            var options = {'title':'statistics of food items', 'width':300, 'height':200};
+
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+
+         }
+          </script>
+
+
+
+          <div class="jumbotron big-banner image-fluid">
+
+
+
+
+
+
+
+
+
+              <div class="box1">
+               <h3 class="text1">STATISTICS OF FOODITEMS</h3>
+             <br><br><br>
+                  <form method="POST" autocomplete="off">
+                    <div class="date1">
+                    {% csrf_token %}
+                    <table>
+                      <tr>
+                        <td>
+                    FROMDATE:<input type="date" name="Fromdate" required id="Fromdate">
+                       </td>
+                       <td>
+                    TODATE:<input type="date" name="Todate" required id="Todate">
+                       </td>
+                       </tr>
+
+                  </table>
+                  </div>
+                  <br><br><br>
+                  <div id="piechart"></div>
+                  <div id="chartContainer" style="height: 370px; width: 10%;"></div>
+                  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
+                  <div class="button1">
+                  <input type="submit" class="btn btn-primary black-background white" value="SUBMIT" /></div>
+                  </form>
+               </div>
+               </div>
+
+
+
+ </body>
+ {% endblock %}
+  </html>
