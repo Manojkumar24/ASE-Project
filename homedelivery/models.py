@@ -16,7 +16,7 @@ class HD_FoodOrder(models.Model):
 class HD_Address(models.Model):
     tokenId = models.ForeignKey(HD_FoodOrder, on_delete=models.CASCADE)
     city_choices= (
-        ("Sri City", "Sri City"),
+        ("Sri City", "Sri City"),   
     )
     town = models.CharField(max_length=225, choices=city_choices,default='Sri City', null=False)
     street = models.CharField(max_length=225, null=False)

@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from . import form
 from .models import Food_items, Dining_Tables, Available_Towns
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 # Create your views here.
 def index(request):
+    #if request.method == 'POST':
+        #send_mail('Test for email', 'Success', settings.EMAIL_HOST_USER, [request.POST['email']], fail_silently=True)
     return render(request, 'Manager/index.html')
 
 
@@ -17,9 +21,9 @@ def add_food(request):
             name = f1.cleaned_data['Name']
             price = f1.cleaned_data['Price']
             qu = f1.cleaned_data['Quantity']
-            # img = f1.cleaned_data['image']
+            img = f1.cleaned_data['image']
             category = f1.cleaned_data['Category']
-            Food_items.objects.create(Food_id=fid, Food_Name=name, Food_Price=price, quantity=qu, Category=category)
+            Food_items.objects.create(Food_id=fid, Food_Name=name, Food_Price=price, image=img, quantity=qu, Category=category)
             item = Food_items.objects.all()
             content = {'item': item}
             return render(request, 'Manager/Food_home.html', content)
@@ -58,13 +62,13 @@ def check_update_food(request):
         name = request.POST['Name']
         price = request.POST['Price']
         qu = request.POST['Quantity']
-        # img = request.FILES['image']
+        img = request.FILES['image']
         category = request.POST['Category']
         food_temp = Food_items.objects.get(Food_id=f_id)
         food_temp.Food_Name = name
         food_temp.Food_Price = price
         food_temp.quantity = qu
-        # food_temp.image = img
+        food_temp.image = img
         food_temp.Category = category
         food_temp.save()
     item = Food_items.objects.all()
@@ -109,7 +113,7 @@ def add_tables(request):
             Dining_Tables.objects.create(Table_id=fid, availability=availabilty, size=size, zone=zone)
             item = Dining_Tables.objects.all()
             content = {'item': item}
-            return render(request, 'Manager/tables_home.html')
+            return render(request, 'Manager/tables_home.html', content)
     return render(request, 'Manager/Add_tables.html', {'form': f1})
 
 

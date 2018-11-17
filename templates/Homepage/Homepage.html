@@ -23,39 +23,27 @@
         </div>
         <div class = "Food">
             <h1>Things that worth waiting!!</h1>
-            <div class="card">
-                <img class="CardImage" src="{%static "Homepage/Kebab.jpg" %}" alt="Avatar">
-                <div class="container">
+            {% if food %}
+                {% for food in food %}
+                    <div class="card">
+                    {%if food.image%}
+                        <img class="CardImage" src="{% static food.image.path %}" alt="Avatar">
+                    {%else%}    
+                        <img class="CardImage" src="#" alt="Avatar">
+                    {%endif%}    
+                        <div class="container">
+                            <h4><b>{{ food.Food_Name }}</b></h4>
+                            <p>Price : {{ food.Food_Price }}</p>
+                            <form>
+                                <input type="submit" value = "add to cart">
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% else %}
+                    <p>There is nothing</p>
 
-                    <form id="myform" method="POST" action="{% url 'eat_at_canteen:book' %}">
-                        <input type="text" value="Kebabs" name="food" style="border: 0"><br>
-                        Price :<input type="text" value="100" name="price" style="border: 0">
-                        <input type="submit" value = "add to cart" class="btnnew">
-                    </form>
-                </div>
-            </div>
-            <div class="card">
-                <img class="CardImage" src="{%static "Homepage/role.jpeg" %}" alt="Avatar">
-                <div class="container">
-
-                    <form id="myform" method="POST" action="{% url 'eat_at_canteen:book' %}">
-                        <input type="text" value="roles"  name="food" style="border: 0"><br>
-                        Price :<input type="text" value="100" name="price" style="border: 0">
-                        <input type="submit" value = "add to cart" class="btnnew">
-                    </form>
-                </div>
-            </div>
-            <div class="card">
-                <img class="CardImage" src="{%static "Homepage/burger.jpg" %}" alt="Avatar">
-                <div  class="container">
-
-                    <form id="myform" method="POST" action="{% url 'eat_at_canteen:book' %}">
-                        <input type="text" value="Burger" name="food" style="border: 0"><br>
-                        Price :<input type="text" value="100" name="price" style="border: 0">
-                        <input  type="submit" class="btnnew" value = "add to cart">
-                    </form>
-                </div>
-            </div>
+            {% endif %}
         </div>
 </body>
 

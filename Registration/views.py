@@ -1,42 +1,71 @@
 from django.shortcuts import render
-from Registration.forms import UserForm
-#create your views here
+from Registration.forms import UserForm,UserProfileInfoForm
+# Create your views here.
+from django.contrib.auth import authenticate,login,logout
+from django.http import HttpResponse,HttpResponseRedirect
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+
+
 
 def default(request):
     return render(request, 'Registration/Registration_01.html')
 
 
+def index(request):
+    return render(request,'Registration/index.html')
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('Homepage:home'))
+
+@login_required
+def special(request):
+    return HttpResponse("You are logged in ,Nice!")
+
 def register(request):
+    registered=False
 
-    registered = False
+    if request.method=="POST":
+        user_form=UserForm(data=request.POST)
+        profile_form=UserProfileInfoForm(data=request.POST)
 
-    if request.method == "POST":
-        user_form = UserForm(data=request.POST)
-
-        if user_form.is_valid():
-            user = user_form.save()
-            #user.check_password(user.password)
+        if user_form.is_valid() and profile_form.is_valid():
+            user=user_form.save()
+            user.set_password(user.password)
             user.save()
 
-            registered = True
+            profile=profile_form.save(commit=False)
+            profile.user=user
+
+            if 'profile_pic' in request.FILES:
+                profile.profile_pic=request.FILES['profile_pic']
+            profile.save()
+            registered=True
         else:
-            print(user_form.errors)
-
+            print(user_form.errors,profile_form.errors)
     else:
-        user_form = UserForm()
+        user_form=UserForm()
+        profile_form=UserProfileInfoForm()
+    return render(request,'Registration/register.html',{'user_form':user_form,'profile_form':profile_form,'registered':registered})
 
-    return render(request, 'Registration/Registration_02.html',{'user_form' : user_form,'registered':registered})
-"""def signup(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('home')
+def user_login(request):
+
+    if request.method=='POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        user=authenticate(username=username,password=password)
+
+        if user:
+            if user.is_active:
+                login(request,user)
+                return HttpResponseRedirect(reverse('User:home'))
+            else:
+                return HttpResponse("ACCOUNT NOT ACTIVE")
+        else:
+            print("Someone tried to login and failed")
+            print("Username: {} and password {}".format(username,password))
+            return HttpResponse("invalid login details supplied!")
     else:
-        form = UserForm()
-    return render(request, 'signup.html', {'form': form})
-"""
+        return render(request,'Registration/login.html',{})
