@@ -146,9 +146,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-#media directory
-MEDIA_ROOT=os.path.join(BASE_DIR,'media')
-MEDIA_URL='/media/'
+
 #LOGIN_URL='/Registration/user_login'
 
 #SESSION_ENGINE = django.contrib.sessions.backend.signed_cookies

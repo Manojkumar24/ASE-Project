@@ -14,8 +14,8 @@
                 {% endcomment %}<li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
                 <li><a class="navbar-link" href="{% url 'Registration:register' %}">Register</a></li>
                 {% if user.is_authenticated %}
-                <li><a class="navbar-link" href="{% url 'logout' %}">Logout</a></li>
-                <li><a class="navbar-link" href="{% url 'special' %}">Special</a></li>
+                <li><a class="navbar-link" href="{% url 'Registration:user_logout' %}">Logout</a></li>
+                {% comment %}<li><a class="navbar-link" href="{% url 'special' %}">Special</a></li>{% endcomment %}
                 {% else %}
                 <li><a class="navbar-link" href="{% url 'Registration:user_login' %}">Login</a></li>
                 {% endif %}
