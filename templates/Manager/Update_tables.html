@@ -1,6 +1,14 @@
 {% extends "Manager/base.html" %}
 {% block body_block %}
+    {% if error %}
+    <p class="errormsg">{{ error }}</p>
+    {% endif %}
 {% if item %}
+    <form method="post" action="{% url 'update_table' %}">
+    {% csrf_token %}
+        <label for="f_Id">Enter Id to Update</label><input type="number" name="f_Id" id="f_Id"><br>
+        <input type="submit" class="btn btn-primary" value="Update">
+    </form>
     <table class="table table-bordered">
     <tr>
         <th>ID</th>
@@ -17,11 +25,8 @@
     </tr>
     {% endfor %}
     </table>
-    <form method="post" action="{% url 'update_table' %}">
-    {% csrf_token %}
-        <label for="f_Id">Enter Id to Update</label><input type="number" name="f_Id" id="f_Id"><br>
-        <input type="submit" class="btn btn-primary" value="Update">
-    </form>
+ {% else %}
+    <h4>No tables to Update</h4>
 {% endif %}
 
 {% if update %}
