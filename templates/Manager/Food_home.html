@@ -3,10 +3,12 @@
     {% load static %}
     <div class="container">
 <br>
+    {% if error %}
+    <p class="errormsg">{{ error }}</p>
+    {% endif %}
 <a href="{% url 'add_food' %}"><input type="button" class="btn btn-primary" id="Add" value="Add Food" ></a>
 <a href="{% url 'remove_food' %}"><input type="button" class="btn btn-primary" id="remove" value="Remove Food" ></a>
-<a href="{% url 'update_food' %}"><input type="button" class="btn btn-primary" id="update" value="Update Food" ></a><br><br><br>
-        <p class="">Food Items:</p>
+<a href="{% url 'update_food' %}"><input type="button" class="btn btn-primary" id="update" value="Update Food" ></a>
         {% if item %}
     <table class="table table-bordered">
         <tr>
