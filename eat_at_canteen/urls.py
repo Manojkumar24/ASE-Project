@@ -22,8 +22,8 @@ urlpatterns = [
     path('index/',views.index,name='index'),
     path('order/',views.show,name='ordernew'),
     path('check/',views.check,name='checkout'),
-    path('table/',views.table,name='table')
-
+    path('table/',views.table,name='table'),
+    path('book/',views.book,name='book'),
 
 ]
 

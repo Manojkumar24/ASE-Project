@@ -26,30 +26,33 @@
             <div class="card">
                 <img class="CardImage" src="{%static "Homepage/Kebab.jpg" %}" alt="Avatar">
                 <div class="container">
-                    <h4><b>Kebabs</b></h4>
-                    <p>Price : 100Rs</p>
-                    <form>
-                        <input type="submit" value = "add to cart">
+
+                    <form id="myform" method="POST" action="{% url 'eat_at_canteen:book' %}">
+                        <input type="text" value="Kebabs" name="food" style="border: 0"><br>
+                        Price :<input type="text" value="100" name="price" style="border: 0">
+                        <input type="submit" value = "add to cart" class="btnnew">
                     </form>
                 </div>
             </div>
             <div class="card">
                 <img class="CardImage" src="{%static "Homepage/role.jpeg" %}" alt="Avatar">
                 <div class="container">
-                    <h4><b>roles</b></h4>
-                    <p>Price : 100Rs</p>
-                    <form>
-                        <input type="submit" value = "add to cart">
+
+                    <form id="myform" method="POST" action="{% url 'eat_at_canteen:book' %}">
+                        <input type="text" value="roles"  name="food" style="border: 0"><br>
+                        Price :<input type="text" value="100" name="price" style="border: 0">
+                        <input type="submit" value = "add to cart" class="btnnew">
                     </form>
                 </div>
             </div>
             <div class="card">
                 <img class="CardImage" src="{%static "Homepage/burger.jpg" %}" alt="Avatar">
-                <div class="container">
-                    <h4><b>Burger</b></h4>
-                    <p>Price : 100Rs</p>
-                    <form>
-                        <input type="submit" value = "add to cart">
+                <div  class="container">
+
+                    <form id="myform" method="POST" action="{% url 'eat_at_canteen:book' %}">
+                        <input type="text" value="Burger" name="food" style="border: 0"><br>
+                        Price :<input type="text" value="100" name="price" style="border: 0">
+                        <input  type="submit" class="btnnew" value = "add to cart">
                     </form>
                 </div>
             </div>

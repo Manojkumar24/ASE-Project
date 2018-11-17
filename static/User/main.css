@@ -282,14 +282,14 @@ Footer{
 li{
     margin:1.54%;
 }
-input{
+.btnnew{
     box-sizing: border-box;
     border: none;
     background-color: #3CBC8D;
     color: white;
     position: relative;
 }
-input:hover{
+.btnnew:hover{
     transition: 0.5s;
     box-shadow: 1px 2px 2px 1px rgba(0,0,0,0.5);
 }
