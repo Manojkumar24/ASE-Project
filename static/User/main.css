@@ -1,10 +1,7 @@
 body{
     background: white;
     color: #333333;
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left : 0;
-    margin-right: 0;
+
 }
 .Heading{
     position:absolute;
@@ -256,13 +253,13 @@ h1{
 Footer{
     background-color: orange;
     color: white;
-    margin-top: 9.5%;
+    margin-top: 40.5%;
 }
 .Contact {
     background-color:orange;
     text-align: center;
     width : 100%;
-    top:1293px;
+    margin-top:12%;
     position:absolute;
     height : 200px;
     font-size: 20px;
@@ -270,20 +267,29 @@ Footer{
     padding-bottom: 12px;
 }
 .Footer{
-    top:1700px;
-    right:0px;
     position:absolute;
     background-color: #333333;
     color: white;
     float:left;
     width:100%;
     font-size: 20px;
-    margin-left: 40.2%;
+    margin-left: 0.2%;
     margin-top: -14.1%;
 }
 .SlideShow{
     background-color: #333333;
 }
 li{
-    margin:1.54%
+    margin:1.54%;
+}
+input{
+    box-sizing: border-box;
+    border: none;
+    background-color: #3CBC8D;
+    color: white;
+    position: relative;
+}
+input:hover{
+    transition: 0.5s;
+    box-shadow: 1px 2px 2px 1px rgba(0,0,0,0.5);
 }
