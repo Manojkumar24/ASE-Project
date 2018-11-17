@@ -3,119 +3,9 @@ body{
     color: #333333;
 
 }
-.Heading{
-    position:absolute;
-    color : orange ;
-    background-color : #333333;
-    text-align: center;
-    float : left;
-    width : 65.9%;
-    font-size : 41px;
-}
 
 ul{
     list-style-type: none;
-}
-.HomeBtn{
-    top:0;
-    right:350px;
-    position: absolute;
-    color : white;
-    background-color : #333333;
-    text-decoration : none;
-    font-size : 20px ;
-    width : 5.7%;
-    height : 35px;
-    text-align : center;
-    padding-top : 17px;
-    margin-left : 70.9%;
-}
-.SignInBtn{
-   top:49px;
-   right:280px;
-   position: absolute;
-    color : white;
-    background-color : #333333;
-    text-decoration : none;
-    font-size : 20px;
-    width : 5.7%;
-    height : 35px;
-    text-align : center;
-    padding-top : 17px;
-    margin-left: 88.9%;
-    margin-top: -3.6%;
-}
-.SignUpBtn{
-  top:49px;
-  right:210px;
-  position: absolute;
-    color : white;
-    background-color : #333333;
-    text-decoration: none;
-    font-size :20px;
-    width : 5.45%;
-    height : 36px;
-    text-align : center;
-    padding-top : 16px;
-    margin-left: 94.6%;
-    margin-top :-3.6%;
-}
-.AboutBtn{
-  top:46px;
-  right:135px;
-  position: absolute;
-    color : white;
-    background-color : #333333;
-    text-decoration : none;
-    font-size : 20px ;
-    width : 5.7%;
-    height : 35px;
-    text-align : center;
-    padding-top : 17px;
-    margin-left : 76.3%;
-    margin-top : -3.6%;
-}
-.ContBtn{
-  top:47px;
-  right:47px;
-  position: absolute;
-    color : white;
-    background-color : #333333;
-    text-decoration : none;
-    font-size : 20px ;
-    width : 6.8%;
-    height : 35px;
-    text-align : center;
-    padding-left: 2px;
-    padding-top : 16px;
-    margin-left: 94.569%;
-    margin-top :-3.46%;
-}
-.AboutBtn{
-    color : white;
-    background-color : #333333;
-    text-decoration : none;
-    font-size : 20px ;
-    width : 5.7%;
-    height : 35px;
-    text-align : center;
-    padding-top : 17px;
-    margin-left : 76.6%;
-    margin-top : -3.4%;
-}
-.ContBtn{
-    color : white;
-    background-color : #333333;
-    text-decoration : none;
-    font-size : 20px ;
-    width : 6.44%;
-    height : 35px;
-    text-align : center;
-    padding-top : 17px;
-    padding-left: 2px;
-    margin-left : 82.3%;
-    margin-top : -3.45%;
-
 }
 .SlideImage{
     vertical-align: middle;
@@ -125,41 +15,6 @@ ul{
     margin-top : 0.02%;
     width : 90%;
     height : 600px;
-}
-.HomeBtn:hover{
-    transition : 0.5s;
-    color : white;
-    background-color : orange;
-}
-.AboutBtn:hover{
-    transition : 0.5s;
-    color : white;
-    background-color : orange;
-}
-.ContBtn:hover{
-    transition : 0.5s;
-    color : white;
-    background-color : orange;
-}
-.SignInBtn:hover{
-    transition : 0.5s;
-    color : white;
-    background-color : orange;
-}
-.SignUpBtn:hover{
-    transition : 0.5s;
-    color : white;
-    background-color : orange;
-}
-.SignInBtn:hover{
-    transition : 0.5s;
-    color : white;
-    background-color : orange;
-}
-.SignUpBtn:hover{
-    transition : 0.5s;
-    color : white;
-    background-color : orange;
 }
 .prev, .next {
     cursor: pointer;
@@ -183,7 +38,6 @@ ul{
 }
 .prev:hover, .next:hover {
     background-color: rgba(1,1,1,1);
-
     color: white;
 
 
@@ -220,15 +74,15 @@ h1{
 .Food{
     background-color: #333333;
     color : orange;
-    height : 210px;
-    padding-top: 2px;
+    height : 50%;
+    padding-top: 2%;
     margin-top: -1.4%;
     padding-bottom: 12.6%;
 
 }
 .card {
     background-color: bisque;
-    height : 300px;
+    height : 100%;
     box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.2);
     transition: 0.3s;
     width: 20%;
@@ -236,9 +90,6 @@ h1{
     margin-left:5%;
 }
 
-.card:hover {
-    box-shadow: 4px 2px 2px 4px rgba(0,0,0,0.5);
-}
 
 .container {
     color:#333333;
