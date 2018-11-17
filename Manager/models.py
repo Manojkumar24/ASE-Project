@@ -9,7 +9,7 @@ class Food_items(models.Model):
     Food_Price = models.FloatField()
     Category = models.CharField(max_length=255, null=True)
     quantity = models.IntegerField(default=0)
-    image = models.ImageField(null=True)
+    image = models.ImageField(upload_to='static/Manager/Foodimg/', null=True)
 
     def __str__(self):
         return self.Food_Name
