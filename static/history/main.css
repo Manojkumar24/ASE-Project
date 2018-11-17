@@ -1,13 +1,17 @@
 
 
 .big-banner{
-  background-image: url("bg01.jpeg");
+  background-image: url("bg1.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: auto;
-  width:120%;
-  height:1900px;
+  background-size: cover;
+  width:200%;
+  height:680px;
+  left:0px;
+  position:absolute;
   }
+    .dropdown-menu { background-color: #e3f2fd; }
+
 
 .c2{
   color:white;
@@ -43,34 +47,27 @@
 .site-header .navbar-nav .nav-link.active {
   font-weight: 500;
 }
-.menu{
-  width:100%;
-  height:57px;
-  background-color:#333333;
-  position:absolute;
-  top:0px;
 
-}
 .box1{
-  height:450px;
-  width:435px;
+  height:500px;
+  width:455px;
   background-color:white;
   left:400px;
-  top:650px;
+  top:70px;
   position:absolute;
 
 }
 .box2{
-  height:450px;
-  width:435px;
+  height:500px;
+  width:455px;
   background-color:white;
   left:400px;
-  top:1250px;
+  top:70px;
   position:absolute;
 
 }
 .text1{
-  color: #9C6B5B;
+  color: #333333;;
   font-family:"times new roman";
   top:10px;
   left:20px;
@@ -78,24 +75,24 @@
 
 }
 .text2{
-  color: #9C6B5B;
+  color: #333333;;
   font-family:"times new roman";
   top:10px;
   left:2px;
   position:absolute;
 
 }
-.black-background {background-color:brown;}
+
 .white {color:#ffffff;}
 
 .date1{
   position:absolute;
   left:2px;
   top:50px;
-  color: #9C6B5B;
+  color:#333333;;
 }
 .date2{
-  color: #9C6B5B;
+  color: #333333;;
 }
 .button1{
   top:400px;

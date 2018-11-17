@@ -4,6 +4,10 @@
     <div class="container">
 <form  method="post" action="{% url 'remove_tables' %}">
     {% if item %}
+    {{ form|bootstrap }}
+    {% csrf_token %}
+    {{ form.errors }}
+    <input type="submit" class="btn btn-primary" value="Remove">
     <table class="table table-bordered">
     <tr>
         <th>ID</th>
@@ -20,11 +24,9 @@
     </tr>
     {% endfor %}
     </table>
+    {% else %}
+        <h4>No Tables to remove</h4>
     {% endif %}
-    {{ form|bootstrap }}
-    {% csrf_token %}
-    {{ form.errors }}
-    <input type="submit" class="btn btn-primary" value="Remove">
 </form>
     </div>
 {% endblock %}
