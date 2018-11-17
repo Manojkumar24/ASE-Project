@@ -1,5 +1,6 @@
 {% extends "Manager/base.html" %}
 {% block body_block %}
+    {% load static %}
     <div class="container">
 <br>
 <a href="{% url 'add_food' %}"><input type="button" class="btn btn-primary" id="Add" value="Add Food" ></a>
@@ -14,6 +15,7 @@
             <th>Price</th>
             <th>Quantity</th>
             <th>Categories</th>
+            <th>Image</th>
         </tr>
         {% for items in item %}
         <tr>
@@ -22,6 +24,11 @@
             <td>{{ items.Food_Price }}</td>
             <td>{{ items.quantity }}</td>
             <td>{{ items.Category }}</td>
+            {% if items.image %}
+            <td><img class="tableimg" src="{% static items.image.path %}" alt="None"></td>
+            {% else %}
+            <td><img class="tableimg" src="#" alt="None"></td>
+            {% endif %}
         </tr>
         {% endfor %}
         </table>
