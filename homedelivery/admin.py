@@ -7,8 +7,6 @@ from .models import HD_Address, HD_FoodOrder
 
 
 
-class HD_AddressAdmin(admin.ModelAdmin):
-=======
 class HD_AddressInLine(admin.StackedInline):
     model = HD_Address
 
@@ -24,7 +22,7 @@ class HD_FoodOrderAdmin(admin.ModelAdmin):
 
 
 admin.site.register(HD_Address,HD_AddressAdmin)
-    inlines = [HD_AddressInLine]
+inlines = [HD_AddressInLine]
 
 
 admin.site.register(HD_FoodOrder, HD_FoodOrderAdmin)
