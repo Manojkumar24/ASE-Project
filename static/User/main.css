@@ -1,11 +1,15 @@
 body{
     background: white;
     margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
 }
 .navBar{
     background-color: #0088ff;
     width: 100%;
     padding-bottom: 0;
+    position: absolute;
+    margin-bottom: 10%;
 }
 .heading{
     color: whitesmoke;
@@ -37,17 +41,14 @@ body{
 .searchBtn:hover{
     box-shadow: 1px 1px 1px 1px #666666;
 }
-.Options{
+.Options ul{
     width:50%;
     float: left;
     margin-top: -2.7%;
-}
-ul {
     list-style-type: none;
     margin-left: 64.9%;
     padding-top:-3%;
 }
-
 .Options li a{
     color: #e3f2fd;
     float:left;
@@ -57,7 +58,7 @@ ul {
     width:13%;
     text-decoration: none;
     overflow: hidden;
-
+    position: relative;
 }
 .Options li a:hover{
     text-decoration: none;
@@ -124,12 +125,13 @@ ul {
 .About{
     color:white;
     background-color: #333333;
-    opacity : 1.5;
     text-align : center;
+    width: 100%;
+    height : 400px;
     margin-top:1.65%;
     padding-top: 25px;
     font-size: 25px;
-    height : 300px;
+    padding-bottom: 25px;
 }
 h1{
     text-align : left;
@@ -137,10 +139,10 @@ h1{
 .Food{
     background-color: #0088ff;
     color : white;
-    height : 50%;
+    height : 60%;
     padding-top: 2%;
-    margin-top: -1.4%;
-    padding-bottom: 12.6%;
+    margin-top: 1.4%;
+    padding-bottom: 25%;
 
 }
 .card {
@@ -175,7 +177,7 @@ h1{
     color:white;
     text-align: center;
     width : 40%;
-    margin-top:20%;
+    margin-top:0;
     margin-left: 0;
     position:absolute;
     height : 40%;
@@ -188,28 +190,29 @@ h1{
     background-color: #333333;
     color: white;
     float:left;
-    width:25%;
-    font-size: 20px;
+    width: 59.9%;
+    font-size: 10px;
     height: 40%;
     margin-left: 40.1%;
-    margin-top: 20%;
 }
 .Footer ul{
     margin-right: 10%;
     margin-left: -4%;
+    list-style-type: none;
 }
 .Footer li a{
     font-size: 20px;
     float: left;
+    color: white;
     display: block;
     padding: 1%;
-    margin-top: 5%;
+    margin-top: 1%;
     margin-right: 50%;
 }
 .Footer li a:hover{
     text-decoration: none;
-    color: white;
     transition: 0.3s;
+    color: #666666;
 }
 
 .cart{
@@ -222,4 +225,15 @@ h1{
 .cart:hover{
     transition: 0.5s;
     box-shadow: 1px 2px 2px 1px rgba(0,0,0,0.5);
+}
+.History,h1 {
+            height: 500px;
+            width: 40%;
+        }
+.History{
+    width: 50%;
+    height: 500px;
+    background-color: #0088ff;
+    color: white;
+    font-size: 30px;
 }

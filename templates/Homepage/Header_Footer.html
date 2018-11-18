@@ -10,17 +10,17 @@
     <header>
         <nav class="navBar">
               <div class="heading">Cafeteria</div>
-                    <div class="" id="">
+                    <div class="Options">
                         <form class="search">
                             <input class="searchInput" type="text" placeholder=" food!!!">
                             <button class="searchBtn" type="submit">Search</button>
                         </form>
-                        <ul class="Options">
+                        <ul>
                             <li>
                                 <a class="" href="{% url 'Homepage:home' %}">Home<span class=""></span></a>
                             </li>
                             <li class="about">
-                                <a class="" href="#">AboutUs</a>
+                                <a href="#">AboutUs</a>
                             </li>
                             <li class="cont">
                                 <a  href="#">ContactUs</a>
@@ -28,7 +28,7 @@
                             {% if user.is_authenticated %}
                                 <li>
                                     <!--img class="proPic" src="{%static request.user.profile_pic.path %}" --->
-                                    <a class="Username">{{ request.user.username }}</a>
+                                    <a>{{ request.user.username }}</a>
                                 </li>
                                 <li class="logout">
                                     <a class="" href="{% url 'Registration:user_logout' %}">LogOut</a>
@@ -63,7 +63,7 @@
                     {% if user.is_authenticated %}
                         <li>
                             <!--img class="proPic" src="{%static request.user.profile_pic.path %}" --->
-                            <a class="Username">{{ request.user.username }}</a>
+                            <a class="logout">{{ request.user.username }}</a>
                         </li>
                         <li class="logout">
                             <a class="" href="{% url 'Registration:user_logout' %}">LogOut</a>
