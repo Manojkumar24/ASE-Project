@@ -9,6 +9,7 @@ body{
     width: 100%;
     padding-bottom: 0;
     position: absolute;
+    margin-bottom: 10%;
 }
 .heading{
     color: whitesmoke;
@@ -57,7 +58,7 @@ body{
     width:13%;
     text-decoration: none;
     overflow: hidden;
-
+    position: relative;
 }
 .Options li a:hover{
     text-decoration: none;
@@ -124,12 +125,13 @@ body{
 .About{
     color:white;
     background-color: #333333;
-    opacity : 1.5;
     text-align : center;
+    width: 100%;
+    height : 400px;
     margin-top:1.65%;
     padding-top: 25px;
     font-size: 25px;
-    height : 300px;
+    padding-bottom: 25px;
 }
 h1{
     text-align : left;
@@ -139,7 +141,7 @@ h1{
     color : white;
     height : 60%;
     padding-top: 2%;
-    margin-top: -1.4%;
+    margin-top: 1.4%;
     padding-bottom: 25%;
 
 }
@@ -224,9 +226,13 @@ h1{
     transition: 0.5s;
     box-shadow: 1px 2px 2px 1px rgba(0,0,0,0.5);
 }
-.History,h1{
+.History,h1 {
+            height: 500px;
+            width: 40%;
+        }
+.History{
+    width: 50%;
     height: 500px;
-    width: 40%;
     background-color: #0088ff;
     color: white;
     font-size: 30px;
