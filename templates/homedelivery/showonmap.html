@@ -1,0 +1,118 @@
+{% block body_block %}
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Google Maps APIs</title>
+
+	<style>,
+p{
+	height: 100%;
+	margin: 0;
+	padding: 0; 
+}
+#map {
+	height: 100%;
+}
+
+
+         </style>
+</head>
+
+<p>
+
+	<div id="map"></div>
+
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
+{% csrf_token %}
+ <script type="text/javascript">
+  var delay = 100;
+  var infowindow = new google.maps.InfoWindow();
+  var latlng = new google.maps.LatLng(17.3850, 78.4867);
+  var mapOptions = {
+    zoom: 15,
+    center: latlng,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+  var geocoder = new google.maps.Geocoder(); 
+  var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+  var bounds = new google.maps.LatLngBounds();
+
+  function geocodeAddress(address, next) {
+    geocoder.geocode({address:address}, function (results,status)
+      { 
+         if (status == google.maps.GeocoderStatus.OK) {
+          var p = results[0].geometry.location;
+          var lat=p.lat();
+          var lng=p.lng();
+          createMarker(address,lat,lng);
+        }
+        else {
+           if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
+            nextAddress--;
+            delay++;
+          } else {
+                        }   
+        }
+        next();
+      }
+    );
+  }
+ function createMarker(add,lat,lng) {
+   var contentString = add;
+   var marker = new google.maps.Marker({
+     position: new google.maps.LatLng(lat,lng),
+     map: map,
+           });
+
+  google.maps.event.addListener(marker, 'click', function() {
+     infowindow.setContent(contentString); 
+     infowindow.open(map,marker);
+   });
+
+   bounds.extend(marker.position);
+
+ }
+  var locations = [
+           'Hydernagar,hyderabad, India',
+           'Kompally,hyderabad, India',
+           'Chennai, India',
+           //'Bangaluru, Karnataka, India',
+           'kukatpally,hyderabad India',
+           //'Gurgaon, Haryana, India',
+           //'Cannaught Place, New Delhi, India',
+           //'Bandra, Mumbai, India',
+           //'Nainital, Uttranchal, India',
+           //'Guwahati, India',
+           //'West Bengal, India',
+           //'Jammu, India',
+           //'Kanyakumari, India',
+           //'Kerala, India',
+           //'Himachal Pradesh, India',
+           //'Shillong, India',
+           //'Chandigarh, India',
+           //'Dwarka, New Delhi, India',
+           //'Pune, India',
+           //'Indore, India',
+           //'Orissa, India',
+           //'Shimla, India',
+           //'Gujarat, India'
+  ];
+  //locations=[];
+  var userloc = "{{ location }}";
+  //var userloc = 'Patna, Bihar';
+  locations.push(userloc);
+  var nextAddress = 0;
+  function theNext() {
+    if (nextAddress < locations.length) {
+      setTimeout('geocodeAddress("'+locations[nextAddress]+'",theNext)', delay);
+      nextAddress++;
+    } else {
+      map.fitBounds(bounds);
+    }
+  }
+ theNext();
+
+</script>
+</p>
+{% endblock body_block %}
+
