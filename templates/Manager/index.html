@@ -1,0 +1,8 @@
+{% extends "Manager/base.html" %}
+{% block body_block %}
+<form action="{% url 'index' %}" method="post">
+{% csrf_token %}
+    Email: <input type="email" name="email">
+    <input type="submit">
+</form>
+{% endblock %}

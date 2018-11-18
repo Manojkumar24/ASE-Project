@@ -1,0 +1,59 @@
+{% extends "Manager/base.html" %}
+{% block body_block %}
+    {% if error %}
+    <p class="errormsg">{{ error }}</p>
+    {% endif %}
+{% if item %}
+    <table class="table table-bordered table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Availability</th>
+        <th>Size</th>
+        <th>Zone</th>
+    </tr>
+    {% for items in item %}
+    <tr>
+        <td><a href="{% url 'update_table' id=items.Table_id %}">{{ items.Table_id }}</a></td>
+        <td>{{ items.availability }}</td>
+        <td>{{ items.size }}</td>
+        <td>{{ items.zone }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+ {% else %}
+    {% if not update %}
+    <h4>No tables to Update</h4>
+    {% endif %}
+{% endif %}
+
+{% if update %}
+    <form method="post" action="{% url 'check_update_table' %}">
+    Update Values:<br>
+    {% csrf_token %}
+    <table class="table table-bordered table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Availability</th>
+        <th>Size</th>
+        <th>Zone</th>
+    </tr>
+    <tr>
+        <td><input type="number" value="{{ update.Table_id }}" name="Id"  id="Id" readonly="readonly" /></td>
+        <td><select name="availability" id="availability">
+                <option value=True>True</option>
+                <option value=False>False</option>
+            </select>
+        </td>
+        <td><input type="number" value="{{ update.size }}" name="size" id="size" /></td>
+        <td><select name="zone" id="zone">
+                <option value='Normal'>Normal</option>
+                <option value='Party'>Party</option>
+                <option value='Family'>Family</option>
+            </select>
+        </td>
+    </tr>
+    </table>
+    <input type="submit" class="btn btn-primary" value="Update"><br>
+    </form>
+{% endif %}
+{% endblock %}
