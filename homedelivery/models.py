@@ -7,6 +7,7 @@ from django.utils import timezone
 
 
 class HD_FoodOrder(models.Model):
+    id=models.AutoField()
     tokenId = models.AutoField(primary_key=True)
     quantity = models.PositiveIntegerField(null=False)
     price = models.FloatField(validators=[MinValueValidator(0.0)], null=False)

@@ -20,7 +20,7 @@ def submit(request):
     town = request.POST['town']
     phone_number = request.POST['phone_number']
     hd_address = HD_Address.objects.create(tokenId=HD_FoodOrder.objects.get(
-        tokenId=2), street=street, dNo=dNo, town=town, phone_number=phone_number)
+        tokenId=1), street=street, dNo=dNo, town=town, phone_number=phone_number)
     return HttpResponse('Saved')
 
 
