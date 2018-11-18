@@ -1,8 +1,12 @@
 from django.urls import path
 from . import views
+
+app_name = 'history'
 urlpatterns = [
 
-path('model2/',views.users,name='canteen-model2'),
-#path('model1/',views.chart,name='canteen-model3'),
-#path('model1/dummy/',views.dummy,name='canteen-modl4'),
+path('',views.users,name='basic'),
+
+path('statistics/',views.users1,name='statistics'),
+
+path('analysis/',views.users2,name='analysis'),
 ]

@@ -1,12 +1,10 @@
 {% extends "Manager/base.html" %}
 {% block body_block %}
-    <script>
-         $(document).ready(function() {
-    $('select').material_select();
-  });
-    </script>
+    {% if error %}
+    <p class="errormsg">{{ error }}</p>
+    {% endif %}
 {% if item %}
-    <table>
+    <table class="table table-bordered table-striped">
     <tr>
         <th>ID</th>
         <th>Availability</th>
@@ -15,25 +13,24 @@
     </tr>
     {% for items in item %}
     <tr>
-        <td>{{ items.Table_id }}</td>
+        <td><a href="{% url 'update_table' id=items.Table_id %}">{{ items.Table_id }}</a></td>
         <td>{{ items.availability }}</td>
         <td>{{ items.size }}</td>
         <td>{{ items.zone }}</td>
     </tr>
     {% endfor %}
     </table>
-    <form method="post" action="{% url 'update_table' %}">
-    {% csrf_token %}
-        <label for="f_Id">Enter Id to Update</label><input type="number" name="f_Id" id="f_Id"><br>
-        <input type="submit" class="btn btn-primary" value="Update">
-    </form>
+ {% else %}
+    {% if not update %}
+    <h4>No tables to Update</h4>
+    {% endif %}
 {% endif %}
 
 {% if update %}
     <form method="post" action="{% url 'check_update_table' %}">
     Update Values:<br>
     {% csrf_token %}
-    <table>
+    <table class="table table-bordered table-striped">
     <tr>
         <th>ID</th>
         <th>Availability</th>

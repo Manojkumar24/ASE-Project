@@ -1,23 +1,9 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Cafeteria</title>
-    <link rel = "stylesheet" type="text/css" href="{% static 'User/main.css' %}">
-</head>
+{% extends 'Homepage/Header_Footer.html' %}
+{% load static %}
+{% block content %}
 <body>
-    <header>
-        <div class = "Heading">cafeteria</div>
-        <div class = "Option1" >
-            Sign in
-        </div>
-        <div class = "Option2" >
-            Sign up
-        </div>
-    </header>
-    <br>
     <div class = "SlideShow">
         <img class = "SlideImage" src = "{%static "Homepage/cafeteria_01.jpg" %}" >
     </div>
@@ -30,56 +16,46 @@
       <span class="dot" onclick="currentSlide(1)"></span>
       <span class="dot" onclick="currentSlide(2)"></span>
     </div>
-    <div>
-        <div class = "About">
+
+        <div class="About">
             <h1>About</h1>
             Our Service is Wonderful to experience....
         </div>
-        <div id = "Food">
-            <h1>Things that worth waiting!!</h1>
-            <div class="card">
-                <img class="CardImage" src="{%static "Homepage/Kebab.jpg" %}" alt="Avatar">
-                <div class="container">
-                    <h4><b>Kebabs</b></h4>
-                    <p>Price : 100Rs</p>
-                </div>
+        <div class = "Food">
+            <h1>Things that are worth waiting!!</h1>
+            {% if food %}
+                {% for food in food %}
+                    <div class="card">
+                        <img class="CardImage" src="{% static food.image.path %}" alt="Avatar">
+                        <div class="container">
+                            <h4><b>{{ food.Food_Name }}</b></h4>
+                            <p>Price : {{ food.Food_Price }}</p>
+                            <form>
+                                <input class="cart" type="submit" value = "add to cart">
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% else %}
+                    <p>There is nothing</p>
 
-            </div>
-            <div class="card">
-                <img class="CardImage" src="{%static "Homepage/role.jpeg" %}" alt="Avatar">
-                <div class="container">
-                    <h4><b>roles</b></h4>
-                    <p>Price : 100Rs</p>
-                </div>
-            </div>
-            <div class="card">
-                <img class="CardImage" src="{%static "Homepage/burger.jpg" %}" alt="Avatar">
-                <div class="container">
-                    <h4><b>roles</b></h4>
-                    <p>Price : 100Rs</p>
-                </div>
-            </div>
+            {% endif %}
         </div>
-        <br>
-    </div>
 </body>
-</html>
-<script type = "text/javascript">
-    let slideIndex = 1;
-    showSlides(slideIndex);
 
+<script type = "text/javascript">
+    var slideIndex = 1;
+    showSlides(slideIndex);
     function plusSlides(n) {
         showSlides(slideIndex += n);
     }
-
     function currentSlide(n) {
       showSlides(slideIndex = n);
     }
-
     function showSlides(n) {
-      let i;
-      let slides = document.getElementsByClassName("SlideShow");
-      let dots = document.getElementsByClassName("dot");
+      var i;
+      var slides = document.getElementsByClassName("SlideShow");
+      var dots = document.getElementsByClassName("dot");
       if (n > slides.length) {slideIndex = 1}
       if (n < 1) {slideIndex = slides.length}
       for (i = 0; i < slides.length; i++) {
@@ -92,3 +68,5 @@
       dots[slideIndex-1].className += " active";
     }
 </script>
+{% endblock %}
+</html>

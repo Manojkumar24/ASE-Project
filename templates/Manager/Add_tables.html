@@ -1,11 +1,12 @@
 {% extends "Manager/base.html" %}
 {% block title_block %}
+    {% load bootstrap %}
 Add Tables
 {% endblock %}
 {% block body_block %}
     <div class="container">
 <form  method="post" action="{% url 'add_tables' %}">
-    {{ form.as_p }}
+    {{ form|bootstrap }}
     {% csrf_token %}
     <input type="submit" class="btn btn-primary" value="ADD">
 </form>

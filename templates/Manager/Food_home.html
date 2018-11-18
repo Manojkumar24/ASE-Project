@@ -1,13 +1,16 @@
 {% extends "Manager/base.html" %}
 {% block body_block %}
+    {% load static %}
     <div class="container">
 <br>
+    {% if error %}
+    <p class="errormsg">{{ error }}</p>
+    {% endif %}
 <a href="{% url 'add_food' %}"><input type="button" class="btn btn-primary" id="Add" value="Add Food" ></a>
 <a href="{% url 'remove_food' %}"><input type="button" class="btn btn-primary" id="remove" value="Remove Food" ></a>
-<a href="{% url 'update_food' %}"><input type="button" class="btn btn-primary" id="update" value="Update Food" ></a><br><br><br>
-        <p class="">Food Items:</p>
+<a href="{% url 'update_food' f_id=0 %}"><input type="button" class="btn btn-primary" id="update" value="Update Food" ></a>
         {% if item %}
-    <table>
+    <table class="table table-bordered table-striped">
         <tr>
             <th>ID</th>
             <th>Name</th>
@@ -23,7 +26,11 @@
             <td>{{ items.Food_Price }}</td>
             <td>{{ items.quantity }}</td>
             <td>{{ items.Category }}</td>
-            <td>{{ items.image }}</td>
+            {% if items.image %}
+            <td><img class="tableimg" src="{% static items.image.path %}" alt="None"></td>
+            {% else %}
+            <td><img class="tableimg" src="#" alt="None"></td>
+            {% endif %}
         </tr>
         {% endfor %}
         </table>

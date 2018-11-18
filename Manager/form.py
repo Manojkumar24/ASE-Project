@@ -1,4 +1,5 @@
 from django import forms
+from django.core.validators import FileExtensionValidator
 
 
 class Add_food(forms.Form):
@@ -6,7 +7,8 @@ class Add_food(forms.Form):
     Name = forms.CharField()
     Price = forms.FloatField()
     Quantity = forms.IntegerField()
-    image = forms.ImageField()
+    image = forms.FileField(allow_empty_file=True,
+                            validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])])
     Category = forms.CharField()
 
 
