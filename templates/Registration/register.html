@@ -13,6 +13,7 @@
         {% csrf_token %}
         {{ user_form|bootstrap }}
         {{ profile_form|bootstrap }}
+        <a href="#"><input type="button" name="verify" value = "Verify Email"></a>
         <input type="submit" name="" value="Register">
     </form>
     {% endif %}

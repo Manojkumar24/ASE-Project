@@ -14,7 +14,6 @@ from django.contrib.auth.decorators import login_required
 def default(request):
     return render(request, 'Registration/Registration_01.html')
 
-count = 0
 def index(request):
     return render(request,'Registration/index.html')
 
@@ -29,13 +28,14 @@ def special(request):
 
 def register(request):
     registered=False
+    verified = False
     #email
-    subject = "REgistration successful"
-    message = "thank u for registering"
+    subject = "REGISTRATION SUCCESSFUL"
+
+    message = "Hi .Thank You For Registering.Verify your email-id here by click this below link "
     if request.method=="POST":
         user_form=UserForm(data=request.POST)
         profile_form=UserProfileInfoForm(data=request.POST)
-
         if user_form.is_valid() and profile_form.is_valid():
             user=user_form.save()
             email = user.email
@@ -44,13 +44,12 @@ def register(request):
 
             profile=profile_form.save(commit=False)
             profile.user=user
-
             if 'profile_pic' in request.FILES:
                 profile.profile_pic=request.FILES['profile_pic']
             profile.save()
             #registered=True
-            send_mail(subject, message, ['csa.ase1@gmail.com'],[email],html_message="<a href = http://127.0.0.1:8000/registration/verified_email>click here</a>")
-            if cust_verify(request)==1:
+            send_mail(subject,message, ['csa.ase1@gmail.com'],[email],html_message="<a href = http://127.0.0.1:8000/registration/email_verify>click here to verify your email</a>")
+            if cust_verify()==1:
                 registered = True
             else:
                 return HttpResponse("Verify ur email")
@@ -102,7 +101,7 @@ def staff_registration(request):
                 Staffdetails.objects.create(firstname=firstname,lastname=lastname,email=email,password=password,address=address,pincode=pincode,employee_id=employee_id)
                 registered = True
                 staff_details = staff_reg_form.save(commit=False)
-                return HttpResponse("ur employee id is {}" .format(employee_id))
+                return HttpResponse("Your employee id is {}" .format(employee_id))
             else :
                 message = "An account with same firstname,lastname or email already exsts .Please try again"
                 return render(request,'Registration/alert.html',{'message' :message})
@@ -116,9 +115,14 @@ def staff_registration(request):
     return render(request, 'Registration/Registration_02.html',
                   {'staff_reg_form': staff_reg_form, 'registered': registered})
 
-def cust_verify(request):
+count = 0
+def cust_verify(self):
+    global count
     count=count+1;
     return(count)
+
+def email_verify(request):
+    return render(request,'Registration/email_verify.html',{})
 
 def email_verified(request):
     return HttpResponse("Your email is verified")
