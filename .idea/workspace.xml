@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c93740c-2efd-47c9-9058-de437c7cd942" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Registration/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Registration/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Registration/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Registration/views.py" afterDir="false" />
@@ -10,6 +11,26 @@
       <change beforePath="$PROJECT_DIR$/templates/Registration/Registration_02.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Registration/Registration_02.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/Registration/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Registration/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/Registration/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Registration/register.html" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0002_auto_20181116_1645.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0003_auto_20181116_2202.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0004_auto_20181117_1305.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0005_auto_20181117_2000.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0006_auto_20181117_2001.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0007_auto_20181117_2013.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0008_auto_20181117_2035.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0009_auto_20181117_2035.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0010_auto_20181117_2242.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0011_auto_20181118_1735.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/canteendb" beforeDir="false" afterPath="$PROJECT_DIR$/canteendb" afterDir="false" />
+>>>>>>> 70efbc0a9e0f38be8ed658590303c843c673a131
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,7 +52,12 @@
     <expand>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="canteendb" type="feb32156:DbDataSourceImpl" />
+        <item name="canteendb [2]" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="canteendb [2]" type="feb32156:DbDataSourceImpl" />
+        <item name="collations" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
     </expand>
     <select />
@@ -196,31 +222,31 @@
         <counts>
           <entry key="css" value="2" />
           <entry key="html" value="7" />
-          <entry key="py" value="12" />
+          <entry key="py" value="22" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="2" />
           <entry key="HTML" value="7" />
-          <entry key="Python" value="12" />
+          <entry key="Python" value="22" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="298" />
           <entry key="html" value="644" />
-          <entry key="py" value="950" />
-          <entry key="py@Canteen_System_Automation" value="31" />
+          <entry key="py" value="998" />
+          <entry key="py@Canteen_System_Automation" value="54" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="298" />
-          <entry key="CommandLine" value="14" />
+          <entry key="CommandLine" value="37" />
           <entry key="HTML" value="644" />
           <entry key="PLAIN_TEXT" value="17" />
-          <entry key="Python" value="950" />
+          <entry key="Python" value="998" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -267,19 +293,31 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/templates/Registration/base.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="147">
               <caret line="7" column="73" selection-start-line="7" selection-start-column="73" selection-end-line="7" selection-end-column="73" />
+=======
+        <entry file="file://$PROJECT_DIR$/Registration/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="21">
+              <caret line="2" column="26" lean-forward="true" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+>>>>>>> 70efbc0a9e0f38be8ed658590303c843c673a131
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Registration/views.py">
+        <entry file="file://$PROJECT_DIR$/User/views.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="412">
               <caret line="50" column="70" lean-forward="true" selection-start-line="50" selection-start-column="70" selection-end-line="50" selection-end-column="70" />
+=======
+            <state relative-caret-position="273">
+              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+>>>>>>> 70efbc0a9e0f38be8ed658590303c843c673a131
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -287,6 +325,7 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Registration/models.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -301,6 +340,13 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="252">
               <caret line="12" column="64" selection-start-line="12" selection-start-column="64" selection-end-line="12" selection-end-column="64" />
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/User/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="196">
+              <caret line="19" column="37" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
+>>>>>>> 70efbc0a9e0f38be8ed658590303c843c673a131
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -309,6 +355,7 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/templates/Registration/email_verify.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="63">
@@ -347,13 +394,32 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/Registration/Registered.html">
           <provider selected="true" editor-type-id="text-editor" />
+=======
+        <entry file="file://$PROJECT_DIR$/User/admin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+>>>>>>> 70efbc0a9e0f38be8ed658590303c843c673a131
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/Registration/Registration_02.html">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="294">
               <caret line="14" column="94" selection-start-line="14" selection-start-column="94" selection-end-line="14" selection-end-column="94" />
+=======
+            <state relative-caret-position="147">
+              <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+>>>>>>> 70efbc0a9e0f38be8ed658590303c843c673a131
             </state>
           </provider>
         </entry>
@@ -384,10 +450,8 @@
         <option value="$PROJECT_DIR$/templates/Manager/food_items_list.html" />
         <option value="$PROJECT_DIR$/Registration/forms.py" />
         <option value="$PROJECT_DIR$/Registration/models.py" />
-        <option value="$PROJECT_DIR$/User/admin.py" />
         <option value="$PROJECT_DIR$/templates/User/UserAccount.html" />
         <option value="$PROJECT_DIR$/Canteen_System_Automation/urls.py" />
-        <option value="$PROJECT_DIR$/User/urls.py" />
         <option value="$PROJECT_DIR$/templates/Manager/index.html" />
         <option value="$PROJECT_DIR$/static/Manager/css/image_style.css" />
         <option value="$PROJECT_DIR$/Manager/models.py" />
@@ -407,10 +471,18 @@
         <option value="$PROJECT_DIR$/templates/Manager/Update_food.html" />
         <option value="$PROJECT_DIR$/templates/Manager/Update_tables.html" />
         <option value="$PROJECT_DIR$/Homepage/urls.py" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/User/views.py" />
+=======
+        <option value="$PROJECT_DIR$/Registration/views.py" />
+>>>>>>> 70efbc0a9e0f38be8ed658590303c843c673a131
         <option value="$PROJECT_DIR$/templates/Homepage/Homepage.html" />
         <option value="$PROJECT_DIR$/static/User/main.css" />
         <option value="$PROJECT_DIR$/templates/Homepage/Header_Footer.html" />
+        <option value="$PROJECT_DIR$/User/urls.py" />
+        <option value="$PROJECT_DIR$/history/views.py" />
+        <option value="$PROJECT_DIR$/User/admin.py" />
+        <option value="$PROJECT_DIR$/User/views.py" />
         <option value="$PROJECT_DIR$/User/models.py" />
         <option value="$PROJECT_DIR$/templates/Registration/Registration_02.html" />
         <option value="$PROJECT_DIR$/templates/Registration/Registration_01.html" />
@@ -470,6 +542,24 @@
             <path>
               <item name="Canteen_System_Automation" type="b2602c69:ProjectViewProjectNode" />
               <item name="Canteen_System_Automation" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
+=======
+              <item name="history" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Canteen_System_Automation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Canteen_System_Automation" type="462c0819:PsiDirectoryNode" />
+              <item name="Homepage" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Canteen_System_Automation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Canteen_System_Automation" type="462c0819:PsiDirectoryNode" />
+              <item name="Manager" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Canteen_System_Automation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Canteen_System_Automation" type="462c0819:PsiDirectoryNode" />
+>>>>>>> 70efbc0a9e0f38be8ed658590303c843c673a131
               <item name="Registration" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -494,6 +584,26 @@
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="Registration" type="462c0819:PsiDirectoryNode" />
             </path>
+<<<<<<< HEAD
+=======
+            <path>
+              <item name="Canteen_System_Automation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Canteen_System_Automation" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="User" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Canteen_System_Automation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Canteen_System_Automation" type="462c0819:PsiDirectoryNode" />
+              <item name="User" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Canteen_System_Automation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Canteen_System_Automation" type="462c0819:PsiDirectoryNode" />
+              <item name="User" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
+            </path>
+>>>>>>> 70efbc0a9e0f38be8ed658590303c843c673a131
           </expand>
           <select />
         </subPane>
@@ -597,7 +707,11 @@
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5013423" side_tool="true" weight="0.33049646" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4986577" weight="0.33049646" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32907802" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="manage.py@Canteen_System_Automation" order="13" sideWeight="0.49932885" visible="true" weight="0.0" />
+=======
+      <window_info anchor="bottom" id="manage.py@Canteen_System_Automation" order="13" sideWeight="0.49932885" visible="true" weight="0.54468083" />
+>>>>>>> 70efbc0a9e0f38be8ed658590303c843c673a131
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -677,6 +791,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/User/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
@@ -691,6 +806,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="32" selection-start-column="32" selection-end-column="32" />
+=======
+    <entry file="file://$PROJECT_DIR$/templates/Registration/Registration_01.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="11" column="7" lean-forward="true" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Registration/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" column="17" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
+>>>>>>> 70efbc0a9e0f38be8ed658590303c843c673a131
         </state>
       </provider>
     </entry>
@@ -849,10 +977,27 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/User/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
           <caret line="1" column="37" selection-start-line="1" selection-start-column="37" selection-end-line="1" selection-end-column="37" />
+=======
+    <entry file="file://$PROJECT_DIR$/Registration/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="819">
+          <caret line="45" column="7" selection-start-line="45" selection-start-column="7" selection-end-line="45" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Registration/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+>>>>>>> 70efbc0a9e0f38be8ed658590303c843c673a131
         </state>
       </provider>
     </entry>
@@ -884,16 +1029,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Homepage/urls.py">
+    <entry file="file://$PROJECT_DIR$/templates/Homepage/Header_Footer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1331">
+          <caret line="4" column="27" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/importlib/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="155" column="28" lean-forward="true" selection-start-line="155" selection-start-column="28" selection-end-line="155" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/history/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/User/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/User/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
@@ -952,18 +1119,80 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
           <caret line="7" column="73" selection-start-line="7" selection-start-column="73" selection-end-line="7" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
+=======
     <entry file="file://$PROJECT_DIR$/Registration/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
+          <caret line="2" column="26" lean-forward="true" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+>>>>>>> 70efbc0a9e0f38be8ed658590303c843c673a131
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Homepage/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="21">
           <caret line="4" column="26" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
+=======
+        <state relative-caret-position="147">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/User/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/User/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/User/migrations/0014_order_food_date.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/User/migrations/0013_order_food_order_user.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="22" column="32" lean-forward="true" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/User/migrations/0012_auto_20181118_1827.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/User/migrations/0011_auto_20181118_1735.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="14" column="24" lean-forward="true" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/User/migrations/0010_auto_20181117_2242.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+>>>>>>> 70efbc0a9e0f38be8ed658590303c843c673a131
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Registration/views.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="412">
           <caret line="50" column="70" lean-forward="true" selection-start-line="50" selection-start-column="70" selection-end-line="50" selection-end-column="70" />
           <folding>
@@ -976,6 +1205,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+=======
+        <state relative-caret-position="196">
+          <caret line="19" column="37" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+>>>>>>> 70efbc0a9e0f38be8ed658590303c843c673a131
         </state>
       </provider>
     </entry>
