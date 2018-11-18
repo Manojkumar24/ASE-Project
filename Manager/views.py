@@ -64,9 +64,8 @@ def remove_food(request):
     return render(request, 'Manager/Remove_food.html', content)
 
 
-def update_food(request):
-    if request.method == "POST":
-        f_id = request.POST['f_Id']
+def update_food(request, f_id=None):
+    if f_id != 0:
         try:
             update = Food_items.objects.get(Food_id=f_id)
             content = {'update': update}
@@ -96,8 +95,13 @@ def check_update_food(request):
         food_temp.Category = category
         try:
             img = request.FILES['image']
-            food_temp.image = img
-            food_temp.save()
+            if img != None and img!= food_temp.image:
+                food_temp.image.delete()
+                food_temp.image = img
+                food_temp.save()
+            else:
+                food_temp.image = img
+                food_temp.save()
         except:
             food_temp.save()
     item = Food_items.objects.all()
@@ -228,11 +232,10 @@ def check_update_table(request):
         return render(request, 'Manager/Update_tables.html', content)
 
 
-def update_table(request):
-    if request.method == "POST":
-        f_id = request.POST['f_Id']
+def update_table(request, id = None):
+    if id != 0:
         try:
-            update = Dining_Tables.objects.get(Table_id=f_id)
+            update = Dining_Tables.objects.get(Table_id=id)
             content = {'update': update}
             return render(request, 'Manager/Update_tables.html', content)
         except:
