@@ -22,7 +22,7 @@
             Our Service is Wonderful to experience....
         </div>
         <div class = "Food">
-            <h1>Things that worth waiting!!</h1>
+            <h1>Things that are worth waiting!!</h1>
             {% if food %}
                 {% for food in food %}
                     <div class="card">
@@ -31,7 +31,7 @@
                             <h4><b>{{ food.Food_Name }}</b></h4>
                             <p>Price : {{ food.Food_Price }}</p>
                             <form>
-                                <input type="submit" value = "add to cart">
+                                <input class="cart" type="submit" value = "add to cart">
                             </form>
                         </div>
                     </div>

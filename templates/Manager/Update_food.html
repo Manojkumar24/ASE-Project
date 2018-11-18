@@ -3,8 +3,11 @@
     {% load bootstrap %}
     {% load static %}
     <div class="container">
+    {% if error %}
+    <p class="errormsg">{{ error }}</p>
+    {% endif %}
 {% if item %}
-    <table class="table table-bordered">
+    <table class="table table-bordered table-striped">
         <tr>
             <th>ID</th>
             <th>Name</th>
@@ -15,7 +18,7 @@
         </tr>
         {% for items in item %}
         <tr>
-            <td>{{ items.Food_id }}</td>
+            <td><a href="{% url 'update_food' f_id=items.Food_id %}">{{ items.Food_id }}</a></td>
             <td>{{ items.Food_Name }}</td>
             <td>{{ items.Food_Price }}</td>
             <td>{{ items.quantity }}</td>
@@ -28,18 +31,17 @@
         </tr>
         {% endfor %}
         </table>
-    <form method="post" action="{% url 'update_food' %}">
-    {% csrf_token %}
-        <br><label for="f_Id">Enter Id: </label><input type="number" name="f_Id" id="f_Id"><br>
-        <input type="submit" class="btn btn-primary" value="Update">
-    </form>
+ {% else %}
+    {% if not update %}
+    <h4>NO Food Items to Update</h4>
+    {% endif %}
 {% endif %}
 
 {% if update %}
     <form method="post" action="{% url 'check_update_food' %}" enctype="multipart/form-data">
     Update Values:<br>
     {% csrf_token %}
-    <table class="table table-bordered">
+    <table class="table table-bordered table-striped">
     <tr>
         <th>ID</th>
         <th>Name</th>

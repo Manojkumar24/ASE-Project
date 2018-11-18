@@ -4,7 +4,11 @@
     <div class="container">
 <form  method="post" action="{% url 'remove_food' %}">
     {% if item %}
-        <table class="table table-bordered">
+    {{ form|bootstrap }}
+    {% csrf_token %}
+    {{ form.errors }}
+    <input type="submit" class="btn btn-primary" value="Remove">
+        <table class="table table-bordered table-striped">
         <tr>
             <th>ID</th>
             <th>Name</th>
@@ -22,11 +26,9 @@
         </tr>
         {% endfor %}
         </table>
+    {% else %}
+        <h4>No Food Items to delete</h4>
     {% endif %}
-    {{ form|bootstrap }}
-    {% csrf_token %}
-    {{ form.errors }}
-    <input type="submit" class="btn btn-primary" value="Remove">
 </form>
     </div>
 {% endblock %}

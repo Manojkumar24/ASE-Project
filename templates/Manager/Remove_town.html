@@ -3,7 +3,11 @@
     {% load bootstrap %}
 <form  method="post" action="{% url 'remove_towns' %}">
     {% if item %}
-        <table class="table table-bordered">
+    {{ form|bootstrap }}
+    {% csrf_token %}
+    {{ form.errors }}
+    <input type="submit" class="btn btn-primary" value="Remove">
+        <table class="table table-bordered table-striped">
             <tr>
                 <th>Name of town</th>
                 <th>Pin code</th>
@@ -15,10 +19,8 @@
                 </tr>
             {% endfor %}
         </table>
+    {% else %}
+        <h4>No Towns to remove</h4>
     {% endif %}
-    {{ form|bootstrap }}
-    {% csrf_token %}
-    {{ form.errors }}
-    <input type="submit" class="btn btn-primary" value="Remove">
 </form>
 {% endblock %}
