@@ -28,6 +28,15 @@ def table(request):
 def check(request):
     if request.method == 'POST':
         t = Dining_Tables.objects.all();
+        if request.user.is_authenticated:
+            username = request.user.username
+        else:
+            return reverse('Registration:register')
+        user = User.objects.get(username=username)
+        email = user.email
+        b = Order_User.objects.get(mailId=email, status='draft');
+        a = b.TokenId
+        g = Order_Food.objects.filter(Status='dr', TokenId=t)
 
         table=" "
         for u in t:
@@ -38,26 +47,17 @@ def check(request):
                     table=str(u.Table_id)
                 else:
                     table=table+','+str(u.Table_id)
-                u.save()
-        if request.user.is_authenticated:
-            username = request.user.username
-        else:
-            return reverse('Registration:register')
-        user = User.objects.get(username=username)
-        email = user.email
-        b = Order_User.objects.get(mailId=email,status='draft');
-        t=b.TokenId
-        l = 0
-        g = Order_Food.objects.filter(Status='dr', TokenId=t)
+                    u.save()
+                for h in g:
+                    h.TableId=table
+                    h.save()
+
+
         for h in g:
             l = l + h.price
-        if request.user.is_authenticated:
-            Username = request.user.username
-
 
         x = {'customer_food': g, 'table': table, 'l': l, 'u': username, 'token': t}
-
-        return render(request, 'eat_at_canteen/show.html', context=x)
+        return render(request, 'ea_at_canteen/show.html', context=x)
 
 
 def show(request):
@@ -110,7 +110,7 @@ def order(request):
 
 
             f=Food_items.objects.get(Food_Name=Food)
-            c = Order_Food.objects.create(FoodId=f, price=Price, quantity=1, date=datetime.date.today(),time=datetime.datetime.now(), TableId=0, TokenId=a.TokenId)
+            c = Order_Food.objects.create(FoodId=f, price=Price, quantity=1, date=datetime.date.today(),time=datetime.datetime.now(), TableId=None, TokenId=a.TokenId)
             a.totalPrice=Price
             a.save()
             c.save()
@@ -135,11 +135,10 @@ def order(request):
                     break
             if l == 0:
                 c = Order_Food.objects.create(FoodId=f, price=Price, quantity=1, date=datetime.date.today(),
-                                              time=datetime.datetime.now(), TableId=0, TokenId=a.TokenId)
+                                              time=datetime.datetime.now(), TableId=None, TokenId=a.TokenId)
                 a.totalPrice=a.totalPrice+float(Price)
                 a.save()
                 c.save()
-                print('jii')
 
         return redirect('Homepage:home')
 

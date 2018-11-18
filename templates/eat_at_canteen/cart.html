@@ -37,11 +37,13 @@
         </table>
         <h2>Sub Total:</h2>
         <h2>{{ l }}</h2>
+        <a href="{% url 'eat_at_canteen:table' %}"><input type="button" name="" value="Book Table"></a>
+        <a href="{% url 'homedelivery:address' %}"><input type="button" name="" value="Home Delivery"></a>
+        <a href="{% url 'homedelivery:address' %}"><input type="button" name="" value="Home Delivery"></a>
         {% else %}
         <p> NO ITEMS  </p>
         {% endif %}
-        <a href="{% url 'eat_at_canteen:table' %}"><input type="button" name="" value="Book Table"></a>
-        <a href="{% url 'homedelivery:address' %}"><input type="button" name="" value="Home Delivery"></a>
+
 
     </form>
 

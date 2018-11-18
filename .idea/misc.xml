@@ -5,6 +5,7 @@
   </component>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6 (venv)" project-jdk-type="Python SDK" />
 =======
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6" project-jdk-type="Python SDK" />
@@ -12,4 +13,7 @@
 =======
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6 (Canteen_System_Automation)" project-jdk-type="Python SDK" />
 >>>>>>> 80590861a2232e7441610c2c7f35d8820c68a312
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6 (Canteen_System_Automation)" project-jdk-type="Python SDK" />
+>>>>>>> 4939aa5886338d31cb97617da8cea3c425fdee94
 </project>
