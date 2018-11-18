@@ -4,12 +4,7 @@
     <p class="errormsg">{{ error }}</p>
     {% endif %}
 {% if item %}
-    <form method="post" action="{% url 'update_table' %}">
-    {% csrf_token %}
-        <label for="f_Id">Enter Id to Update</label><input type="number" name="f_Id" id="f_Id"><br>
-        <input type="submit" class="btn btn-primary" value="Update">
-    </form>
-    <table class="table table-bordered">
+    <table class="table table-bordered table-striped">
     <tr>
         <th>ID</th>
         <th>Availability</th>
@@ -18,7 +13,7 @@
     </tr>
     {% for items in item %}
     <tr>
-        <td>{{ items.Table_id }}</td>
+        <td><a href="{% url 'update_table' id=items.Table_id %}">{{ items.Table_id }}</a></td>
         <td>{{ items.availability }}</td>
         <td>{{ items.size }}</td>
         <td>{{ items.zone }}</td>
@@ -26,14 +21,16 @@
     {% endfor %}
     </table>
  {% else %}
+    {% if not update %}
     <h4>No tables to Update</h4>
+    {% endif %}
 {% endif %}
 
 {% if update %}
     <form method="post" action="{% url 'check_update_table' %}">
     Update Values:<br>
     {% csrf_token %}
-    <table class="table table-bordered">
+    <table class="table table-bordered table-striped">
     <tr>
         <th>ID</th>
         <th>Availability</th>
