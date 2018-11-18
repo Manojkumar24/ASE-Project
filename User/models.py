@@ -1,6 +1,7 @@
 from django.db import models
+#mport tornado.platform.twisted
 from Manager.models import Food_items
-
+import datetime
 
 # Create your models here.
 
@@ -15,15 +16,18 @@ class Order_Food(models.Model):
     price = models.FloatField(null=False)
     TableId = models.IntegerField()
     Status = models.CharField(max_length=8, choices=status, default=draft)
+    date = models.DateField(null=True)
+    time = models.TimeField(null=True)
+
 
 class Order_User(models.Model):
     order = 'ordered'
-    canc = 'cancelled'
+    cancel = 'cancelled'
     inPrep = 'in Preparation'
     inDel = 'in Delivery'
     Comp = 'Completed'
     draft = 'draft'
-    choice = ((order, 'ordered'), (canc, 'cancelled'), (inPrep, 'in Preparation'), (inDel, 'in Delivery'), (draft, 'draft'), (Comp, 'complete'))
+    choice = ((order, 'ordered'), (cancel, 'cancelled'), (inPrep, 'in Preparation'), (inDel, 'in Delivery'), (draft, 'draft'), (Comp, 'complete'))
     mailId = models.EmailField(max_length=255, null=False)
     TokenId = models.CharField(max_length=10)
     status = models.CharField(choices=choice, max_length=255, default=draft)

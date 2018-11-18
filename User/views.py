@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from .models import Order_Food,Order_User
 from Registration.models import UserProfileInfo
 from django.contrib.auth.decorators import login_required
+
+
+# from User.models import Order_Food,Order_User
 # Create your views here.
 
 
