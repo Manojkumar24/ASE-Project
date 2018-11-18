@@ -110,8 +110,7 @@ def order(request):
 
 
             f=Food_items.objects.get(Food_Name=Food)
-            c = Order_Food.objects.create(FoodId=f, price=Price, quantity=1, date=datetime.date.today(),
-                                          time=datetime.datetime.now(), TableId=0, TokenId=a.TokenId)
+            c = Order_Food.objects.create(FoodId=f, price=Price, quantity=1, date=datetime.date.today(),time=datetime.datetime.now(), TableId=0, TokenId=a.TokenId)
             a.totalPrice=Price
             a.save()
             c.save()
