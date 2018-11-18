@@ -21,15 +21,11 @@
                             <li>
                                 <a class="" href="{% url 'Homepage:home' %}">Home<span class=""></span></a>
                             </li>
-                            <li class="about">
-                                <a href="#">AboutUs</a>
-                            </li>
+
                             <li class="cont">
                                 <a  href="#">ContactUs</a>
                             </li>
-                            <li class="">
-                                <a  href="{% url 'eat_at_canteen:cart' %}">Cart</a>
-                            </li>
+
                             <li class="">
                                 <a class="" href="{% url 'eat_at_canteen:review' %}">Review</a>
                             </li>
@@ -42,7 +38,13 @@
                                 <li class="logout">
                                     <a class="" href="{% url 'Registration:user_logout' %}">LogOut</a>
                                 </li>
+                                 <li class="">
+                                <a  href="{% url 'eat_at_canteen:cart' %}">Cart</a>
+                                </li>
                             {% else %}
+                                <li class="about">
+                                <a href="#">AboutUs</a>
+                                </li>
                                 <li class="logIn">
                                     <a class="" href="{%  url 'Registration:user_login' %}">LogIn</a>
                                 </li>

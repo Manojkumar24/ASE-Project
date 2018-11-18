@@ -37,50 +37,56 @@ def check(request):
         email = user.email
         b = Order_User.objects.get(mailId=email, status='draft');
         a = b.TokenId
-        g = Order_Food.objects.filter(Status='dr', TokenId=t)
+        g = Order_Food.objects.filter(Status='dr', TokenId=a)
+
 
         table=" "
         for u in t:
+
             if str(u.Table_id) in request.POST:
+                print('hiiuuh')
                 print('jii')
                 u.availability = False
+                u.save()
                 if table==" ":
                     table=str(u.Table_id)
                 else:
                     table=table+','+str(u.Table_id)
-                    u.save()
+                print(table)
                 for h in g:
                     h.TableId=table
+                    print(h.TableId)
                     h.save()
 
-
+        l=0
         for h in g:
             l = l + h.price
 
-        x = {'customer_food': g, 'table': table, 'l': l, 'u': username, 'token': t}
-        return render(request, 'ea_at_canteen/show.html', context=x)
+        x = {'customer_food': g, 'table': table, 'l': l, 'u': username, 'token': a}
+        return render(request,'eat_at_canteen/show.html', context=x)
 
 
 
 
 @login_required
 def checkout(request):
-    if request.method == 'POST':
-        if request.user.is_authenticated:
-            username = request.user.username
-        else:
-            return reverse('Registration:register')
-        user = User.objects.get(username=username)
-        email = user.email
-        b = Order_User.objects.get(mailId=email, status='draft');
-        a = b.TokenId
-        g = Order_Food.objects.filter(Status='dr', TokenId=t)
-
-        for h in g:
-            l = l + h.price
-
-        x = {'customer_food': g, 'l': l, 'u': username, 'token': t}
-        return render(request, 'ea_at_canteen/show.html', context=x)
+    print('hii')
+    if request.user.is_authenticated:
+         username = request.user.username
+    else:
+        return reverse('Registration:register')
+    user = User.objects.get(username=username)
+    email = user.email
+    b = Order_User.objects.get(mailId=email, status='draft');
+    a = b.TokenId
+    g = Order_Food.objects.filter(Status='dr', TokenId=a)
+    l=0
+    for h in g:
+        l = l + h.price
+    b.totalPrice=float(l)
+    b.save()
+    x = {'customer_food': g, 'l': l, 'u': username, 'token': a}
+    return render(request,'eat_at_canteen/show.html', context=x)
 
 @login_required
 def order(request):
@@ -125,7 +131,7 @@ def order(request):
 
 
             f=Food_items.objects.get(Food_Name=Food)
-            c = Order_Food.objects.create(FoodId=f, price=Price, quantity=1, date=datetime.date.today(),time=datetime.datetime.now(), TableId=None, TokenId=a.TokenId)
+            c = Order_Food.objects.create(FoodId=f, price=Price, quantity=1, date=datetime.date.today(),time=datetime.datetime.now(), TableId=0, TokenId=a.TokenId)
             a.totalPrice=Price
             a.save()
             c.save()
@@ -150,7 +156,7 @@ def order(request):
                     break
             if l == 0:
                 c = Order_Food.objects.create(FoodId=f, price=Price, quantity=1, date=datetime.date.today(),
-                                              time=datetime.datetime.now(), TableId=None, TokenId=a.TokenId)
+                                              time=datetime.datetime.now(), TableId=0, TokenId=a.TokenId)
                 a.totalPrice=a.totalPrice+float(Price)
                 a.save()
                 c.save()
@@ -225,7 +231,7 @@ def confirm(request):
         print('shersasura')
         j.Status='conf'
         j.save()
-    return render(request,'Homepage/Homepage.html')
+    return redirect('Homepage:home')
 @login_required
 def update(request):
     print('came to update top part')
