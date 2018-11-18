@@ -48,7 +48,6 @@ body{
     list-style-type: none;
     margin-left: 64.9%;
     padding-top:-3%;
-
 }
 .Options li a{
     color: #e3f2fd;
@@ -227,6 +226,10 @@ h1{
     transition: 0.5s;
     box-shadow: 1px 2px 2px 1px rgba(0,0,0,0.5);
 }
+.History,h1 {
+            height: 500px;
+            width: 40%;
+        }
 .History{
     width: 50%;
     height: 500px;
