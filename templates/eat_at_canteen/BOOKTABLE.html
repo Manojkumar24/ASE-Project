@@ -15,7 +15,7 @@
   <button class="btn" onclick="filterSelection('cars')"> Party</button>
   <button class="btn" onclick="filterSelection('people')"> Family</button>
 </div>
-<form action="{% url 'eat_at_canteen:checkout' %}"  method="POST">
+<form action="{% url 'eat_at_canteen:check' %}"  method="POST">
         {% csrf_token %}
 <!-- Portfolio Gallery Grid -->
 <div class="row">

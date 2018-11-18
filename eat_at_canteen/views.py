@@ -18,6 +18,7 @@ import random
 def index(request):
     return render(request,'eat_at_canteen/index.html')
 
+@login_required
 def table(request):
     t=Dining_Tables.objects.all()
 
@@ -60,12 +61,26 @@ def check(request):
         return render(request, 'ea_at_canteen/show.html', context=x)
 
 
-def show(request):
-    print('added2')
-    FoodList = Food_items.objects.order_by('Food_Price')
-    print('hii')
-    food_dict = {'items': FoodList}
-    return render(request, 'eat_at_canteen/order.html', context=food_dict)
+
+
+@login_required
+def checkout(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            username = request.user.username
+        else:
+            return reverse('Registration:register')
+        user = User.objects.get(username=username)
+        email = user.email
+        b = Order_User.objects.get(mailId=email, status='draft');
+        a = b.TokenId
+        g = Order_Food.objects.filter(Status='dr', TokenId=t)
+
+        for h in g:
+            l = l + h.price
+
+        x = {'customer_food': g, 'l': l, 'u': username, 'token': t}
+        return render(request, 'ea_at_canteen/show.html', context=x)
 
 @login_required
 def order(request):
@@ -173,7 +188,7 @@ def cart(request):
     x={'items':g,'l':l}
     return render(request,'eat_at_canteen/cart.html',context=x)
 
-
+@login_required
 def Delete(request):
     a=request.POST.get('food')
     f = Food_items.objects.get(Food_Name=a)
@@ -192,6 +207,7 @@ def Delete(request):
     s.delete()
     return redirect('eat_at_canteen:cart')
 
+@login_required
 def confirm(request):
     if request.user.is_authenticated:
         username = request.user.username
@@ -210,6 +226,7 @@ def confirm(request):
         j.Status='conf'
         j.save()
     return render(request,'Homepage/Homepage.html')
+@login_required
 def update(request):
     print('came to update top part')
     if request.method=='POST':
@@ -223,18 +240,7 @@ def update(request):
         print(food)
         print('came to update')
         return HttpResponse('hi')
-        # if request.user.is_authenticated:
-        #     username = request.user.username
-        # else:
-        #     return reverse('Registration:register')
-        # user = User.objects.get(username=username)
-        # email = user.email
-        # x = Order_User.objects.get(mailId=email, status='draft')
-        # t = x.TokenId
-        # s = Order_Food.objects.get(FoodId=f,TokenId=t, Status='dr')
-        # s.quantity=quantity
-        # s.price=f.Food_Price*s.quantity
-        # s.save()
+
 
 
 

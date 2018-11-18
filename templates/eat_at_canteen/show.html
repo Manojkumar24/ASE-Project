@@ -28,8 +28,10 @@
         </table>
 
     </form>
+    {% if table %}
     <h2>Table No</h2>
     <h2>{{ table }}</h2><br>
+    {% endif %}
     <h2>Sub Total</h2>
     <h2>{{ l }}</h2>
     <a href="{% url 'eat_at_canteen:confirm' %}"><input type="button" name="" value="Confirm"></a>

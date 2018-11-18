@@ -20,8 +20,8 @@ from . import views
 app_name='eat_at_canteen'
 urlpatterns = [
     path('index/',views.index,name='index'),
-    path('order/',views.show,name='ordernew'),
-    path('check/',views.check,name='checkout'),
+    path('check/',views.check,name='check'),
+    path('check/',views.checkout,name='checkout'),
     path('table/',views.table,name='table'),
     path('orderfood/',views.order,name='order'),
     path('cart/',views.cart,name='cart'),
