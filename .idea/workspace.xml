@@ -2,20 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c93740c-2efd-47c9-9058-de437c7cd942" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/User/migrations/0011_auto_20181118_1735.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Canteen_System_Automation.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Canteen_System_Automation.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Canteen_System_Automation/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Canteen_System_Automation/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Manager/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Manager/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/User/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/User/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/canteendb" beforeDir="false" afterPath="$PROJECT_DIR$/canteendb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/User/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/User/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/history/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/history/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Homepage/Header_Footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Homepage/Header_Footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Homepage/Homepage.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Homepage/Homepage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Manager/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Manager/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0002_auto_20181116_1645.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0003_auto_20181116_2202.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0004_auto_20181117_1305.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0005_auto_20181117_2000.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0006_auto_20181117_2001.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0007_auto_20181117_2013.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0008_auto_20181117_2035.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0009_auto_20181117_2035.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0010_auto_20181117_2242.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/User/migrations/0011_auto_20181118_1735.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -69,7 +66,7 @@
           <entry key="gitignore" value="1" />
           <entry key="html" value="85" />
           <entry key="js" value="1" />
-          <entry key="py" value="68" />
+          <entry key="py" value="69" />
           <entry key="sql" value="1" />
         </counts>
       </usages-collector>
@@ -79,7 +76,7 @@
           <entry key="HTML" value="86" />
           <entry key="JavaScript" value="1" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="68" />
+          <entry key="Python" value="69" />
           <entry key="Scratch" value="1" />
         </counts>
       </usages-collector>
@@ -248,7 +245,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Manager/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
@@ -256,6 +253,15 @@
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/User/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="16" column="74" lean-forward="true" selection-start-line="16" selection-start-column="74" selection-end-line="16" selection-end-column="74" />
             </state>
           </provider>
         </entry>
@@ -329,7 +335,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
     <option name="width" value="895" />
     <option name="height" value="1030" />
@@ -410,18 +416,18 @@
               <item name="Canteen_System_Automation" type="b2602c69:ProjectViewProjectNode" />
               <item name="Canteen_System_Automation" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="Manager" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Canteen_System_Automation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Canteen_System_Automation" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="User" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Canteen_System_Automation" type="b2602c69:ProjectViewProjectNode" />
               <item name="Canteen_System_Automation" type="462c0819:PsiDirectoryNode" />
               <item name="User" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Canteen_System_Automation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Canteen_System_Automation" type="462c0819:PsiDirectoryNode" />
+              <item name="User" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -914,13 +920,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/User/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Canteen_System_Automation/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
@@ -935,6 +934,13 @@
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/User/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="16" column="74" lean-forward="true" selection-start-line="16" selection-start-column="74" selection-end-line="16" selection-end-column="74" />
         </state>
       </provider>
     </entry>
