@@ -1,14 +1,19 @@
 from django.contrib import admin
 from .models import HD_Address
+from .models import HD_Address, HD_FoodOrder
 # Register your models here.
 # admin.site.register(HD_FoodOrder)
 # admin.site.register(HD_Address)
 
 
 
-
-
 class HD_AddressAdmin(admin.ModelAdmin):
+=======
+class HD_AddressInLine(admin.StackedInline):
+    model = HD_Address
+
+
+class HD_FoodOrderAdmin(admin.ModelAdmin):
     readonly_fields = ('tokenId',)
     fieldsets = [
         ('TokenID', {'fields': ['tokenId']}),
@@ -19,3 +24,8 @@ class HD_AddressAdmin(admin.ModelAdmin):
 
 
 admin.site.register(HD_Address,HD_AddressAdmin)
+    inlines = [HD_AddressInLine]
+
+
+admin.site.register(HD_FoodOrder, HD_FoodOrderAdmin)
+

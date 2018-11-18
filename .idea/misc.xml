@@ -7,6 +7,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6 (venv)" project-jdk-type="Python SDK" />
 =======
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6" project-jdk-type="Python SDK" />
@@ -20,4 +21,7 @@
 =======
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6" project-jdk-type="Python SDK" />
 >>>>>>> 57661ccc73d2807382b7ca8ab5ea7113511b8082
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6 (venv)" project-jdk-type="Python SDK" />
+>>>>>>> 6b8f19b53121b5183e21c8a26ba6e0bed7ef236b
 </project>
