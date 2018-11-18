@@ -28,9 +28,11 @@
                     <div class="card">
                         <img class="CardImage" src="{% static food.image.path %}" alt="Avatar">
                         <div class="container">
-                            <h4><b>{{ food.Food_Name }}</b></h4>
-                            <p>Price : {{ food.Food_Price }}</p>
-                            <form>
+
+                            <form method="post" action="{% url 'eat_at_canteen:order' %}">
+                                {% csrf_token %}
+                                <input type="text" value="{{ food.Food_Name }}" name="food" style="border: 0"><br>
+                                Price :<input type="text" value="{{ food.Food_Price }}" name="price" style="border: 0"><br>
                                 <input type="submit" value = "add to cart">
                             </form>
                         </div>

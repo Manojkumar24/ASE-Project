@@ -23,4 +23,5 @@ urlpatterns = [
     path('', include('Homepage.urls')),
     path('User/', include('User.urls')),
     path('registration/',include('Registration.urls')),
+    path('ec/',include('eat_at_canteen.urls'))
 ]

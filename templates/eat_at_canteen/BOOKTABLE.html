@@ -3,7 +3,6 @@
 
     {% block body_block %}
 <div class="jumbotron">
-        {% if t %}
     <h1 style="text-align: center"> Please Select the table </h1>
 
     <div class="main">
@@ -25,11 +24,11 @@
         {% if acc.zone == "Normal" %}
             <div class="column nature">
                 <div class="content">
-                    <img src="{% static 'eat_at_canteen/images/table.jpg' %}" alt="Mountains" style="width:100%">
-                    <h4>Table_No:{{ acc.Table_id }}</h4>
-                    <h4>Max_size:{{ acc.size }} category:{{ acc.zone }} </h4>
-                    {% if acc.availability == True %}
-                        <input type="text" value="BOOK"><input type="checkbox" value="Book" name="{{ acc.Table_id }}">
+                    <img src="{% static 'eat_at_canteen/images/8.jpg' %}" alt="Mountains" style="width:100%">
+                    <h4>Table_No:{{ acc.Table_No }}</h4>
+                    <h4>Max_size:{{ acc.Max_size }} category:{{ acc.category }} </h4>
+                    {% if acc.Status == "Not Reserved" %}
+                        BOOK<input type="checkbox" value="Book" name="{{ acc.Table_No }}">
                     {% else %}
                         <input type="text" value="RESERVED">
                     {% endif %}
@@ -43,11 +42,11 @@
         {% if acc.zone == "Party" %}
             <div class="column cars">
                 <div class="content">
-                    <img src="{% static 'eat_at_canteen/images/table.jpg' %}" alt="Mountains" style="width:100%">
-                    <h4>Table_No:{{ acc.Table_id }}</h4>
-                    <h4>Max_size:{{ acc.size }} category:{{ acc.zone }} </h4>
-                    {% if acc.availability == True %}
-                        <input type="text" value="BOOK"><input type="checkbox" value="Book" name="{{ acc.Table_id}}">
+                    <img src="{% static 'eat_at_canteen/images/tableparty.jpg' %}" alt="Mountains" style="width:100%;height:170px">
+                    <h4>Table_No:{{ acc.Table_No }}</h4>
+                    <h4>Max_size:{{ acc.Max_size }} category:{{ acc.category }} </h4>
+                    {% if acc.Status == "Not Reserved" %}
+                        BOOK<input type="checkbox" value="Book" name="{{ acc.Table_No }}">
                     {% else %}
                         <input type="text" value="RESERVED">
                     {% endif %}
@@ -59,11 +58,11 @@
         {% if acc.zone == "Family" %}
             <div class="column people">
                 <div class="content">
-                    <img src="{% static 'eat_at_canteen/images/table.jpg' %}" alt="Mountains" style="width:100%">
-                    <h4>Table_No:{{ acc.Table_id }}</h4>
-                    <h4>Max_size:{{ acc.size }} category:{{ acc.zone }} </h4>
-                    {% if acc.availability == True %}
-                        <input type="text" value="BOOK"><input type="checkbox" value="Book" name="{{ acc.Table_id }}">
+                    <img src="{% static 'eat_at_canteen/images/family.jpg' %}" alt="Mountains" style="width:100%">
+                    <h4>Table_No:{{ acc.Table_No }}</h4>
+                    <h4>Max_size:{{ acc.Max_size }} category:{{ acc.category }} </h4>
+                    {% if acc.Status == "Not Reserved" %}
+                        BOOK<input type="checkbox" value="Book" name="{{ acc.Table_No }}">
                     {% else %}
                         <input type="text" value="RESERVED">
                     {% endif %}
@@ -126,9 +125,5 @@ for (var i = 0; i < btns.length; i++) {
   });
 }
 </script>
-{% else %}
-   NO TABLES
-{% endif %}
-</div>
     {% endblock %}
-
+</div>

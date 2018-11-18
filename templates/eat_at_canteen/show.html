@@ -19,9 +19,9 @@
            {% for acc in customer_food %}
 
             <tr>
-                <td><input type="text" name="food" value="{{ acc.Foodname }}"></td>
-                <td><input type="text" name="price" value="{{ acc.Quantity }}"></td>
-                <td><input type="text" id="see" name="Quantity" value="{{ acc.Price }}"></td>
+                <td><input type="text" name="food" value="{{ acc.FoodId }}"></td>
+                <td><input type="text" name="price" value="{{ acc.quantity }}"></td>
+                <td><input type="text" id="see" name="Quantity" value="{{ acc.price }}"></td>
             </tr>
 
             {% endfor %}
@@ -32,6 +32,8 @@
     <h2>{{ table }}</h2><br>
     <h2>Sub Total</h2>
     <h2>{{ l }}</h2>
+    <a href="{% url 'eat_at_canteen:confirm' %}"><input type="button" name="" value="Confirm"></a>
+
 
     {% endblock %}
 </div>

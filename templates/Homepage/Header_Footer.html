@@ -5,6 +5,8 @@
     <meta charset="UTF-8"/>
     <title>Cafeteria</title>
     <link rel = "stylesheet" type="text/css" href="{% static 'User/main.css' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 <body>
     <header>
@@ -36,6 +38,12 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">SignUp</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'eat_at_canteen:cart' %}">Cart</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'eat_at_canteen:review' %}">Review</a>
                             </li>
 
                         </ul>

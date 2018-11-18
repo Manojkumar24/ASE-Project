@@ -1,6 +1,9 @@
-{% extends "eat_at_canteen/base.html" %}
-    {% block body_block %}
-<div class="jumbotron">
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'Homepage/Header_Footer.html' %}
+{% load static %}
+{% block content %}
+<div class="">
 <h1> Cart </h1>
 
 
@@ -11,6 +14,7 @@
             <th>Food Name</th>
             <th>Price</th>
             <th>Quantity</th>
+            <th>Price</th>
             <th>Optional</th>
             </thead>
             {% for acc in items %}
@@ -18,14 +22,14 @@
                 <!--{% csrf_token %}-->
 
             <tr>
-             <form action="{% url 'eat_at_canteen:delete' %}"  method="POST">
+             <form  id="new_user_form" action="{% url 'eat_at_canteen:delete' %}" method="POST">
                 {% csrf_token %}
 
-                <td><input type="text" name="food" value="{{ acc.Foodname }}" readonly></td>
-                <td><input type="text" name="price" id="{{ acc.Price }}" value="{{ acc.Price }}" readonly></td>
-                <td><input type="number" id="see" name="Quantity" value="{{ acc.Quantity }}"></td>
+                <td><input type="text" name="food" id="food" value="{{ acc.FoodId }}" readonly></td>
+                 <td><input type="text" name="actualprice" id="actualprice{{acc.id}}" value="{{ acc.FoodId.Food_Price }}" readonly></td>
+                 <td><input type="number" id="quantity{{acc.id}}" class="quantities" onchange="see(this)" name="quantity" value="{{ acc.quantity }}"></td>
+                 <td><input type="text" name="price" id="price{{acc.id}}" value="{{ acc.price }}" readonly></td>
                 <td><input type="submit" value="Remove"></td>
-                <td><input type="text" id="price"></td>
 
              </form>
             </tr>
@@ -36,11 +40,36 @@
         {% else %}
         <p> NO ITEMS  </p>
         {% endif %}
-        <a href="{% url 'eat_at_canteen:Booktable' %}"><input type="button" name="" value="Book Table"></a>
+        <a href="{% url 'eat_at_canteen:table' %}"><input type="button" name="" value="Book Table"></a>
 
     </form>
 
 
 
-    {% endblock %}
+
 </div>
+<script type="text/javascript">
+
+function see(element) {
+    let id = element.id.slice(8);
+    let actualprice = document.getElementById("actualprice" + id);
+    let price = document.getElementById("price" + id);
+    price.value = element.value * actualprice.value;
+    $.ajax({
+        type: 'POST',
+        url: "{% url 'eat_at_canteen:update' %}",
+        data: {
+            id: id,
+            price: price.value,
+            quantity: element.value,
+            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+        },
+        success: function (response) {
+            console.log(response);
+        }
+    });
+}
+</script>
+
+{% endblock %}
+</html>
