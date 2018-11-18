@@ -1,3 +1,5 @@
+import string
+from random import *
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
@@ -7,8 +9,7 @@ class UserProfileInfo(models.Model):
     address = models.CharField(max_length=200,default='')
     city = models.CharField(max_length=100,default='')
     pincode = models.CharField(max_length=6,default='')
-
-    profile_pic=models.ImageField(upload_to='static/registration/profile_pics',blank=True)
+    profile_pic=models.ImageField(upload_to='profile_pics',blank=True)
     """def __str__(self):
         return self.user.username
 """
@@ -31,11 +32,22 @@ class Admin(models.Model):
    # profile_pic = models.ImageField(upload_to='user_profile_pics',blank=True)
    """
 
-class Staff(models.Model):
+class Staffdetails(models.Model):
     firstname = models.CharField(max_length = 200)
     lastname = models.CharField(max_length=200)
-    employee_id = models.IntegerField(primary_key=True)
-    email = models.EmailField()
+    employee_id = models.CharField(primary_key=True,max_length=10)
+    email = models.EmailField(unique=True)
     password = models.CharField(max_length=50)
+    #password2 = models.CharField(max_length=50)
     address = models.CharField(max_length=250)
-    city = models.CharField(max_length=150)
+    pincode = models.CharField(max_length=6,default='')
+
+    @classmethod
+    def emp_id(self):
+        min_char = 5
+        max_char = 5
+        #allchar = string.ascii_letters + string.punctuation + string.digits
+        allchar = string.digits
+        emp_id = "CSA"+ ("".join(choice(allchar) for x in range(randint(min_char, max_char))))
+        return (emp_id)
+    # Here be code
