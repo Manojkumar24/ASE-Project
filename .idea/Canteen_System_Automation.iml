@@ -16,7 +16,27 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
     <orderEntry type="jdk" jdkName="Python 3.6 (venv)" jdkType="Python SDK" />
+=======
+    <orderEntry type="jdk" jdkName="Python 3.6" jdkType="Python SDK" />
+>>>>>>> 4e5ab7a14769a3a8b3b70aa8d5eaea294b4e4b50
+=======
+    <orderEntry type="jdk" jdkName="Python 3.6 (Canteen_System_Automation)" jdkType="Python SDK" />
+>>>>>>> 80590861a2232e7441610c2c7f35d8820c68a312
+=======
+    <orderEntry type="jdk" jdkName="Python 3.6 (Canteen_System_Automation)" jdkType="Python SDK" />
+>>>>>>> 4939aa5886338d31cb97617da8cea3c425fdee94
+=======
+    <orderEntry type="jdk" jdkName="Python 3.6" jdkType="Python SDK" />
+>>>>>>> 57661ccc73d2807382b7ca8ab5ea7113511b8082
+=======
+    <orderEntry type="jdk" jdkName="Python 3.6 (venv)" jdkType="Python SDK" />
+>>>>>>> 6b8f19b53121b5183e21c8a26ba6e0bed7ef236b
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="bootstrap" level="application" />
     <orderEntry type="library" name="jquery-3.2.0" level="application" />

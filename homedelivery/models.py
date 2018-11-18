@@ -1,10 +1,15 @@
 from django.db import models
 from Manager.models import Food_items
 from django.core.validators import MinValueValidator, RegexValidator
+from User.models import Order_Food,Order_User
 from django.utils import timezone
 
 # Create your models here.
 
+
+
+class HD_Address(models.Model):
+    tokenId = models.ForeignKey(Order_User, on_delete=models.CASCADE)
 
 class HD_FoodOrder(models.Model):
     tokenId = models.AutoField(primary_key=True)
@@ -22,6 +27,7 @@ class HD_FoodOrder(models.Model):
 
 class HD_Address(models.Model):
     tokenId = models.ForeignKey(HD_FoodOrder, on_delete=models.CASCADE)
+
     city_choices = (
         ("Sri City", "Sri City"),
     )

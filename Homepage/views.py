@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from Manager.models import Food_items
+from User.models import Order_Food,Order_User
+from django.contrib.auth.models import User
+
 
 
 def default(request):

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from django.shortcuts import reverse
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from django.template.backends import django
@@ -147,6 +148,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-#LOGIN_URL='/Registration/user_login'
+LOGIN_URL='/registration/user_login'
+LOGIN_REDIRECT_URL = '/registration/user_login/'
 
 #SESSION_ENGINE = django.contrib.sessions.backend.signed_cookies

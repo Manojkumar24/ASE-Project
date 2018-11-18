@@ -1,8 +1,10 @@
 from django.contrib import admin
+from .models import HD_Address
 from .models import HD_Address, HD_FoodOrder
 # Register your models here.
 # admin.site.register(HD_FoodOrder)
 # admin.site.register(HD_Address)
+
 
 
 class HD_AddressInLine(admin.StackedInline):
@@ -17,7 +19,11 @@ class HD_FoodOrderAdmin(admin.ModelAdmin):
         ('Food Info', {'fields': ['Food_id', 'quantity', 'price']}),
         ('Date Ordered', {'fields': ['date']}),
     ]
-    inlines = [HD_AddressInLine]
+
+
+admin.site.register(HD_Address,HD_AddressAdmin)
+inlines = [HD_AddressInLine]
 
 
 admin.site.register(HD_FoodOrder, HD_FoodOrderAdmin)
+

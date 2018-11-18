@@ -5,6 +5,8 @@
     <meta charset="UTF-8"/>
     <title>Cafeteria</title>
     <link rel = "stylesheet" type="text/css" href="{% static 'User/main.css' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
     <header>
@@ -19,12 +21,15 @@
                             <li>
                                 <a class="" href="{% url 'Homepage:home' %}">Home<span class=""></span></a>
                             </li>
-                            <li class="about">
-                                <a href="#">AboutUs</a>
-                            </li>
+
                             <li class="cont">
                                 <a  href="#">ContactUs</a>
                             </li>
+
+                            <li class="">
+                                <a class="" href="{% url 'eat_at_canteen:review' %}">Review</a>
+                            </li>
+
                             {% if user.is_authenticated %}
                                 <li>
                                     <!--img class="proPic" src="{%static request.user.profile_pic.path %}" --->
@@ -33,7 +38,13 @@
                                 <li class="logout">
                                     <a class="" href="{% url 'Registration:user_logout' %}">LogOut</a>
                                 </li>
+                                 <li class="">
+                                <a  href="{% url 'eat_at_canteen:cart' %}">Cart</a>
+                                </li>
                             {% else %}
+                                <li class="about">
+                                <a href="#">AboutUs</a>
+                                </li>
                                 <li class="logIn">
                                     <a class="" href="{%  url 'Registration:user_login' %}">LogIn</a>
                                 </li>
