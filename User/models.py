@@ -15,8 +15,6 @@ class Order_Food(models.Model):
     price = models.FloatField(null=False)
     TableId = models.IntegerField()
     Status = models.CharField(max_length=8, choices=status, default=draft)
-    date = models.DateField()
-    time = models.TimeField()
 
 class Order_User(models.Model):
     order = 'ordered'

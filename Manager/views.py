@@ -7,8 +7,8 @@ from django.conf import settings
 
 # Create your views here.
 def index(request):
-    #if request.method == 'POST':
-        #send_mail('Test for email', 'Success', settings.EMAIL_HOST_USER, [request.POST['email']], fail_silently=True)
+    if request.method == 'POST':
+        send_mail('Test for email', 'Success', settings.EMAIL_HOST_USER, [request.POST['email']], fail_silently=True)
     return render(request, 'Manager/index.html')
 
 

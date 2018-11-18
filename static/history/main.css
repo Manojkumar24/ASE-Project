@@ -1,20 +1,21 @@
 
 
 .big-banner{
-  background-image: url("bg1.png");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
   background-size: cover;
-  width:200%;
+  width:100%;
   height:680px;
   left:0px;
   position:absolute;
   }
-    .dropdown-menu { background-color: #e3f2fd; }
 
+body{
+  background-size: cover;
+  background-attachment: fixed;
+  z-index: -2;
+}
 
 .c2{
-  color:white;
+  color: #333333;
   font-family: "Times New Roman";
   top:200px;
   left:100px;
@@ -23,7 +24,7 @@
 
 }
 .c3{
-  color:white;
+  color: #333333;
   font-family: "Times New Roman";
   top:270px;
   left:700px;
@@ -136,3 +137,14 @@
 }
 .w3-animate-zoom {animation:animatezoom 0.6s}@keyframes animatezoom{from{transform:scale(0)} to{transform:scale(1)}}
 .w3-container{padding:0.01em 16px}
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: -1;
+}
