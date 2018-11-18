@@ -11,6 +11,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 
+
 def default(request):
     return render(request, 'Registration/Registration_01.html')
 
@@ -27,7 +28,7 @@ def special(request):
     return HttpResponse("You are logged in ,Nice!")
 
 def register(request):
-    registered=False
+    registered = False
     verified = False
     #email
     subject = "REGISTRATION SUCCESSFUL"
@@ -47,12 +48,9 @@ def register(request):
             if 'profile_pic' in request.FILES:
                 profile.profile_pic=request.FILES['profile_pic']
             profile.save()
-            #registered=True
+            rergistered = True
             send_mail(subject,message, ['csa.ase1@gmail.com'],[email],html_message="<a href = http://127.0.0.1:8000/registration/email_verify>click here to verify your email</a>")
-            if cust_verify()==1:
-                registered = True
-            else:
-                return HttpResponse("Verify ur email")
+
         else:
             print(user_form.errors,profile_form.errors)
     else:
@@ -114,16 +112,46 @@ def staff_registration(request):
         staff_reg_form = StaffdetailsForm()
     return render(request, 'Registration/Registration_02.html',
                   {'staff_reg_form': staff_reg_form, 'registered': registered})
-
+"""
 count = 0
 def cust_verify(self):
     global count
     count=count+1;
     return(count)
+"""
 
 def email_verify(request):
     return render(request,'Registration/email_verify.html',{})
 
 def email_verified(request):
     return HttpResponse("Your email is verified")
+
+"""
+def staff_login(request):
+    staff = False
+    if request.method=='POST':
+        employee_id = Staffdetails.employee_id
+        password = Staffdetails.password
+        emplo_id=request.POST.get('employee_id')
+        psw=request.POST.get('password')
+        if (employee_id==emplo_id) and (password==psw):
+            staff = True
+        else:
+            staff = False
+    #here
+    else :
+        return render(request,'Registration/staff_login.html',{})
+
+    
+           if staff:
+                if staff.is_active:
+                    login(request,staff)
+                    return HttpResponseRedirect(reverse('Homepage:home'))
+                    return HttpResponse("You are logged in")
+                else:
+                    return HttpResponse("ACCOUNT NOT ACTIVE")
+            else:
+                return HttpResponse("invalid login details")
+"""
+
 
