@@ -4,24 +4,12 @@
     <option name="languageLevel" value="ES6" />
   </component>
 <<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6 (venv)" project-jdk-type="Python SDK" />
 =======
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6" project-jdk-type="Python SDK" />
->>>>>>> 4e5ab7a14769a3a8b3b70aa8d5eaea294b4e4b50
 =======
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6 (Canteen_System_Automation)" project-jdk-type="Python SDK" />
->>>>>>> 80590861a2232e7441610c2c7f35d8820c68a312
-=======
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6 (Canteen_System_Automation)" project-jdk-type="Python SDK" />
->>>>>>> 4939aa5886338d31cb97617da8cea3c425fdee94
-=======
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6" project-jdk-type="Python SDK" />
->>>>>>> 57661ccc73d2807382b7ca8ab5ea7113511b8082
-=======
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6 (venv)" project-jdk-type="Python SDK" />
->>>>>>> 6b8f19b53121b5183e21c8a26ba6e0bed7ef236b
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6 (venv) (2)" project-jdk-type="Python SDK" />
+>>>>>>> a672fc9c9d194b75628a25167a71cd136c896203
+>>>>>>> 1bf225c90ae73ab139e5cd08e469a9cbb9f02d7e
 </project>

@@ -3,13 +3,16 @@ from . import form
 from .models import Food_items, Dining_Tables, Available_Towns
 from django.core.mail import send_mail
 from django.conf import settings
+from User.models import Order_Food, Order_User
+from homedelivery.models import HD_Address
 
 
 # Create your views here.
 def index(request):
-    if request.method == 'POST':
-        send_mail('Test for email', 'Success', settings.EMAIL_HOST_USER, [request.POST['email']], fail_silently=True)
-    return render(request, 'Manager/index.html')
+    user_order_item = Order_User.objects.filter(status='ordered')
+    user_pre_item = Order_User.objects.filter(status='in Preparation')
+    content = {'user_order_item': user_order_item, 'user_pre_item': user_pre_item}
+    return render(request, 'Manager/index.html', content)
 
 
 def add_food(request):
@@ -33,7 +36,7 @@ def add_food(request):
             except:
                 try:
                     Food_items.objects.create(Food_id=fid, Food_Name=name, Food_Price=price, quantity=qu,
-                                          Category=category)
+                                              Category=category)
                 except:
                     error = 'Unable to Add the food item'
             item = Food_items.objects.all()
@@ -95,7 +98,7 @@ def check_update_food(request):
         food_temp.Category = category
         try:
             img = request.FILES['image']
-            if img != None and img!= food_temp.image:
+            if img != None and img != food_temp.image:
                 food_temp.image.delete()
                 food_temp.image = img
                 food_temp.save()
@@ -232,7 +235,7 @@ def check_update_table(request):
         return render(request, 'Manager/Update_tables.html', content)
 
 
-def update_table(request, id = None):
+def update_table(request, id=None):
     if id != 0:
         try:
             update = Dining_Tables.objects.get(Table_id=id)
@@ -247,3 +250,123 @@ def update_table(request, id = None):
         item = Dining_Tables.objects.all()
         content = {'item': item}
         return render(request, 'Manager/Update_tables.html', content)
+
+
+def list_items(request, id=None):
+    error = None
+    if id:
+        try:
+            items = Order_Food.objects.filter(TokenId=id)
+            content = {'items': items}
+            return render(request, 'Manager/list_items.html', content)
+        except:
+            error = 'No Food items present'
+    if error:
+        user_item = Order_User.objects.filter(status='ordered')
+        content = {'user_item': user_item, 'error': error}
+        return render(request, 'Manager/index.html', content)
+    else:
+        error = 'Invalid TokenId'
+        user_item = Order_User.objects.filter(status='ordered')
+        content = {'user_item': user_item, 'error': error}
+        return render(request, 'Manager/index.html', content)
+
+
+def send_email(request, t_id=None):
+    msg = 'Email is not sent'
+    if t_id:
+        if request.method == 'POST':
+            item = Order_User.objects.get(TokenId__exact=t_id)
+            email = item.mailId
+            time = request.POST['time']
+            subject = 'Your order expected time is' + time
+            body = '''Dear User,
+            You order with Token Id ''' + t_id + ''' is expected to be done by ''' + time + ''' 
+            Thank You for ordering'''
+            try:
+                send_mail(subject, body, settings.EMAIL_HOST_USER, [email], fail_silently=True)
+                msg = 'Email is sent'
+                item.status = 'in Preparation'
+                item.save()
+            except:
+                pass
+    user_order_item = Order_User.objects.filter(status='ordered')
+    user_pre_item = Order_User.objects.filter(status='in Preparation')
+    content = {'user_order_item': user_order_item, 'user_pre_item': user_pre_item, 'msg': msg}
+    return render(request, 'Manager/index.html', content)
+
+
+def change_status(request, f_id=None):
+    error = None
+    if f_id:
+        try:
+            items = Order_Food.objects.filter(TokenId=f_id)
+            add = HD_Address.objects.filter(tokenId__exact=Order_User.objects.filter(TokenId=f_id))
+            content = {'items': items, 'add': add}
+            return render(request, 'Manager/change_status.html', content)
+        except:
+            try:
+                items = Order_Food.objects.filter(TokenId=f_id)
+                content = {'items': items}
+                return render(request, 'Manager/change_status.html', content)
+            except:
+                error = 'No Food items present'
+    if error:
+        user_order_item = Order_User.objects.filter(status='ordered')
+        user_pre_item = Order_User.objects.filter(status='in Preparation')
+        content = {'user_order_item': user_order_item, 'user_pre_item': user_pre_item, 'error': error}
+        return render(request, 'Manager/index.html', content)
+    else:
+        error = 'Invalid TokenId'
+        user_order_item = Order_User.objects.filter(status='ordered')
+        user_pre_item = Order_User.objects.filter(status='in Preparation')
+        content = {'user_order_item': user_order_item, 'user_pre_item': user_pre_item, 'error': error}
+        return render(request, 'Manager/index.html', content)
+
+
+def send_com_email(request, t_id=None):
+    msg = 'Email is not sent'
+    if t_id:
+        if request.method == 'POST':
+            item = Order_User.objects.get(TokenId__exact=t_id)
+            email = item.mailId
+            status = request.POST['Completed']
+            subject = 'Your order status: ' + status
+            body = '''Dear User,
+                You order with Token Id ''' + t_id + ''' is changed its status to ''' + status + ''' You can come and collect your order 
+                Thank You for ordering'''
+            try:
+                send_mail(subject, body, settings.EMAIL_HOST_USER, [email], fail_silently=True)
+                msg = 'Email is sent'
+                item.status = status
+                item.save()
+            except:
+                pass
+    user_order_item = Order_User.objects.filter(status='ordered')
+    user_pre_item = Order_User.objects.filter(status='in Preparation')
+    content = {'user_order_item': user_order_item, 'user_pre_item': user_pre_item, 'msg': msg}
+    return render(request, 'Manager/index.html', content)
+
+
+def send_home_email(request, t_id=None):
+    msg = 'Email is not sent'
+    if t_id:
+        if request.method == 'POST':
+            item = Order_User.objects.get(TokenId__exact=t_id)
+            email = item.mailId
+            status = request.POST['in Delivery']
+            subject = 'Your order status: ' + status
+            body = '''Dear User,
+                    You order with Token Id ''' + t_id + ''' is changed its status to ''' + status + ''' You will receive your food soon.  
+                    Thank You for ordering'''
+            try:
+                send_mail(subject, body, settings.EMAIL_HOST_USER, [email], fail_silently=True)
+                msg = 'Email is sent'
+                item.status = status
+                item.save()
+            except:
+                pass
+    user_order_item = Order_User.objects.filter(status='ordered')
+    user_pre_item = Order_User.objects.filter(status='in Preparation')
+    content = {'user_order_item': user_order_item, 'user_pre_item': user_pre_item, 'msg': msg}
+    return render(request, 'Manager/index.html', content)
