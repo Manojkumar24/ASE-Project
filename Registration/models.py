@@ -39,3 +39,4 @@ class Staff(models.Model):
     password = models.CharField(max_length=50)
     address = models.CharField(max_length=250)
     city = models.CharField(max_length=150)
+

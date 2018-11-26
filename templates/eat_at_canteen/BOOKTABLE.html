@@ -28,7 +28,7 @@
                     <h4>Table_No:{{ acc.Table_No }}</h4>
                     <h4>Max_size:{{ acc.Max_size }} category:{{ acc.category }} </h4>
                     {% if acc.availability == True %}
-                        BOOK<input type="checkbox" value="Book" name="{{ acc.Table_id }}">
+                        <input type="text" value="BOOK"><input type="checkbox" value="Book" name="{{ acc.Table_id }}">
                     {% else %}
                         <input type="text" value="RESERVED">
                     {% endif %}
@@ -46,7 +46,7 @@
                     <h4>Table_No:{{ acc.Table_id }}</h4>
                     <h4>Max_size:{{ acc.Max_size }} category:{{ acc.category }} </h4>
                     {% if acc.availability == True %}
-                        BOOK<input type="checkbox" value="Book" name="{{ acc.Table_id }}">
+                        <input type="text" value="BOOK"><input type="checkbox" value="Book" name="{{ acc.Table_id }}">
                     {% else %}
                         <input type="text" value="RESERVED">
                     {% endif %}
@@ -62,7 +62,7 @@
                     <h4>Table_No:{{ acc.Table_No }}</h4>
                     <h4>Max_size:{{ acc.Max_size }} category:{{ acc.category }} </h4>
                     {% if acc.availability == True %}
-                        BOOK<input type="checkbox" value="Book" name="{{ acc.Table_id }}">
+                        <input type="text" value="BOOK"><input type="checkbox" value="Book" name="{{ acc.Table_id }}">
                     {% else %}
                         <input type="text" value="RESERVED">
                     {% endif %}

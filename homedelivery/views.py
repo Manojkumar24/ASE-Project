@@ -1,4 +1,3 @@
-
 from django.shortcuts import render, reverse
 from django.http import HttpResponse
 from .models import HD_Address
@@ -84,3 +83,4 @@ def confirm(request):
         food_items.Status = 'conf'
         food_items.save()
     return render(request, 'Homepage/Homepage.html')
+
