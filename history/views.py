@@ -21,7 +21,7 @@ def users1(request):
         y=int(Todate[0:4])
         y1=int(Todate[5:7])
         y2=int(Todate[8:10])
-        all_foodorders=Order_Food.objects.filter(Status='confirmed');
+        all_foodorders=Order_Food.objects.filter(Status='conf');
 
 
 
@@ -71,7 +71,7 @@ def users2(request):
             b=int(todate[0:4])
             b1=int(todate[5:7])
             b2=int(todate[8:10])
-            all_foodorders=Order_Food.objects.filter(Status='confirmed');
+            all_foodorders=Order_Food.objects.filter(Status='conf');
 
 
             for i in all_foodorders:
