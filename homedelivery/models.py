@@ -8,10 +8,7 @@ from django.utils import timezone
 
 
 
-class HD_Address(models.Model):
-    tokenId = models.ForeignKey(Order_User, on_delete=models.CASCADE)
-
-class HD_FoodOrder(models.Model):
+"""class HD_FoodOrder(models.Model):
     tokenId = models.AutoField(primary_key=True)
     quantity = models.PositiveIntegerField(null=False)
     price = models.FloatField(validators=[MinValueValidator(0.0)], null=False)
@@ -22,11 +19,11 @@ class HD_FoodOrder(models.Model):
     #        'tokenId' : tokenId,
     #        'quanti'
     #    }
-    #    return context
+    #    return context"""
 
 
 class HD_Address(models.Model):
-    tokenId = models.ForeignKey(HD_FoodOrder, on_delete=models.CASCADE)
+    tokenId = models.ForeignKey(Order_User, on_delete=models.CASCADE)
 
     city_choices = (
         ("Sri City", "Sri City"),
