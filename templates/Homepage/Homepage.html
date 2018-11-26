@@ -34,7 +34,7 @@
                             <form method="post" action="{% url 'eat_at_canteen:order' %}">
                                 {% csrf_token %}
                                 <input type="text" value="{{ food.Food_Name }}" name="food" style="border: 0"><br>
-                                Price :<input type="text" value="{{ food.Food_Price }}" name="price" style="border: 0" readonly><br>
+                                Price :<input type="text" value="{{ food.Food_Price }}" name="price" style="border: 0"><br>
 
                                 <input type="submit"  class="cart" value = "add to cart">
 
@@ -77,3 +77,4 @@
 </script>
 {% endblock %}
 </html>
+>>>>>>> ef1b4375ff856c8ff0d5bdc8953637bd6c85e3b7

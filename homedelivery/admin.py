@@ -24,4 +24,3 @@ from .models import HD_Address
 
 
 admin.site.register(HD_Address)
-

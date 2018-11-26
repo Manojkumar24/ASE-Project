@@ -26,3 +26,4 @@ urlpatterns = [
     path('registration/',include('Registration.urls')),
     path('ec/',include('eat_at_canteen.urls'))
 ]
+

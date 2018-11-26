@@ -31,7 +31,9 @@
                 <div class="form-group col-md-6">
                     <label for="town">City</label>
                     <select class="form-control" name="town" id="town">
-                        <option>Sri City</option>
+                    {% for city in Towns %}
+                      <option>{{city}}</option>
+                    {% endfor %}
                     </select>
                   <!--<input type="text" name="town" class="form-control" id="town">-->
                 </div>

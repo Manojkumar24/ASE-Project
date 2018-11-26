@@ -3,7 +3,7 @@
 <div class="jumbotron">
 <h1> Your Order </h1>
     <h2>Order Details</h2>
-    <h2>Username:{{ u }}</h2>
+    <h2>Username:{{ username }}</h2>
     <h2>Token_No:{{ token.TokenId }}</h2>
 
 
@@ -16,12 +16,12 @@
             <th>Quantity</th>
             <th>Price</th>
             </thead>
-           {% for acc in customer_food %}
+           {% for food_items in customer_food %}
 
             <tr>
-                <td><input type="text" name="food" value="{{ acc.FoodId }}"></td>
-                <td><input type="text" name="price" value="{{ acc.quantity }}"></td>
-                <td><input type="text" id="see" name="Quantity" value="{{ acc.price }}"></td>
+                <td><input type="text" name="food" value="{{ food_items.FoodId }}"></td>
+                <td><input type="text" name="price" value="{{ food_items.quantity }}"></td>
+                <td><input type="text" id="see" name="Quantity" value="{{ food_items.price }}"></td>
             </tr>
 
             {% endfor %}
@@ -31,12 +31,12 @@
     <h2>Table No</h2>
     <h2>{{ table }}</h2><br>
     <h2>Sub Total</h2>
-    <h2>{{ l }}</h2>
+    <h2>{{ amount }}</h2>
     <h1>Shipping Address</h1>
-    Door_No:{{ ad.dNo }}
-    Street:{{ ad.street }}
-    Town:{{ ad.town }}
-    Phone_No:{{ ad.phone_number }}
+    Door_No:{{ address.dNo }}
+    Street:{{ address.street }}
+    Town:{{ address.town }}
+    Phone_No:{{ address.phone_number }}
     <a href="{% url 'homedelivery:confirm' %}"><input type="button" name="" value="Confirm"></a>
 
 
