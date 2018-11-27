@@ -253,23 +253,18 @@ def update_table(request, id=None):
 
 
 def list_items(request, id=None):
-    error = None
+    error = 'Invalid TokenId'
     if id:
         try:
             items = Order_Food.objects.filter(TokenId=id)
             content = {'items': items}
             return render(request, 'Manager/list_items.html', content)
         except:
-            error = 'No Food items present'
-    if error:
-        user_item = Order_User.objects.filter(status='ordered')
-        content = {'user_item': user_item, 'error': error}
-        return render(request, 'Manager/index.html', content)
-    else:
-        error = 'Invalid TokenId'
-        user_item = Order_User.objects.filter(status='ordered')
-        content = {'user_item': user_item, 'error': error}
-        return render(request, 'Manager/index.html', content)
+            pass
+    user_item = Order_User.objects.filter(status='ordered')
+    user_pre_item = Order_User.objects.filter(status='in Preparation')
+    content = {'user_item': user_item, 'user_pre_item': user_pre_item, 'error': error}
+    return render(request, 'Manager/index.html', content)
 
 
 def send_email(request, t_id=None):
@@ -297,31 +292,22 @@ def send_email(request, t_id=None):
 
 
 def change_status(request, f_id=None):
-    error = None
+    error = 'Invalid TokenId'
     if f_id:
         try:
             items = Order_Food.objects.filter(TokenId=f_id)
-            add = HD_Address.objects.filter(tokenId__exact=Order_User.objects.filter(TokenId=f_id))
-            content = {'items': items, 'add': add}
+            try:
+                add = HD_Address.objects.get(tokenId=Order_User.objects.filter(TokenId=f_id).first)
+                content = {'items': items, 'add': add}
+            except:
+                content = {'items': items}
             return render(request, 'Manager/change_status.html', content)
         except:
-            try:
-                items = Order_Food.objects.filter(TokenId=f_id)
-                content = {'items': items}
-                return render(request, 'Manager/change_status.html', content)
-            except:
-                error = 'No Food items present'
-    if error:
-        user_order_item = Order_User.objects.filter(status='ordered')
-        user_pre_item = Order_User.objects.filter(status='in Preparation')
-        content = {'user_order_item': user_order_item, 'user_pre_item': user_pre_item, 'error': error}
-        return render(request, 'Manager/index.html', content)
-    else:
-        error = 'Invalid TokenId'
-        user_order_item = Order_User.objects.filter(status='ordered')
-        user_pre_item = Order_User.objects.filter(status='in Preparation')
-        content = {'user_order_item': user_order_item, 'user_pre_item': user_pre_item, 'error': error}
-        return render(request, 'Manager/index.html', content)
+            pass
+    user_order_item = Order_User.objects.filter(status='ordered')
+    user_pre_item = Order_User.objects.filter(status='in Preparation')
+    content = {'user_order_item': user_order_item, 'user_pre_item': user_pre_item, 'error': error}
+    return render(request, 'Manager/index.html', content)
 
 
 def send_com_email(request, t_id=None):
