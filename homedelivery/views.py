@@ -1,14 +1,25 @@
+<<<<<<< HEAD
 from django.shortcuts import render, reverse
+=======
+
+from django.shortcuts import render,reverse
+>>>>>>> 9bf36a9aa4fb910d284e11d1225e627e2774a9b1
 from django.http import HttpResponse
 from .models import HD_Address
 from django.core import serializers
 from django.contrib.auth.models import User
+<<<<<<< HEAD
 from User.models import Order_Food, Order_User
 from Manager.models import Available_Towns
 from django.contrib.auth.decorators import login_required
 
 
 @login_required
+=======
+from User.models import Order_Food,Order_User
+
+
+>>>>>>> 9bf36a9aa4fb910d284e11d1225e627e2774a9b1
 def address(request):
     context = {
         "Towns": []
@@ -24,6 +35,7 @@ def submit(request):
     username = request.user.username
     user = User.objects.get(username=username)
     email = user.email
+<<<<<<< HEAD
     street = request.POST['street']
     dNo = request.POST['dNo']
     town = request.POST['town']
@@ -40,6 +52,42 @@ def submit(request):
     context = {'customer_food': customer_food, 'amount': amount,
                'username': username, 'token': tokenId, 'address': hd_address}
     return render(request, 'homedelivery/shownew.html', context=context)
+=======
+    #x=Order_User.objects.get(mailId=email,status='draft')
+    #t = x.TokenId
+    if request.method=='POST':
+        street = request.POST['street']
+        dNo = request.POST['dNo']
+        town = request.POST['town']
+        phone_number = request.POST['phone_number']
+        temp =Order_User.objects.get(mailId=email, status='draft')
+        hd_address = HD_Address.objects.create(tokenId=temp,street=street, dNo=dNo, town=town, phone_number=phone_number)
+
+    if request.user.is_authenticated:
+        username = request.user.username
+    else:
+        return reverse('Registration:register')
+    user = User.objects.get(username=username)
+    email = user.email
+    b = Order_User.objects.get(mailId=email, status='draft');
+    t = b.TokenId
+    l = 0
+    g = Order_Food.objects.filter(Status='dr', TokenId=t)
+    for h in g:
+        l = l + h.price
+    if request.user.is_authenticated:
+        Username = request.user.username
+
+        y = {'customer_food': g, 'l': l, 'u': username, 'token': t,'ad':hd_address}
+
+        return render(request, 'homedelivery/shownew.html', context=y)
+
+
+    hd_address = HD_Address.objects.create(tokenId=HD_FoodOrder.objects.get(
+        tokenId=1), street=street, dNo=dNo, town=town, phone_number=phone_number)
+
+    return HttpResponse('Saved')
+>>>>>>> 9bf36a9aa4fb910d284e11d1225e627e2774a9b1
 
 
 def showonmap(request):
@@ -47,8 +95,13 @@ def showonmap(request):
     # return HttpResponse('Hello')
     # return {
     #    'location':'102 Matej Enclave Khajpura Bailey Road Patna'
+<<<<<<< HEAD
     # } 
     return render(request, 'homedelivery/showonmap.html', context)
+=======
+    # }
+    return render(request, 'homedelivery/shownew.html', context)
+>>>>>>> 9bf36a9aa4fb910d284e11d1225e627e2774a9b1
 
 
 def orderdetails(request):
@@ -67,9 +120,12 @@ def orderdetails(request):
     }
     # return HttpResponse()
     return render(request, 'homedelivery/orderdetails.html', context)
+<<<<<<< HEAD
 
 
 @login_required
+=======
+>>>>>>> 9bf36a9aa4fb910d284e11d1225e627e2774a9b1
 def confirm(request):
     username = request.user.username
     user = User.objects.get(username=username)

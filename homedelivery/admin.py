@@ -23,4 +23,9 @@ from .models import HD_Address
 #inlines = [HD_AddressInLine]
 
 
+<<<<<<< HEAD
 admin.site.register(HD_Address)
+=======
+admin.site.register(HD_Address)
+
+>>>>>>> 9bf36a9aa4fb910d284e11d1225e627e2774a9b1
