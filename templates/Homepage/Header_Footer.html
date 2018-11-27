@@ -13,8 +13,8 @@
         <nav class="navBar">
               <div class="heading">Cafeteria</div>
                     <div class="Options">
-                        <form class="search">
-                            <input class="searchInput" type="text" placeholder=" food!!!">
+                        <form action="{% url 'Homepage:search' %}" class="search" method="get">
+                            <input class="searchInput" name="FoodRequest" type="text" placeholder=" food!!!" >
                             <button class="searchBtn" type="submit">Search</button>
                         </form>
                         <ul>
@@ -23,7 +23,7 @@
                             </li>
 
                             <li class="cont">
-                                <a  href="#">ContactUs</a>
+                                <a  href="#Cont">ContactUs</a>
                             </li>
 
                             <li class="">
@@ -58,8 +58,8 @@
     </header>
     {% block content %}
     {% endblock %}
-    <footer>
-            <div class="Contact">
+    <!---footer>
+            <div id="#Cont" class="Contact">
                 <h4 style="text-align: left;font-size: 30px">Contact US</h4>
                 <p>
                     Bh-2,IIIT Sricty,sricity,
@@ -69,11 +69,10 @@
             <div class="Footer">
                 <ul>
                     <li><a href="{% url 'Homepage:home' %}">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#about">About Us</a></li>
                     {% if user.is_authenticated %}
                         <li>
-                            <!--img class="proPic" src="{%static request.user.profile_pic.path %}" --->
+                            <!--img class="proPic" src="{%static request.user.profile_pic.path %}" >
                             <a class="logout">{{ request.user.username }}</a>
                         </li>
                         <li class="logout">
@@ -85,7 +84,7 @@
                     {% endif %}
                 </ul>
             </div>
-    </footer>
+    </footer-->
 </html>
 <script>
     window.onscroll = function() {myFunction()};

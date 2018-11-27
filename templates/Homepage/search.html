@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% extends 'Homepage/Header_Footer.html' %}
+{% load static %}
+<html lang="en">
+{% block content %}
+<body>
+    <br><br><br><br><br>
+    {% if results %}
+        {% for results in results %}
+            <div class="card">
+                <img class="CardImage" src="{% static results.image.path %}" alt="Avatar">
+                <div class="container">
+
+                    <form method="post" action="{% url 'eat_at_canteen:order' %}">
+                        {% csrf_token %}
+                            Name :<input type="text" value="{{ results.Food_Name }}" name="food" style="border: 0">
+                            Price :<input type="text" value="{{ results.Food_Price }}" name="price" style="border: 0"><br>
+                        <input type="submit"  class="cart" value = "add to cart">
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+        {% else %}
+            <p>There is nothing</p>
+
+    {% endif %}
+</body>
+{% endblock %}
+</html>

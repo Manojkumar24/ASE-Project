@@ -1,19 +1,10 @@
-<<<<<<< HEAD
+
 from django.shortcuts import render,reverse
 from django.http import HttpResponse
 from .models import HD_Address
 from django.core import serializers
 from django.contrib.auth.models import User
 from User.models import Order_Food,Order_User
-
-
-=======
-from django.shortcuts import render
-from django.http import HttpResponse
-from .models import HD_Address, HD_FoodOrder
-from django.core import serializers
->>>>>>> 6b8f19b53121b5183e21c8a26ba6e0bed7ef236b
-# Create your views here.
 
 
 def address(request):
@@ -35,13 +26,13 @@ def submit(request):
     email = user.email
     #x=Order_User.objects.get(mailId=email,status='draft')
     #t = x.TokenId
-
-    street = request.POST['street']
-    dNo = request.POST['dNo']
-    town = request.POST['town']
-    phone_number = request.POST['phone_number']
-
-    hd_address = HD_Address.objects.create(tokenId=Order_User.objects.get(mailId=email, status='draft'),street=street, dNo=dNo, town=town, phone_number=phone_number)
+    if request.method=='POST':
+        street = request.POST['street']
+        dNo = request.POST['dNo']
+        town = request.POST['town']
+        phone_number = request.POST['phone_number']
+        temp =Order_User.objects.get(mailId=email, status='draft')
+        hd_address = HD_Address.objects.create(tokenId=temp,street=street, dNo=dNo, town=town, phone_number=phone_number)
 
     if request.user.is_authenticated:
         username = request.user.username
@@ -58,9 +49,9 @@ def submit(request):
     if request.user.is_authenticated:
         Username = request.user.username
 
-    y = {'customer_food': g, 'l': l, 'u': username, 'token': t,'ad':hd_address}
+        y = {'customer_food': g, 'l': l, 'u': username, 'token': t,'ad':hd_address}
 
-    return render(request, 'homedelivery/shownew.html', context=y)
+        return render(request, 'homedelivery/shownew.html', context=y)
 
 
     hd_address = HD_Address.objects.create(tokenId=HD_FoodOrder.objects.get(
@@ -75,7 +66,7 @@ def showonmap(request):
     # return {
     #    'location':'102 Matej Enclave Khajpura Bailey Road Patna'
     # }
-    return render(request, 'homedelivery/showonmap.html', context)
+    return render(request, 'homedelivery/shownew.html', context)
 
 
 def orderdetails(request):
@@ -94,7 +85,6 @@ def orderdetails(request):
     }
     # return HttpResponse()
     return render(request, 'homedelivery/orderdetails.html', context)
-<<<<<<< HEAD
 def confirm(request):
     if request.user.is_authenticated:
         username = request.user.username
