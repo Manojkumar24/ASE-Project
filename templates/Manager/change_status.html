@@ -22,20 +22,24 @@
         </tr>
     {% endfor %}
     </table>
-    {% if add %}
-    <table>
+    {% if status == 'User Conform' %}
+        <form action="{% url 'send_com_email' t_id=items.first.TokenId %}" method="post">
+        {% csrf_token %}
+        Change the Status:
+        <input type="submit" class="btn btn-primary" name="Completed" value="Completed">
+        </form>
+    {% elif add %}
+    <table class="table table-bordered table-striped">
     <tr>
         <th>Town</th>
         <th>Street</th>
         <th>Phone Number</th>
     </tr>
-    {% for add in add %}
     <tr>
         <td>{{ add.town }}</td>
         <td>{{ add.street }}</td>
         <td>{{ add.phone_number }}</td>
     </tr>
-    {% endfor %}
     </table>
     <br>
     <form action="{% url 'send_home_email' t_id=items.first.TokenId %}" method="post">

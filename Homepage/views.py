@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 from django.http import JsonResponse, HttpResponse
+=======
+>>>>>>> af3034b095dd5c46eb117bf8b54643011e7d093f
 from django.shortcuts import render
 from Manager.models import Food_items
 from Registration.models import UserProfileInfo
@@ -27,9 +30,12 @@ def search(request):
         results = []
     return render(
         request, template_name, {'results': results})
+<<<<<<< HEAD
 
 
 def proProvide(request, user):
     User = request.get(user)
     details = UserProfileInfo.objects.filter(user=User)
     return HttpResponse(details)
+=======
+>>>>>>> af3034b095dd5c46eb117bf8b54643011e7d093f

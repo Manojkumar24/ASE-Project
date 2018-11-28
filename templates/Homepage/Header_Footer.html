@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+{%  load static %}
+>>>>>>> af3034b095dd5c46eb117bf8b54643011e7d093f
 <!DOCTYPE html>
 {%  load static %}
 <html lang="en">
@@ -33,9 +37,14 @@
 
                             {% if user.is_authenticated %}
                                 <li>
+<<<<<<< HEAD
                                     <!--href="{% url 'Homepage:proProvide' %}"img class="proPic" src="{%static request.user.profile_pic.path %}" --->
                                     <a >{{ request.user.username }}</a>
 
+=======
+                                    <img class="proPic" src="{%static request.user.profile_pic.path %}">
+                                    <a>{{ request.user.username }}</a>
+>>>>>>> af3034b095dd5c46eb117bf8b54643011e7d093f
                                 </li>
                                 <li>
                                     <a class="" href="{% url 'Registration:user_logout' %}">LogOut</a>
@@ -127,4 +136,7 @@
     }
 
 </script>
+<<<<<<< HEAD
 console({{ request.user.username }}[0])
+=======
+>>>>>>> af3034b095dd5c46eb117bf8b54643011e7d093f

@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 # from django.shortcuts import render, reverse
 
 from django.shortcuts import render, reverse
 # from django.http import HttpResponse
+=======
+from django.shortcuts import render,reverse
+from django.http import HttpResponse
+>>>>>>> af3034b095dd5c46eb117bf8b54643011e7d093f
 from .models import HD_Address
 # from django.core import serializers
 from django.contrib.auth.models import User
@@ -10,6 +15,12 @@ from Manager.models import Available_Towns
 from django.contrib.auth.decorators import login_required
 
 
+<<<<<<< HEAD
+=======
+
+from User.models import Order_Food,Order_User
+
+>>>>>>> af3034b095dd5c46eb117bf8b54643011e7d093f
 @login_required
 def address(request):
     context = {
@@ -42,9 +53,15 @@ def submit(request):
     context = {'customer_food': customer_food, 'amount': amount,
                'username': username, 'token': tokenId, 'address': hd_address}
     return render(request, 'homedelivery/shownew.html', context=context)
+<<<<<<< HEAD
     # x=Order_User.objects.get(mailId=email,status='draft')
     # t = x.TokenId
     if request.method == 'POST':
+=======
+    #x=Order_User.objects.get(mailId=email,status='draft')
+    #t = x.TokenId
+    if request.method=='POST':
+>>>>>>> af3034b095dd5c46eb117bf8b54643011e7d093f
         street = request.POST['street']
         dNo = request.POST['dNo']
         town = request.POST['town']
@@ -83,10 +100,16 @@ def showonmap(request):
     # return HttpResponse('Hello')
     # return {
     #    'location':'102 Matej Enclave Khajpura Bailey Road Patna'
+<<<<<<< HEAD
     # }
     return render(request, 'homedelivery/showonmap.html', context)
     # }
     return render(request, 'homedelivery/shownew.html', context)
+=======
+    # } 
+    return render(request, 'homedelivery/showonmap.html', context)
+    # }
+>>>>>>> af3034b095dd5c46eb117bf8b54643011e7d093f
 
 
 def orderdetails(request):

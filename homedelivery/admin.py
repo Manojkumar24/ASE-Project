@@ -23,3 +23,7 @@ from .models import HD_Address
 
 
 admin.site.register(HD_Address)
+<<<<<<< HEAD
+=======
+
+>>>>>>> af3034b095dd5c46eb117bf8b54643011e7d093f
