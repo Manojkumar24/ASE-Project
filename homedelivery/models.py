@@ -6,10 +6,6 @@ from User.models import Order_Food, Order_User
 # from django.utils import timezone
 # Create your models here.
 
-<<<<<<< HEAD
-
-=======
->>>>>>> af3034b095dd5c46eb117bf8b54643011e7d093f
 """class HD_FoodOrder(models.Model):
     tokenId = models.AutoField(primary_key=True)
     quantity = models.PositiveIntegerField(null=False)
@@ -33,12 +29,9 @@ class HD_Address(models.Model):
         # print(object['Towns'])
     city_choices = tuple(city_choices)
     print(city_choices)
-<<<<<<< HEAD
     city_choices = (
         ("Sri City", "Sri City"),
     )
-=======
->>>>>>> af3034b095dd5c46eb117bf8b54643011e7d093f
     town = models.CharField(
         max_length=225, choices=city_choices, default='Sri City', null=False)
     street = models.CharField(max_length=225, null=False)

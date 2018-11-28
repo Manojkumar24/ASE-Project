@@ -29,12 +29,8 @@ class Order_User(models.Model):
     user_conf = 'User Conform'
     Comp = 'Completed'
     draft = 'draft'
-<<<<<<< HEAD
     choice = ((order, 'ordered'), (cancel, 'cancelled'), (inPrep, 'in Preparation'), (inDel, 'in Delivery'),
               (draft, 'draft'), (Comp, 'complete'))
-=======
-    choice = ((order, 'ordered'), (cancel, 'cancelled'), (inPrep, 'in Preparation'), (inDel, 'in Delivery'), (draft, 'draft'), (Comp, 'complete'), (user_conf, 'User Conform'))
->>>>>>> af3034b095dd5c46eb117bf8b54643011e7d093f
     mailId = models.EmailField(max_length=255, null=False)
     TokenId = models.CharField(max_length=10)
     status = models.CharField(choices=choice, max_length=255, default=draft)
