@@ -25,9 +25,10 @@ class Order_User(models.Model):
     cancel = 'cancelled'
     inPrep = 'in Preparation'
     inDel = 'in Delivery'
+    user_conf = 'User Conform'
     Comp = 'Completed'
     draft = 'draft'
-    choice = ((order, 'ordered'), (cancel, 'cancelled'), (inPrep, 'in Preparation'), (inDel, 'in Delivery'), (draft, 'draft'), (Comp, 'complete'))
+    choice = ((order, 'ordered'), (cancel, 'cancelled'), (inPrep, 'in Preparation'), (inDel, 'in Delivery'), (draft, 'draft'), (Comp, 'complete'), (user_conf, 'User Conform'))
     mailId = models.EmailField(max_length=255, null=False)
     TokenId = models.CharField(max_length=10)
     status = models.CharField(choices=choice, max_length=255, default=draft)

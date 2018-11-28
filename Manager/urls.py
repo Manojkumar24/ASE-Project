@@ -16,7 +16,7 @@ urlpatterns = [
     path('add_towns/', views.add_towns, name='add_towns'),
     path('remove_towns/', views.remove_towns, name='remove_towns'),
     path('update_table/<int:id>', views.update_table, name='update_table'),
-    path('check_update_table/', views.check_update_table , name='check_update_table'),
+    path('check_update_table/', views.check_update_table, name='check_update_table'),
     path('history/', include('history.urls')),
     path('list_items/<str:id>', views.list_items, name='list_items'),
     path('send_email/<str:t_id>', views.send_email, name='send_email'),
