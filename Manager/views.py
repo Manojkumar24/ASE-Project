@@ -8,10 +8,16 @@ from homedelivery.models import HD_Address
 
 
 # Create your views here.
-def index(request):
+def index(request, content=None):
     user_order_item = Order_User.objects.filter(status='ordered')
     user_pre_item = Order_User.objects.filter(status='in Preparation')
-    content = {'user_order_item': user_order_item, 'user_pre_item': user_pre_item}
+    user_conorder_item = Order_User.objects.filter(status='User Conform')
+    if content:
+        content['user_order_item'] = user_order_item
+        content['user_pre_item'] = user_pre_item
+        content['user_conorder_item'] = user_conorder_item
+    else:
+        content = {'user_order_item': user_order_item, 'user_pre_item': user_pre_item, 'user_conorder_item': user_conorder_item}
     return render(request, 'Manager/index.html', content)
 
 
@@ -253,7 +259,6 @@ def update_table(request, id=None):
 
 
 def list_items(request, id=None):
-    error = 'Invalid TokenId'
     if id:
         try:
             items = Order_Food.objects.filter(TokenId=id)
@@ -261,10 +266,8 @@ def list_items(request, id=None):
             return render(request, 'Manager/list_items.html', content)
         except:
             pass
-    user_item = Order_User.objects.filter(status='ordered')
-    user_pre_item = Order_User.objects.filter(status='in Preparation')
-    content = {'user_item': user_item, 'user_pre_item': user_pre_item, 'error': error}
-    return render(request, 'Manager/index.html', content)
+    index_content = {'error': 'Invalid TokenId'}
+    return index(request, index_content)
 
 
 def send_email(request, t_id=None):
@@ -296,14 +299,14 @@ def change_status(request, f_id=None):
     if f_id:
         try:
             items = Order_Food.objects.filter(TokenId=f_id)
-            try:
-                add = HD_Address.objects.get(tokenId=Order_User.objects.filter(TokenId=f_id).first)
-                content = {'items': items, 'add': add}
-            except:
-                content = {'items': items}
-            return render(request, 'Manager/change_status.html', content)
+            add = HD_Address.objects.get(tokenId__TokenId=f_id)
+            content = {'items': items, 'add': add}
         except:
-            pass
+            items = Order_Food.objects.filter(TokenId=f_id)
+            content = {'items': items}
+        status = Order_User.objects.filter(TokenId=f_id).first().status
+        content['status'] = status
+        return render(request, 'Manager/change_status.html', content)
     user_order_item = Order_User.objects.filter(status='ordered')
     user_pre_item = Order_User.objects.filter(status='in Preparation')
     content = {'user_order_item': user_order_item, 'user_pre_item': user_pre_item, 'error': error}
@@ -317,10 +320,13 @@ def send_com_email(request, t_id=None):
             item = Order_User.objects.get(TokenId__exact=t_id)
             email = item.mailId
             status = request.POST['Completed']
-            subject = 'Your order status: ' + status
             body = '''Dear User,
-                You order with Token Id ''' + t_id + ''' is changed its status to ''' + status + ''' You can come and collect your order 
-                Thank You for ordering'''
+            You order with Token Id ''' + t_id + ''' is completed with its progess. We hope you will enjoy the food 
+            Thank You'''
+            if item.status == 'User Conform':
+                subject = 'Delivery Conformed'
+            else:
+                subject = 'Your order is ready'
             try:
                 send_mail(subject, body, settings.EMAIL_HOST_USER, [email], fail_silently=True)
                 msg = 'Email is sent'
