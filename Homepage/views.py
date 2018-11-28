@@ -1,22 +1,14 @@
-<<<<<<< HEAD
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from Manager.models import Food_items
-from User.models import Order_Food,Order_User
-from django.contrib.auth.models import User
+from Registration.models import UserProfileInfo
 
 
-
-def default(request):
-    food = Food_items.objects.all()
-    contents = {'food': food}
-    return render(request, 'Homepage/Homepage.html', contents)
-=======
-from django.shortcuts import render
-from Manager.models import Food_items
-
-
+# , Staff
 # from User.models import Order_Food, Order_User
 # from django.contrib.auth.models import User
+
+
 # def populateOrder_Food():
 
 def default(request):
@@ -28,7 +20,7 @@ def default(request):
 def search(request):
     template_name = 'Homepage/search.html'
 
-    query = request.GET.get('FoodRequest')
+    query = request.POST.get('FoodRequest')
     if query:
         results = Food_items.objects.filter(Food_Name=query).distinct()
     else:
@@ -36,5 +28,8 @@ def search(request):
     return render(
         request, template_name, {'results': results})
 
-def history()
->>>>>>> 9bf36a9aa4fb910d284e11d1225e627e2774a9b1
+
+def proProvide(request, user):
+    User = request.get(user)
+    details = UserProfileInfo.objects.filter(user=User)
+    return HttpResponse(details)

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 {% extends 'Homepage/Header_Footer.html' %}
 {% load static %}
@@ -7,10 +6,10 @@
 <body>
 
     <div class = "SlideShow">
-        <img class = "SlideImage" src = "{%static "Homepage/cafeteria_01.jpg" %}" >
+        <img class = "SlideImage" src = "{%static 'Homepage/cafeteria_01.jpg' %}" >
     </div>
     <div class = "SlideShow">
-        <img class = "SlideImage" src = "{%static "Homepage/cafeteria_02.jpg" %}" >
+        <img class = "SlideImage" src = "{%static 'Homepage/cafeteria_02.jpg' %}" >
     </div>
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
     <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -19,7 +18,7 @@
       <span class="dot" onclick="currentSlide(2)"></span>
     </div>
 
-        <div id ="#about"class="About">
+        <div id ="#about" class="About">
             <h1>About</h1>
             Our Service is Wonderful to experience....
         </div>
@@ -78,4 +77,3 @@
 </script>
 {% endblock %}
 </html>
->>>>>>> ef1b4375ff856c8ff0d5bdc8953637bd6c85e3b7
