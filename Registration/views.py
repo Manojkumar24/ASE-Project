@@ -1,7 +1,9 @@
+from django.contrib import messages
 from django.shortcuts import render
-from Registration.forms import UserForm,UserProfileInfoForm
+from Registration.forms import UserForm,UserProfileInfoForm,StaffdetailsForm
 # Create your views here.
 from django.contrib.auth import authenticate,login,logout
+from Registration.models import Staffdetails
 from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -69,3 +71,34 @@ def user_login(request):
             return HttpResponse("invalid login details supplied!")
     else:
         return render(request,'Registration/login.html',{})
+
+def staff_registration(request):
+    registered = False
+    if request.method == "POST":
+        staff_reg_form = StaffdetailsForm(request.POST)
+
+        if staff_reg_form.is_valid():
+            firstname = staff_reg_form.cleaned_data['firstname']
+            lastname = staff_reg_form.cleaned_data['lastname']
+            email = staff_reg_form.cleaned_data['email']
+            password = staff_reg_form.cleaned_data['password']
+            address = staff_reg_form.cleaned_data['address']
+            pincode = staff_reg_form.cleaned_data['pincode']
+            employee_id = Staffdetails.emp_id()
+            if not ((Staffdetails.objects.filter(firstname=firstname).exists() and Staffdetails.objects.filter(lastname=lastname).exists()) or Staffdetails.objects.filter(email=email).exists() or Staffdetails.objects.filter(employee_id=employee_id).exists()):
+                Staffdetails.objects.create(firstname=firstname,lastname=lastname,email=email,password=password,address=address,pincode=pincode,employee_id=employee_id)
+                registered = True
+                staff_details = staff_reg_form.save(commit=False)
+                return HttpResponse("Your employee id is {}" .format(employee_id))
+            else :
+                message = "An account with same firstname,lastname or email already exsts .Please try again"
+                return render(request,'Registration/alert.html',{'message' :message})
+                #return HttpResponse("An account with same firstname,lastname or email already exsts")
+                #messages.info(request,'An account with same firstname,lastname or email already exsts')
+                #raise forms.ValidationError("A firstname or lastname or email swith that inputs already exist")
+        else:
+            print(staff_reg_form.errors)
+    else:
+        staff_reg_form = StaffdetailsForm()
+    return render(request, 'Registration/Registration_02.html',
+                  {'staff_reg_form': staff_reg_form, 'registered': registered})

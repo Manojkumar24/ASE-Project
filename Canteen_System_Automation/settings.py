@@ -152,3 +152,4 @@ LOGIN_URL='/registration/user_login'
 LOGIN_REDIRECT_URL = '/registration/user_login/'
 
 #SESSION_ENGINE = django.contrib.sessions.backend.signed_cookies
+
