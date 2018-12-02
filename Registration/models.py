@@ -9,8 +9,7 @@ class UserProfileInfo(models.Model):
     address = models.CharField(max_length=200,default='')
     city = models.CharField(max_length=100,default='')
     pincode = models.CharField(max_length=6,default='')
-
-    profile_pic=models.ImageField(upload_to='static/registration/profile_pics',blank=True)
+    profile_pic=models.ImageField(upload_to='profile_pics',blank=True)
     """def __str__(self):
         return self.user.username
 """
