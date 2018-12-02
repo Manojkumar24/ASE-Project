@@ -3,7 +3,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cafeteria</title>
     <link rel = "stylesheet" type="text/css" href="{% static 'Homepage/main.css' %}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -22,7 +21,7 @@
                         </form>
                         <ul>
                             <li>
-                                <a class="" href="{% url 'Homepage:home' %}">Home<span class=""></span></a>
+                                <a href="{% url 'Homepage:home' %}">Home<span class=""></span></a>
                             </li>
                             <li class="cont">
                                 <a  href="#Cont">ContactUs</a>
@@ -33,9 +32,9 @@
                             </li>
 
                             {% if user.is_authenticated %}
-                                <li>
+                                <li class="user">
                                     <!--href="{% url 'Homepage:proProvide' %}"img class="proPic" src="{%static request.user.profile_pic.path %}" --->
-                                    <a >{{ request.user.username }}</a>
+                                    <a  href="#" >{{ request.user.username }}</a>
                                 </li>
                                 <li>
                                     <a class="" href="{% url 'Registration:user_logout' %}">LogOut</a>
@@ -60,34 +59,24 @@
     </header>
     {% block content %}
     {% endblock %}
-    <!--br><br><br><br><br><br><br><br><br><br><br><br-->
-    <div class="footer" >
-            <div id="#Cont" class="Contact">
-                <h4 style="text-align: left;font-size: 30px">Contact US</h4>
-                <p>
-                    Bh-2,IIIT Sricty,sricity,
-                    Chittoor,Andhra Pradesh
-                </p>
-            </div>
-            <div class="Footer">
-                <ul>
-                    <li><a href="{% url 'Homepage:home' %}">Home</a></li>
-                    <!--li><a href="#about">About Us</a></li-->
-                    {% if user.is_authenticated %}
-                        <li>
-                            <!--img class="proPic" src="{%static request.user.profile_pic.path %}" -->
-                            <a>{{ request.user.username }}</a>
-                        </li>
-                        <li>
-                            <a class="" href="{% url 'Registration:user_logout' %}">LogOut</a>
-                        </li>
-                    {% else %}
-                        <li><a href="{%  url 'Registration:user_login' %}">LogIn</a></li>
-                        <li><a href="{% url 'Registration:register' %}">register</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-    </div>
+    <footer>
+        <div>
+            <h4 style="text-align: left;font-size: 30px">
+               Contact US
+            </h4>
+            <p>
+                Bh2,IIIT SRICITY ,CHITTOR
+                ANDHRA PRADESH,INDIA...
+
+            </p>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Home</a></li>
+            </ul>
+        </div>
+    </footer>
 </html>
 <!--script>
     window.onscroll = function() {myFunction()};

@@ -5,5 +5,5 @@ app_name = "Homepage"
 urlpatterns = [
     path("", views.default, name="home"),
     path("searchdb", views.search, name='search'),
-    path("Prof", views.proProvide, name='proProvide')
+    path("Prof", views.proProvide, name='proProvide'),
 ]
