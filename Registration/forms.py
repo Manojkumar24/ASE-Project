@@ -1,5 +1,5 @@
 from django import forms
-from Registration.models import UserProfileInfo
+from Registration.models import UserProfileInfo,Staffdetails
 from django.contrib.auth.models import User
 
 class UserForm(forms.ModelForm):
@@ -13,11 +13,11 @@ class UserProfileInfoForm(forms.ModelForm):
         model=UserProfileInfo
         fields=('address','city','pincode','profile_pic')
 
-
-"""class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
-
+class StaffdetailsForm(forms.ModelForm):
+    password=forms.CharField(widget=forms.PasswordInput())
+    email = forms.EmailField(max_length=200,required=True)
     class Meta():
-        model = User
-        fields = ('firstname','lastname','email','password','address','city')
-"""
+        model = Staffdetails
+        fields = ('firstname','lastname','email','password','address','city','pincode')
+
+

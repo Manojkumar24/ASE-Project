@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-from django.shortcuts import reverse
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from django.template.backends import django
@@ -148,7 +147,17 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-LOGIN_URL='/registration/user_login'
-LOGIN_REDIRECT_URL = '/registration/user_login/'
+#LOGIN_URL='/Registration/user_login'
 
 #SESSION_ENGINE = django.contrib.sessions.backend.signed_cookies
+
+
+#sending email
+"""
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com''
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'csa.ase1@gmail.com'
+EMAIL_HOST_PASSWORD = 'user-group8'
+"""
