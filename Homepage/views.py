@@ -10,16 +10,21 @@ from Registration.models import UserProfileInfo
 
 
 # def populateOrder_Food():
-
 def default(request):
-    food = Food_items.objects.all()
+    if 'breakfast' in request.GET:
+        food = Food_items.objects.filter(Category='Tiffin')
+    elif 'snack' in request.GET:
+        food = Food_items.objects.filter(Category='Snack')
+    elif 'starter' in request.GET:
+        food = Food_items.objects.filter(Category='Starter')
+    else:
+        food = Food_items.objects.all()
     contents = {'food': food}
-    return render(request, 'Homepage/Homepage.html', contents)
+    return render(request, 'Homepage/category.html', contents)
 
 
 def search(request):
     template_name = 'Homepage/search.html'
-
     query = request.POST.get('FoodRequest')
     if query:
         results = Food_items.objects.filter(Food_Name=query).distinct()
