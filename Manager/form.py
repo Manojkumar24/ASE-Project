@@ -1,15 +1,11 @@
 from django import forms
-from django.core.validators import FileExtensionValidator
+from .models import Food_items, Available_Towns, Dining_Tables
 
 
-class Add_food(forms.Form):
-    Id = forms.IntegerField()
-    Name = forms.CharField()
-    Price = forms.FloatField()
-    Quantity = forms.IntegerField()
-    image = forms.FileField(allow_empty_file=True,
-                            validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png'])])
-    Category = forms.CharField()
+class Add_food(forms.ModelForm):
+    class Meta:
+        model = Food_items
+        fields = '__all__'
 
 
 class get_id(forms.Form):
@@ -17,16 +13,15 @@ class get_id(forms.Form):
 
 
 class Add_tables(forms.Form):
-    Choices = (('Normal', 'Normal'), ('Party', 'Party'), ('Family', 'Family'))
-    Id = forms.IntegerField()
-    availability = forms.BooleanField(required=False)
-    size = forms.IntegerField()
-    zone = forms.ChoiceField(choices=Choices)
+    class Meta:
+        model = Dining_Tables
+        fields = '__all__'
 
 
 class Add_city(forms.Form):
-    town = forms.CharField()
-    pincode = forms.IntegerField()
+    class Meta:
+        model = Available_Towns
+        fields = '__all__'
 
 
 class Remove_city(forms.Form):

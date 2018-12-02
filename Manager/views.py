@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from . import form
 from .models import Food_items, Dining_Tables, Available_Towns
 from django.core.mail import send_mail
@@ -23,34 +23,11 @@ def index(request, content=None):
 
 def add_food(request):
     f1 = form.Add_food()
-    error = None
     if request.method == 'POST':
         f1 = form.Add_food(request.POST, request.FILES)
         if f1.is_valid():
-            fid = f1.cleaned_data['Id']
-            name = f1.cleaned_data['Name']
-            price = f1.cleaned_data['Price']
-            qu = f1.cleaned_data['Quantity']
-            category = f1.cleaned_data['Category']
-            try:
-                img = f1.cleaned_data['image']
-                try:
-                    Food_items.objects.create(Food_id=fid, Food_Name=name, Food_Price=price, image=img, quantity=qu,
-                                              Category=category)
-                except:
-                    error = 'Unable to Add the food item'
-            except:
-                try:
-                    Food_items.objects.create(Food_id=fid, Food_Name=name, Food_Price=price, quantity=qu,
-                                              Category=category)
-                except:
-                    error = 'Unable to Add the food item'
-            item = Food_items.objects.all()
-            if error:
-                content = {'item': item, 'error': error}
-            else:
-                content = {'item': item}
-            return render(request, 'Manager/Food_home.html', content)
+            f1.save()
+            return redirect('food_home')
     return render(request, 'Manager/Add_food.html', {'form': f1})
 
 
@@ -65,9 +42,7 @@ def remove_food(request):
                 f_item.delete()
             except:
                 pass
-        item = Food_items.objects.all()
-        content = {'item': item}
-        return render(request, 'Manager/Food_home.html', content)
+            return redirect('food_home')
     item = Food_items.objects.all()
     content = {'form': f2, 'item': item}
     return render(request, 'Manager/Remove_food.html', content)
@@ -85,9 +60,7 @@ def update_food(request, f_id=None):
             content = {'item': item, 'error': error}
             return render(request, 'Manager/Update_food.html', content)
     else:
-        item = Food_items.objects.all()
-        content = {'item': item}
-        return render(request, 'Manager/Update_food.html', content)
+        return redirect('food_home')
 
 
 def check_update_food(request):
@@ -140,7 +113,7 @@ def remove_tables(request):
                 Dining_Tables.objects.get(Table_id__exact=fid).delete()
             except:
                 pass
-            return render(request, 'Manager/tables_home.html')
+            return redirect('tables_home')
     item = Dining_Tables.objects.all()
     content = {'form': f2, 'item': item}
     return render(request, 'Manager/Remove_table.html', content)
@@ -148,23 +121,11 @@ def remove_tables(request):
 
 def add_tables(request):
     f1 = form.Add_tables()
-    error = None
     if request.method == 'POST':
         f1 = form.Add_tables(request.POST)
         if f1.is_valid():
-            fid = f1.cleaned_data['Id']
-            availabilty = f1.cleaned_data['availability']
-            size = f1.cleaned_data['size']
-            zone = f1.cleaned_data['zone']
-            try:
-                Dining_Tables.objects.create(Table_id=fid, availability=availabilty, size=size, zone=zone)
-            except:
-                error = "Table Id Already Exits"
-            item = Dining_Tables.objects.all()
-            if error:
-                content = {'item': item, 'error': error}
-            else:
-                content = {'item': item}
+            f1.save()
+            content = {'item': item}
             return render(request, 'Manager/tables_home.html', content)
     return render(request, 'Manager/Add_tables.html', {'form': f1})
 
@@ -185,7 +146,7 @@ def remove_towns(request):
                 Available_Towns.objects.get(Towns__exact=fname).delete()
             except:
                 pass
-            return render(request, 'Manager/town_home.html')
+            return redirect('town_home')
     item = Available_Towns.objects.all()
     content = {'form': f2, 'item': item}
     return render(request, 'Manager/Remove_town.html', content)
@@ -193,24 +154,11 @@ def remove_towns(request):
 
 def add_towns(request):
     f1 = form.Add_city()
-    error = None
     if request.method == 'POST':
         f1 = form.Add_city(request.POST)
         if f1.is_valid():
-            fname = f1.cleaned_data['town']
-            pincode = f1.cleaned_data['pincode']
-            try:
-                Available_Towns.objects.create(Towns=fname, pincode=pincode)
-            except:
-                error = 'Town already exists'
-            if error:
-                item = Available_Towns.objects.all()
-                content = {'item': item, 'error': error}
-                return render(request, 'Manager/town_home.html', content)
-            else:
-                item = Available_Towns.objects.all()
-                content = {'item': item}
-                return render(request, 'Manager/town_home.html', content)
+            f1.save()
+            return redirect('town_home')
     return render(request, 'Manager/Add_town.html', {'form': f1})
 
 
@@ -236,9 +184,7 @@ def check_update_table(request):
             content = {'item': item}
         return render(request, 'Manager/Update_tables.html', content)
     else:
-        item = Dining_Tables.objects.all()
-        content = {'item': item}
-        return render(request, 'Manager/Update_tables.html', content)
+        return redirect('update_table', 0)
 
 
 def update_table(request, id=None):
@@ -288,10 +234,8 @@ def send_email(request, t_id=None):
                 item.save()
             except:
                 pass
-    user_order_item = Order_User.objects.filter(status='ordered')
-    user_pre_item = Order_User.objects.filter(status='in Preparation')
-    content = {'user_order_item': user_order_item, 'user_pre_item': user_pre_item, 'msg': msg}
-    return render(request, 'Manager/index.html', content)
+    index_content = {'msg': msg}
+    return index(request, index_content)
 
 
 def change_status(request, f_id=None):
@@ -307,10 +251,8 @@ def change_status(request, f_id=None):
         status = Order_User.objects.filter(TokenId=f_id).first().status
         content['status'] = status
         return render(request, 'Manager/change_status.html', content)
-    user_order_item = Order_User.objects.filter(status='ordered')
-    user_pre_item = Order_User.objects.filter(status='in Preparation')
-    content = {'user_order_item': user_order_item, 'user_pre_item': user_pre_item, 'error': error}
-    return render(request, 'Manager/index.html', content)
+    index_content = {'error': error}
+    return index(request, index_content)
 
 
 def send_com_email(request, t_id=None):
@@ -334,10 +276,8 @@ def send_com_email(request, t_id=None):
                 item.save()
             except:
                 pass
-    user_order_item = Order_User.objects.filter(status='ordered')
-    user_pre_item = Order_User.objects.filter(status='in Preparation')
-    content = {'user_order_item': user_order_item, 'user_pre_item': user_pre_item, 'msg': msg}
-    return render(request, 'Manager/index.html', content)
+    index_content = {'msg': msg}
+    return index(request, index_content)
 
 
 def send_home_email(request, t_id=None):
@@ -358,7 +298,5 @@ def send_home_email(request, t_id=None):
                 item.save()
             except:
                 pass
-    user_order_item = Order_User.objects.filter(status='ordered')
-    user_pre_item = Order_User.objects.filter(status='in Preparation')
-    content = {'user_order_item': user_order_item, 'user_pre_item': user_pre_item, 'msg': msg}
-    return render(request, 'Manager/index.html', content)
+    index_content = {'msg': msg}
+    return index(request, index_content)
