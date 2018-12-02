@@ -16,7 +16,6 @@
                         <form action="{% url 'Homepage:search' %}" class="search" method="POST">
                             {% csrf_token %}
                             <input class="searchInput" name="FoodRequest" type="text" placeholder=" food!!!" >
-                            <!--input class="searchCategory" type="checkbox" value=""-->
                             <button class="searchBtn" type="submit">Search</button>
                         </form>
                         <ul>
@@ -93,7 +92,7 @@
     }
     indexOf(filter)
 </script-->
-<script>
+<!--script>
     function profShow () {
           $.ajax({
                 method:"POST",
@@ -115,4 +114,4 @@
 
     }
 
-</script>
+</script-->
