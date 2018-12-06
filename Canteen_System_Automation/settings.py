@@ -147,7 +147,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-#LOGIN_URL='/Registration/user_login'
+LOGIN_URL = '/registration/user_login'
+LOGIN_REDIRECT_URL = '/registration/user_login/'
 
 #SESSION_ENGINE = django.contrib.sessions.backend.signed_cookies
 
