@@ -65,6 +65,7 @@ def user_login(request):
 
         if user:
             if user.is_active:
+                request.session.set_expiry(20)
                 login(request, user)
                 return HttpResponseRedirect(reverse('Homepage:home'))
             else:
@@ -124,9 +125,32 @@ def staff_login(request):
         staff = Staffdetails.objects.get(employee_id=employee_id)
         staff_log = check_password(password,staff.password)
         if staff_log :
-                login(request,staff)
-                return HttpResponseRedirect(reverse('Homepage:home'))
+                #login(request,staff)
+                request.session['employee_id'] = staff.employee_id
+                #return HttpResponseRedirect(reverse('Homepage:home'))
+                return HttpResponse("you are logged in {}".format(staff.firstname))
+
+                return render(request, 'Registration/staff_login.html', {})
         else :
             return HttpResponse("invalid details")
     else:
         return render(request,'Registration/staff_login.html',{})
+
+"""def login(request):
+    if request.method != 'POST':
+        raise Http404('Only POSTs are allowed')
+    try:
+        m = Member.objects.get(username=request.POST['username'])
+        if m.password == request.POST['password']:
+            request.session['member_id'] = m.id
+            return HttpResponseRedirect('/you-are-logged-in/')
+    except Member.DoesNotExist:
+        return HttpResponse("Your username and password didn't match.")
+"""
+
+def staff_logout(request):
+    try:
+        del request.session['employee_id']
+    except KeyError:
+        return HttpResponse("You are not logged in")
+    return HttpResponse("You're logged out.")
