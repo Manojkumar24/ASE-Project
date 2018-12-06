@@ -8,19 +8,21 @@
 </head>
 <body>
 {% block content %}
-
     <div class="History">
         <h2>
             History of order
         </h2>
-        <p></p>
+        {% if data %}
+        <p>
+            {{data.}}
+        </p>
+        {% endif %}
     </div>
     <div class="popular">
         <h2>
             popular items
         </h2>
         <form>
-
         </form>
         <p>
 

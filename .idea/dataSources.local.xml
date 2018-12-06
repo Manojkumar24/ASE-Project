@@ -11,6 +11,7 @@
     </data-source>
     <data-source name="canteendb [2]" uuid="82962eb9-fe2e-4952-8e6b-28542f7ca136">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" family="SQLITE" exact-version="0.0" />
+      <introspection-schemas>*:@</introspection-schemas>
     </data-source>
   </component>
 </project>
