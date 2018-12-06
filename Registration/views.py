@@ -127,6 +127,6 @@ def staff_login(request):
                 login(request,staff)
                 return HttpResponseRedirect(reverse('Homepage:home'))
         else :
-            return HttpResponse("Not logged in")
+            return HttpResponse("invalid details")
     else:
         return render(request,'Registration/staff_login.html',{})

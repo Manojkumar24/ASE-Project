@@ -41,6 +41,12 @@
                                 <li>
                                     <a  href="{% url 'eat_at_canteen:cart' %}">Cart</a>
                                 </li>
+                            {% elif staff.is_authenticated %}
+                                <li class="user">
+                                    <!--href="{% url 'Homepage:proProvide' %}"img class="proPic" src="{%static request.user.profile_pic.path %}" --->
+                                    <a  href="#" >{{ request.satff.firstname }}</a>
+                                </li>
+
                             {% else %}
                                 <li>
                                     <a href="#about">AboutUs</a>
