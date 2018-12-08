@@ -1,7 +1,8 @@
-from django.http import JsonResponse, HttpResponse
-from django.shortcuts import render
+# from django.http import JsonResponse, HttpResponse
+# from django.shortcuts import render
 from Manager.models import Food_items
-from Registration.models import UserProfileInfo
+from Registration.models import UserProfileInfo, Staffdetails
+from Registration.views import *
 
 
 # , Staff
@@ -19,8 +20,15 @@ def default(request):
         food = Food_items.objects.filter(Category='Starter')
     else:
         food = Food_items.objects.all()
-    contents = {'food': food}
-    return render(request, 'Homepage/category.html', contents)
+
+    if 'employee_id' in request.session:
+        staff = request.session.get('employee_id')
+        user = Staffdetails.objects.filter(employee_id=staff)
+        contents = {'food': food, 'user': user}
+        return render(request, 'Homepage/category.html', contents)
+    else:
+        contents = {'food': food}
+        return render(request, 'Homepage/category.html', contents)
 
 
 def search(request):
@@ -34,7 +42,5 @@ def search(request):
         request, template_name, {'results': results})
 
 
-def proProvide(request, user):
-    User = request.get(user)
-    details = UserProfileInfo.objects.filter(user=User)
-    return HttpResponse(details)
+
+    #return HttpResponse(details)

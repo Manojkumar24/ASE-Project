@@ -87,7 +87,7 @@ def staff_registration(request):
             firstname = staff_reg_form.cleaned_data['firstname']
             lastname = staff_reg_form.cleaned_data['lastname']
             email = staff_reg_form.cleaned_data['email']
-            password = staff_reg_form.cleaned_data['password']
+            password = staff_reg_form.cleaned_data['password1']
             address = staff_reg_form.cleaned_data['address']
             pincode = staff_reg_form.cleaned_data['pincode']
             city = staff_reg_form.cleaned_data['city']
@@ -96,7 +96,7 @@ def staff_registration(request):
 
             if not ((Staffdetails.objects.filter(firstname=firstname).exists() and Staffdetails.objects.filter(
                     lastname=lastname).exists()) or Staffdetails.objects.filter(
-                    email=email).exists() or Staffdetails.objects.filter(employee_id=employee_id).exists()):
+                email=email).exists() or Staffdetails.objects.filter(employee_id=employee_id).exists()):
                 Staffdetails.objects.create(firstname=firstname, lastname=lastname, email=email, password=password,
                                             address=address, pincode=pincode, city=city, employee_id=employee_id)
                 registered = True
@@ -119,22 +119,25 @@ def staff_registration(request):
 
 
 def staff_login(request):
+    staff_logged_in = False
     if request.method == 'POST':
         employee_id = request.POST.get('employee_id')
         password = request.POST.get('password')
         staff = Staffdetails.objects.get(employee_id=employee_id)
-        staff_log = check_password(password,staff.password)
-        if staff_log :
-                #login(request,staff)
-                request.session['employee_id'] = staff.employee_id
-                #return HttpResponseRedirect(reverse('Homepage:home'))
-                return HttpResponse("you are logged in {}".format(staff.firstname))
-
-                return render(request, 'Registration/staff_login.html', {})
-        else :
-            return HttpResponse("invalid details")
+        staff_log = check_password(password, staff.password)
+        if staff_log:
+            # login(request,staff)
+            request.session['employee_id'] = staff.employee_id
+            staff_logged_in = True
+            #request.session['staff_fname'] = staff.firstname
+            return HttpResponseRedirect(reverse('Homepage:home'))
+            # return HttpResponse("you are logged in {}".format(staff.firstname))
+            # return render(request, 'Registration/staff_login.html', {})
+        else:
+            return HttpResponse("Not logged in")
     else:
-        return render(request,'Registration/staff_login.html',{})
+        return render(request, 'Registration/staff_login.html', {})
+
 
 """def login(request):
     if request.method != 'POST':
@@ -148,9 +151,10 @@ def staff_login(request):
         return HttpResponse("Your username and password didn't match.")
 """
 
+
 def staff_logout(request):
     try:
         del request.session['employee_id']
     except KeyError:
         return HttpResponse("You are not logged in")
-    return HttpResponse("You're logged out.")
+    return HttpResponseRedirect(reverse('Homepage:home'))

@@ -12,11 +12,27 @@
         <h2>
             History of order
         </h2>
-        {% if data %}
-        <p>
-            {{data.}}
-        </p>
+        <div class="">
+        {% if details %}
+            {% for details in details %}
+                <p>
+                    <a href="#">
+                        {{ details.user }}
+                    </a>
+                    <a href="#">
+                        {{ details.address }}
+                    </a>
+                    <a href="#">
+                        {{ details.city }}
+                    </a>
+                    <a href="{% url 'User:proProvide' name=data.user%}">
+                        {{ data.profile_pic }}
+                    </a>
+
+                </p>
+            {% endfor %}
         {% endif %}
+        </div>
     </div>
     <div class="popular">
         <h2>
@@ -28,6 +44,6 @@
 
         </p>
     </div>
-{% endblock %}
+    {% endblock %}
 </body>
 </html>>

@@ -29,11 +29,11 @@
                             <li class="">
                                 <a class="" href="{% url 'eat_at_canteen:review' %}">Review</a>
                             </li>
-
                             {% if user.is_authenticated %}
                                 <li class="user">
-                                    <!--href="{% url 'Homepage:proProvide' %}"img class="proPic" src="{%static request.user.profile_pic.path %}" --->
-                                    <a  href="#" >{{ request.user.username }}</a>
+                                    <!--a href="" class="proPic" src="#"> </a-->
+                                    <a  href="{% url 'User:proProvide' name=request.user.username %}" >{{ request.user.username }}</a>
+
                                 </li>
                                 <li>
                                     <a class="" href="{% url 'Registration:user_logout' %}">LogOut</a>
@@ -41,10 +41,17 @@
                                 <li>
                                     <a  href="{% url 'eat_at_canteen:cart' %}">Cart</a>
                                 </li>
-                            {% elif staff.is_authenticated %}
+                            {% elif 'employee_id' in request.session %}
                                 <li class="user">
                                     <!--href="{% url 'Homepage:proProvide' %}"img class="proPic" src="{%static request.user.profile_pic.path %}" --->
-                                    <a  href="#" >{{ request.satff.firstname }}</a>
+                                    <a  href="#" >staff</a>
+                                </li>
+                                <li class="user">
+                                    <!--href="{% url 'Homepage:proProvide' %}"img class="proPic" src="{%static request.user.profile_pic.path %}" --->
+                                    <a  href="#" >{request.session.employee_id.firstname}</a>
+                                </li>
+                                <li>
+                                    <a class="" href="{% url 'Registration:staff_logout' %}">LogOut</a>
                                 </li>
 
                             {% else %}
@@ -57,8 +64,10 @@
                                 <li>
                                     <a class="" href="{% url 'Registration:register' %}">register</a>
                                 </li>
+
                             {% endif %}
-                        </ul>
+
+                            </ul>
                     </div>
         </nav>
     </header>
@@ -102,7 +111,7 @@
     function profShow () {
           $.ajax({
                 method:"POST",
-                url: "{% url 'Homepage:proProvide'%}",
+                url: "",
                 data: {
                   'username': {{request.user.username}}
                 },

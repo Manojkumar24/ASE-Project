@@ -3,9 +3,12 @@
 {% extends 'Homepage/Homepage.html' %}
 {% load static %}
 {% block category %}
-<head>
+<!--head>
     <link rel = "stylesheet" type="text/css" href="{% static 'Homepage/main.css' %}"/>
-</head>
+</head--->
+    <!--p>
+
+    </p-->
     <div class = "Food">
         <h1>Things that are worth waiting!!</h1>
         <form action="{% url 'Homepage:home' %}" method="get" id="category_form">
@@ -22,8 +25,16 @@
 
                         <form method="post" action="{% url 'eat_at_canteen:order' %}">
                             {% csrf_token %}
-                            Name:<input type="text" value="{{ food.Food_Name }}" name="food" style="border: 0" readonly><br>
-                            Price :<input type="text" value="{{ food.Food_Price }}" name="price" style="border: 0" readonly><br>
+                            <label>
+                                Name:
+                                <input type="text" value="{{ food.Food_Name }}" name="food" style="border: 0" readonly>
+                            </label>
+                            <br>
+                            <label>
+                                Price :
+                                <input type="text" value="{{ food.Food_Price }}" name="price" style="border: 0"
+                                       readonly>
+                            </label><br>
 
                             <input type="submit"  class="cart" value = "add to cart">
 
