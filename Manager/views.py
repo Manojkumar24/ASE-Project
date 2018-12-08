@@ -300,3 +300,14 @@ def send_home_email(request, t_id=None):
                 pass
     index_content = {'msg': msg}
     return index(request, index_content)
+
+
+def update_admin(request):
+    f1 = form.Update_Admin()
+    if request.method == 'POST':
+        f1 = form.Update_Admin(request.POST)
+        if f1.is_valid():
+            f1.save()
+            return redirect('index')
+    content = {'form': f1}
+    return render(request, 'Manager/Update_admin.html', content)
