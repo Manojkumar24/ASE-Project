@@ -1,3 +1,4 @@
+from django.conf.urls import url
 from django.urls import path
 from Registration import views
 
@@ -11,4 +12,6 @@ urlpatterns = [
     path('user_login/', views.user_login, name='user_login'),
     path('staff_login/',views.staff_login,name='staff_login'),
     path('staff_logout/',views.staff_logout,name='staff_logout'),
+    url(r'^activate_account/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        views.activate_account, name='activate_account'),
 ]
