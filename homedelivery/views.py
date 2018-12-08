@@ -9,6 +9,12 @@ from Manager.models import Available_Towns
 from django.contrib.auth.decorators import login_required
 
 
+import json
+import requests
+import base64
+from .paytm_func import Checksum
+
+
 @login_required
 def address(request):
     context = {
@@ -48,7 +54,8 @@ def showonmap(request):
     # return HttpResponse('Hello')
     # return {
     #    'location':'102 Matej Enclave Khajpura Bailey Road Patna'
-    # } 
+    # }
+    #json_context = json.dumps(context)
     return render(request, 'homedelivery/showonmap.html', context)
 
 
@@ -84,3 +91,37 @@ def confirm(request):
         food_items.Status = 'conf'
         food_items.save()
     return render(request, 'Homepage/Homepage.html')
+
+
+MERCHANT_KEY = 'CyqbdF3AQJ6504#Q'
+
+
+@login_required
+def paytm(request):
+    username = request.user.username
+    mId = "EvaaDz25148733930898"
+    orderId = "123"
+    custId = 'Prashant'
+    txn_amount = '1.00'
+    channel_id = "WEB"
+    #checksumhash = ''
+    website = "WEBSTAGING"
+    #mobile_no = '8578082961'
+    #email = 'prashantraj18198@gmail.com'
+    industry_type_id = 'Retail'
+    callback_url = "http://127.0.0.1:8000/"
+    data_dict = {
+        "MID": mId,
+        "ORDER_ID": orderId,
+        "TXN_AMOUT": txn_amount,
+        'CUST_ID': custId,
+        'INDUSTRY_TYPE_ID': industry_type_id,
+        'WEBSITE': website,
+        'CHANNEL_ID': channel_id,
+        'CALLBACK_URL': callback_url,
+
+    }
+    param_dict = data_dict
+    param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(
+        data_dict, MERCHANT_KEY)
+    render(request, 'homedelivery/paytm.html', context=param_dict)

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% extends "Registration/base.html" %}
+<head>
+  <script>
+  var check = function() {
+  if (document.getElementById('password').value ==
+    document.getElementById('confirm_password').value) {
+    document.getElementById('message').style.color = 'green';
+    document.getElementById('message').innerHTML = 'matching';
+  } else {
+    document.getElementById('message').style.color = 'red';
+    document.getElementById('message').innerHTML = 'not matching';
+  }
+}
+  </script>
+</head>
+    {% block body_block %}
+<div class="jumbotron">
+<h1>WELCOME TO Canteen automation system!  </h1>
+    <h1>Update Here!</h1>
+    <h3>Fill out the form:</h3>
+    <form enctype="multipart/form-data" action="{% url 'Registration:updateprofile'%}" method="post">
+        {% csrf_token %}
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="username">Username</label>
+              <input name="username" type="username" class="form-control" id="username" value="{{user.username}}"placeholder="username" readonly>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="password">Password</label>
+              <input name="password" type="password" class="form-control"       id="password" placeholder="Password" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="first_name">First Name</label>
+              <input name="first_name" type="first_name" class="form-control" id="first_name" value="{{user.first_name}}"placeholder="first_name" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="last_name">Last Name</label>
+              <input name="last_name" type="last_name" class="form-control"       id="last_name" value="{{user.last_name}}"placeholder="last_name" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6"
+              <label for="email">Email</label>
+              <input name="email" type="email" class="form-control" id="email" value="{{user.email}}"placeholder="Email" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="address">Address</label>
+              <input name="address" type="text" class="form-control" id="address" value="{{userprofileinfo.address}}"   placeholder="1234 Main St" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="city">City</label>
+              <input name="city" type="text" class="form-control" id="city" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="pincode">Pincode</label>
+              <input name="pincode" type="text" class="form-control" id="pincode" required>
+            </div>
+          </div>
+          <div class="form-row col">
+            <button type="submit" class="btn btn-primary">Update Profile</button>
+            </div>
+          </div>
+        </form>
+    {% endblock %}
+</div>

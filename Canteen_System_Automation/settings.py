@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'Registration',
     'eat_at_canteen',
     'User',
-    'bootstrapform'
+    'bootstrapform',
 ]
 
 MIDDLEWARE = [
@@ -64,8 +64,7 @@ ROOT_URLCONF = 'Canteen_System_Automation.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -110,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-        'OPTIONS' : {'min_length' : 8}
+        'OPTIONS': {'min_length': 8}
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -148,7 +147,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-LOGIN_URL='/registration/user_login'
+LOGIN_URL = '/registration/user_login'
 LOGIN_REDIRECT_URL = '/registration/user_login/'
 
 #SESSION_ENGINE = django.contrib.sessions.backend.signed_cookies
