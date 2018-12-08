@@ -1,12 +1,12 @@
 from django.contrib import admin
 from .models import HD_Address
+
 # Register your models here.
 # admin.site.register(HD_FoodOrder)
 # admin.site.register(HD_Address)
 
 
-
-#class HD_AddressInLine(admin.StackedInline):
+# class HD_AddressInLine(admin.StackedInline):
 #    model = HD_Address
 
 
@@ -19,8 +19,7 @@ from .models import HD_Address
         ('Date Ordered', {'fields': ['date']}),
     ]'''
 
-
-#inlines = [HD_AddressInLine]
+# inlines = [HD_AddressInLine]
 
 
 admin.site.register(HD_Address)

@@ -1,0 +1,23 @@
+.myButton {
+	background-color:#44c767;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#170017;
+	font-family: "Lucinda Grande", "Lucinda Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+	font-size:17px;
+	font-style:italic;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #010a00;
+}
+.myButton:hover {
+	background-color:#6ffc24;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
