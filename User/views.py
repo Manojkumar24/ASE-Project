@@ -18,19 +18,15 @@ def index(request, name=None):
     return render(request, 'User/UserAccount.html', {'data': data})
 
 
-'''
-def history(request):
-    username = request.user.get('user')
-    user = UserProfileInfo.objects.filter()
+'''def history(request, email):
+    user_orders = Order_User.objects.filter(mailId=email)
     
-'''
+    return '''
 
 
-def proProvide(request, name=None):
-    # User = request.get(name)
-    user = User.objects.filter(username=name)
-    #details = Order_User.objects.filter(mailId=user.email)
-    # y=typeof(user)
-    return HttpResponse(user.email)
-    #if details:
-     #   return render(request, "User/UserAccount.html", {'details':details})
+
+def proProvide(request, pk=None):
+    user = User.objects.get(username=pk)
+    return render(request, "User/UserAccount.html", {'details': user})
+
+# def cancel(request)

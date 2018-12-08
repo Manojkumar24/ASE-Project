@@ -32,7 +32,7 @@
                             {% if user.is_authenticated %}
                                 <li class="user">
                                     <!--a href="" class="proPic" src="#"> </a-->
-                                    <a  href="{% url 'User:proProvide' name=request.user.username %}" >{{ request.user.username }}</a>
+                                    <a  href="{% url 'User:proProvide' pk=request.user.username %}" >{{ request.user.username }}</a>
 
                                 </li>
                                 <li>

@@ -14,23 +14,19 @@
         </h2>
         <div class="">
         {% if details %}
-            {% for details in details %}
                 <p>
                     <a href="#">
-                        {{ details.user }}
+                        {{ request.user.username }}
                     </a>
                     <a href="#">
-                        {{ details.address }}
+                        {{ details.userprofileinfo.address }}
                     </a>
                     <a href="#">
-                        {{ details.city }}
+                        {{ details.userprofileinfo.city }}
                     </a>
-                    <a href="{% url 'User:proProvide' name=data.user%}">
-                        {{ data.profile_pic }}
-                    </a>
+                    <img src="{%static details.userprofileinfo.profile_pic.path %} ">
 
                 </p>
-            {% endfor %}
         {% endif %}
         </div>
     </div>

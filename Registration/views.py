@@ -65,7 +65,7 @@ def user_login(request):
 
         if user:
             if user.is_active:
-                request.session.set_expiry(20)
+                request.session.set_expiry(2000)
                 login(request, user)
                 return HttpResponseRedirect(reverse('Homepage:home'))
             else:
