@@ -1,3 +1,241 @@
+<<<<<<< HEAD
+body{
+    background: white;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+}
+.navBar{
+    background-color: #0088ff;
+    width: 100%;
+    padding-bottom: 0;
+    position: absolute;
+}
+.heading{
+    color: whitesmoke;
+    width: 10%;
+    font-size: 30px;
+    padding: 0.5%;
+}
+.search{
+    margin-left: 12%;
+}
+.searchInput{
+    width :25%;
+    background-color: whitesmoke;
+    color: black;
+    float:left;
+    margin-top: -3%;
+    border-radius: 10px;
+}
+.searchInput:hover{
+    box-shadow: none;
+}
+.searchBtn{
+    float:left;
+    margin-top: -2.9%;
+    margin-left: 28%;
+    border-radius:5px;
+    background-color: whitesmoke;
+}
+.searchBtn:hover{
+    box-shadow: 1px 1px 1px 1px #666666;
+}
+
+.Options ul{
+    width:50%;
+    float: left;
+    margin-top: -2.7%;
+    list-style-type: none;
+    margin-left: 60.9%;
+    padding-top:-3%;
+}
+
+.Options li a{
+    color: #e3f2fd;
+    float:left;
+    text-align: center;
+    font-size: 20px;
+    width:10%;
+    margin-left: 1%;
+    text-decoration: none;
+    overflow: hidden;
+    position: relative;
+}
+.Options li a:hover{
+    text-decoration: none;
+    transition: 0.3s;
+    color: #e3f2fd;
+    text-shadow: 2px 2px 2px #333333;
+}
+.SlideImage{
+    vertical-align: middle;
+    background-color : white;
+    margin-right: 5%;
+    margin-top: -0.3%;
+    width : 100%;
+    height : 700px;
+}
+.proPic{
+    width: 3px;
+    height:3px;
+    margin-left: 0.5%;
+}
+.prev, .next {
+    cursor: pointer;
+    width: auto;
+    padding: 16px;
+    margin-top: 6%;
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+    transition: 0.6s ease;
+    border-radius: 3px 3px 3px 3px;
+    position: absolute;
+}
+.next {
+    top : 42%;
+    right: 1%;
+}
+.prev {
+    top : 42%;
+    left: 1%;
+}
+.prev:hover, .next:hover {
+    background-color: rgba(1,1,1,1);
+    color: white;
+
+
+}
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin : 0 2px 2px;
+    background-color: white;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot:hover {
+    transition: background-color 0.6s ease;
+    background-color: darkgray;
+}
+.Username{
+    color: white;
+}
+.About{
+    color:white;
+    background-color: #333333;
+    text-align : center;
+    width: 100%;
+    height :500px;
+    margin-top:1.65%;
+    font-size: 25px;
+    padding-bottom: 25px;
+}
+h1{
+    text-align : left;
+}
+.Food{
+    background-color: #0088ff;
+    color : white;
+    height : 500px;
+    padding-top: 3%;
+    margin-top: 0;
+    margin-bottom:-5% ;
+}
+.card {
+    height : 400px;
+    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 20%;
+    float : left;
+    margin-left:5%;
+    margin-top: 10%;
+}
+
+.container {
+    color:#333333;
+    font-size: 20px;
+    padding: 2px 16px;
+}
+.CardImage{
+    width : 100%;
+    height : 60%;
+
+}
+footer{
+    margin-top: 20%;
+}
+.line1 {
+    background-color: white;
+    height: 30%;
+    margin-left: 40%;
+    width: 1%;
+}
+.Contact {
+    background-color:#333333;
+    color:white;
+    text-align: center;
+    width : 40%;
+    margin-top:0;
+    margin-left: 0;
+    position:absolute;
+    height : 40%;
+    font-size: 20px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+.Footer{
+    position:absolute;
+    background-color: #333333;
+    color: white;
+    float:left;
+    width: 59.9%;
+    font-size: 10px;
+    height: 40%;
+    margin-left: 40.1%;
+}
+.Footer ul{
+    margin-right: 10%;
+    margin-left: -4%;
+    list-style-type: none;
+}
+.Footer li a{
+    font-size: 20px;
+    float: left;
+    color: white;
+    display: block;
+    padding: 1%;
+    margin-top: 1%;
+    margin-right: 50%;
+}
+.Footer li a:hover{
+    text-decoration: none;
+    transition: 0.3s;
+    color: #666666;
+}
+
+.cart{
+    box-sizing: border-box;
+    border: none;
+    background-color: #3CBC8D;
+    color: white;
+    position: relative;
+}
+.cart:hover{
+    transition: 0.5s;
+    box-shadow: 1px 2px 2px 1px rgba(0,0,0,0.5);
+}
+.History{
+    width: 50%;
+    height: 80%;
+    background-color: #0088ff;
+    color: white;
+    font-size: 30px;
+}
+=======
 body{
     background: white;
     margin-top: 0;
@@ -239,3 +477,4 @@ h1{
     color: white;
     font-size: 30px;
 }
+>>>>>>> ef1b4375ff856c8ff0d5bdc8953637bd6c85e3b7
