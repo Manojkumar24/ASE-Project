@@ -23,4 +23,5 @@ urlpatterns = [
     path('change_status/<str:f_id>', views.change_status, name='change_status'),
     path('send_com_email/<str:t_id>', views.send_com_email, name='send_com_email'),
     path('send_home_email/<str:t_id>', views.send_home_email, name='send_home_email'),
+    path('update_admin/', views.update_admin, name='update_admin'),
 ]
