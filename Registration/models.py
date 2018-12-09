@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Create your models here.
 class UserProfileInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -41,18 +42,37 @@ class Staffdetails(models.Model):
 
 =======
 >>>>>>> parent of b8c06fa... Displaying User History
+=======
+class Staffdetails(models.Model):
+    firstname = models.CharField(max_length = 200)
+    lastname = models.CharField(max_length=200)
+    employee_id = models.CharField(primary_key=True,max_length=10)
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=50)
+    #password2 = models.CharField(max_length=50)
+    address = models.CharField(max_length=250)
+    city = models.CharField(max_length=150)
+    pincode = models.CharField(max_length=6,default='')
+
+>>>>>>> parent of b8c06fa... Displaying User History
     @classmethod
     def emp_id(self):
         min_char = 5
         max_char = 5
+<<<<<<< HEAD
 <<<<<<< HEAD
         # allchar = string.ascii_letters + string.punctuation + string.digits
         allchar = string.digits
         emp_id = "CSA" + ("".join(choice(allchar) for x in range(randint(min_char, max_char))))
         return emp_id
 =======
+=======
+>>>>>>> parent of b8c06fa... Displaying User History
         #allchar = string.ascii_letters + string.punctuation + string.digits
         allchar = string.digits
         emp_id = "CSA"+ ("".join(choice(allchar) for x in range(randint(min_char, max_char))))
         return (emp_id)
+<<<<<<< HEAD
+>>>>>>> parent of b8c06fa... Displaying User History
+=======
 >>>>>>> parent of b8c06fa... Displaying User History

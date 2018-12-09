@@ -48,6 +48,7 @@ def register(request):
             profile.save()
             registered = True
 <<<<<<< HEAD
+<<<<<<< HEAD
             current_site = get_current_site(request)
             mail_subject = 'Thanks for registering.Activate your account here.'
             message = render_to_string('Registration/activate_account.html', {
@@ -62,6 +63,8 @@ def register(request):
             return HttpResponse('Please confirm your email address to complete the registration')
 =======
 >>>>>>> parent of b8c06fa... Displaying User History
+=======
+>>>>>>> parent of b8c06fa... Displaying User History
         else:
             print(user_form.errors, profile_form.errors)
     else:
@@ -71,6 +74,7 @@ def register(request):
                   {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 def activate_account(request, uidb64, token):
     try:
@@ -95,11 +99,14 @@ def activate_account(request, uidb64, token):
 
 =======
 >>>>>>> parent of b8c06fa... Displaying User History
+=======
+>>>>>>> parent of b8c06fa... Displaying User History
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(username=username, password=password)
+<<<<<<< HEAD
 <<<<<<< HEAD
         if user:
             user_info = User.objects.get(username=username)
@@ -111,6 +118,14 @@ def user_login(request):
             elif not user_info1.is_verified:
                 return HttpResponse(
                     "If you have already registered with us but not yet confirmed your email id,Please verify your email id to proceed .")
+=======
+
+        if user:
+            if user.is_active:
+                request.session.set_expiry(2000)
+                login(request, user)
+                return HttpResponseRedirect(reverse('Homepage:home'))
+>>>>>>> parent of b8c06fa... Displaying User History
 =======
 
         if user:
@@ -180,7 +195,11 @@ def staff_login(request):
             request.session['employee_id'] = staff.employee_id
             staff_logged_in = True
 <<<<<<< HEAD
+<<<<<<< HEAD
             # request.session['staff_fname'] = staff.firstname
+=======
+            #request.session['staff_fname'] = staff.firstname
+>>>>>>> parent of b8c06fa... Displaying User History
 =======
             #request.session['staff_fname'] = staff.firstname
 >>>>>>> parent of b8c06fa... Displaying User History

@@ -22,6 +22,7 @@ def default(request):
         food = Food_items.objects.all()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     contents = {'food': food}
 
     if 'employee_id' in request.session:
@@ -32,6 +33,8 @@ def default(request):
     else:
         return render(request, 'Homepage/Homepage.html', contents)
 =======
+=======
+>>>>>>> parent of b8c06fa... Displaying User History
     if 'employee_id' in request.session:
         staff = request.session.get('employee_id')
         user = Staffdetails.objects.filter(employee_id=staff)
@@ -40,6 +43,9 @@ def default(request):
     else:
         contents = {'food': food}
         return render(request, 'Homepage/category.html', contents)
+<<<<<<< HEAD
+>>>>>>> parent of b8c06fa... Displaying User History
+=======
 >>>>>>> parent of b8c06fa... Displaying User History
 
 

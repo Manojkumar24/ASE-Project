@@ -165,4 +165,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'csa.ase1@gmail.com'
 EMAIL_HOST_PASSWORD = 'user-group8'
 """
+<<<<<<< HEAD
+>>>>>>> parent of b8c06fa... Displaying User History
+=======
 >>>>>>> parent of b8c06fa... Displaying User History

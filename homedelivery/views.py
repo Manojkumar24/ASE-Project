@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from Manager.models import Available_Towns
 from django.contrib.auth.decorators import login_required
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 import json
@@ -15,6 +16,9 @@ import base64
 from .paytm_func import Checksum
 
 
+=======
+from User.models import Order_Food,Order_User
+>>>>>>> parent of b8c06fa... Displaying User History
 =======
 from User.models import Order_Food,Order_User
 >>>>>>> parent of b8c06fa... Displaying User History

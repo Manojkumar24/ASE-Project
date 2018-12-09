@@ -10,6 +10,7 @@ urlpatterns = [
     path('staff_registration/', views.staff_registration, name='staff_registration'),
     path('user_login/', views.user_login, name='user_login'),
 <<<<<<< HEAD
+<<<<<<< HEAD
     path('staff_login/', views.staff_login, name='staff_login'),
     path('staff_logout/', views.staff_logout, name='staff_logout'),
     # url(r'^activate_account/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
@@ -18,6 +19,10 @@ urlpatterns = [
     path('editprofile/', views.editprofile, name='editprofile'),
     path('updateprofile/', views.updateprofile, name="updateprofile"),
 
+=======
+    path('staff_login/',views.staff_login,name='staff_login'),
+    path('staff_logout/',views.staff_logout,name='staff_logout'),
+>>>>>>> parent of b8c06fa... Displaying User History
 =======
     path('staff_login/',views.staff_login,name='staff_login'),
     path('staff_logout/',views.staff_logout,name='staff_logout'),
