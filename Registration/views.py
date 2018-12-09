@@ -40,7 +40,6 @@ def special(request):
 
 def register(request):
     registered = False
-
     if request.method == "POST":
         user_form = UserForm(data=request.POST)
         profile_form = UserProfileInfoForm(data=request.POST)
@@ -68,10 +67,8 @@ def register(request):
             })
             to_email = user.email
             print(user.email)
-            send_mail(mail_subject, message,['csa.ase1@gmail.com'],[to_email])
+            send_mail(mail_subject, message, ['csa.ase1@gmail.com'], [to_email])
             return HttpResponse('Please confirm your email address to complete the registration')
-
-
         else:
             print(user_form.errors, profile_form.errors)
     else:
@@ -92,7 +89,7 @@ def activate_account(request, uidb64, token):
         user.save()
         username = user.username
         user_info = User.objects.get(username=username)
-        user_info1 = UserProfileInfo.objects.get(user = user_info)
+        user_info1 = UserProfileInfo.objects.get(user=user_info)
         user_info1.is_verified = True
         user_info1.save()
         login(request, user)
@@ -107,15 +104,16 @@ def user_login(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(username=username, password=password)
-        if user :
+        if user:
             user_info = User.objects.get(username=username)
             user_info1 = UserProfileInfo.objects.get(user=user_info)
-            if user.is_active and (user_info1.is_verified==True):
+            if user.is_active and (user_info1.is_verified == True):
                 request.session.set_expiry(900)
                 login(request, user)
                 return HttpResponseRedirect(reverse('Homepage:home'))
-            elif user_info1.is_verified==False:
-                return HttpResponse("If you have already registered with us but not yet confirmed your email id,Please verify your email id to proceed .")
+            elif not user_info1.is_verified:
+                return HttpResponse(
+                    "If you have already registered with us but not yet confirmed your email id,Please verify your email id to proceed .")
             else:
                 return HttpResponse("ACCOUNT NOT ACTIVE")
         elif not user:
@@ -180,9 +178,8 @@ def staff_registration(request):
 
             if not ((Staffdetails.objects.filter(firstname=firstname).exists() and Staffdetails.objects.filter(
                     lastname=lastname).exists()) or Staffdetails.objects.filter(
-                email=email).exists() or Staffdetails.objects.filter(employee_id=employee_id).exists()):
-                Staffdetails.objects.create(firstname=firstname, lastname=lastname, email=email, password=password,
-                                            address=address, pincode=pincode, city=city, employee_id=employee_id)
+                    email=email).exists() or Staffdetails.objects.filter(employee_id=employee_id).exists()):
+                Staffdetails.objects.create(firstname=firstname, lastname=lastname, email=email, password=password, address=address, pincode=pincode, city=city, employee_id=employee_id)
                 registered = True
 
                 staff_details = staff_reg_form.save(commit=False)
