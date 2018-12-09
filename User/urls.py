@@ -6,5 +6,5 @@ urlpatterns = [
     path('', views.index, name="home"),
     path("proProvide/<str:pk>", views.proProvide, name='proProvide'),
     #path('hist/<str:name>', views.history, name="Home")
-    path("user/<str:TokenId>", views.OrderConfirm, name='ConfirmOrder')
+    path("user/<str:TokenId>", views.CompletedOrders, name='ConfirmOrder'),
 ]

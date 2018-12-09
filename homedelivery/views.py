@@ -1,16 +1,13 @@
-from django.shortcuts import render, reverse
-from django.http import HttpResponse
-from .models import HD_Address
-from django.core import serializers
-from django.contrib.auth.models import User
-from User.models import Order_Food, Order_User
-from Manager.models import Available_Towns
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.shortcuts import render
 
-
-import json
-import requests
-import base64
+from Manager.models import Available_Towns
+from User.models import Order_Food, Order_User
+from .models import HD_Address
+# import json
+# import requests
+# import base64
 from .paytm_func import Checksum
 
 
@@ -54,7 +51,7 @@ def showonmap(request):
     # return {
     #    'location':'102 Matej Enclave Khajpura Bailey Road Patna'
     # }
-    #json_context = json.dumps(context)
+    # json_context = json.dumps(context)
     return render(request, 'homedelivery/showonmap.html', context)
 
 
@@ -69,7 +66,7 @@ def orderdetails(request):
     # for i in HD_FoodOrder.objects.filter(tokenId=2):
     #    lis.append(str(i))
     context = {
-        "HD_FoodOrder": HD_FoodOrder.objects.filter(tokenId=id).values(),
+        # "HD_FoodOrder": HD_FoodOrder.objects.filter(tokenId=id).values(),
         "HD_Address": HD_Address.objects.filter(tokenId=id).values()
     }
     # return HttpResponse()
@@ -103,10 +100,10 @@ def paytm(request):
     custId = 'Prashant'
     txn_amount = '1.00'
     channel_id = "WEB"
-    #checksumhash = ''
+    # checksumhash = ''
     website = "WEBSTAGING"
-    #mobile_no = '8578082961'
-    #email = 'prashantraj18198@gmail.com'
+    # mobile_no = '8578082961'
+    # email = 'prashantraj18198@gmail.com'
     industry_type_id = 'Retail'
     callback_url = "http://127.0.0.1:8000/"
     data_dict = {

@@ -4,8 +4,6 @@ from django.shortcuts import render
 from Registration.models import UserProfileInfo
 from django.contrib.auth.decorators import login_required
 # from Registration.views import user_login
-
-
 from User.models import Order_Food, Order_User
 
 
@@ -28,8 +26,12 @@ def Order_history(email):
     return order
 
 
-# def PopularFood():
-def OrderConfirm(request, TokenId):
+def PopularFood():
+    orders = Order_Food.objects.all()
+    print(orders)
+
+
+def CompletedOrders(request, TokenId):
     ordered = Order_User.objects.get(TokenId=TokenId)
     ordered.status.set('complete')
     return render(request, 'User/UserAccount.html')
@@ -39,8 +41,8 @@ def OrderConfirm(request, TokenId):
 def proProvide(request, pk=None):
     user = User.objects.get(username=pk)
     email = user.email
-    user_order_hisory = Order_history(email)
+    user_order_history = Order_history(email)
     # popular=PopularFood()
-    return render(request, "User/UserAccount.html", {'details': user, 'history': user_order_hisory})
+    return render(request, "User/UserAccount.html", {'details': user, 'history': user_order_history})
 
 # def cancel(request)

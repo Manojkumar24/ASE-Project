@@ -68,10 +68,8 @@ def register(request):
             })
             to_email = user.email
             print(user.email)
-            send_mail(mail_subject, message,['csa.ase1@gmail.com'],[to_email])
+            send_mail(mail_subject, message, ['csa.ase1@gmail.com'], [to_email])
             return HttpResponse('Please confirm your email address to complete the registration')
-
-
         else:
             print(user_form.errors, profile_form.errors)
     else:
@@ -92,7 +90,7 @@ def activate_account(request, uidb64, token):
         user.save()
         username = user.username
         user_info = User.objects.get(username=username)
-        user_info1 = UserProfileInfo.objects.get(user = user_info)
+        user_info1 = UserProfileInfo.objects.get(user=user_info)
         user_info1.is_verified = True
         user_info1.save()
         login(request, user)
@@ -107,22 +105,16 @@ def user_login(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(username=username, password=password)
-<<<<<<< HEAD
-
         if user:
-            if user.is_active:
-                request.session.set_expiry(2000)
-=======
-        if user :
             user_info = User.objects.get(username=username)
             user_info1 = UserProfileInfo.objects.get(user=user_info)
-            if user.is_active and (user_info1.is_verified==True):
+            if user.is_active and (user_info1.is_verified == True):
                 request.session.set_expiry(900)
->>>>>>> 0cab35af913bc6ddb6797ce30fac24edc773932c
                 login(request, user)
                 return HttpResponseRedirect(reverse('Homepage:home'))
-            elif user_info1.is_verified==False:
-                return HttpResponse("If you have already registered with us but not yet confirmed your email id,Please verify your email id to proceed .")
+            elif not user_info1.is_verified:
+                return HttpResponse(
+                    "If you have already registered with us but not yet confirmed your email id,Please verify your email id to proceed .")
             else:
                 return HttpResponse("ACCOUNT NOT ACTIVE")
         elif not user:
@@ -220,11 +212,8 @@ def staff_login(request):
             # login(request,staff)
             request.session['employee_id'] = staff.employee_id
             staff_logged_in = True
-<<<<<<< HEAD
-            #request.session['staff_fname'] = staff.firstname
-=======
             # request.session['staff_fname'] = staff.firstname
->>>>>>> 0cab35af913bc6ddb6797ce30fac24edc773932c
+            # request.session['staff_fname'] = staff.firstname
             return HttpResponseRedirect(reverse('Homepage:home'))
             # return HttpResponse("you are logged in {}".format(staff.firstname))
             # return render(request, 'Registration/staff_login.html', {})
