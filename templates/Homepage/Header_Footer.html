@@ -29,7 +29,6 @@
                             <li class="">
                                 <a class="" href="{% url 'eat_at_canteen:review' %}">Review</a>
                             </li>
-
                             {% if user.is_authenticated %}
                                 <li class="user">
                                     <!--href="{% url 'Homepage:proProvide' %}"img class="proPic" src="{%static request.user.profile_pic.path %}" --->
@@ -41,6 +40,16 @@
                                 <li>
                                     <a  href="{% url 'eat_at_canteen:cart' %}">Cart</a>
                                 </li>
+                            {% elif 'employee_id' in request.session %}
+                                        <li>
+                                            <a class="" href="{% url 'Registration:staff_logout' %}">LogOut</a>
+                                        </li>
+                                {% if user in user %}
+                                        <li class="user">
+                                            <!--href="{% url 'Homepage:proProvide' %}"img class="proPic" src="{%static request.user.profile_pic.path %}" --->
+                                            <a  href="#" >{{ user.staff_firstname }}</a>
+                                        </li>
+                                {% endif %}
                             {% else %}
                                 <li>
                                     <a href="#about">AboutUs</a>
@@ -51,8 +60,10 @@
                                 <li>
                                     <a class="" href="{% url 'Registration:register' %}">register</a>
                                 </li>
+
                             {% endif %}
-                        </ul>
+
+                            </ul>
                     </div>
         </nav>
     </header>
