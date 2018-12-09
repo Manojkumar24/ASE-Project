@@ -25,6 +25,5 @@ urlpatterns = [
     path('User/', include('User.urls')),
     path('registration/',include('Registration.urls')),
     path('ec/',include('eat_at_canteen.urls'))
-    path('registration/', include('Registration.urls')),
-    path('homedelivery/', include('homedelivery.urls'))
 ]
+

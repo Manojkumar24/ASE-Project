@@ -1,3 +1,18 @@
+<<<<<<< HEAD
+from django.urls import path
+from Registration import views
+
+app_name = 'Registration'
+urlpatterns = [
+    path("", views.default),
+    path('register/', views.register, name='register'),
+    path('user_logout/', views.user_logout, name='user_logout'),
+    path('index/', views.index, name='index'),
+    path('user_login/', views.user_login, name='user_login'),
+    path('editprofile/', views.editprofile, name='editprofile'),
+    path('updateprofile/', views.updateprofile, name="updateprofile")
+]
+=======
 from django.urls import path
 from Registration import views
 
@@ -7,5 +22,9 @@ urlpatterns = [
     path('register/',views.register,name='register'),
     path('user_logout/',views.user_logout,name='user_logout'),
     path('index/',views.index,name='index'),
-    path('user_login/', views.user_login, name='user_login')
+    path('staff_registration/',views.staff_registration,name='staff_registration'),
+    path('user_login/', views.user_login, name='user_login'),
+    path('staff_login/',views.staff_login,name='staff_login'),
+    path('staff_logout/',views.staff_logout,name='staff_logout'),
 ]
+>>>>>>> 30a42d1c748ad3487d84dde31ed32bb7e48def69

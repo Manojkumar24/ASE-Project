@@ -1,0 +1,15 @@
+{% extends "Manager/base.html" %}
+{% load bootstrap %}
+{% block title_block %}
+Update Your Profile
+{% endblock %}
+{% block body_block %}
+    <div class="container">
+        <p>Update Your Profile:</p>
+<form  method="post" action="{% url 'update_admin' %}">
+    {{ form|bootstrap}}
+    {% csrf_token %}
+    <input type="submit" class="btn btn-primary" value="Update">
+</form>
+    </div>
+{% endblock %}

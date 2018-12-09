@@ -1,0 +1,59 @@
+{% extends 'Manager/base.html' %}
+{% block body_block %}
+{% if items %}
+    <p>Token Id : {{ items.first.TokenId }}</p>
+    <table class="table table-bordered table-striped">
+    <tr>
+        <th>Food ID</th>
+        <th>Quantity</th>
+        <th>Table Id</th>
+        <th>Price</th>
+        <th>Date</th>
+        <th>Time</th>
+    </tr>
+    {% for items in items %}
+        <tr>
+        <td>{{ items.FoodId }}</td>
+        <td>{{ items.quantity }}</td>
+        <td>{{ items.TableId }}</td>
+        <td>{{ items.price }}</td>
+        <td>{{ items.date }}</td>
+        <td>{{ items.time }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    {% if status == 'User Conform' %}
+        <form action="{% url 'send_com_email' t_id=items.first.TokenId %}" method="post">
+        {% csrf_token %}
+        Change the Status:
+        <input type="submit" class="btn btn-primary" name="Completed" value="Completed">
+        </form>
+    {% elif add %}
+    <table class="table table-bordered table-striped">
+    <tr>
+        <th>Town</th>
+        <th>Street</th>
+        <th>Phone Number</th>
+    </tr>
+    <tr>
+        <td>{{ add.town }}</td>
+        <td>{{ add.street }}</td>
+        <td>{{ add.phone_number }}</td>
+    </tr>
+    </table>
+    <br>
+    <form action="{% url 'send_home_email' t_id=items.first.TokenId %}" method="post">
+    {% csrf_token %}
+    Change the Status:
+    <input type="submit" class="btn btn-primary" name="in Delivery" value="in Delivery">
+    </form>
+    {% else %}
+        <form action="{% url 'send_com_email' t_id=items.first.TokenId %}" method="post">
+        {% csrf_token %}
+        Change the Status:
+        <input type="submit" class="btn btn-primary" name="Completed" value="Completed">
+        </form>
+    {% endif %}
+{% endif %}
+
+{% endblock %}

@@ -1,8 +1,63 @@
 {% extends "Manager/base.html" %}
 {% block body_block %}
-<form action="{% url 'index' %}" method="post">
-{% csrf_token %}
-    Email: <input type="email" name="email">
-    <input type="submit">
-</form>
+    {% if error %}
+        <h4 class="errormsg">{{ error }}</h4>
+    {% endif %}
+    {% if msg %}
+        <h4 class="errormsg">{{ msg }}</h4>
+    {% endif %}
+    {% if user_order_item %}
+        <table class="table table-bordered table-striped">
+                <tr>
+                <td>Email Id</td>
+                <td>Token Id</td>
+                <td>Status</td>
+                <td>Total Price</td>
+                </tr>
+        {% for item in user_order_item %}
+                <tr>
+                <td>{{ item.mailId }}</td>
+                <td><a href="{% url 'list_items' id=item.TokenId %}">{{ item.TokenId }}</a></td>
+                <td>{{ item.status }}</td>
+                <td>{{ item.totalPrice }}</td>
+                </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+    {% if user_pre_item %}
+        <table class="table table-bordered table-striped">
+                <tr>
+                <td>Email Id</td>
+                <td>Token Id</td>
+                <td>Status</td>
+                <td>Total Price</td>
+                </tr>
+        {% for item in user_pre_item %}
+                <tr>
+                <td>{{ item.mailId }}</td>
+                <td><a href="{% url 'change_status' f_id=item.TokenId %}">{{ item.TokenId }}</a></td>
+                <td>{{ item.status }}</td>
+                <td>{{ item.totalPrice }}</td>
+                </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+    {% if user_conorder_item %}
+        <table class="table table-bordered table-striped">
+                <tr>
+                <td>Email Id</td>
+                <td>Token Id</td>
+                <td>Status</td>
+                <td>Total Price</td>
+                </tr>
+        {% for item in user_conorder_item %}
+                <tr>
+                <td>{{ item.mailId }}</td>
+                <td><a href="{% url 'change_status' f_id=item.TokenId %}">{{ item.TokenId }}</a></td>
+                <td>{{ item.status }}</td>
+                <td>{{ item.totalPrice }}</td>
+                </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
 {% endblock %}
