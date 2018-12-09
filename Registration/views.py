@@ -126,6 +126,42 @@ def user_login(request):
         return render(request, 'Registration/login.html', {})
 
 
+@login_required
+def editprofile(request):
+    updated = False
+    user = User.objects.filter(username=request.user)
+    # print(user)
+    userId = User.objects.get(username=request.user).id
+    # user = User.objects.filter(username=request.user)
+    userprofileinfo = UserProfileInfo.objects.filter(id=userId)
+    context = {
+    }
+    # print(user.values())
+    for field in user.values():
+        context["user"] = field
+    for field in userprofileinfo.values():
+        context["userprofileinfo"] = field
+    # print(context)
+    return render(request, 'Registration/editprofile.html', context=context)
+    # return HttpResponse("user")
+
+
+@login_required
+def updateprofile(request):
+    user = User.objects.get(username=request.user)
+    user.email = request.POST['email']
+    user.first_name = request.POST['first_name']
+    user.last_name = request.POST['last_name']
+    user.set_password(request.POST['password'])
+    user.save()
+    userprofileinfo = UserProfileInfo.objects.get(user=request.user)
+    userprofileinfo.address = request.POST['address']
+    userprofileinfo.city = request.POST['city']
+    userprofileinfo.pincode = request.POST['pincode']
+    userprofileinfo.save()
+    return HttpResponse("Saved")
+
+
 def staff_registration(request):
     registered = False
     if request.method == "POST":

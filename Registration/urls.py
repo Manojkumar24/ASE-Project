@@ -14,4 +14,7 @@ urlpatterns = [
     path('staff_logout/',views.staff_logout,name='staff_logout'),
     url(r'^activate_account/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         views.activate_account, name='activate_account'),
+    path('editprofile/', views.editprofile, name='editprofile'),
+    path('updateprofile/', views.updateprofile, name="updateprofile")
+
 ]
