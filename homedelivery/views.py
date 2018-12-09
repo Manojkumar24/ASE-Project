@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 
 import json
-import requests
+#import requests
 import base64
 from .paytm_func import Checksum
 

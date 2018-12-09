@@ -1,24 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+{% extends 'Homepage/Homepage.html' %}
 {% load static %}
-<<<<<<< HEAD
 {% block category %}
-<!--head>
-    <link rel = "stylesheet" type="text/css" href="{% static 'Homepage/main.css' %}"/>
-</head--->
-    <!--p>
-
-    </p-->
-=======
-<head>
-    <link rel = "stylesheet" type="text/css" href="{% static 'Homepage/main.css' %}"/>
-</head>
-    {% comment %}<!--p>
-        {% extends 'Homepage/Homepage.html' %}
-        {% block category %}
-        {% endblock %}
-    </p-->{% endcomment %}
->>>>>>> 0cab35af913bc6ddb6797ce30fac24edc773932c
     <div class = "Food">
         <h1>Things that are worth waiting!!</h1>
         <form action="{% url 'Homepage:home' %}" method="get" id="category_form">
@@ -58,4 +42,5 @@
 
         {% endif %}
     </div>
+{% endblock %}
 </html>
