@@ -1,23 +1,46 @@
+from django.http import HttpResponse
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from Registration.models import UserProfileInfo
 from django.contrib.auth.decorators import login_required
-#from Registration.views import user_login
+# from Registration.views import user_login
 
 
-# from User.models import Order_Food,Order_User
+from User.models import Order_Food, Order_User
+
+
 # Create your views here.
 
 
-@login_required
-def index(request):
-    data = UserProfileInfo.objects.all()
+def index(request, name=None):
+    data = UserProfileInfo.objects.filter(user=name)
     return render(request, 'User/UserAccount.html', {'data': data})
-    User = request.get(user)
-    details = UserProfileInfo.objects.filter(user=User)
-    return HttpResponse(details)
 
 
-'''def history(request):
-    username = request.POST.get('user')
-    user = 
-'''
+def Order_history(email):
+    ordered = Order_User.objects.filter(mailId=email, status='ordered')
+    order = {}
+    for m in ordered:
+        order[m.TokenId] = Order_Food.objects.filter(Status='conf', TokenId=m.TokenId)
+    print(order)
+    # confirmed_orders = Order_User.objects.filter(mailId=email,status='conf')
+    # food_ordered = .values('FoodId', 'quantity', 'time', 'date')
+    return order
+
+
+# def PopularFood():
+def OrderConfirm(request, TokenId):
+    ordered = Order_User.objects.get(TokenId=TokenId)
+    ordered.status.set('complete')
+    return render(request, 'User/UserAccount.html')
+
+
+@login_required
+def proProvide(request, pk=None):
+    user = User.objects.get(username=pk)
+    email = user.email
+    user_order_hisory = Order_history(email)
+    # popular=PopularFood()
+    return render(request, "User/UserAccount.html", {'details': user, 'history': user_order_hisory})
+
+# def cancel(request)

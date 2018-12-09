@@ -1,13 +1,22 @@
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import send_mail
 from django.shortcuts import render
+from django.template.loader import render_to_string
+from django.utils.encoding import force_text, force_bytes
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+
 from Registration.forms import UserForm, UserProfileInfoForm, StaffdetailsForm
 # Create your views here.
 from django.contrib.auth import authenticate, login, logout
-from Registration.models import Staffdetails
+from Registration.models import Staffdetails, UserProfileInfo
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import *
+
+from Registration.tokens import account_activation_token
 
 
 def default(request):
@@ -31,24 +40,24 @@ def special(request):
 
 def register(request):
     registered = False
+
     if request.method == "POST":
         user_form = UserForm(data=request.POST)
         profile_form = UserProfileInfoForm(data=request.POST)
 
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
+
             user.set_password(user.password)
+            user.is_active = False
             user.save()
 
             profile = profile_form.save(commit=False)
             profile.user = user
-
             if 'profile_pic' in request.FILES:
                 profile.profile_pic = request.FILES['profile_pic']
             profile.save()
             registered = True
-<<<<<<< HEAD
-<<<<<<< HEAD
             current_site = get_current_site(request)
             mail_subject = 'Thanks for registering.Activate your account here.'
             message = render_to_string('Registration/activate_account.html', {
@@ -59,12 +68,10 @@ def register(request):
             })
             to_email = user.email
             print(user.email)
-            send_mail(mail_subject, message, ['csa.ase1@gmail.com'], [to_email])
+            send_mail(mail_subject, message,['csa.ase1@gmail.com'],[to_email])
             return HttpResponse('Please confirm your email address to complete the registration')
-=======
->>>>>>> parent of b8c06fa... Displaying User History
-=======
->>>>>>> parent of b8c06fa... Displaying User History
+
+
         else:
             print(user_form.errors, profile_form.errors)
     else:
@@ -74,8 +81,6 @@ def register(request):
                   {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 def activate_account(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -87,7 +92,7 @@ def activate_account(request, uidb64, token):
         user.save()
         username = user.username
         user_info = User.objects.get(username=username)
-        user_info1 = UserProfileInfo.objects.get(user=user_info)
+        user_info1 = UserProfileInfo.objects.get(user = user_info)
         user_info1.is_verified = True
         user_info1.save()
         login(request, user)
@@ -97,51 +102,71 @@ def activate_account(request, uidb64, token):
         return HttpResponse('Activation link is invalid!')
 
 
-=======
->>>>>>> parent of b8c06fa... Displaying User History
-=======
->>>>>>> parent of b8c06fa... Displaying User History
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(username=username, password=password)
 <<<<<<< HEAD
-<<<<<<< HEAD
+
         if user:
+            if user.is_active:
+                request.session.set_expiry(2000)
+=======
+        if user :
             user_info = User.objects.get(username=username)
             user_info1 = UserProfileInfo.objects.get(user=user_info)
-            if user.is_active and (user_info1.is_verified == True):
+            if user.is_active and (user_info1.is_verified==True):
                 request.session.set_expiry(900)
+>>>>>>> 0cab35af913bc6ddb6797ce30fac24edc773932c
                 login(request, user)
                 return HttpResponseRedirect(reverse('Homepage:home'))
-            elif not user_info1.is_verified:
-                return HttpResponse(
-                    "If you have already registered with us but not yet confirmed your email id,Please verify your email id to proceed .")
-=======
-
-        if user:
-            if user.is_active:
-                request.session.set_expiry(2000)
-                login(request, user)
-                return HttpResponseRedirect(reverse('Homepage:home'))
->>>>>>> parent of b8c06fa... Displaying User History
-=======
-
-        if user:
-            if user.is_active:
-                request.session.set_expiry(2000)
-                login(request, user)
-                return HttpResponseRedirect(reverse('Homepage:home'))
->>>>>>> parent of b8c06fa... Displaying User History
+            elif user_info1.is_verified==False:
+                return HttpResponse("If you have already registered with us but not yet confirmed your email id,Please verify your email id to proceed .")
             else:
                 return HttpResponse("ACCOUNT NOT ACTIVE")
-        else:
+        elif not user:
             print("Someone tried to login and failed")
             print("Username: {} and password {}".format(username, password))
             return HttpResponse("invalid login details supplied!")
     else:
         return render(request, 'Registration/login.html', {})
+
+
+@login_required
+def editprofile(request):
+    updated = False
+    user = User.objects.filter(username=request.user)
+    # print(user)
+    userId = User.objects.get(username=request.user).id
+    # user = User.objects.filter(username=request.user)
+    userprofileinfo = UserProfileInfo.objects.filter(id=userId)
+    context = {
+    }
+    # print(user.values())
+    for field in user.values():
+        context["user"] = field
+    for field in userprofileinfo.values():
+        context["userprofileinfo"] = field
+    # print(context)
+    return render(request, 'Registration/editprofile.html', context=context)
+    # return HttpResponse("user")
+
+
+@login_required
+def updateprofile(request):
+    user = User.objects.get(username=request.user)
+    user.email = request.POST['email']
+    user.first_name = request.POST['first_name']
+    user.last_name = request.POST['last_name']
+    user.set_password(request.POST['password'])
+    user.save()
+    userprofileinfo = UserProfileInfo.objects.get(user=request.user)
+    userprofileinfo.address = request.POST['address']
+    userprofileinfo.city = request.POST['city']
+    userprofileinfo.pincode = request.POST['pincode']
+    userprofileinfo.save()
+    return HttpResponse("Saved")
 
 
 def staff_registration(request):
@@ -162,8 +187,9 @@ def staff_registration(request):
 
             if not ((Staffdetails.objects.filter(firstname=firstname).exists() and Staffdetails.objects.filter(
                     lastname=lastname).exists()) or Staffdetails.objects.filter(
-                    email=email).exists() or Staffdetails.objects.filter(employee_id=employee_id).exists()):
-                Staffdetails.objects.create(firstname=firstname, lastname=lastname, email=email, password=password, address=address, pincode=pincode, city=city, employee_id=employee_id)
+                email=email).exists() or Staffdetails.objects.filter(employee_id=employee_id).exists()):
+                Staffdetails.objects.create(firstname=firstname, lastname=lastname, email=email, password=password,
+                                            address=address, pincode=pincode, city=city, employee_id=employee_id)
                 registered = True
 
                 staff_details = staff_reg_form.save(commit=False)
@@ -195,14 +221,10 @@ def staff_login(request):
             request.session['employee_id'] = staff.employee_id
             staff_logged_in = True
 <<<<<<< HEAD
-<<<<<<< HEAD
+            #request.session['staff_fname'] = staff.firstname
+=======
             # request.session['staff_fname'] = staff.firstname
-=======
-            #request.session['staff_fname'] = staff.firstname
->>>>>>> parent of b8c06fa... Displaying User History
-=======
-            #request.session['staff_fname'] = staff.firstname
->>>>>>> parent of b8c06fa... Displaying User History
+>>>>>>> 0cab35af913bc6ddb6797ce30fac24edc773932c
             return HttpResponseRedirect(reverse('Homepage:home'))
             # return HttpResponse("you are logged in {}".format(staff.firstname))
             # return render(request, 'Registration/staff_login.html', {})

@@ -1,0 +1,24 @@
+.History table{
+    width: 100%;
+    font-size: 20px;
+}
+.order td{
+    width:20%;
+    text-align: center;
+
+}
+.History .divider{
+    width: 100%;
+    background-color: white;
+    height: 5px;
+}
+.History{
+    width: 50%;
+    height: auto;
+    color: white;
+    font-size: 30px;
+    margin-top: 65px;
+    background : rgba(51,51,51,0.7) ;
+    overflow: auto;
+}
+s
