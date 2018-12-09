@@ -1,14 +1,16 @@
 from django import forms
-from Registration.models import UserProfileInfo,Staffdetails
+from Registration.models import UserProfileInfo, Staffdetails
 from django.contrib.auth.models import User
 
+
 class UserForm(forms.ModelForm):
-    password=forms.CharField(label='Password',widget=forms.PasswordInput())
-    #password2=forms.CharField(label='Confirm Password',widget=forms.PasswordInput())
-    email = forms.EmailField(max_length=200,required=True)
+    password = forms.CharField(label='Password', widget=forms.PasswordInput())
+    # password2=forms.CharField(label='Confirm Password',widget=forms.PasswordInput())
+    email = forms.EmailField(max_length=200, required=True)
+
     class Meta():
-        model=User
-        fields=('username','first_name','last_name','email','password')
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email', 'password')
 
     """def clean_password2(self):
         # Check that the two password entries match
@@ -19,18 +21,22 @@ class UserForm(forms.ModelForm):
         else:
             return password2
 """
+
+
 class UserProfileInfoForm(forms.ModelForm):
     class Meta():
-        model=UserProfileInfo
-        fields=('address','city','pincode','profile_pic')
+        model = UserProfileInfo
+        fields = ('address', 'city', 'pincode', 'profile_pic')
+
 
 class StaffdetailsForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput())
     password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput())
-    email = forms.EmailField(max_length=200,required=True)
+    email = forms.EmailField(max_length=200, required=True)
+
     class Meta():
         model = Staffdetails
-        fields = ('firstname','lastname','email','password1','password2','address','city','pincode')
+        fields = ('firstname', 'lastname', 'email', 'password1', 'password2', 'address', 'city', 'pincode')
 
     def clean_password2(self):
         # Check that the two password entries match
