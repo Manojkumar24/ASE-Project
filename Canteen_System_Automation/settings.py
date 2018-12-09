@@ -18,6 +18,7 @@ from django.template.backends import django
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -28,6 +29,7 @@ SECRET_KEY = 'ubz483(h=xj^ma29+e&34(9+68&m_%i5u246xm1=^rcj8+t)oz'
 DEBUG = True
 SESSION_COOKIE_HTTPONLY = True
 ALLOWED_HOSTS = []
+
 
 # Application definition
 
@@ -77,6 +79,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Canteen_System_Automation.wsgi.application'
 
+
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
@@ -86,6 +89,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'canteendb'),
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -97,6 +101,7 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
 ]
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -132,6 +137,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/

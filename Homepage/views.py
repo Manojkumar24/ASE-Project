@@ -27,9 +27,9 @@ def default(request):
         staff = request.session['employee_id']
         user = Staffdetails.objects.filter(employee_id=staff)
         content1 = {'user': user}
-        return render(request, 'Homepage/category.html', contents, content1)
+        return render(request, 'Homepage/Homepage.html', contents, content1)
     else:
-        return render(request, 'Homepage/category.html', contents)
+        return render(request, 'Homepage/Homepage.html', contents)
 
 
 def search(request):
@@ -43,5 +43,3 @@ def search(request):
         request, template_name, {'results': results})
 
 
-
-    #return HttpResponse(details)

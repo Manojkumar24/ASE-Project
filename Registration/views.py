@@ -211,7 +211,6 @@ def staff_login(request):
             request.session['employee_id'] = staff.employee_id
             staff_logged_in = True
             # request.session['staff_fname'] = staff.firstname
-            # request.session['staff_fname'] = staff.firstname
             return HttpResponseRedirect(reverse('Homepage:home'))
             # return HttpResponse("you are logged in {}".format(staff.firstname))
             # return render(request, 'Registration/staff_login.html', {})
