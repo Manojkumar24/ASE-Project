@@ -16,8 +16,12 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
+<<<<<<< HEAD
    <orderEntry type="jdk" jdkName="Python 3.6 (Canteen_System_Automation) (2)" jdkType="Python SDK" />
     <orderEntry type="jdk" jdkName="Python 3.6 (Canteen_System_Automation)" jdkType="Python SDK" />
+=======
+    <orderEntry type="jdk" jdkName="Python 3.6" jdkType="Python SDK" />
+>>>>>>> 0cab35af913bc6ddb6797ce30fac24edc773932c
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="bootstrap" level="application" />
     <orderEntry type="library" name="jquery-3.2.0" level="application" />

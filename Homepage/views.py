@@ -21,6 +21,7 @@ def default(request):
     else:
         food = Food_items.objects.all()
 
+<<<<<<< HEAD
     if 'employee_id' in request.session:
         staff = request.session.get('employee_id')
         user = Staffdetails.objects.filter(employee_id=staff)
@@ -29,6 +30,17 @@ def default(request):
     else:
         contents = {'food': food}
         return render(request, 'Homepage/category.html', contents)
+=======
+    contents = {'food': food}
+
+    if 'employee_id' in request.session:
+        staff = request.session['employee_id']
+        user = Staffdetails.objects.filter(employee_id=staff)
+        content1 = {'user': user}
+        return render(request, 'Homepage/Homepage.html', contents, content1)
+    else:
+        return render(request, 'Homepage/Homepage.html', contents)
+>>>>>>> 0cab35af913bc6ddb6797ce30fac24edc773932c
 
 
 def search(request):
