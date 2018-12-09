@@ -21,9 +21,11 @@ app_name = 'homedelivery'
 urlpatterns = [
 
     path("address/", views.address, name='address'),
+
     path("confirm/", views.confirm, name='confirm'),
+
+
     path("submit/", views.submit, name='submit'),
     path("showonmap/", views.showonmap, name='showonmap'),
     path("orderdetails/", views.orderdetails, name="orderdetails"),
-    path("paytm/", views.paytm, name="paytm")
 ]

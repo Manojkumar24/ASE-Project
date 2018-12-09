@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+<<<<<<< HEAD
 # Create your models here.
 class UserProfileInfo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -38,11 +39,20 @@ class Staffdetails(models.Model):
     city = models.CharField(max_length=150)
     pincode = models.CharField(max_length=6, default='')
 
+=======
+>>>>>>> parent of b8c06fa... Displaying User History
     @classmethod
     def emp_id(self):
         min_char = 5
         max_char = 5
+<<<<<<< HEAD
         # allchar = string.ascii_letters + string.punctuation + string.digits
         allchar = string.digits
         emp_id = "CSA" + ("".join(choice(allchar) for x in range(randint(min_char, max_char))))
         return emp_id
+=======
+        #allchar = string.ascii_letters + string.punctuation + string.digits
+        allchar = string.digits
+        emp_id = "CSA"+ ("".join(choice(allchar) for x in range(randint(min_char, max_char))))
+        return (emp_id)
+>>>>>>> parent of b8c06fa... Displaying User History

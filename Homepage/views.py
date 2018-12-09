@@ -21,6 +21,7 @@ def default(request):
     else:
         food = Food_items.objects.all()
 
+<<<<<<< HEAD
     contents = {'food': food}
 
     if 'employee_id' in request.session:
@@ -30,6 +31,16 @@ def default(request):
         return render(request, 'Homepage/Homepage.html', contents, content1)
     else:
         return render(request, 'Homepage/Homepage.html', contents)
+=======
+    if 'employee_id' in request.session:
+        staff = request.session.get('employee_id')
+        user = Staffdetails.objects.filter(employee_id=staff)
+        contents = {'food': food, 'user': user}
+        return render(request, 'Homepage/category.html', contents)
+    else:
+        contents = {'food': food}
+        return render(request, 'Homepage/category.html', contents)
+>>>>>>> parent of b8c06fa... Displaying User History
 
 
 def search(request):

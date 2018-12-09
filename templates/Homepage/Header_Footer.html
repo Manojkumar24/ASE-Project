@@ -41,6 +41,7 @@
                                     <a  href="{% url 'eat_at_canteen:cart' %}">Cart</a>
                                 </li>
                             {% elif 'employee_id' in request.session %}
+<<<<<<< HEAD
                                         <li>
                                             <a class="" href="{% url 'Registration:staff_logout' %}">LogOut</a>
                                         </li>
@@ -50,6 +51,20 @@
                                             <a  href="#" >{{ user.staff_firstname }}</a>
                                         </li>
                                 {% endif %}
+=======
+                                <li class="user">
+                                    <!--href="{% url 'Homepage:proProvide' %}"img class="proPic" src="{%static request.user.profile_pic.path %}" --->
+                                    <a  href="#" >staff</a>
+                                </li>
+                                <li class="user">
+                                    <!--href="{% url 'Homepage:proProvide' %}"img class="proPic" src="{%static request.user.profile_pic.path %}" --->
+                                    <a  href="#" >{request.session.employee_id.firstname}</a>
+                                </li>
+                                <li>
+                                    <a class="" href="{% url 'Registration:staff_logout' %}">LogOut</a>
+                                </li>
+
+>>>>>>> parent of b8c06fa... Displaying User History
                             {% else %}
                                 <li>
                                     <a href="#about">AboutUs</a>

@@ -150,4 +150,19 @@ STATICFILES_DIRS = [
 LOGIN_URL = '/registration/user_login'
 LOGIN_REDIRECT_URL = '/registration/user_login/'
 
+<<<<<<< HEAD
 # SESSION_ENGINE = django.contrib.sessions.backend.signed_cookies
+=======
+#SESSION_ENGINE = django.contrib.sessions.backend.signed_cookies
+
+
+#sending email
+"""
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com''
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'csa.ase1@gmail.com'
+EMAIL_HOST_PASSWORD = 'user-group8'
+"""
+>>>>>>> parent of b8c06fa... Displaying User History
