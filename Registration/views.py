@@ -40,7 +40,6 @@ def special(request):
 
 def register(request):
     registered = False
-
     if request.method == "POST":
         user_form = UserForm(data=request.POST)
         profile_form = UserProfileInfoForm(data=request.POST)
@@ -179,9 +178,8 @@ def staff_registration(request):
 
             if not ((Staffdetails.objects.filter(firstname=firstname).exists() and Staffdetails.objects.filter(
                     lastname=lastname).exists()) or Staffdetails.objects.filter(
-                email=email).exists() or Staffdetails.objects.filter(employee_id=employee_id).exists()):
-                Staffdetails.objects.create(firstname=firstname, lastname=lastname, email=email, password=password,
-                                            address=address, pincode=pincode, city=city, employee_id=employee_id)
+                    email=email).exists() or Staffdetails.objects.filter(employee_id=employee_id).exists()):
+                Staffdetails.objects.create(firstname=firstname, lastname=lastname, email=email, password=password, address=address, pincode=pincode, city=city, employee_id=employee_id)
                 registered = True
 
                 staff_details = staff_reg_form.save(commit=False)

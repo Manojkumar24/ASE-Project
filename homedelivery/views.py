@@ -1,7 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render
-
 from Manager.models import Available_Towns
 from User.models import Order_Food, Order_User
 from .models import HD_Address
