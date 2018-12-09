@@ -45,4 +45,4 @@ class Staffdetails(models.Model):
         # allchar = string.ascii_letters + string.punctuation + string.digits
         allchar = string.digits
         emp_id = "CSA" + ("".join(choice(allchar) for x in range(randint(min_char, max_char))))
-        return (emp_id)
+        return emp_id
