@@ -1,8 +1,10 @@
 from django.db import models
 from Manager.models import Food_items, Available_Towns
+from Registration.models import UserProfileInfo
 from django.core.validators import MinValueValidator, RegexValidator
 from User.models import Order_Food, Order_User
-
+from django.utils import timezone
+from Canteen_System_Automation import settings
 # from django.utils import timezone
 # Create your models here.
 
@@ -24,9 +26,9 @@ class HD_Address(models.Model):
     tokenId = models.ForeignKey(Order_User, on_delete=models.CASCADE)
     city_choices = [
     ]
-    for object in Available_Towns.objects.all().values():
-        city_choices.append((object["Towns"], object["Towns"]))
-        # print(object['Towns'])
+    # for object in Available_Towns.objects.all().values():
+    #    city_choices.append((object["Towns"], object["Towns"]))
+    # print(object['Towns'])
     city_choices = tuple(city_choices)
     print(city_choices)
     city_choices = (

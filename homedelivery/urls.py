@@ -25,5 +25,4 @@ urlpatterns = [
     path("submit/", views.submit, name='submit'),
     path("showonmap/", views.showonmap, name='showonmap'),
     path("orderdetails/", views.orderdetails, name="orderdetails"),
-    path("paytm/", views.paytm, name="paytm")
 ]
