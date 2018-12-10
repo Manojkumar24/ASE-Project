@@ -7,7 +7,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_text, force_bytes
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
-from Registration.forms import UserForm, UserProfileInfoForm, StaffdetailsForm
+from Registration.forms import UserForm, UserProfileInfoForm, StaffdetailsForm, PasswordResetForm, SetNewPasswordForm
 # Create your views here.
 from django.contrib.auth import authenticate, login, logout
 from Registration.models import Staffdetails, UserProfileInfo
@@ -124,6 +124,67 @@ def user_login(request):
         return render(request, 'Registration/login.html', {})
 
 
+"""def fp(request):
+    return render(request, 'Registration/Password_reset_form.html',{form:'form'})
+
+"""
+
+
+def change_user_password(request):
+    if request.method == 'POST':
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get('Email')
+            user = User.objects.get(email=email)
+            if user:
+                # socket.getaddrinfo('localhost', 8080)
+                current_site = get_current_site(request)
+                mail_subject = 'Reset Your Password'
+                message = render_to_string('Registration/password_reset_email.html', {
+                    'user': user,
+                    'domain': current_site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
+                    'token': account_activation_token.make_token(user),
+                })
+                to_email = form.cleaned_data.get('Email')
+                send_mail(mail_subject, message, ['csa.ase1@gmail.com'], [to_email])
+                return render(request, 'Registration/password_reset_done.html', {})
+            else:
+                return HttpResponse('Email does not exist')
+        else:
+            return HttpResponse('Please enter a valid email')
+    else:
+        form = PasswordResetForm()
+        return render(request, 'Registration/password_reset_form.html', {'form': form})
+
+
+def user_password_reset(request, uidb64, token):
+    if request.method == 'POST':
+        form = SetNewPasswordForm(request.POST)
+        if form.is_valid():
+            password1 = form.cleaned_data.get('Password')
+            password2 = form.cleaned_data.get('Confirm_Password')
+            if password1 == password2:
+                try:
+                    uid = urlsafe_base64_decode(uidb64).decode()
+                    user = User.objects.get(pk=uid)
+                except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+                    user = None
+                if user is not None and account_activation_token.check_token(user, token):
+                    user.set_password(password1)
+                    user.save()
+                    return HttpResponse('Your Password is changed successfully')
+                else:
+                    return HttpResponse('Invalid reset link')
+            else:
+                return HttpResponse('Password does not match')
+        else:
+            return render(request, 'Registration/password_reset_confirm.html', {'form': form})
+    else:
+        form = SetNewPasswordForm()
+        return render(request, 'Registration/password_reset_confirm.html', {'form': form})
+
+
 @login_required
 def editprofile(request):
     updated = False
@@ -178,8 +239,9 @@ def staff_registration(request):
 
             if not ((Staffdetails.objects.filter(firstname=firstname).exists() and Staffdetails.objects.filter(
                     lastname=lastname).exists()) or Staffdetails.objects.filter(
-                    email=email).exists() or Staffdetails.objects.filter(employee_id=employee_id).exists()):
-                Staffdetails.objects.create(firstname=firstname, lastname=lastname, email=email, password=password, address=address, pincode=pincode, city=city, employee_id=employee_id)
+                email=email).exists() or Staffdetails.objects.filter(employee_id=employee_id).exists()):
+                Staffdetails.objects.create(firstname=firstname, lastname=lastname, email=email, password=password,
+                                            address=address, pincode=pincode, city=city, employee_id=employee_id)
                 registered = True
 
                 staff_details = staff_reg_form.save(commit=False)

@@ -45,3 +45,13 @@ class StaffdetailsForm(forms.ModelForm):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError("Passwords don't match")
         return password2
+
+
+class PasswordResetForm(forms.Form):
+    Email = forms.EmailField(label='Email',help_text="Please enter the email with which you have registered.")
+    fields = 'Email'
+
+
+class SetNewPasswordForm(forms.Form):
+    Password = forms.CharField(widget=forms.PasswordInput())
+    Confirm_Password = forms.CharField(widget=forms.PasswordInput())

@@ -12,7 +12,7 @@
         <label for="password">Password:</label>
         <input type="password" name="password" autofocus>
         <input type="submit" name="" value="Login">
-        <a href = "{% url 'Registration:staff_logout' %}"><button>Log out</button></a>
-    </form>
+        {% comment %}<a href = "{% url 'Registration:fp' %}">Forgot password?</a>
+    {% endcomment %}</form>
     {% endblock %}
 </div>

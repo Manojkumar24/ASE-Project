@@ -246,3 +246,10 @@ footer li a:hover{
     border: 1px solid rgba(0,0,0,.125);
     border-radius: 0.5rem;
 }
+
+.adjust{
+     margin-bottom: 12.5%;
+     margin-top: 5%;
+    margin-left: 70%;
+    font-size: 20px;
+}
