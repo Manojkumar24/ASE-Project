@@ -9,23 +9,24 @@
 <body>
 {% block content %}
     <div class="History">
-        <h2>
-            History of order
-        </h2>
         <table>
-            <tr class="orders">
-                <th>Food Name</th>
-                <th>quantity</th>
-                <th>time</th>
-                <th>date</th>
-                <th>status</th>
-                <th>price</th>
-            </tr>
-            {% if history %}
-                {% for key,value in history.items %}
+            <th class="Heading"><u>
+                Orders in delivery
+                </u>
+            </th>
+            {% if historyDelivery %}
+                <tr class="orders">
+                    <th>Food Name</th>
+                    <th>quantity</th>
+                    <th>time</th>
+                    <th>date</th>
+                    <th>status</th>
+                    <th>price</th>
+                </tr>
+                {% for key,value in historyDelivery.items %}
                     <tr class="divider"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
                     {% for food in value %}
-                          <tr class="orders">
+                        <tr class="orders">
                             <td>{{food.FoodId }}</td>
                             <td>{{ food.quantity }}</td>
                             <td>{{ food.time }}</td>
@@ -34,15 +35,88 @@
                                 <td>confirmed</td>
                             {% endif %}
                             <td>{{ food.price }}</td>
-                          </tr>
-                    {% endfor %}
-                        <tr>
-                          <td><a href="{% url 'User:ConfirmOrder' TokenId=key %}">Confirm</a></td>
                         </tr>
+                    {% endfor %}
+                    <tr>
+                        <td><a href="{% url 'UserProfile:ConfirmOrder' token_id=key %}">Confirm Delivery</a></td>
+                    </tr>
                 {% endfor %}
             {% else %}
-                <tr><th>Haven't tried anything</th></tr>
-                <tr><th>Go order something...!!!</th></tr>
+                <tr class="NoHistory"><td>Haven't tried anything?</td></tr>
+                <tr class="NoHistory"><td>Go order something...!!!</td></tr>
+            {% endif %}
+
+        </table>
+        <table>
+            <th class="Heading"><u>
+                Orders in ordered
+                </u>
+            </th>
+
+            {% if historyOrdered %}
+
+                <tr class="orders">
+                    <th>Food Name</th>
+                    <th>quantity</th>
+                    <th>time</th>
+                    <th>date</th>
+                    <th>status</th>
+                    <th>price</th>
+                </tr>
+                {% for key,value in historyOrdered.items %}
+                    <tr class="divider"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    {% for food in value %}
+                        <tr class="orders">
+                            <td>{{food.FoodId }}</td>
+                            <td>{{ food.quantity }}</td>
+                            <td>{{ food.time }}</td>
+                            <td>{{ food.date }}</td>
+                            <td>{{ food.Status }}</td>
+                            <td>{{ food.price }}</td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td><a href="{% url 'UserProfile:CancelOrder' token_id=key %}">Cancel order</a></td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr class="NoHistory"><td>Haven't tried anything?</td></tr>
+                <tr class="NoHistory"><td>Go order something...!!!</td></tr>
+            {% endif %}
+
+        </table>
+        <table>
+            <th class="Heading"><u>
+                    Orders in preperation
+                </u>
+            </th>
+
+            {% if historyPreparation %}
+
+                <tr class="orders">
+                    <th>Food Name</th>
+                    <th>quantity</th>
+                    <th>time</th>
+                    <th>date</th>
+                    <th>status</th>
+                    <th>price</th>
+                </tr>
+                {% for key,value in historyPreparation.items %}
+                    <tr class="divider"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    {% for food in value %}
+                        <tr class="orders">
+                            <td>{{food.FoodId }}</td>
+                            <td>{{ food.quantity }}</td>
+                            <td>{{ food.time }}</td>
+                            <td>{{ food.date }}</td>
+                            <td>{{ food.Status }}</td>
+                            <td>{{ food.price }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            {% else %}
+                <tr class="NoHistory"><td>Haven't tried anything?</td></tr>
+                <tr class="NoHistory"><td>Go order something...!!!</td></tr>
             {% endif %}
 
         </table>
@@ -64,8 +138,11 @@
         {% endif %}
         </div-->
 
-        <div>
+        <div class="ItemsInPreparation">
+            {% if historyPreparation %}
 
+
+            {% endif %}
         </div>
     </div>
     <div class="popular">

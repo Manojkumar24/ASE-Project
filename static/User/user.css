@@ -1,23 +1,33 @@
 .History table{
-    width: 100%;
+    width: 80%;
+    height: auto;
+    color: white;
     font-size: 20px;
+    background : rgba(51,51,51,0.7) ;
+    overflow: auto;
+    margin-left:10%;
+    margin-top: 4%;
 }
-.order td{
-    width:20%;
+.Heading {
+    padding-left: 5%;
+    font-size: 30px;
+}
+.orders td{
+    margin-left: 2%;
     text-align: center;
-
+    padding-top: 1%;
 }
 .History .divider{
     width: 100%;
     background-color: white;
     height: 5px;
 }
+.NoHistory{
+    margin-top: 20%;
+    margin-bottom: 20%;
+    font-size: 40px;
+    padding-left: 20%;
+}
 .History{
-    width: 50%;
-    height: auto;
-    color: white;
-    font-size: 30px;
-    margin-top: 65px;
-    background : rgba(51,51,51,0.7) ;
-    overflow: auto;
+    margin-top: 5%;
 }
