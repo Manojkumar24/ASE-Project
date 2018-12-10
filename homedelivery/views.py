@@ -6,8 +6,8 @@ from django.contrib.auth.models import User
 from User.models import Order_Food, Order_User
 from Manager.models import Available_Towns
 from django.contrib.auth.decorators import login_required
-
-
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
+from Registration.models import UserProfileInfo
 import json
 import requests
 import base64
@@ -90,36 +90,3 @@ def confirm(request):
         food_items.Status = 'conf'
         food_items.save()
     return render(request, 'Homepage/Homepage.html')
-
-
-MERCHANT_KEY = 'CyqbdF3AQJ6504#Q'
-
-
-@login_required
-def paytm(request):
-    username = request.user.username
-    mId = "EvaaDz25148733930898"
-    orderId = "123"
-    custId = 'Prashant'
-    txn_amount = '1.00'
-    channel_id = "WEB"
-    #checksumhash = ''
-    website = "WEBSTAGING"
-    #mobile_no = '8578082961'
-    #email = 'prashantraj18198@gmail.com'
-    industry_type_id = 'Retail'
-    callback_url = "http://127.0.0.1:8000/"
-    data_dict = {
-        "MID": mId,
-        "ORDER_ID": orderId,
-        "TXN_AMOUT": txn_amount,
-        'CUST_ID': custId,
-        'INDUSTRY_TYPE_ID': industry_type_id,
-        'WEBSITE': website,
-        'CHANNEL_ID': channel_id,
-        'CALLBACK_URL': callback_url,
-    }
-    param_dict = data_dict
-    param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(
-        data_dict, MERCHANT_KEY)
-    render(request, 'homedelivery/paytm.html', context=param_dict)
