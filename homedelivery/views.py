@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from Registration.models import UserProfileInfo
 import json
-import requests
+#import requests
 import base64
 from .paytm_func import Checksum
 

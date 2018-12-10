@@ -12,11 +12,61 @@
         <h2>
             History of order
         </h2>
-        {% if data %}
-        <p>
-            {{data.}}
-        </p>
+        <table>
+            <tr class="orders">
+                <th>Food Name</th>
+                <th>quantity</th>
+                <th>time</th>
+                <th>date</th>
+                <th>status</th>
+                <th>price</th>
+            </tr>
+            {% if history %}
+                {% for key,value in history.items %}
+                    <tr class="divider"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    {% for food in value %}
+                          <tr class="orders">
+                            <td>{{food.FoodId }}</td>
+                            <td>{{ food.quantity }}</td>
+                            <td>{{ food.time }}</td>
+                            <td>{{ food.date }}</td>
+                            {% if food.Status == 'conf' %}
+                                <td>confirmed</td>
+                            {% endif %}
+                            <td>{{ food.price }}</td>
+                          </tr>
+                    {% endfor %}
+                        <tr>
+                          <td><a href="{% url 'User:ConfirmOrder' TokenId=key %}">Confirm</a></td>
+                        </tr>
+                {% endfor %}
+            {% else %}
+                <tr><th>Haven't tried anything</th></tr>
+                <tr><th>Go order something...!!!</th></tr>
+            {% endif %}
+
+        </table>
+        <!--div class="profile_dropdwon">
+        {% if details %}
+                <p>
+                    <a href="#">
+                        {{ request.user.username }}
+                    </a>
+                    <a href="#">
+                        {{ details.userprofileinfo.address }}
+                    </a>
+                    <a href="#">
+                        {{ details.userprofileinfo.city }}
+                    </a>
+                    <img src="{%static details.userprofileinfo.profile_pic.path %}" alt="avatar">
+
+                </p>
         {% endif %}
+        </div-->
+
+        <div>
+
+        </div>
     </div>
     <div class="popular">
         <h2>
@@ -28,6 +78,6 @@
 
         </p>
     </div>
-{% endblock %}
+    {% endblock %}
 </body>
 </html>>
