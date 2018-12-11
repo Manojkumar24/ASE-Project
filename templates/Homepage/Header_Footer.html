@@ -78,12 +78,13 @@
                     </div>
         </nav>
     </header>
-    <div id="Review">
-        User-Restaurant Review
-    </div>
-        <div id="ReviewData">
+    <div class="Review">
+        <a href="#">User-Restaurant Review</a>
+        <div class="ReviewData">
             hcsdgyflhdgsuvfVdkfkjj
         </div>
+
+    </div>
 
     {% block content %}
     {% endblock %}
@@ -121,48 +122,3 @@
         </div>
     </footer>
 </html>
-<!--script>
-    window.onscroll = function() {myFunction()};
-
-    var navbar = document.getElementsByClassName("navBar");
-    var sticky = navbar.offsetTop;
-
-    function myFunction() {
-      if (window.pageYOffset >= sticky) {
-        navbar.classList.add("sticky")
-      } else {
-        navbar.classList.remove("sticky");
-      }
-    }
-    indexOf(filter)
-</script-->
-<!--script>
-    function profShow () {
-          $.ajax({
-                method:"POST",
-                url: "",
-                data: {
-                  'username': {{request.user.username}}
-                },
-                dataType: 'json',
-                success: function (data) {
-                    if (details) {
-                        console.log(details.username)
-                    }
-                    else {
-                        console.log(5)
-                    }
-
-                }
-          });
-
-    }
-
-</script-->
-<script>
-    $(function(){
-        $("#Review").click(function(){
-            $("#Reviewdata").slideToggle("slow");
-        });
-    });
-</script>
