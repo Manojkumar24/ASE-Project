@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% extends "Registration/base.html" %}
+
+    {% block body_block %}
+<div class="jumbotron">
+<h1> Please Login </h1>
+
+    <form action="{% url 'Registration:staff_login' %}"  method="post" autocomplete="off">
+        {% csrf_token %}
+        <label for="employee_id">Employee Id:</label>
+        <input type="text" name="employee_id" placeholder="Enter Employee Id" autofocus autocomplete="false">
+        <label for="password">Password:</label>
+        <input type="password" name="password" autofocus>
+        <input type="submit" name="" value="Login">
+        {% comment %}<a href = "{% url 'Registration:fp2' %}">Forgot password?</a>{% endcomment %}
+    </form>
+    {% endblock %}
+</div>
