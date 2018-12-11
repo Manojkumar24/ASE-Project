@@ -12,11 +12,6 @@
     <h3>Fill out the form:</h3>
     <form enctype="multipart/form-data" method="post">
         {% csrf_token %}
-<<<<<<< HEAD
-        {{ user_form.as_ul }}
-        {{ profile_form.as_ul }}
-        <input type="submit" name="" value="Register">
-=======
         <table>
             {% for field in user_form %}
                 <tr><td>{{ field.label }}</td></tr>
@@ -34,7 +29,6 @@
         </table>
 
         <input type="submit" name="" value="Register" class="myButton">
->>>>>>> 99800d28e3545e14b34ebb27622709c309adff60
     </form>
     {% endif %}
 </div>

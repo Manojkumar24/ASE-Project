@@ -3,17 +3,18 @@
 {% extends 'Homepage/Header_Footer.html' %}
 {% load static %}
 {% block content %}
-<body>
-
-    <div class = "SlideShow">
-        <img class = "SlideImage" src = "{%static 'Homepage/cafeteria_01.jpg' %}" >
-    </div>
-    <div class = "SlideShow">
-        <img class = "SlideImage" src = "{%static 'Homepage/cafeteria_02.jpg' %}" >
-    </div>
-    <div class = "SlideShow">
-        <img class = "SlideImage" src = "{%static 'Homepage/cafeteria_04.jpg' %}" >
-    </div>
+{% if background  %}
+    {% for pic in background %}
+        <body style="background-image: url('{{ pic.image.path }}') center no-repeat fixed">
+    {% endfor %}
+{% endif %}
+    {% if canteen_pics %}
+        {% for pics in canteen_pics %}
+            <div class = "SlideShow">
+                <img class = "SlideImage" src = "{%static pics.image.path %}"  >
+            </div>
+            <span class="dot" onclick="currentSlide(1)"></span>
+        {% endfor %}
     <a href="#" class="prev" onclick="plusSlides(-1)">&#10094;</a>
     <a href="#" class="next" onclick="plusSlides(1)">&#10095;</a>
     <div style="margin-left : 49%;margin-top : -3%">
@@ -21,14 +22,49 @@
         <span class="dot" onclick="currentSlide(2)"></span>
         <span class="dot" onclick="currentSlide(3)"></span>
     </div>
-
+    {% endif %}
     <div id ="about" class="About">
         <h1>About</h1>
         Our Service is Wonderful to experience....
     </div>
+    <div class = "Food">
+        <h1>Things that are worth waiting!!</h1>
+        <form action="{% url 'Homepage:home' %}" method="get" id="category_form">
+            <input type="submit" value="All" name="all">
+            <input type="submit" value="Breakfast" name="breakfast">
+            <input type="submit" value="Snack" name="snack">
+            <input type="submit" value="Starters" name="starter">
+        </form>
+        {% if food %}
+            {% for food in food %}
+                <div class="card">
+                    <a href="{% url 'Homepage:specificitem' food.Food_id %}"><img class="CardImage" src="{% static food.image.path %}" alt="Avatar"></a>
+                    <div class="container">
 
-        {% block category %}
-        {% endblock %}
+                        <form method="post" action="{% url 'eat_at_canteen:order' %}">
+                            {% csrf_token %}
+                            Name :<input type="text" value="{{ food.Food_Name }}" name="food" style="border: 0" readonly><br>
+                                Price : <input type="text" value="{{ food.Food_Price }}" name="price" style="border: 0" readonly><br>
+
+                                {% if  food.quantity  == 0 %}
+                                    <input type="text" style="border: 0" value="Not Available" readonly>
+                                {% else %}
+                                    {% if food.Food_Name in user_items %}
+                                        <a href="{% url 'eat_at_canteen:cart' %}"><input type="button" class="cart" value="Go to Cart" ></a>
+                                    {% else %}
+                                        <input type="submit"  class="cart" value = "add to cart">
+                                    {% endif %}
+                                {% endif %}
+                        </form>
+
+                    </div>
+                </div>
+            {% endfor %}
+            {% else %}
+                <p style="color: white">There is nothing</p>
+
+        {% endif %}
+    </div>
 </body>
 
 <script type = "text/javascript">
@@ -54,7 +90,6 @@
           }
           slides[slideIndex-1].style.display = "block";
           dots[slideIndex-1].className += " active";
-          setTimeout(showSlides, 5500);
     }
 
 </script>

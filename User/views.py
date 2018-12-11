@@ -26,10 +26,10 @@ def Order_history(email):
     orders_Delivery = {}
     orders_Ordered = {}
     orders_preparation = {}
-    orders_delivered={}
+    orders_delivered = {}
 
-    orderes_inDelivery = Order_User.objects.filter(mailId=email, status='in Delivery')
-    for m in orderes_inDelivery:
+    orders_inDelivery = Order_User.objects.filter(mailId=email, status='in Delivery')
+    for m in orders_inDelivery:
         orders_Delivery[m.TokenId] = Order_Food.objects.filter(Status='conf', TokenId=m.TokenId)
 
     orders_inOrdered = Order_User.objects.filter(mailId=email, status='ordered')
@@ -40,14 +40,10 @@ def Order_history(email):
     for m in orders_inPreparation:
         orders_preparation[m.TokenId] = Order_Food.objects.filter(Status='conf', TokenId=m.TokenId)
 
-<<<<<<< HEAD
     orders_Delivered = Order_User.objects.filter(status='Completed', mailId=email)
     for m in orders_Delivered:
         orders_delivered[m.TokenId] = Order_Food.objects.filter(Status='conf', TokenId=m.TokenId)
 
-=======
-    # orders_delivered = Order_User.objects
->>>>>>> 99800d28e3545e14b34ebb27622709c309adff60
     return orders_Ordered, orders_preparation, orders_Delivery
 
 

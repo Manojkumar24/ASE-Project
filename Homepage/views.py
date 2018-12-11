@@ -2,7 +2,7 @@
 # from django.shortcuts import render
 from django.shortcuts import redirect
 
-from Manager.models import Food_items
+from Manager.models import Food_items,Admin_Image
 # from Registration.models import UserProfileInfo, Staffdetails
 from Registration.views import *
 
@@ -46,14 +46,16 @@ def default(request):
         food = Food_items.objects.all()
 
     contents = {'food': food}
-
+    background = Admin_Image.objects.filter(categories='background')
+    canteen_pics = Admin_Image.objects.filter(categories='workplace')
+    service_pics = Admin_Image.objects.filter(categories='service')
     if 'employee_id' in request.session:
         user = request.session['employee_id']
         staff = Staffdetails.objects.filter(employee_id=user)
         content1 = {'staff': staff}
         return render(request, 'Homepage/category.html', contents, content1)
     else:
-        return render(request, 'Homepage/category.html', contents)
+        return render(request, 'Homepage/Homepage.html', {'background': background, 'canteen_pics': canteen_pics, 'service_pics': service_pics, 'food': food})
 
 
 def search(request):
