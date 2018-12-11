@@ -23,7 +23,7 @@
     {% endfor %}
     </table>
     <br>
-    <form action="{% url 'send_email' t_id=items.first.TokenId %}" method="post">
+    <form action="{% url 'Manager:send_email' t_id=items.first.TokenId %}" method="post">
     {% csrf_token %}
     <label for="time">Enter expected time: </label><input type="time" name="time"><br>
     <input type="submit" class="btn btn-primary" name="Send Expected Time">

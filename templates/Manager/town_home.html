@@ -4,8 +4,8 @@
     {% if error %}
     <p class="errormsg">{{ error }}</p>
     {% endif %}
-<a href="{% url 'add_towns' %}"><input type="button" class="btn btn-primary" id="Add" value="Add Towns" ></a>
-<a href="{% url 'remove_towns' %}"><input type="button" class="btn btn-primary" id="Remove" value="Remove Town" ></a>
+<a href="{% url 'Manager:add_towns' %}"><input type="button" class="btn btn-primary" id="Add" value="Add Towns" ></a>
+<a href="{% url 'Manager:remove_towns' %}"><input type="button" class="btn btn-primary" id="Remove" value="Remove Town" ></a>
     {% if item %}
         <table class="table table-bordered table-striped">
             <tr>

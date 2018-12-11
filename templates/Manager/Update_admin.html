@@ -6,7 +6,7 @@ Update Your Profile
 {% block body_block %}
     <div class="container">
         <p>Update Your Profile:</p>
-<form  method="post" action="{% url 'update_admin' %}">
+<form  method="post" action="{% url 'Manager:update_admin' %}">
     {{ form|bootstrap}}
     {% csrf_token %}
     <input type="submit" class="btn btn-primary" value="Update">

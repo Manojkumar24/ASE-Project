@@ -27,7 +27,7 @@ def add_food(request):
         f1 = form.Add_food(request.POST, request.FILES)
         if f1.is_valid():
             f1.save()
-            return redirect('food_home')
+            return redirect('Manager:food_home')
     return render(request, 'Manager/Add_food.html', {'form': f1})
 
 
@@ -42,7 +42,7 @@ def remove_food(request):
                 f_item.delete()
             except:
                 pass
-            return redirect('food_home')
+            return redirect('Manager:food_home')
     item = Food_items.objects.all()
     content = {'form': f2, 'item': item}
     return render(request, 'Manager/Remove_food.html', content)
@@ -60,7 +60,9 @@ def update_food(request, f_id=None):
             content = {'item': item, 'error': error}
             return render(request, 'Manager/Update_food.html', content)
     else:
-        return redirect('food_home')
+        item = Food_items.objects.all()
+        content = {'item': item}
+        return render(request, 'Manager/Update_food.html', content)
 
 
 def check_update_food(request):
@@ -113,7 +115,7 @@ def remove_tables(request):
                 Dining_Tables.objects.get(Table_id__exact=fid).delete()
             except:
                 pass
-            return redirect('tables_home')
+            return redirect('Manager:tables_home')
     item = Dining_Tables.objects.all()
     content = {'form': f2, 'item': item}
     return render(request, 'Manager/Remove_table.html', content)
@@ -125,8 +127,7 @@ def add_tables(request):
         f1 = form.Add_tables(request.POST)
         if f1.is_valid():
             f1.save()
-            content = {'item': item}
-            return render(request, 'Manager/tables_home.html', content)
+            return redirect('Manager:tables_home')
     return render(request, 'Manager/Add_tables.html', {'form': f1})
 
 
@@ -146,7 +147,7 @@ def remove_towns(request):
                 Available_Towns.objects.get(Towns__exact=fname).delete()
             except:
                 pass
-            return redirect('town_home')
+            return redirect('Manager:town_home')
     item = Available_Towns.objects.all()
     content = {'form': f2, 'item': item}
     return render(request, 'Manager/Remove_town.html', content)
@@ -158,7 +159,7 @@ def add_towns(request):
         f1 = form.Add_city(request.POST)
         if f1.is_valid():
             f1.save()
-            return redirect('town_home')
+            return redirect('Manager:town_home')
     return render(request, 'Manager/Add_town.html', {'form': f1})
 
 
@@ -308,6 +309,6 @@ def update_admin(request):
         f1 = form.Update_Admin(request.POST)
         if f1.is_valid():
             f1.save()
-            return redirect('index')
+            return redirect('Manager:index')
     content = {'form': f1}
     return render(request, 'Manager/Update_admin.html', content)
