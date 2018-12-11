@@ -42,8 +42,7 @@
                     </tr>
                 {% endfor %}
             {% else %}
-                <tr class="NoHistory"><td>Haven't tried anything?</td></tr>
-                <tr class="NoHistory"><td>Go order something...!!!</td></tr>
+                <tr class="NoHistory"><td>Nothing to Show here !!!</td></tr>
             {% endif %}
 
         </table>
@@ -65,13 +64,14 @@
                 </tr>
                 {% for key,value in historyOrdered.items %}
                     <tr class="divider"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td>{{ food.TokenId }}</td></tr>
                     {% for food in value %}
                         <tr class="orders">
                             <td>{{food.FoodId }}</td>
                             <td>{{ food.quantity }}</td>
                             <td>{{ food.time }}</td>
                             <td>{{ food.date }}</td>
-                            <td>{{ food.Status }}</td>
+                            <td>In prep.</td>
                             <td>{{ food.price }}</td>
                         </tr>
                     {% endfor %}
@@ -80,8 +80,7 @@
                     </tr>
                 {% endfor %}
             {% else %}
-                <tr class="NoHistory"><td>Haven't tried anything?</td></tr>
-                <tr class="NoHistory"><td>Go order something...!!!</td></tr>
+                <tr class="NoHistory"><td>Nothing to Show here !!!</td></tr>
             {% endif %}
 
         </table>
@@ -109,14 +108,13 @@
                             <td>{{ food.quantity }}</td>
                             <td>{{ food.time }}</td>
                             <td>{{ food.date }}</td>
-                            <td>{{ food.Status }}</td>
+                            <td>In ordered</td>
                             <td>{{ food.price }}</td>
                         </tr>
                     {% endfor %}
                 {% endfor %}
             {% else %}
-                <tr class="NoHistory"><td>Haven't tried anything?</td></tr>
-                <tr class="NoHistory"><td>Go order something...!!!</td></tr>
+                <tr class="NoHistory"><td>Nothing to Show here !!!</td></tr>
             {% endif %}
 
         </table>
