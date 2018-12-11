@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% extends "Registration/base.html" %}
+<head>
+    <title>Staff Details Edit</title>
+</head>
+    {% block body_block %}
+<div class="jumbotron">
+    <h3>Update the form:</h3>
+    <form enctype="multipart/form-data" action="{% url 'Registration:updatestaff'%}" method="post">
+        {% csrf_token %}
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="firstname">First Name</label>
+              <input name="firstname" type="name" class="form-control" id="firstname" value="{{firstname}}"placeholder="First Name" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="lastname">Last Name</label>
+              <input name="lastname" type="name" class="form-control" id="lastname" value="{{lastname}}" placeholder="Last Name" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="email">Email</label>
+              <input name="email" type="email" class="form-control" id="email" value="{{email}}"placeholder="Email" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="address">Address</label>
+              <input name="address" type="text" class="form-control" id="address" value='{{address}}' placeholder="Address" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="city">City</label>
+                <input name="city" type="text" class="form-control" id="city" value='{{city}}' placeholder="City" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="pincode">Pincode</label>
+                <input name="pincode" type="number" maxlength="6" minlength='6' class="form-control" id="pincode" value='{{pincode}}' placeholder="Pincode" required>
+            </div>
+          </div>
+          <div class="form-row col">
+            <button type="submit" class="btn btn-primary">Update Staff Profile</button>
+            </div>
+          </div>
+        </form>
+    {% endblock %}
+</div>

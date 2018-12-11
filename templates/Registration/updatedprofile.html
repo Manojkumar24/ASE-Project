@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% extends "Registration/base.html" %}
+<head>
+  <title>Updated Profile</title>
+</head>
+    {% block body_block %}
+<div class="jumbotron">
+    <h3>Updated Profile</h3>
+    <form enctype="multipart/form-data" action="{% url 'Registration:editprofile'%}" method="post">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="image">Profile Picture</label>
+              <img src="{{user_id.profile_pic}}" alt="Sorry image can't be displayed" class="img-thumbnail">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="username">Username</label>
+              <input name="username" type="username" class="form-control" id="username" value="{{user_id.user.username}}"placeholder="username" readonly>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="first_name">First Name</label>
+              <input name="first_name" type="first_name" class="form-control" id="first_name" value="{{user_id.user.first_name}}"placeholder="first_name" readonly>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="last_name">Last Name</label>
+              <input name="last_name" type="last_name" class="form-control" id="last_name" value="{{user_id.user.last_name}}"placeholder="last_name" readonly>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="email">Email</label>
+              <input name="email" type="email" class="form-control" id="email" value="{{user_id.user.email}}"placeholder="Email" readonly>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="address">Address</label>
+              <input name="address" type="text" class="form-control" id="address" value="{{user_id.address}}"   placeholder="1234 Main St" readonly>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="city">City</label>
+              <input name="city" type="text" class="form-control" id="city" value="{{user_id.city}}"readonly>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="pincode">Pincode</label>
+              <input name="pincode" type="text" class="form-control" id="pincode" value="{{user_id.pincode}}"readonly>
+            </div>
+          </div>
+          <div class="form-row col">
+            <button type="submit" class="btn btn-primary">Edit Details Again</button>
+            </div>
+          </div>
+        </form>
+    {% endblock %}
+</div>
