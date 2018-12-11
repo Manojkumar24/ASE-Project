@@ -1,7 +1,7 @@
    <html>
 
 <head>
-        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU_kJ3UUPCV-HLOaTfDf9zfqBBAXQ0VHE&libraries=places&callback=initMap"></script>
 
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,7 +28,6 @@ body {
 
 
  <script type="text/javascript">
-  //cnosole.log({{ 'location '}});
   var infowindow = new google.maps.InfoWindow();
   var latlng = new google.maps.LatLng(17.3850, 78.4867);
   var mapOptions = {
@@ -75,13 +74,12 @@ body {
 
  }
    var locations = [
-           'Hydernagar,hyderabad, India',
-           'Patna, Bihar, India', 
+           '{{location}}' 
   ];
   var nextAddress = 0;
   function theNext() {
     if (nextAddress < locations.length) {
-      setTimeout('geocodeAddress("'+locations[nextAddress]+'",theNext)', delay);
+      setTimeout('geocodeAddress("'+locations[nextAddress]+'",theNext)');
       nextAddress++;
     } else {
       map.fitBounds(bounds);
