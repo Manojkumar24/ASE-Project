@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from django.urls import path
+
 from Registration import views
 
 app_name = 'Registration'
@@ -17,5 +18,9 @@ urlpatterns = [
     # profile_edits
     path('editprofile/', views.editprofile, name='editprofile'),
     path('updateprofile/', views.updateprofile, name="updateprofile"),
+    path('change_password/',views.change_user_password,name="change_user_password"),
+    path('reset/<uidb64>/<token>/',views.user_password_reset, name='user_password_reset'),
+    path('forgotpassword/',views.change_user_password,name='fp')
+
 
 ]
