@@ -49,25 +49,20 @@ def submit(request):
 
 
 def showonmap(request):
-    context = {'location': '102 Matej Enclave Khajpura Bailey Road Patna', }
-    # return HttpResponse('Hello')
-    # return {
-    #    'location':'102 Matej Enclave Khajpura Bailey Road Patna'
-    # }
-    #json_context = json.dumps(context)
+    user = User.objects.get(username=request.user)
+    print(user)
+    tokenId = Order_User.objects.get(
+        mailId=user.email, status='in Delivery')
+    hd_address = HD_Address.objects.get(tokenId=tokenId)
+    location = hd_address.dNo + ', ' + hd_address.street + ', ' + hd_address.town
+    print(location)
+    context = {'location': location, }
+    # return HttpResponse('Show on map')
     return render(request, 'homedelivery/showonmap.html', context)
 
 
 def orderdetails(request):
     id = 2
-    # empty dictionary for storing the models data
-    # context = {
-    #    'HD_FoodOrder': HD_FoodOrder.objects.get(tokenId=id),
-    #    'HD_Address': HD_Address.objects.get(tokenId=id),
-    # }
-    # lis = []
-    # for i in HD_FoodOrder.objects.filter(tokenId=2):
-    #    lis.append(str(i))
     context = {
         "HD_FoodOrder": HD_FoodOrder.objects.filter(tokenId=id).values(),
         "HD_Address": HD_Address.objects.filter(tokenId=id).values()
@@ -82,7 +77,7 @@ def confirm(request):
     user = User.objects.get(username=username)
     email = user.email
     current_user = Order_User.objects.get(mailId=email, status='draft')
-    current_user.status = 'ordered'
+    current_user.status = 'in Delivery'
     TokenId = current_user.TokenId
     current_user.save()
     current_order = Order_Food.objects.filter(TokenId=TokenId, Status='dr')
