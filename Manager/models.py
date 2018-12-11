@@ -10,6 +10,8 @@ class Food_items(models.Model):
     Category = models.CharField(max_length=255, null=True)
     quantity = models.IntegerField(default=0)
     image = models.ImageField(upload_to='static/Manager/Foodimg/', null=True)
+    No_of_reviews = models.IntegerField(default=0)
+    rating = models.FloatField(default=0)
 
     def __str__(self):
         return self.Food_Name
