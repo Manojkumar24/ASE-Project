@@ -21,7 +21,20 @@
 	position:relative;
 	top:1px;
 }
-
 #id_username,#id_first_name,#id_last_name,#id_password,#id_email,#id_address,#id_city,#id_pincode{
-	width: 150%;
+	width: 100%;
+}
+#id_username{
+	border: none;
+	border-bottom: black;
+}
+form{
+	width:60%;
+	heigth:400px;
+	margin-right: 20%;
+	background-position: center;
+	position: center;
+}
+.jumborton{
+	margin-left:20%;
 }
