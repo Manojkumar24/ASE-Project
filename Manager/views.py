@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from . import form
 from .models import *
+from Registration.models import Staffdetails
 from django.core.mail import send_mail
 from django.conf import settings
 from User.models import Order_Food, Order_User
@@ -334,3 +335,26 @@ def remove_image(request):
     item = Admin_Image.objects.all()
     content = {'form': f2, 'item': item}
     return render(request, 'Manager/Remove_images.html', content)
+
+
+def staff_home(request):
+    item = Staffdetails.objects.all()
+    content = {'item': item}
+    return render(request, 'Manager/Staff_home.html', content)
+
+
+def remove_staff(request):
+    f2 = form.get_emp_id()
+    if request.method == 'POST':
+        f2 = form.get_emp_id(request.POST)
+        if f2.is_valid():
+            fid = f2.cleaned_data['Employee_id']
+            try:
+                i_item = Staffdetails.objects.get(employee_id__exact=fid)
+                i_item.delete()
+            except:
+                pass
+            return redirect('Manager:staff_home')
+    item = Staffdetails.objects.all()
+    content = {'form': f2, 'item': item}
+    return render(request, 'Manager/Remove_staff.html', content)
