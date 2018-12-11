@@ -36,3 +36,11 @@ class Available_Towns(models.Model):
 
     def __str__(self):
         return self.Towns
+
+
+images_choices = (('background', 'background'), ('workplace', 'workplace'), ('service', 'service'))
+
+
+class Admin_Image(models.Model):
+    categories = models.CharField(default='service', max_length=10, choices=images_choices)
+    image = models.ImageField(upload_to='static/Manager/Admin_img/', null=True)

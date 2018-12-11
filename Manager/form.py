@@ -1,6 +1,5 @@
 from django import forms
-from .models import Food_items, Available_Towns, Dining_Tables
-from Registration.models import Admin, Staffdetails
+from .models import *
 
 
 class Add_food(forms.ModelForm):
@@ -9,7 +8,7 @@ class Add_food(forms.ModelForm):
         fields = ['Food_id', 'Food_Name', 'Food_Price', 'Category', 'quantity', 'image']
 
 
-class get_id(forms.ModelForm):
+class get_id(forms.Form):
     Id = forms.IntegerField()
 
 
@@ -29,13 +28,7 @@ class Remove_city(forms.Form):
     town = forms.CharField()
 
 
-class Update_Admin(forms.ModelForm):
+class Add_images(forms.ModelForm):
     class Meta:
-        model = Admin
-        fields = ['Name', 'email', 'password', 'canteen_name', 'canteen_street', 'canteen_pincode']
-
-
-class Update_Staff(forms.ModelForm):
-    class Meta:
-        model = Staffdetails
-        fields = ['firstname', 'lastname', 'email', 'password', 'address', 'city', 'pincode']
+        model = Admin_Image
+        fields = '__all__'

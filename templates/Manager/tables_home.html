@@ -3,9 +3,9 @@
     {% if error %}
     <p class="errormsg">{{ error }}</p>
     {% endif %}
-<a href="{% url 'add_tables' %}"><input type="button" class="btn btn-primary" id="Add" value="Add Table" ></a>
-<a href="{% url 'remove_tables' %}"><input type="button" class="btn btn-primary" id="Remove" value="Remove Table" ></a>
-<a href="{% url 'update_table' id=0 %}"><input type="button" class="btn btn-primary" id="update" value="Update" ></a><br>
+<a href="{% url 'Manager:add_tables' %}"><input type="button" class="btn btn-primary" id="Add" value="Add Table" ></a>
+<a href="{% url 'Manager:remove_tables' %}"><input type="button" class="btn btn-primary" id="Remove" value="Remove Table" ></a>
+<a href="{% url 'Manager:update_table' id=0 %}"><input type="button" class="btn btn-primary" id="update" value="Update" ></a><br>
     {% if item %}
         <table class="table table-bordered table-striped">
         <tr>

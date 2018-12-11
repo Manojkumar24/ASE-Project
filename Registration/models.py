@@ -20,12 +20,19 @@ class UserProfileInfo(models.Model):
 
 class Admin(models.Model):
     Name = models.CharField(max_length=225, blank=False)
-    email = models.EmailField()
+    username = models.CharField(max_length=200, blank=False, null=True)
+    email = models.EmailField(blank=False)
     password = models.CharField(max_length=50, null=True)
     canteen_name = models.CharField(max_length=200, null=True)
     canteen_street = models.CharField(max_length=200, null=True)
     canteen_city = models.CharField(max_length=200, null=True)
+<<<<<<< HEAD
     canteen_pincode = models.IntegerField(null=True)
+=======
+    canteen_pincode = models.CharField(null=True, max_length=6)
+    # is_admin_reg = models.BooleanField(default=False)
+    admin_id = models.CharField(max_length=7, default="ADMN001")
+>>>>>>> 99800d28e3545e14b34ebb27622709c309adff60
 
 
 class Staffdetails(models.Model):
