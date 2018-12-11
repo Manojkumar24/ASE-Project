@@ -1,7 +1,7 @@
 from django.db import models
 # import tornado.platform.twisted
 from Manager.models import Food_items
-import datetime
+# import datetime
 
 
 # Create your models here.

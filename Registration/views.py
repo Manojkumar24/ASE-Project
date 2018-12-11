@@ -2,12 +2,13 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_text, force_bytes
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
-from Registration.forms import UserForm, UserProfileInfoForm, StaffdetailsForm
+from Registration.forms import UserForm, UserProfileInfoForm, StaffdetailsForm, PasswordResetForm, SetNewPasswordForm, \
+    AdmindetailsForm
 # Create your views here.
 from django.contrib.auth import authenticate, login, logout
 from Registration.models import Staffdetails, UserProfileInfo, Admin
@@ -46,7 +47,7 @@ def register(request):
 
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
-
+            unhashed = user.password
             user.set_password(user.password)
             user.is_active = False
             user.save()
@@ -141,6 +142,67 @@ def get_editprofile_dict(request):
     return context
 
 
+def change_user_password(request):
+    if request.method == 'POST':
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get('Email')
+            user = User.objects.get(email=email)
+            if user:
+                # socket.getaddrinfo('localhost', 8080)
+                current_site = get_current_site(request)
+                mail_subject = 'Reset Your Password'
+                message = render_to_string('Registration/password_reset_email.html', {
+                    'user': user,
+                    'domain': current_site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
+                    'token': account_activation_token.make_token(user),
+                })
+                to_email = form.cleaned_data.get('Email')
+                send_mail(mail_subject, message, ['csa.ase1@gmail.com'], [to_email])
+                return render(request, 'Registration/password_reset_done.html', {})
+            else:
+                return HttpResponse('Email does not exist')
+        else:
+            return HttpResponse('Please enter a valid email')
+    else:
+        form = PasswordResetForm()
+        return render(request, 'Registration/password_reset_form.html', {'form': form})
+
+
+def user_password_reset(request, uidb64, token):
+    if request.method == 'POST':
+        form = SetNewPasswordForm(request.POST)
+        if form.is_valid():
+            password1 = form.cleaned_data.get('Password')
+            password2 = form.cleaned_data.get('Confirm_Password')
+            if password1 == password2:
+                try:
+                    uid = urlsafe_base64_decode(uidb64).decode()
+                    user = User.objects.get(pk=uid)
+                except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+                    user = None
+                if user is not None and account_activation_token.check_token(user, token):
+                    user.set_password(password1)
+                    user.save()
+                    return HttpResponse('Your Password is changed successfully')
+                else:
+                    return HttpResponse('Invalid reset link')
+            else:
+                return HttpResponse('Password does not match')
+        else:
+            return render(request, 'Registration/password_reset_confirm.html', {'form': form})
+    else:
+        form = SetNewPasswordForm()
+        return render(request, 'Registration/password_reset_confirm.html', {'form': form})
+
+
+@login_required
+def editprofile(request):
+    context = get_editprofile_dict(request)
+    return context
+
+
 @login_required
 def editprofile(request):
     context = get_editprofile_dict(request)
@@ -206,18 +268,20 @@ def staff_registration(request):
             pincode = staff_reg_form.cleaned_data['pincode']
             city = staff_reg_form.cleaned_data['city']
             employee_id = Staffdetails.emp_id()
+            password_old = password
             password = make_password(password)
 
             if not ((Staffdetails.objects.filter(firstname=firstname).exists() and Staffdetails.objects.filter(
                     lastname=lastname).exists()) or Staffdetails.objects.filter(
-                    email=email).exists() or Staffdetails.objects.filter(employee_id=employee_id).exists()):
-                Staffdetails.objects.create(firstname=firstname, lastname=lastname, email=email,
-                                            password=password, address=address, pincode=pincode, city=city, employee_id=employee_id)
+                email=email).exists() or Staffdetails.objects.filter(employee_id=employee_id).exists()):
+                Staffdetails.objects.create(firstname=firstname, lastname=lastname, email=email, password=password,
+                                            address=address, pincode=pincode, city=city, employee_id=employee_id)
                 registered = True
-
                 staff_details = staff_reg_form.save(commit=False)
-
-                return HttpResponse("Your employee id is {}".format(employee_id))
+                mail_subject = "Registration successful"
+                message = "You are successfully registered with us as staff.login with username :{}, password:{} ".format(employee_id,password_old)
+                send_mail(mail_subject, message, ['csa.ase1@gmail.com'], [email])
+                return redirect('Manager:staff_home')
             else:
                 message = "An account with same firstname,lastname or email already exsts .Please try again"
                 return render(request, 'Registration/alert.html', {'message': message})
@@ -244,7 +308,7 @@ def staff_login(request):
             request.session['employee_id'] = staff.employee_id
             staff_logged_in = True
             # request.session['staff_fname'] = staff.firstname
-            return HttpResponseRedirect(reverse('Homepage:home'))
+            return HttpResponseRedirect(reverse('Manager:index'))
             # return HttpResponse("you are logged in {}".format(staff.firstname))
             # return render(request, 'Registration/staff_login.html', {})
         else:
@@ -316,3 +380,66 @@ def updatestaff(request):
     staff['city'] = request.POST['city']
     staff.save()
     return HttpResponse("Update Staff Page")
+
+
+def admin_register(request):
+    registered = False
+    if request.method == "POST":
+        is_present = Admin.objects.all()
+        admin_reg_form = AdmindetailsForm(request.POST)
+        if not is_present:
+            if admin_reg_form.is_valid():
+                Name = admin_reg_form.cleaned_data['Name']
+                username = admin_reg_form.cleaned_data['username']
+                email = admin_reg_form.cleaned_data['email']
+                password = admin_reg_form.cleaned_data['password1']
+                canteen_name = admin_reg_form.cleaned_data['canteen_name']
+                canteen_street = admin_reg_form.cleaned_data['canteen_street']
+                canteen_pincode = admin_reg_form.cleaned_data['canteen_pincode']
+                canteen_city = admin_reg_form.cleaned_data['canteen_city']
+                password = make_password(password)
+
+                Admin.objects.create(Name=Name, email=email,username=username, password=password,canteen_street=canteen_street,
+                                        canteen_name=canteen_name,canteen_pincode=canteen_pincode,canteen_city=canteen_city)
+
+                registered = True
+
+                Admin_details = admin_reg_form.save(commit=False)
+
+                return HttpResponse("Admin is {}".format(Name))
+            else:
+                print(admin_reg_form.errors)
+
+        else :
+            return HttpResponse("Admin already present")
+    else:
+        admin_reg_form = AdmindetailsForm()
+    return render(request, 'Registration/Admin_Registration.html',
+                  {'admin_reg_form': admin_reg_form, 'registered': registered})
+
+
+def admin_login(request):
+    admin_logged_in = False
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        admin = Admin.objects.get(username=username)
+        admin_log = check_password(password, admin.password)
+        if admin_log:
+            # login(request,staff)
+            request.session['admin_id'] = admin.admin_id
+            admin_logged_in = True
+            #return HttpResponseRedirect(reverse('Homepage:home'))
+            return HttpResponseRedirect(reverse('Manager:index'))
+        else:
+            return HttpResponse("Not logged in")
+    else:
+        return render(request, 'Registration/admin_login.html', {})
+
+
+def admin_logout(request):
+    try:
+        del request.session['admin_id']
+    except KeyError:
+        return HttpResponse("You are not logged in")
+    return HttpResponseRedirect(reverse('Homepage:home'))

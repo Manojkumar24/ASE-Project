@@ -5,7 +5,7 @@ Add Town
 {% endblock %}
 {% block body_block %}
     <div class="container">
-<form  method="post" action="{% url 'add_towns' %}">
+<form  method="post" action="{% url 'Manager:add_towns' %}">
     {{ form|bootstrap }}
     {% csrf_token %}
     <input type="submit" class="btn btn-primary" value="ADD">

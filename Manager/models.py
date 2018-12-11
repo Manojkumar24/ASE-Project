@@ -10,6 +10,8 @@ class Food_items(models.Model):
     Category = models.CharField(max_length=255, null=True)
     quantity = models.IntegerField(default=0)
     image = models.ImageField(upload_to='static/Manager/Foodimg/', null=True)
+    No_of_reviews = models.IntegerField(default=0)
+    rating = models.FloatField(default=0)
 
     def __str__(self):
         return self.Food_Name
@@ -36,3 +38,11 @@ class Available_Towns(models.Model):
 
     def __str__(self):
         return self.Towns
+
+
+images_choices = (('background', 'background'), ('workplace', 'workplace'), ('service', 'service'))
+
+
+class Admin_Image(models.Model):
+    categories = models.CharField(default='service', max_length=10, choices=images_choices)
+    image = models.ImageField(upload_to='static/Manager/Admin_img/', null=True)

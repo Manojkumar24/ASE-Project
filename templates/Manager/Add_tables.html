@@ -5,7 +5,7 @@ Add Tables
 {% endblock %}
 {% block body_block %}
     <div class="container">
-<form  method="post" action="{% url 'add_tables' %}">
+<form  method="post" action="{% url 'Manager:add_tables' %}">
     {{ form|bootstrap }}
     {% csrf_token %}
     <input type="submit" class="btn btn-primary" value="ADD">

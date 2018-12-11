@@ -13,7 +13,7 @@
     </tr>
     {% for items in item %}
     <tr>
-        <td><a href="{% url 'update_table' id=items.Table_id %}">{{ items.Table_id }}</a></td>
+        <td><a href="{% url 'Manager:update_table' id=items.Table_id %}">{{ items.Table_id }}</a></td>
         <td>{{ items.availability }}</td>
         <td>{{ items.size }}</td>
         <td>{{ items.zone }}</td>
@@ -27,7 +27,7 @@
 {% endif %}
 
 {% if update %}
-    <form method="post" action="{% url 'check_update_table' %}">
+    <form method="post" action="{% url 'Manager:check_update_table' %}">
     Update Values:<br>
     {% csrf_token %}
     <table class="table table-bordered table-striped">

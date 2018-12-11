@@ -9,21 +9,35 @@ from User.models import Order_Food, Order_User
 
 # Create your views here.
 
-
-def index(request, name=None):
-    data = UserProfileInfo.objects.filter(user=name)
-    return render(request, 'User/UserAccount.html', {'data': data})
+@login_required
+def index(request, pk=None):
+    user = User.objects.get(username=pk)
+    email = user.email
+    user_order_inOrderd, user_order_inPreparation, user_order_inDelivery = Order_history(email)
+    # popular=PopularFood()
+    return render(request, "User/UserAccount.html", {'details': user, 'historyDelivery': user_order_inDelivery, 'historyOrdered': user_order_inOrderd, 'historyPreparation': user_order_inPreparation})
 
 
 def Order_history(email):
-    ordered = Order_User.objects.filter(mailId=email, status='ordered')
-    order = {}
-    for m in ordered:
-        order[m.TokenId] = Order_Food.objects.filter(Status='conf', TokenId=m.TokenId)
-    print(order)
-    # confirmed_orders = Order_User.objects.filter(mailId=email,status='conf')
-    # food_ordered = .values('FoodId', 'quantity', 'time', 'date')
-    return order
+    orders_Delivery = {}
+    orders_Ordered = {}
+    orders_preparation = {}
+    orders_delivered={}
+
+    orderes_inDelivery = Order_User.objects.filter(mailId=email, status='in Delivery')
+    for m in orderes_inDelivery:
+        orders_Delivery[m.TokenId] = Order_Food.objects.filter(Status='conf', TokenId=m.TokenId)
+
+    orders_inOrdered = Order_User.objects.filter(mailId=email, status='ordered')
+    for m in orders_inOrdered:
+        orders_Ordered[m.TokenId] = Order_Food.objects.filter(Status='conf', TokenId=m.TokenId)
+
+    orders_inPreparation = Order_User.objects.filter(mailId=email, status='in Preparation')
+    for m in orders_inPreparation:
+        orders_preparation[m.TokenId] = Order_Food.objects.filter(Status='conf', TokenId=m.TokenId)
+
+    # orders_delivered = Order_User.objects
+    return orders_Ordered, orders_preparation, orders_Delivery
 
 
 def PopularFood():
@@ -31,18 +45,27 @@ def PopularFood():
     print(orders)
 
 
-def CompletedOrders(request, TokenId):
-    ordered = Order_User.objects.get(TokenId=TokenId)
-    ordered.status.set('complete')
-    return render(request, 'User/UserAccount.html')
+def CompletedOrders(request, token_id):
+    ordered = Order_User.objects.get(TokenId=token_id)
+    ordered.status = 'User Conform'
+    ordered.save()
+    print(ordered.status)
+    username = User.objects.get(email=ordered.mailId)
+    return index(request, username)
 
 
-@login_required
-def proProvide(request, pk=None):
-    user = User.objects.get(username=pk)
-    email = user.email
-    user_order_history = Order_history(email)
-    # popular=PopularFood()
-    return render(request, "User/UserAccount.html", {'details': user, 'history': user_order_history})
+# def proProvide(request, pk=None):
 
-# def cancel(request)
+
+def CancelOrders(request, token_id):
+    ordered = Order_User.objects.get(TokenId=token_id)
+    ordered.status = 'cancelled'
+    ordered.save()
+    print(ordered.status)
+    username = User.objects.get(email=ordered.mailId)
+    return index(request, username)
+
+
+def validate(request):
+    # if user.is_authentictaed
+    return None

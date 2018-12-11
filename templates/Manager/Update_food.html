@@ -18,7 +18,7 @@
         </tr>
         {% for items in item %}
         <tr>
-            <td><a href="{% url 'update_food' f_id=items.Food_id %}">{{ items.Food_id }}</a></td>
+            <td><a href="{% url 'Manager:update_food' f_id=items.Food_id %}">{{ items.Food_id }}</a></td>
             <td>{{ items.Food_Name }}</td>
             <td>{{ items.Food_Price }}</td>
             <td>{{ items.quantity }}</td>
@@ -38,7 +38,7 @@
 {% endif %}
 
 {% if update %}
-    <form method="post" action="{% url 'check_update_food' %}" enctype="multipart/form-data">
+    <form method="post" action="{% url 'Manager:check_update_food' %}" enctype="multipart/form-data">
     Update Values:<br>
     {% csrf_token %}
     <table class="table table-bordered table-striped">

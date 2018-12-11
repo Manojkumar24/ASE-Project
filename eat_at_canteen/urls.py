@@ -21,15 +21,16 @@ app_name='eat_at_canteen'
 urlpatterns = [
     path('index/',views.index,name='index'),
     path('check/',views.check,name='check'),
-    path('checkout/',views.checkout,name='checkout'),
+    path('checkout/', views.checkout, name='checkout'),
     path('table/',views.table,name='table'),
     path('orderfood/',views.order,name='order'),
+    path('order/<int:pk>/',views.order,name='orderagain'),
     path('cart/',views.cart,name='cart'),
     path('delete/',views.Delete,name='delete'),
     path('confirm/',views.confirm,name='confirm'),
     path('update/',views.update,name='update'),
-    path('review/', views.review, name='review'),
-    path('add/', views.add_review, name='add_review')
-
+    path('review/', views.review, name='hotel_review'),
+    path('add/', views.add_review, name='add_review'),
+    path('re/',views.ReviewView.as_view()),
 ]
 

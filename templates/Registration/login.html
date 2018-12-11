@@ -1,16 +1,48 @@
-<!DOCTYPE html>
-{% extends "Registration/base.html" %}
-    {% block body_block %}
-<div class="jumbotron">
+<!Doctype html>
+{% extends 'Homepage/Header_Footer.html' %}
+{%  load staticfiles %}
+{% block content %}
+<div class="adjust">
+<div class="box">
 <h1> Please Login </h1>
 
     <form action="{% url 'Registration:user_login' %}"  method="post" autocomplete="off">
         {% csrf_token %}
-        <label for="username">Username:</label>
-        <input type="text" name="username" placeholder="Enter Username" autofocus autocomplete="false">
-        <label for="password">Password:</label>
-        <input type="password" name="password" autofocus>
-        <input type="submit" name="" value="Login">
+        <div class="inputbox">
+            <input type="text" name = "username" required="" autocomplete="false">
+            <label>UserName</label>
+        </div>
+        <div class="inputbox">
+            <input type="password" name="password" required="" autocomplete="false">
+            <label>Password</label>
+        </div>
+        <input type="submit" name="" value="Login"><br>
+        <a href = "{% url 'Registration:fp' %}">Forgot password?</a><br>
+        <label>
+            <input type="radio" onclick="location.href='{% url 'Registration:staff_login' %}'">
+        </label>Staff
+        <label>
+            <input type="radio" onclick="location.href='{% url 'Registration:admin_login' %}'">
+        </label> Admin
+       {% comment %} <tr>
+            <td><label for="username">Username:</label></td>
+            <td><input type="text" name="username" placeholder="Enter Username" autofocus autocomplete="false"></td>
+        </tr>
+        <tr>
+            <td><label for="password">Password:</label></td>
+            <td><input type="password" name="password" autofocus placeholder="Enter password"><br></td>
+        </tr>
+        <tr>
+            <td><a href = "{% url 'Registration:fp' %}">Forgot password?</a></td>
+            <td><input type="submit" name="" value="Login"></td>
+        </tr>
+        </table>{% endcomment %}
     </form>
-    {% endblock %}
 </div>
+</div>
+    {% endblock %}
+
+{% comment %}<!DOCTYPE html>
+{% extends "Registration/base.html" %}
+    {% block body_block %}
+<div class="jumbotron">{% endcomment %}

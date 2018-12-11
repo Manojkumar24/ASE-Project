@@ -23,7 +23,7 @@
     {% endfor %}
     </table>
     {% if status == 'User Conform' %}
-        <form action="{% url 'send_com_email' t_id=items.first.TokenId %}" method="post">
+        <form action="{% url 'Manager:send_com_email' t_id=items.first.TokenId %}" method="post">
         {% csrf_token %}
         Change the Status:
         <input type="submit" class="btn btn-primary" name="Completed" value="Completed">
@@ -42,13 +42,13 @@
     </tr>
     </table>
     <br>
-    <form action="{% url 'send_home_email' t_id=items.first.TokenId %}" method="post">
+    <form action="{% url 'Manager:send_home_email' t_id=items.first.TokenId %}" method="post">
     {% csrf_token %}
     Change the Status:
     <input type="submit" class="btn btn-primary" name="in Delivery" value="in Delivery">
     </form>
     {% else %}
-        <form action="{% url 'send_com_email' t_id=items.first.TokenId %}" method="post">
+        <form action="{% url 'Manager:send_com_email' t_id=items.first.TokenId %}" method="post">
         {% csrf_token %}
         Change the Status:
         <input type="submit" class="btn btn-primary" name="Completed" value="Completed">
