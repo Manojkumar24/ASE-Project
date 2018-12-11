@@ -14,7 +14,7 @@
 
         <form enctype="multipart/form-data" method="post" style="background-color: #00ff88">
             {% csrf_token %}
-            {{ staff_reg_form.as_p }}
+            {{ admin_reg_form.as_p }}
             <input type="submit" value="Register">
         </form>
     {%  endif %}

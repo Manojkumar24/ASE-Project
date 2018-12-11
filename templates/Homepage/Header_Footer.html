@@ -6,6 +6,7 @@
     <title>Cafeteria</title>
     <link rel = "stylesheet" type="text/css" href="{% static 'Homepage/main.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static "eat_at_canteen/css/star.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "registration/registration.css" %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel = "stylesheet" type="text/css" href="{% static 'User/user.css' %}"/>
@@ -96,11 +97,26 @@
 
             </p>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Home</a></li>
+                <li><a href="{% url 'Homepage:home' %}">Home</a></li>
+                <li><a href="#Cont">Contact Us</a></li>
+            {% if user.is_authenticated %}
+                <li class="user">
+                    <!--a href="" class="proPic" src="#"> </a-->
+                    <a  href="{% url 'UserProfile:home' pk=request.user.username %}" >{{ request.user.username }}</a>
+                </li>
+                <li>
+                    <a class="" href="{% url 'Registration:user_logout' %}">LogOut</a>
+                </li>
+                <li>
+                    <a  href="{% url 'eat_at_canteen:cart' %}">Cart</a>
+                </li>
+            {% else %}
+                <li><a href="#about">About us</a></li>
+                <li><a href="{%  url 'Registration:user_login' %}">log in </a></li>
+                <li><a href="#">register</a></li>
+            {% endif %}
             </ul>
+            <p>Click on username to go to User account page</p>
         </div>
     </footer>
 </html>

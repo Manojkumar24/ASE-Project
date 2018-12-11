@@ -18,7 +18,11 @@
       <introspection-schemas>*:@</introspection-schemas>
     </data-source>
     <data-source name="canteendb [3]" uuid="406db7fb-ca57-4bc4-a022-f82805fa387e">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" family="SQLITE" exact-version="0.0" />
+      <database-info product="SQLite" version="3.25.1" jdbc-version="2.1" driver-name="SQLite JDBC" driver-version="3.25.1" family="SQLITE" exact-version="3.25.1">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <introspection-schemas>*:</introspection-schemas>
     </data-source>
   </component>
 </project>

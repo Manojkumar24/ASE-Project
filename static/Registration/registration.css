@@ -21,3 +21,7 @@
 	position:relative;
 	top:1px;
 }
+
+#id_username,#id_first_name,#id_last_name,#id_password,#id_email,#id_address,#id_city,#id_pincode{
+	width: 150%;
+}

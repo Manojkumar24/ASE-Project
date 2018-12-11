@@ -1,4 +1,3 @@
-
 from django.contrib import admin
 from Registration.models import Admin,UserProfileInfo,Staffdetails
 # Register your models here.
