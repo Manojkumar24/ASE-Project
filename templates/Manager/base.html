@@ -7,16 +7,30 @@
       {% block title_block %}
       {% endblock %}
     </title>
-      <link rel="stylesheet" href="{% static 'history/main.css' %}">
-      <link rel="stylesheet" type="text/css" href="{% static 'history/main.css' %}">
+    <style>
+        #chart {
+            max-width: 650px;
+            margin: 35px auto;
+        }
+        #chart .apexcharts-xaxis-label {
+            font-weight: bold;
+
+        }
+    </style>
+      <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.css'>
+      <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'>
+      <link rel="stylesheet" type="text/css" href="{% static 'history/style.css' %}">
       <link rel="stylesheet" href="{% static 'Manager/css/style.css' %}">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-      <link rel="stylesheet" type="text/css" href="{% static 'history/main.css' %}">
+      <link href="{% static 'history/style1.css' %}" rel="stylesheet" />
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css"/>
 </head>
-  <body style="background-image:url({% static 'history/bg1.png' %});">
+
+  <body>
   <div>
     <nav class=" navbar navbar-expand-sm bg-dark navbar-dark" >
         <ul class="navbar-nav mr-auto">
@@ -24,26 +38,40 @@
           <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:food_home' %}" id="Food">Food</a></li>
           <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:tables_home' %}" id="Table">Tables</a></li>
           <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:town_home' %}" id="Town">Towns</a></li>
+            {% if 'admin_id' in request.session %}
           <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:images_home' %}" id="Town">Images</a></li>
-          <li class="navbar-brand"><a class="nav-link" href="#" id="Staff">Add/Remove Staff</a></li>
+          <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:staff_home' %}" id="Staff">Add/Remove Staff</a></li>
           <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:history:basic' %}" id="history">History</a></li>
+          {% endif %}
         </ul>
         <ul class="nav navbar-nav navbar-right" style="padding-right: 20px">
+            {% if 'admin_id' in request.session %}
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Name</a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">profile</a>
-                    <a class="dropdown-item" href="#">Logout</a>
+                  <a class="dropdown-item" href="#">profile</a>
+                    <a class="dropdown-item" href="{% url 'Registration:admin_logout' %}">Logout</a>
                 </div>
             </li>
+            {% elif 'employee_id' in request.session %}
+             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Name</a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">profile</a>
+                    <a class="dropdown-item" href="{% url 'Registration:staff_logout' %}">Logout</a>
+                </div>
+            </li>
+            {% endif %}
         </ul>
     </nav>
     </div>
     <div class="jumbotron big-banner image-fulid">
     <div class="container">
       {% block body_block %}
-
       {% endblock %}
     </div>
     </div>
   </body>
 </html>
+
+
+
+

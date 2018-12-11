@@ -1,0 +1,29 @@
+/*@import url('https://fonts.googleapis.com/css?family=Lato:300,400,600,700');*/
+
+* {
+    font-family: Arial;
+}
+#chart {
+    max-width: 650px;
+    margin: 35px auto;
+
+}
+#chart .apexcharts-xaxis-label {
+    font-weight: bold;
+
+}
+ 
+#chart1{
+  background-color:rgba(20, 20, 20, 0.8);
+  top:100px;
+  left:30px;
+  position:absolute;
+}
+#chart, .chart-box {
+
+  background-color: rgba(20, 20, 20, 0.8);
+	top:55px;
+  left:0px;
+  position:absolute;
+
+}
