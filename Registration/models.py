@@ -24,6 +24,7 @@ class Admin(models.Model):
     password = models.CharField(max_length=50, null=True)
     canteen_name = models.CharField(max_length=200, null=True)
     canteen_street = models.CharField(max_length=200, null=True)
+    canteen_city = models.CharField(max_length=200, null=True)
     canteen_pincode = models.IntegerField(null=True)
 
 

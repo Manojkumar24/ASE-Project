@@ -15,6 +15,12 @@
 .orders td{
     margin-left: 2%;
     padding-top: 1%;
+    padding-left: 1%;
+}
+.orders th{
+    margin-left: 2%;
+    padding-top: 1%;
+    padding-left: 1%;
 }
 .History .divider{
     width: 100%;
@@ -30,3 +36,64 @@
 .History{
     margin-top: 5%;
 }
+
+.profile_dropdown {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.profile_dropdown li a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.profile_dropdown li a:hover {background-color: #ddd;}
+
+.user:hover .profile_dropdown li{display: block;}
+
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  width: 100%;
+}
+
+.profile_dropdown {
+    width: 10%;
+    position: fixed;
+  display: inline-block;
+  z-index: 1;
+  margin-top: 10%;
+}
+
+.profile_dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.profile_dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.profile_dropdown-content a img{
+    height:30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.profile_dropdown-content a:hover {background-color: #ddd;text-decoration: none;color:brown;transition: 200ms}
+
+.profile_dropdown:hover .dropbtn {background-color: #3e8e41;}

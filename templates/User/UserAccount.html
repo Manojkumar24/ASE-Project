@@ -8,6 +8,18 @@
 </head>
 <body>
 {% block content %}
+    <div class="profile_dropdown">
+        {% if details %}
+        <button class="dropbtn">UserProfile</button>
+        <div class="profile_dropdown-content">
+            <a href="#"><img src="{%static details.userprofileinfo.profile_pic.path %}" alt="avatar"> {{ request.user.username }}</a>
+            <a href="#">{{ details.userprofileinfo.address }}</a>
+            <a href="#">{{ details.userprofileinfo.city }}</a>
+            <a href="#"></a>
+        </div>
+        {% endif %}
+    </div>
+
     <div class="History">
         <table>
             <th class="Heading"><u>
@@ -118,30 +130,6 @@
             {% endif %}
 
         </table>
-        <!--div class="profile_dropdwon">
-        {% if details %}
-                <p>
-                    <a href="#">
-                        {{ request.user.username }}
-                    </a>
-                    <a href="#">
-                        {{ details.userprofileinfo.address }}
-                    </a>
-                    <a href="#">
-                        {{ details.userprofileinfo.city }}
-                    </a>
-                    <img src="{%static details.userprofileinfo.profile_pic.path %}" alt="avatar">
-
-                </p>
-        {% endif %}
-        </div-->
-
-        <div class="ItemsInPreparation">
-            {% if historyPreparation %}
-
-
-            {% endif %}
-        </div>
     </div>
     <div class="popular">
         <h2>
@@ -153,6 +141,16 @@
 
         </p>
     </div>
-    {% endblock %}
 </body>
-</html>>
+</html>
+<script>
+    $(document).ready(function(){
+      $(".dropbtn").click(function(){
+           $(".profile_dropdown-content").slideToggle("slow");
+      });
+      $(".Review a").click(function(){
+            $(".Reviewdata").slideToggle("slow");
+      });
+    });
+</script>
+{% endblock %}

@@ -48,9 +48,9 @@ def default(request):
     contents = {'food': food}
 
     if 'employee_id' in request.session:
-        staff = request.session['employee_id']
-        user = Staffdetails.objects.filter(employee_id=staff)
-        content1 = {'user': user}
+        user = request.session['employee_id']
+        staff = Staffdetails.objects.filter(employee_id=user)
+        content1 = {'staff': staff}
         return render(request, 'Homepage/category.html', contents, content1)
     else:
         return render(request, 'Homepage/category.html', contents)

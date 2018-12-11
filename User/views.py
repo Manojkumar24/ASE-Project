@@ -1,6 +1,8 @@
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import render
+
+from Manager.models import Food_items
 from Registration.models import UserProfileInfo
 from django.contrib.auth.decorators import login_required
 # from Registration.views import user_login
@@ -8,6 +10,8 @@ from User.models import Order_Food, Order_User
 
 
 # Create your views here.
+from eat_at_canteen.models import item_review
+
 
 @login_required
 def index(request, pk=None):
@@ -44,8 +48,9 @@ def Order_history(email):
 
 
 def PopularFood():
-    orders = Order_Food.objects.all()
-    print(orders)
+    FoodItems = Food_items.objects.all()
+    reviews = item_review.objects.all()
+    #print(orders)
 
 
 def CompletedOrders(request, token_id):
