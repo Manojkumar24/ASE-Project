@@ -8,6 +8,18 @@
 </head>
 <body>
 {% block content %}
+    <div class="profile_dropdown">
+        {% if details %}
+        <button class="dropbtn">UserProfile</button>
+        <div class="profile_dropdown-content">
+            <a href="#"><img src="{%static details.userprofileinfo.profile_pic.path %}" alt="avatar"> {{ request.user.username }}</a>
+            <a href="#">add : {{ details.userprofileinfo.address }}</a>
+            <a href="#">city : {{ details.userprofileinfo.city }}</a>
+            <a href="#">Edit Profile</a>
+        </div>
+        {% endif %}
+    </div>
+
     <div class="History">
         <table>
             <th class="Heading"><u>
@@ -82,6 +94,39 @@
             {% else %}
                 <tr class="NoHistory"><td>Nothing to Show here !!!</td></tr>
             {% endif %}
+            <table>
+            <th class="Heading"><u>
+                Orders delivered
+                </u>
+            </th>
+
+            {% if orders_delivered %}
+
+                <tr class="orders">
+                    <th>Food Name</th>
+                    <th>quantity</th>
+                    <th>time</th>
+                    <th>date</th>
+                    <th>status</th>
+                    <th>price</th>
+                </tr>
+                {% for key,value in orders_delivered.items %}
+                    <tr class="divider"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td>{{ food.TokenId }}</td></tr>
+                    {% for food in value %}
+                        <tr class="orders">
+                            <td>{{food.FoodId }}</td>
+                            <td>{{ food.quantity }}</td>
+                            <td>{{ food.time }}</td>
+                            <td>{{ food.date }}</td>
+                            <td>In prep.</td>
+                            <td>{{ food.price }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            {% else %}
+                <tr class="NoHistory"><td>Nothing to Show here !!!</td></tr>
+            {% endif %}
 
         </table>
         <table>
@@ -118,41 +163,48 @@
             {% endif %}
 
         </table>
-        <!--div class="profile_dropdwon">
-        {% if details %}
-                <p>
-                    <a href="#">
-                        {{ request.user.username }}
-                    </a>
-                    <a href="#">
-                        {{ details.userprofileinfo.address }}
-                    </a>
-                    <a href="#">
-                        {{ details.userprofileinfo.city }}
-                    </a>
-                    <img src="{%static details.userprofileinfo.profile_pic.path %}" alt="avatar">
-
-                </p>
-        {% endif %}
-        </div-->
-
-        <div class="ItemsInPreparation">
-            {% if historyPreparation %}
-
-
-            {% endif %}
-        </div>
     </div>
     <div class="popular">
-        <h2>
-            popular items
-        </h2>
-        <form>
-        </form>
-        <p>
+        <h2>Food in increasing order of rating</h2>
+        {% if popular %}
+            {% for key,value in popular.items %}
+                {% for food in value %}
+                <div class="card">
+                    <a href="{% url 'Homepage:specificitem' food.Food_id %}"><img class="CardImage" src="{% static food.image.path %}" alt="Avatar"></a>
+                    <div class="container">
 
-        </p>
+                        <form method="post" action="{% url 'eat_at_canteen:order' %}">
+                            {% csrf_token %}
+                            Name :<input type="text" value="{{ food.Food_Name }}" name="food" style="border: 0" readonly><br>
+                            Price : <input type="text" value="{{ food.Food_Price }}" name="price" style="border: 0" readonly><br>
+
+                            {% if  food.quantity  == 0 %}
+                                <input type="text" style="border: 0" value="Not Available" readonly>
+                            {% else %}
+                                {% if food.Food_Name in user_items %}
+                                    <a href="{% url 'eat_at_canteen:cart' %}"><input type="button" class="cart" value="Go to Cart" ></a>
+                                {% else %}
+                                    <input type="submit"  class="cart" value = "add to cart">
+                                {% endif %}
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
     </div>
-    {% endblock %}
+
 </body>
-</html>>
+</html>
+<script>
+    $(document).ready(function(){
+      $(".dropbtn").click(function(){
+           $(".profile_dropdown-content").slideToggle("slow");
+      });
+      $(".Review a").click(function(){
+            $(".Reviewdata").slideToggle("slow");
+      });
+    });
+</script>
+{% endblock %}

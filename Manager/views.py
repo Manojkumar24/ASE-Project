@@ -18,7 +18,8 @@ def index(request, content=None):
         content['user_pre_item'] = user_pre_item
         content['user_conorder_item'] = user_conorder_item
     else:
-        content = {'user_order_item': user_order_item, 'user_pre_item': user_pre_item, 'user_conorder_item': user_conorder_item}
+        content = {'user_order_item': user_order_item, 'user_pre_item': user_pre_item,
+                   'user_conorder_item': user_conorder_item}
     return render(request, 'Manager/index.html', content)
 
 
