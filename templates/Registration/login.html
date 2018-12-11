@@ -16,7 +16,14 @@
             <input type="password" name="password" required="" autocomplete="false">
             <label>Password</label>
         </div>
-        <input type="submit" name="" value="Login">
+        <input type="submit" name="" value="Login"><br>
+        <a href = "{% url 'Registration:fp' %}">Forgot password?</a><br>
+        <label>
+            <input type="radio" onclick="location.href='{% url 'Registration:staff_login' %}'">
+        </label>Staff
+        <label>
+            <input type="radio" onclick="location.href='{% url 'Registration:admin_login' %}'">
+        </label> Admin
        {% comment %} <tr>
             <td><label for="username">Username:</label></td>
             <td><input type="text" name="username" placeholder="Enter Username" autofocus autocomplete="false"></td>
