@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!Doctype html>
 {% extends 'Homepage/Header_Footer.html' %}
 {%  load static %}
@@ -32,18 +33,35 @@
     {% block body_block %}
 =======
 
+=======
+>>>>>>> 4279d63a73a5300ad6981c8740c41d1d73be1ac0
 <!Doctype html>
 {% extends 'Homepage/Header_Footer.html' %}
-{%  load static %}
-
+{%  load staticfiles %}
 {% block content %}
 <div class="adjust">
+<div class="box">
 <h1> Please Login </h1>
 
     <form action="{% url 'Registration:user_login' %}"  method="post" autocomplete="off">
         {% csrf_token %}
-        <table>
-        <tr>
+        <div class="inputbox">
+            <input type="text" name = "username" required="" autocomplete="false">
+            <label>UserName</label>
+        </div>
+        <div class="inputbox">
+            <input type="password" name="password" required="" autocomplete="false">
+            <label>Password</label>
+        </div>
+        <input type="submit" name="" value="Login"><br>
+        <a href = "{% url 'Registration:fp' %}">Forgot password?</a><br>
+        <label>
+            <input type="radio" onclick="location.href='{% url 'Registration:staff_login' %}'">
+        </label>Staff
+        <label>
+            <input type="radio" onclick="location.href='{% url 'Registration:admin_login' %}'">
+        </label> Admin
+       {% comment %} <tr>
             <td><label for="username">Username:</label></td>
             <td><input type="text" name="username" placeholder="Enter Username" autofocus autocomplete="false"></td>
         </tr>
@@ -55,11 +73,11 @@
             <td><a href = "{% url 'Registration:fp' %}">Forgot password?</a></td>
             <td><input type="submit" name="" value="Login"></td>
         </tr>
-        </table>
+        </table>{% endcomment %}
     </form>
 </div>
+</div>
     {% endblock %}
-
 
 {% comment %}<!DOCTYPE html>
 {% extends "Registration/base.html" %}

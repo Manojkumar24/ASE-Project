@@ -1,0 +1,26 @@
+{% extends "Manager/base.html" %}
+{% block body_block %}
+    {% if error %}
+    <p class="errormsg">{{ error }}</p>
+    {% endif %}
+<a href="{% url 'Registration:staff_registration' %}"><input type="button" class="btn btn-primary" id="Add" value="Add Staff" ></a>
+<a href="{% url 'Manager:remove_staff' %}"><input type="button" class="btn btn-primary" id="Remove" value="Remove Staff" ></a>
+    {% if item %}
+        <table class="table table-bordered table-striped">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Employee_id</th>
+            <th>Email</th>
+        </tr>
+        {% for items in item %}
+        <tr>
+            <td>{{ items.firstname }}</td>
+            <td>{{ items.lastname }}</td>
+            <td>{{ items.employee_id }}</td>
+            <td>{{ items.email }}</td>
+        </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

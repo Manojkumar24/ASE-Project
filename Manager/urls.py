@@ -26,4 +26,6 @@ urlpatterns = [
     path('images_home', views.image_home, name='images_home'),
     path('add_image/', views.add_image, name='add_image'),
     path('remove_image/', views.remove_image, name='remove_image'),
+    path('staff_home/', views.staff_home, name='staff_home'),
+    path('remove_staff/', views.remove_staff, name='remove_staff'),
 ]

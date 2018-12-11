@@ -1,35 +1,68 @@
+
 <!DOCTYPE html>
 {% extends "Homepage/Header_Footer.html" %}
+{% comment %}
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-row">
+      <div class="form-group col-md-6 mb-0">
+        {{ form.email|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-6 mb-0">
+        {{ form.password|as_crispy_field }}
+      </div>
+    </div>
+    {{ form.address_1|as_crispy_field }}
+    {{ form.address_2|as_crispy_field }}
+    <div class="form-row">
+      <div class="form-group col-md-6 mb-0">
+        {{ form.city|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-4 mb-0">
+        {{ form.state|as_crispy_field }}
+      </div>
+      <div class="form-group col-md-2 mb-0">
+        {{ form.zip_code|as_crispy_field }}
+      </div>
+    </div>
+    {{ form.check_me_out|as_crispy_field }}
+    <button type="submit" class="btn btn-primary">Sign in</button>
+  </form>
+{% endblock %}
+{% endcomment %}
 {% load bootstrap %}
 {% load staticfiles %}
     {% block content %}
-<div class="jumbotron" style="margin-bottom: 0.0008%">
-<h1>WELCOME TO Canteen automation system!  </h1>
+<div class="jumbotron" style="width:60%;height:840px;margin-left: 20%;margin-top: 10%;margin-bottom: 5%;border:brown">
+<h1>WELCOME ! </h1>
     {% if registered %}
     <h1>Thank you for registering</h1>
     {% else %}
     <h1>Register Here!</h1>
     <h3>Fill out the form:</h3>
-    <form enctype="multipart/form-data" method="post">
+    <form enctype="multipart/form-data" method="post" style="width:60%;margin-left:20%">
         {% csrf_token %}
-        <table>
+
             {% for field in user_form %}
-                <tr><td>{{ field.label }}</td></tr>
-                <tr><td>{{field}}</td></tr>
+                {{ field.label }}
+                {{field}}
             {% endfor %}
             {% for field in profile_form %}
-                <tr><td>{{ field.label }}</td></tr>
-                <tr><td>{{field}}</td></tr>
+                {{ field.label }}
+                {{field}}
             {% endfor %}
             {% for radio in user_form %}
                 <div class="myradio">
                     {{ radio.input }}
                 </div>
             {% endfor %}
-        </table>
 
         <input type="submit" name="" value="Register" class="myButton">
     </form>
     {% endif %}
 </div>
     {% endblock %}
+{% comment %}
+{% load crispy_forms_tags %}{% endcomment %}
+

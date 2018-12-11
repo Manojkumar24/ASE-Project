@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_text, force_bytes
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
@@ -47,7 +47,7 @@ def register(request):
 
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
-
+            unhashed = user.password
             user.set_password(user.password)
             user.is_active = False
             user.save()
@@ -68,7 +68,8 @@ def register(request):
             })
             to_email = user.email
             print(user.email)
-            send_mail(mail_subject, message, ['csa.ase1@gmail.com'], [to_email])
+            send_mail(mail_subject, message, [
+                      'csa.ase1@gmail.com'], [to_email])
             return HttpResponse('Please confirm your email address to complete the registration')
         else:
             print(user_form.errors, profile_form.errors)
@@ -125,10 +126,20 @@ def user_login(request):
         return render(request, 'Registration/login.html', {})
 
 
-"""def fp(request):
-    return render(request, 'Registration/Password_reset_form.html',{form:'form'})
-
-"""
+def get_editprofile_dict(request):
+    user = User.objects.filter(username=request.user)
+    # print(user)
+    userId = User.objects.get(username=request.user).id
+    # user = User.objects.filter(username=request.user)
+    userprofileinfo = UserProfileInfo.objects.filter(id=userId)
+    context = {
+    }
+    # print(user.values())
+    for field in user.values():
+        context["user"] = field
+    for field in userprofileinfo.values():
+        context["userprofileinfo"] = field
+    return context
 
 
 def change_user_password(request):
@@ -188,38 +199,59 @@ def user_password_reset(request, uidb64, token):
 
 @login_required
 def editprofile(request):
-    updated = False
-    user = User.objects.filter(username=request.user)
-    # print(user)
-    userId = User.objects.get(username=request.user).id
-    # user = User.objects.filter(username=request.user)
-    userprofileinfo = UserProfileInfo.objects.filter(id=userId)
-    context = {
-    }
-    # print(user.values())
-    for field in user.values():
-        context["user"] = field
-    for field in userprofileinfo.values():
-        context["userprofileinfo"] = field
-    # print(context)
+    context = get_editprofile_dict(request)
+    return context
+
+
+@login_required
+def editprofile(request):
+    context = get_editprofile_dict(request)
     return render(request, 'Registration/editprofile.html', context=context)
     # return HttpResponse("user")
 
 
-@login_required
-def updateprofile(request):
-    user = User.objects.get(username=request.user)
-    user.email = request.POST['email']
-    user.first_name = request.POST['first_name']
-    user.last_name = request.POST['last_name']
-    user.set_password(request.POST['password'])
-    user.save()
-    userprofileinfo = UserProfileInfo.objects.get(user=request.user)
+def change_profile_info(request):
+    new_password = request.POST['new_password']
+    new_password_conf = request.POST['new_password_conf']
+    print(new_password)
+    print(new_password_conf)
+    userprofileinfo = UserProfileInfo.objects.get(user__username=request.user)
+    old_password_check = userprofileinfo.user.check_password(
+        request.POST['old_password'])
+    print(userprofileinfo.user.check_password(request.POST['old_password']))
+    if not(new_password == new_password_conf or old_password_check == True):
+        return False
+    print("some")
+    userprofileinfo.user.email = request.POST['email']
+    userprofileinfo.user.first_name = request.POST['first_name']
+    userprofileinfo.user.last_name = request.POST['last_name']
     userprofileinfo.address = request.POST['address']
     userprofileinfo.city = request.POST['city']
     userprofileinfo.pincode = request.POST['pincode']
+    if 'profile_pic' in request.FILES:
+        print("profile pic exists")
+        userprofileinfo.profile_pic = request.FILES['profile_pic']
+    userprofileinfo.user.set_password(request.POST['new_password'])
     userprofileinfo.save()
-    return HttpResponse("Saved")
+    return True
+
+
+@login_required
+def updateprofile(request):
+    valid_profile_data = change_profile_info(request)
+    # print(valid_profile_data)
+    if valid_profile_data == False:
+        context = get_editprofile_dict(request)
+        context['match_failed'] = True
+        context['message'] = "Your old password didn't match or your new passwords didn't match with each other"
+        return render(request, 'Registration/editprofile.html', context=context)
+    values = UserProfileInfo.objects.filter(
+        user__username=request.user)
+    print(values)
+    context = {
+        'user_id': values[0]
+    }
+    return render(request, 'Registration/updatedprofile.html', context=context)
 
 
 def staff_registration(request):
@@ -236,6 +268,7 @@ def staff_registration(request):
             pincode = staff_reg_form.cleaned_data['pincode']
             city = staff_reg_form.cleaned_data['city']
             employee_id = Staffdetails.emp_id()
+            password_old = password
             password = make_password(password)
 
             if not ((Staffdetails.objects.filter(firstname=firstname).exists() and Staffdetails.objects.filter(
@@ -245,11 +278,10 @@ def staff_registration(request):
                                             address=address, pincode=pincode, city=city, employee_id=employee_id)
                 registered = True
                 staff_details = staff_reg_form.save(commit=False)
-                to_email = staff_reg_form.email
                 mail_subject = "Registration successful"
-                html_message = "You are successfully registered with us as staff.login with username :{}, password:{} "
-                send_mail(mail_subject, message, ['csa.ase1@gmail.com'], [to_email])
-                return HttpResponse("Your employee id is {}".format(employee_id))
+                message = "You are successfully registered with us as staff.login with username :{}, password:{} ".format(employee_id,password_old)
+                send_mail(mail_subject, message, ['csa.ase1@gmail.com'], [email])
+                return redirect('Manager:staff_home')
             else:
                 message = "An account with same firstname,lastname or email already exsts .Please try again"
                 return render(request, 'Registration/alert.html', {'message': message})
@@ -276,7 +308,7 @@ def staff_login(request):
             request.session['employee_id'] = staff.employee_id
             staff_logged_in = True
             # request.session['staff_fname'] = staff.firstname
-            return HttpResponseRedirect(reverse('Homepage:home'))
+            return HttpResponseRedirect(reverse('Manager:index'))
             # return HttpResponse("you are logged in {}".format(staff.firstname))
             # return render(request, 'Registration/staff_login.html', {})
         else:
@@ -304,6 +336,50 @@ def staff_logout(request):
     except KeyError:
         return HttpResponse("You are not logged in")
     return HttpResponseRedirect(reverse('Homepage:home'))
+
+
+@login_required
+def editadmin(request):
+    admin = Admin.objects.filter(Name="test_admin")
+    context = admin.values()
+    context = context[0]
+    return render(request, 'Registration/editadmin.html', context=context)
+
+
+@login_required
+def updateadmin(request):
+    admin = Admin.objects.get(Name="test_admin")
+    admin.Name = request.POST['Name']
+    admin.email = request.POST['email']
+    admin.password = request.POST['password']
+    admin.canteen_name = request.POST['canteen_name']
+    admin.canteen_street = request.POST['canteen_street']
+    admin.canteen_pincode = request.POST['canteen_pincode']
+    admin.save()
+    return HttpResponse('Saved')
+
+
+@login_required
+def editstaff(request):
+    staff = Staffdetails.objects.filter(employee_id='1')
+    context = staff.values()
+    context = context[0]
+    print(context)
+    return render(request, 'Registration/editstaff.html', context=context)
+    return HttpResponse('Saved')
+
+
+@login_required
+def updatestaff(request):
+    staff = Staffdetails.objects.get(employee_id='1')
+    staff['lastname'] = request.POST['lastname']
+    staff['email'] = request.POST['email']
+    staff['pincode'] = request.POST['pincode']
+    staff['firstname'] = request.POST['firstname']
+    staff['address'] = request.POST['address']
+    staff['city'] = request.POST['city']
+    staff.save()
+    return HttpResponse("Update Staff Page")
 
 
 def admin_register(request):
@@ -341,6 +417,7 @@ def admin_register(request):
     return render(request, 'Registration/Admin_Registration.html',
                   {'admin_reg_form': admin_reg_form, 'registered': registered})
 
+
 def admin_login(request):
     admin_logged_in = False
     if request.method == 'POST':
@@ -350,11 +427,19 @@ def admin_login(request):
         admin_log = check_password(password, admin.password)
         if admin_log:
             # login(request,staff)
-            request.session['username'] = admin.username
+            request.session['admin_id'] = admin.admin_id
             admin_logged_in = True
             #return HttpResponseRedirect(reverse('Homepage:home'))
-            return HttpResponse("You are logged in,Admin {},".format(admin.username))
+            return HttpResponseRedirect(reverse('Manager:index'))
         else:
             return HttpResponse("Not logged in")
     else:
         return render(request, 'Registration/admin_login.html', {})
+
+
+def admin_logout(request):
+    try:
+        del request.session['admin_id']
+    except KeyError:
+        return HttpResponse("You are not logged in")
+    return HttpResponseRedirect(reverse('Homepage:home'))
