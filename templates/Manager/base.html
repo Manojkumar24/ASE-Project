@@ -24,13 +24,14 @@
           <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:food_home' %}" id="Food">Food</a></li>
           <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:tables_home' %}" id="Table">Tables</a></li>
           <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:town_home' %}" id="Town">Towns</a></li>
+          <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:images_home' %}" id="Town">Images</a></li>
           <li class="navbar-brand"><a class="nav-link" href="#" id="Staff">Add/Remove Staff</a></li>
-          <li class="navbar-brand"><a class="nav-link" href="#" id="history">History</a></li>
+          <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:history:basic' %}" id="history">History</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right" style="padding-right: 20px">
             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Name</a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'Manager:update_admin' %}">profile</a>
+                    <a class="dropdown-item" href="#">profile</a>
                     <a class="dropdown-item" href="#">Logout</a>
                 </div>
             </li>

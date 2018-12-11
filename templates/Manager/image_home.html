@@ -1,0 +1,27 @@
+{% extends 'Manager/base.html' %}
+{% block body_block %}
+{% load bootstrap %}
+    {% load static %}
+<a href="{% url 'Manager:add_image' %}"><input type="button" class="btn btn-primary" id="Add" value="Add Images" ></a>
+<a href="{% url 'Manager:remove_image' %}"><input type="button" class="btn btn-primary" id="remove" value="Remove Images" ></a>
+    {% if item %}
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Id</th>
+            <th>Categorie</th>
+            <th>Image</th>
+        </tr>
+        {% for items in item %}
+        <tr>
+            <td>{{ items.id }}</td>
+            <td>{{ items.categories }}</td>
+            {% if items.image %}
+            <td><img class="tableimg" src="{% static items.image.path %}" alt="None"></td>
+            {% else %}
+            <td><img class="tableimg" src="#" alt="None"></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        </table>
+{% endif %}
+{% endblock %}
