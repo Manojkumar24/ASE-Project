@@ -301,3 +301,6 @@ def staff_logout(request):
     except KeyError:
         return HttpResponse("You are not logged in")
     return HttpResponseRedirect(reverse('Homepage:home'))
+
+
+#def admin_register:
