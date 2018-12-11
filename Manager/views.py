@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from . import form
-from .models import Food_items, Dining_Tables, Available_Towns
+from .models import *
 from django.core.mail import send_mail
 from django.conf import settings
 from User.models import Order_Food, Order_User
@@ -303,12 +303,34 @@ def send_home_email(request, t_id=None):
     return index(request, index_content)
 
 
-def update_admin(request):
-    f1 = form.Update_Admin()
+def image_home(request):
+    items = Admin_Image.objects.all()
+    content = {'item': items}
+    return render(request,'Manager/image_home.html', content)
+
+
+def add_image(request):
+    f1 = form.Add_images()
     if request.method == 'POST':
-        f1 = form.Update_Admin(request.POST)
+        f1 = form.Add_images(request.POST, request.FILES)
         if f1.is_valid():
             f1.save()
-            return redirect('Manager:index')
-    content = {'form': f1}
-    return render(request, 'Manager/Update_admin.html', content)
+            return redirect('Manager:images_home')
+    return render(request, 'Manager/Add_image.html',{'form': f1})
+
+
+def remove_image(request):
+    f2 = form.get_id()
+    if request.method == 'POST':
+        f2 = form.get_id(request.POST)
+        if f2.is_valid():
+            fid = f2.cleaned_data['Id']
+            try:
+                i_item = Admin_Image.objects.get(id__exact=fid)
+                i_item.delete()
+            except:
+                pass
+            return redirect('Manager:images_home')
+    item = Admin_Image.objects.all()
+    content = {'form': f2, 'item': item}
+    return render(request, 'Manager/Remove_images.html', content)
