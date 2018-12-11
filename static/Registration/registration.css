@@ -7,12 +7,12 @@
 	display:inline-block;
 	cursor:pointer;
 	color:#170017;
-	font-family: "Lucinda Grande", "Lucinda Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+	font-family: Arial, Verdana, sans-serif;
 	font-size:17px;
 	font-style:italic;
 	padding:16px 31px;
 	text-decoration:none;
-	text-shadow:0px 1px 0px #010a00;
+	text-shadow:0 1px 0 #010a00;
 }
 .myButton:hover {
 	background-color:#6ffc24;
@@ -21,7 +21,25 @@
 	position:relative;
 	top:1px;
 }
-
 #id_username,#id_first_name,#id_last_name,#id_password,#id_email,#id_address,#id_city,#id_pincode{
-	width: 150%;
+	width: 100%;
+}
+
+/*
+
+#id_username{
+	border: none;
+	border-bottom: black;
+}
+*/
+
+form{
+	width:60%;
+	height:40%;
+	margin-right: 20%;
+	background-position: center;
+	position: center;
+}
+.jumbotron{
+	margin-left:20%;
 }

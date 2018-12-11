@@ -1,18 +1,39 @@
-<!DOCTYPE html>
-{% extends "Registration/base.html" %}
-
-    {% block body_block %}
-<div class="jumbotron">
+<!Doctype html>
+{% extends 'Homepage/Header_Footer.html' %}
+{%  load staticfiles %}
+{% block content %}
+<div class="adjust">
+<div class="box">
 <h1> Please Login </h1>
 
-    <form action="{% url 'Registration:staff_login' %}"  method="post" autocomplete="off">
+        <form action="{% url 'Registration:staff_login' %}"  method="post" autocomplete="off">
+        {% csrf_token %}
+        <div class="inputbox">
+                <input type="text" name = "employee_id" required="" autocomplete="false">
+            <label>Employee ID</label>
+        </div>
+        <div class="inputbox">
+                <input type="password" name="password" required="" autocomplete="false">
+            <label>Password</label>
+        </div>
+        <input type="submit" name="" value="Login"><br>
+        {% comment %}<a href = "{% url 'Registration:fp' %}">Forgot password?</a><br>{% endcomment %}
+        <label>
+            <input type="radio" onclick="location.href='{% url 'Registration:staff_login' %}'">
+        </label>Customer
+        <label>
+            <input type="radio" onclick="location.href='{% url 'Registration:user_login' %}'">
+        </label> Admin
+        </form>
+</div>
+</div>
+    {% comment %}<form action="{% url 'Registration:staff_login' %}"  method="post" autocomplete="off">
         {% csrf_token %}
         <label for="employee_id">Employee Id:</label>
         <input type="text" name="employee_id" placeholder="Enter Employee Id" autofocus autocomplete="false">
         <label for="password">Password:</label>
         <input type="password" name="password" autofocus>
         <input type="submit" name="" value="Login">
-        {% comment %}<a href = "{% url 'Registration:fp2' %}">Forgot password?</a>{% endcomment %}
-    </form>
+        <a href = "{% url 'Registration:fp2' %}">Forgot password?</a>
+    </form>{% endcomment %}
     {% endblock %}
-</div>
