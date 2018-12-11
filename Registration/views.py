@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_text, force_bytes
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
@@ -236,6 +236,7 @@ def staff_registration(request):
             pincode = staff_reg_form.cleaned_data['pincode']
             city = staff_reg_form.cleaned_data['city']
             employee_id = Staffdetails.emp_id()
+            password_old = password
             password = make_password(password)
 
             if not ((Staffdetails.objects.filter(firstname=firstname).exists() and Staffdetails.objects.filter(
@@ -245,11 +246,10 @@ def staff_registration(request):
                                             address=address, pincode=pincode, city=city, employee_id=employee_id)
                 registered = True
                 staff_details = staff_reg_form.save(commit=False)
-                to_email = staff_reg_form.email
                 mail_subject = "Registration successful"
-                html_message = "You are successfully registered with us as staff.login with username :{}, password:{} "
-                send_mail(mail_subject, message, ['csa.ase1@gmail.com'], [to_email])
-                return HttpResponse("Your employee id is {}".format(employee_id))
+                message = "You are successfully registered with us as staff.login with username :{}, password:{} ".format(employee_id,password_old)
+                send_mail(mail_subject, message, ['csa.ase1@gmail.com'], [email])
+                return redirect('Manager:staff_home')
             else:
                 message = "An account with same firstname,lastname or email already exsts .Please try again"
                 return render(request, 'Registration/alert.html', {'message': message})
@@ -276,7 +276,7 @@ def staff_login(request):
             request.session['employee_id'] = staff.employee_id
             staff_logged_in = True
             # request.session['staff_fname'] = staff.firstname
-            return HttpResponseRedirect(reverse('Homepage:home'))
+            return HttpResponseRedirect(reverse('Manager:index'))
             # return HttpResponse("you are logged in {}".format(staff.firstname))
             # return render(request, 'Registration/staff_login.html', {})
         else:
@@ -350,11 +350,19 @@ def admin_login(request):
         admin_log = check_password(password, admin.password)
         if admin_log:
             # login(request,staff)
-            request.session['username'] = admin.username
+            request.session['admin_id'] = admin.admin_id
             admin_logged_in = True
             #return HttpResponseRedirect(reverse('Homepage:home'))
-            return HttpResponse("You are logged in,Admin {},".format(admin.username))
+            return HttpResponseRedirect(reverse('Manager:index'))
         else:
             return HttpResponse("Not logged in")
     else:
         return render(request, 'Registration/admin_login.html', {})
+
+
+def admin_logout(request):
+    try:
+        del request.session['admin_id']
+    except KeyError:
+        return HttpResponse("You are not logged in")
+    return HttpResponseRedirect(reverse('Homepage:home'))

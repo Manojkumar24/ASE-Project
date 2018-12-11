@@ -32,3 +32,7 @@ class Add_images(forms.ModelForm):
     class Meta:
         model = Admin_Image
         fields = '__all__'
+
+
+class get_emp_id(forms.Form):
+    Employee_id = forms.CharField()
