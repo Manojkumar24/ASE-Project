@@ -1,7 +1,7 @@
 from django.urls import path, include
 from Manager import views
 
-
+app_name = 'Manager'
 urlpatterns = [
     path('', views.index, name='index'),
     path('food_home/', views.food_home, name='food_home'),

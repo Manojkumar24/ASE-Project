@@ -17,7 +17,7 @@
         {% for item in user_order_item %}
                 <tr>
                 <td>{{ item.mailId }}</td>
-                <td><a href="{% url 'list_items' id=item.TokenId %}">{{ item.TokenId }}</a></td>
+                <td><a href="{% url 'Manager:list_items' id=item.TokenId %}">{{ item.TokenId }}</a></td>
                 <td>{{ item.status }}</td>
                 <td>{{ item.totalPrice }}</td>
                 </tr>
@@ -35,7 +35,7 @@
         {% for item in user_pre_item %}
                 <tr>
                 <td>{{ item.mailId }}</td>
-                <td><a href="{% url 'change_status' f_id=item.TokenId %}">{{ item.TokenId }}</a></td>
+                <td><a href="{% url 'Manager:change_status' f_id=item.TokenId %}">{{ item.TokenId }}</a></td>
                 <td>{{ item.status }}</td>
                 <td>{{ item.totalPrice }}</td>
                 </tr>
@@ -53,7 +53,7 @@
         {% for item in user_conorder_item %}
                 <tr>
                 <td>{{ item.mailId }}</td>
-                <td><a href="{% url 'change_status' f_id=item.TokenId %}">{{ item.TokenId }}</a></td>
+                <td><a href="{% url 'Manager:change_status' f_id=item.TokenId %}">{{ item.TokenId }}</a></td>
                 <td>{{ item.status }}</td>
                 <td>{{ item.totalPrice }}</td>
                 </tr>
