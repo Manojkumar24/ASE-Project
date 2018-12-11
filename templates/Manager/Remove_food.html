@@ -2,7 +2,7 @@
 {% block body_block %}
     {% load bootstrap %}
     <div class="container">
-<form  method="post" action="{% url 'remove_food' %}">
+<form  method="post" action="{% url 'Manager:remove_food' %}">
     {% if item %}
     {{ form|bootstrap }}
     {% csrf_token %}
