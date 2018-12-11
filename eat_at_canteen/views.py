@@ -14,9 +14,31 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 import datetime
 from .models import user_review,Review
 from .forms import ReviewForm
+from rest_framework.views import APIView
+
+from rest_framework.decorators import api_view
+from .serializers import reviewserializer
+from rest_framework.response import Response
+from rest_framework import status
 import random
+
 def index(request):
     return render(request,'eat_at_canteen/index.html')
+
+
+class ReviewView(APIView):
+    def get(self,request):
+        reviewlogs=Review.objects.all()
+        serializer=reviewserializer(reviewlogs,many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = reviewserializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+
 
 @login_required
 def table(request):
@@ -89,7 +111,7 @@ def checkout(request):
     return render(request,'eat_at_canteen/show.html', context=x)
 
 @login_required
-def order(request):
+def order(request,pk=None):
     if(request.method=='POST'):
         FoodList = Order_Food.objects.all()
         CustomerFoodList = Order_User.objects.all()
@@ -162,6 +184,76 @@ def order(request):
                 c.save()
 
         return redirect('Homepage:home')
+    elif request.method=='GET':
+        FoodList = Order_Food.objects.all()
+        CustomerFoodList = Order_User.objects.all()
+        w=Food_items.objects.get(Food_id=pk)
+        Food =w.Food_Name
+        print(Food)
+        Price =w.Food_Price
+        print(Food, Price)
+        print('added1')
+
+        if request.user.is_authenticated:
+            username = request.user.username
+        else:
+            return reverse('Registration:register')
+        user = User.objects.get(username=username)
+        email = user.email
+        print(email)
+        j = 0
+        for i in CustomerFoodList:
+            if i.mailId == email and i.status == 'draft':
+                print('fgdfgdgdgdg')
+                j = 1
+                break
+        print(j)
+
+        if j == 0:
+            def uniqueid():
+                seed = random.getrandbits(32)
+                while True:
+                    yield seed
+                    seed += 1
+
+            unique_sequence = uniqueid()
+            id1 = next(unique_sequence)
+            a = Order_User()
+            a.mailId = email
+            a.TokenId = id1
+
+            f = Food_items.objects.get(Food_Name=Food)
+            c = Order_Food.objects.create(FoodId=f, price=Price, quantity=1, date=datetime.date.today(),
+                                          time=datetime.datetime.now(), TableId=0, TokenId=a.TokenId)
+            a.totalPrice = Price
+            a.save()
+            c.save()
+
+
+        else:
+            a = Order_User.objects.get(mailId=email, status='draft')
+            d = a.TokenId
+            print(d)
+            f = Food_items.objects.get(Food_Name=Food)
+            print(f.Food_Price)
+            l = 0
+
+            for u in FoodList:
+                if u.FoodId == f and u.TokenId == d:
+                    u.quantity = u.quantity + 1
+                    l = 1
+                    u.price = u.quantity * float(Price)
+                    a.totalPrice = a.totalPrice
+                    u.save()
+                    print('hifsdfsi')
+                    break
+            if l == 0:
+                c = Order_Food.objects.create(FoodId=f, price=Price, quantity=1, date=datetime.date.today(),
+                                              time=datetime.datetime.now(), TableId=0, TokenId=a.TokenId)
+                a.totalPrice = a.totalPrice + float(Price)
+                a.save()
+                c.save()
+        reverse('Homepage:specificitem',kwargs={'pk':pk})
 
 
 
@@ -227,7 +319,11 @@ def confirm(request):
     x.save()
     print(t+'he')
     s=Order_Food.objects.filter(TokenId=t,Status='dr')
+    l=Food_items.objects.all()
     for j in s:
+        c=Food_items.objects.get(Food_Name=j.FoodId)
+        c.quantity=c.quantity-j.quantity
+        c.save()
         print('shersasura')
         j.Status='conf'
         j.save()
@@ -288,9 +384,7 @@ def add_review(request):
                                            latest_pub_date=datetime.datetime.now(), No_Reviews=1, average_rating=rating)
             a.save()
 
-        return HttpResponseRedirect(reverse('eat_at_canteen:review'))
+        return HttpResponseRedirect(reverse('eat_at_canteen:hotel_review'))
 
     return render(request, 'reviews/review.html', {'form': form})
-
-
 

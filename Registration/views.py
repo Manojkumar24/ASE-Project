@@ -7,10 +7,11 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_text, force_bytes
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 
-from Registration.forms import UserForm, UserProfileInfoForm, StaffdetailsForm, PasswordResetForm, SetNewPasswordForm
+from Registration.forms import UserForm, UserProfileInfoForm, StaffdetailsForm, PasswordResetForm, SetNewPasswordForm, \
+    AdmindetailsForm
 # Create your views here.
 from django.contrib.auth import authenticate, login, logout
-from Registration.models import Staffdetails, UserProfileInfo
+from Registration.models import Staffdetails, UserProfileInfo, Admin
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -243,9 +244,11 @@ def staff_registration(request):
                 Staffdetails.objects.create(firstname=firstname, lastname=lastname, email=email, password=password,
                                             address=address, pincode=pincode, city=city, employee_id=employee_id)
                 registered = True
-
                 staff_details = staff_reg_form.save(commit=False)
-
+                to_email = staff_reg_form.email
+                mail_subject = "Registration successful"
+                html_message = "You are successfully registered with us as staff.login with username :{}, password:{} "
+                send_mail(mail_subject, message, ['csa.ase1@gmail.com'], [to_email])
                 return HttpResponse("Your employee id is {}".format(employee_id))
             else:
                 message = "An account with same firstname,lastname or email already exsts .Please try again"
@@ -303,4 +306,55 @@ def staff_logout(request):
     return HttpResponseRedirect(reverse('Homepage:home'))
 
 
-#def admin_register:
+def admin_register(request):
+    registered = False
+    if request.method == "POST":
+        is_present = Admin.objects.all()
+        admin_reg_form = AdmindetailsForm(request.POST)
+        if not is_present:
+            if admin_reg_form.is_valid():
+                Name = admin_reg_form.cleaned_data['Name']
+                username = admin_reg_form.cleaned_data['username']
+                email = admin_reg_form.cleaned_data['email']
+                password = admin_reg_form.cleaned_data['password1']
+                canteen_name = admin_reg_form.cleaned_data['canteen_name']
+                canteen_street = admin_reg_form.cleaned_data['canteen_street']
+                canteen_pincode = admin_reg_form.cleaned_data['canteen_pincode']
+                canteen_city = admin_reg_form.cleaned_data['canteen_city']
+                password = make_password(password)
+
+                Admin.objects.create(Name=Name, email=email,username=username, password=password,canteen_street=canteen_street,
+                                        canteen_name=canteen_name,canteen_pincode=canteen_pincode,canteen_city=canteen_city)
+
+                registered = True
+
+                Admin_details = admin_reg_form.save(commit=False)
+
+                return HttpResponse("Admin is {}".format(Name))
+            else:
+                print(admin_reg_form.errors)
+
+        else :
+            return HttpResponse("Admin already present")
+    else:
+        admin_reg_form = AdmindetailsForm()
+    return render(request, 'Registration/Admin_Registration.html',
+                  {'admin_reg_form': admin_reg_form, 'registered': registered})
+
+def admin_login(request):
+    admin_logged_in = False
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        admin = Admin.objects.get(username=username)
+        admin_log = check_password(password, admin.password)
+        if admin_log:
+            # login(request,staff)
+            request.session['username'] = admin.username
+            admin_logged_in = True
+            #return HttpResponseRedirect(reverse('Homepage:home'))
+            return HttpResponse("You are logged in,Admin {},".format(admin.username))
+        else:
+            return HttpResponse("Not logged in")
+    else:
+        return render(request, 'Registration/admin_login.html', {})
