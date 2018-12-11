@@ -6,7 +6,6 @@ from django.http import HttpResponseRedirect
 import numpy as np
 from datetime import date
 from datetime import datetime
-from Manager.models import Food_items
 
 RATING_CHOICES = (
         (1, '1'),
@@ -29,14 +28,6 @@ class user_review(models.Model):
     latest_pub_date=models.DateTimeField(default=datetime.now)
     No_Reviews=models.IntegerField(default=0)
     average_rating=models.FloatField(max_length=10)
-
-class item_review(models.Model):
-    product = models.ForeignKey(Food_items, default=None, on_delete=models.CASCADE)
-    latest_pub_date=models.DateTimeField(default=datetime.now)
-    customer = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
-    content = models.TextField(max_length=1000)
-    rating =  models.IntegerField(null=True)
-    date = models.DateTimeField(auto_now_add=True, null=True)
 
 
 
