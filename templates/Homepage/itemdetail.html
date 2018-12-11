@@ -4,8 +4,9 @@
 {% load static %}
 {% block content %}
 
+                    <div class="card">
                             <img class="CardImage" src="{% static prod.image.path %}" alt="Avatar">
-
+                            <div class="container">
                                 Name : <input type="text" value="{{ prod.Food_Name }}" name="food" style="border: 0"><br>
                                 Price : <input type="text" value="{{ prod.Food_Price }}" name="price" style="border: 0"><br>
 
@@ -18,17 +19,11 @@
                                         <a href="{% url 'eat_at_canteen:orderagain' prod.Food_id %}"><input type="button" class="cart" value="Add to Cart"></a>
                                     {% endif %}
                                 {% endif %}
-
-
-
-
-
-
-
-
-
+                            </div>
+                    </div>
             <br>
-                {% if list %}
+    {% if list %}
+            <div class="adjuster">
                 Reviews:
                 {% if s %}
                 Rated {{ s }} by our customers
@@ -65,12 +60,14 @@
                             .prop("checked", true);
                     </script>
                 </div>
-                <footer class = "blockquote-footer">by <cite>{{ review.customer }}</cite></footer>
+                <div class = "blockquote-footer">by <cite>{{ review.customer }}</cite></div>
               {% endfor %}
               </a>
-            </div>
             {% endif %}
-             <span ><a href="{% url 'Homepage:item_review'  prod.Food_id  %}" >Write a Review</a></span>
+                <span ><a href="{% url 'Homepage:item_review'  prod.Food_id  %}" >Write a Review</a></span>
+        </div>
+    <div >
+    </div>
 {% endblock %}
 
 </html>
