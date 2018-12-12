@@ -65,7 +65,6 @@
             </th>
 
             {% if historyOrdered %}
-
                 <tr class="orders">
                     <th>Food Name</th>
                     <th>quantity</th>
@@ -87,9 +86,13 @@
                             <td>{{ food.price }}</td>
                         </tr>
                     {% endfor %}
-                    <tr>
-                        <td><a href="{% url 'UserProfile:CancelOrder' token_id=key %}">Cancel order</a></td>
-                    </tr>
+                        {% if cancel%}
+                            <tr>
+                                <td><a href="{% url 'UserProfile:CancelOrder' token_id=key %}">Cancel order</a></td>
+                            </tr>
+                        {% else %}
+                            <tr><td>Cannot be cancelled</td></tr>
+                        {% endif %}
                 {% endfor %}
             {% else %}
                 <tr class="NoHistory"><td>Nothing to Show here !!!</td></tr>

@@ -24,6 +24,7 @@
         <label>
             <input type="radio" onclick="location.href='{% url 'Registration:admin_login' %}'">
         </label> Admin
+ {% endblock %}
        {% comment %} <tr>
             <td><label for="username">Username:</label></td>
             <td><input type="text" name="username" placeholder="Enter Username" autofocus autocomplete="false"></td>
@@ -37,10 +38,6 @@
             <td><input type="submit" name="" value="Login"></td>
         </tr>
         </table>{% endcomment %}
-    </form>
-</div>
-</div>
-    {% endblock %}
 
 {% comment %}<!DOCTYPE html>
 {% extends "Registration/base.html" %}

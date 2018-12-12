@@ -31,7 +31,7 @@ def index(request):
 @login_required
 def user_logout(request):
     logout(request)
-    return HttpResponseRedirect(reverse('Homepage:home'))
+    return redirect('Homepage:home', category='all')
 
 
 @login_required
@@ -112,7 +112,7 @@ def user_login(request):
             if user.is_active and (user_info1.is_verified == True):
                 request.session.set_expiry(900)
                 login(request, user)
-                return HttpResponseRedirect(reverse('Homepage:home'))
+                return redirect('Homepage:home', category='all')
             elif not user_info1.is_verified:
                 return HttpResponse(
                     "If you have already registered with us but not yet confirmed your email id,Please verify your email id to proceed .")
