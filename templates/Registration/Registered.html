@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+
+{% extends "Homepage/Header_Footer.html" %}
+{% block content %}
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
-    <h1> Registered Successfully</h1>
-</body>
-</html>
+
+    <div style="margin-top: 7%;margin-bottom: 20%">
+    <h3> Your email is confirmed.You can sign in here
+    <a href="{% url 'Registration:user_login' %}">Sign in</a></h3>
+    </div>
+
+{%  endblock %}

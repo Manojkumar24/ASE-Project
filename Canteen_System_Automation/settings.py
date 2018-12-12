@@ -48,8 +48,9 @@ INSTALLED_APPS = [
     'User',
     'bootstrapform',
     'payment',
+    'crispy_forms',
 ]
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -89,7 +90,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'canteendb',
         'USER': 'root',
-        'PASSWORD': 'mysqlroot',
+        'PASSWORD': 'Pardhu@2000',
         'HOST': '',
         'PORT': '',
     }
