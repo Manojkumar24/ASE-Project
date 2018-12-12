@@ -14,9 +14,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
     <header>
-        {% for details in canteenDetails %}
         <nav class="navBar">
-              <div class="heading">{{ details.canteen_name }}</div>
+                {% if canteenDetails %}
+                    {% for canteenDetails in canteenDetails %}
+              <div class="heading">{{ canteenDetails.canteen_name }}</div>
+                    {% endfor %}
+                {% else %}
+                    <div class="heading">Cafeteria</div>
+                {% endif %}
                     <div class="Options">
                         <form action="{% url 'Homepage:search' %}" class="search" method="POST">
                             {% csrf_token %}
@@ -77,9 +82,17 @@
             <h4 style="text-align: left;font-size: 30px">
                Contact US
             </h4>
+            {% if canteenDetails %}
+                {% for details in canteenDetails %}
             <p>
                 {{ details.canteen_street }},{{ details.canteen_city }},{{ details.canteen_pincode }}
             </p>
+                {% endfor %}
+            {% else %}
+                <p>
+                mainroad,sri city,517546
+                </p>
+            {% endif %}
             <ul>
                 <li><a href="{% url 'Homepage:home' category='all' %}">Home</a></li>
                 <li><a href="#Cont">Contact Us</a></li>
@@ -102,5 +115,4 @@
             <p>Click on username to go to User account page</p>
         </div>
     </footer>
-    {% endfor %}
 </html>
