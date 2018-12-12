@@ -16,11 +16,10 @@ from User.models import Order_User, Order_Food
 from eat_at_canteen.forms import *
 
 
-def default(request):
-    category = 'all'
+def default(request, category):
     user_order_items = []
-    if request.user.is_authenticated:
-        username = request.user.username
+    if 'username' in request.session:
+        username = request.session['username']
         FoodList = Food_items.objects.all()
         CustomerFoodList = Order_User.objects.all()
         user = User.objects.get(username=username)
@@ -36,134 +35,9 @@ def default(request):
             g = Order_Food.objects.filter(Status='dr', TokenId=token)
             for i in g:
                 user_order_items.append(i.FoodId.Food_Name)
-
-    food = Food_items.objects.filter(Category=category)
-    contents = {'food': food}
-    background = Admin_Image.objects.filter(categories='background')
-    canteen_pics = Admin_Image.objects.filter(categories='workplace')
-    service_pics = Admin_Image.objects.filter(categories='service')
-    if 'employee_id' in request.session:
-        user = request.session['employee_id']
-        staff = Staffdetails.objects.filter(employee_id=user)
-        content1 = {'staff': staff}
-        return render(request, 'Homepage/category.html', contents, content1)
-    else:
-        return render(request, 'Homepage/Homepage.html',
-                      {'background': background, 'canteen_pics': canteen_pics, 'service_pics': service_pics,
-                       'food': food})
-
-
-def default1(request):
-    category = 'breakfast'
-    user_order_items = []
-    if request.user.is_authenticated:
-        username = request.user.username
-        FoodList = Food_items.objects.all()
-        CustomerFoodList = Order_User.objects.all()
-        user = User.objects.get(username=username)
-        email = user.email
-        j = 0
-        token = ' '
-        for i in CustomerFoodList:
-            if i.mailId == email and i.status == 'draft':
-                j = 1
-                token = i.TokenId
-                break
-        if j == 1:
-            g = Order_Food.objects.filter(Status='dr', TokenId=token)
-            for i in g:
-                user_order_items.append(i.FoodId.Food_Name)
-
-    food = Food_items.objects.filter(Category=category)
-    contents = {'food': food}
-    background = Admin_Image.objects.filter(categories='background')
-    canteen_pics = Admin_Image.objects.filter(categories='workplace')
-    service_pics = Admin_Image.objects.filter(categories='service')
-    if 'employee_id' in request.session:
-        user = request.session['employee_id']
-        staff = Staffdetails.objects.filter(employee_id=user)
-        content1 = {'staff': staff}
-        return render(request, 'Homepage/category.html', contents, content1)
-    else:
-        return render(request, 'Homepage/Homepage.html',
-                      {'background': background, 'canteen_pics': canteen_pics, 'service_pics': service_pics,
-                       'food': food})
-
-
-def default2(request):
-    category = 'snacks'
-    user_order_items = []
-    if request.user.is_authenticated:
-        username = request.user.username
-        FoodList = Food_items.objects.all()
-        CustomerFoodList = Order_User.objects.all()
-        user = User.objects.get(username=username)
-        email = user.email
-        j = 0
-        token = ' '
-        for i in CustomerFoodList:
-            if i.mailId == email and i.status == 'draft':
-                j = 1
-                token = i.TokenId
-                break
-        if j == 1:
-            g = Order_Food.objects.filter(Status='dr', TokenId=token)
-            for i in g:
-                user_order_items.append(i.FoodId.Food_Name)
-
-    if category == 'breakfast':
-        food = Food_items.objects.filter(Category='Tiffin')
-    elif category == 'snack':
-        food = Food_items.objects.filter(Category='Snack')
-    elif category == 'starter':
-        food = Food_items.objects.filter(Category='Starter')
-    else:
-        food = Food_items.objects.all()
-
-    contents = {'food': food}
-    background = Admin_Image.objects.filter(categories='background')
-    canteen_pics = Admin_Image.objects.filter(categories='workplace')
-    service_pics = Admin_Image.objects.filter(categories='service')
-    if 'employee_id' in request.session:
-        user = request.session['employee_id']
-        staff = Staffdetails.objects.filter(employee_id=user)
-        content1 = {'staff': staff}
-        return render(request, 'Homepage/category.html', contents, content1)
-    else:
-        return render(request, 'Homepage/Homepage.html',
-                      {'background': background, 'canteen_pics': canteen_pics, 'service_pics': service_pics,
-                       'food': food})
-
-
-def default3(request):
-    category = 'all'
-    user_order_items = []
-    if request.user.is_authenticated:
-        username = request.user.username
-        FoodList = Food_items.objects.all()
-        CustomerFoodList = Order_User.objects.all()
-        user = User.objects.get(username=username)
-        email = user.email
-        j = 0
-        token = ' '
-        for i in CustomerFoodList:
-            if i.mailId == email and i.status == 'draft':
-                j = 1
-                token = i.TokenId
-                break
-        if j == 1:
-            g = Order_Food.objects.filter(Status='dr', TokenId=token)
-            for i in g:
-                user_order_items.append(i.FoodId.Food_Name)
-
-    if category == 'breakfast':
-        food = Food_items.objects.filter(Category='Tiffin')
-    elif category == 'snack':
-        food = Food_items.objects.filter(Category='Snack')
-    elif category == 'starter':
-        food = Food_items.objects.filter(Category='Starter')
-    else:
-        food = Food_items.objects.all()
+    food = Food_items.objects.all()
+    if category != 'all':
+        food = Food_items.objects.filter(Category=category)
 
     contents = {'food': food}
     background = Admin_Image.objects.filter(categories='background')
@@ -198,8 +72,8 @@ def itemdetailview(request, pk):
     user_order_items = []
     b = item_review.objects.all()
 
-    if request.user.is_authenticated:
-        username = request.user.username
+    if 'username' in request.session:
+        username = request.session['username']
         FoodList = Food_items.objects.all()
         CustomerFoodList = Order_User.objects.all()
         user = User.objects.get(username=username)
@@ -234,7 +108,6 @@ def itemdetailview(request, pk):
     return render(request, 'Homepage/itemdetail.html', contents)
 
 
-@login_required
 def reviewtext(request, pk):
     prod = Food_items.objects.get(Food_id=pk)
     if request.method == 'POST':

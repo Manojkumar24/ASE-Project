@@ -34,14 +34,14 @@
   <div>
     <nav class=" navbar navbar-expand-sm bg-dark navbar-dark" >
         <ul class="navbar-nav mr-auto">
-          <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:index' %}" id="Home">HOME</a></li>
-          <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:food_home' %}" id="Food">Food</a></li>
-          <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:tables_home' %}" id="Table">Tables</a></li>
-          <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:town_home' %}" id="Town">Towns</a></li>
+          <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:index' %}" id="Home"><i class="fas fa-home"></i>HOME</a></li>
+          <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:food_home' %}" id="Food"><i class="fas fa-utensils"></i>Food</a></li>
+          <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:tables_home' %}" id="Table"><i class="fas fa-table"></i>Tables</a></li>
+          <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:town_home' %}" id="Town"><i class="fas fa-city"></i>Towns</a></li>
             {% if 'admin_id' in request.session %}
           <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:images_home' %}" id="Town">Images</a></li>
-          <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:staff_home' %}" id="Staff">Add/Remove Staff</a></li>
-          <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:history:basic' %}" id="history">History</a></li>
+          <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:staff_home' %}" id="Staff">"><i class="fas fa-male"></i>Add/Remove Staff</a></li>
+          <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:history:basic' %}" id="history"><i class="fas fa-history"></i>History</a></li>
           {% endif %}
         </ul>
         <ul class="nav navbar-nav navbar-right" style="padding-right: 20px">
@@ -63,12 +63,8 @@
         </ul>
     </nav>
     </div>
-    <div class="jumbotron big-banner image-fulid">
-    <div class="container">
       {% block body_block %}
       {% endblock %}
-    </div>
-    </div>
   </body>
 </html>
 

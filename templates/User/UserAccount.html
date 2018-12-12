@@ -12,7 +12,11 @@
         {% if details %}
         <button class="dropbtn">UserProfile</button>
         <div class="profile_dropdown-content">
-            <a href="#"><img src="{%static details.userprofileinfo.profile_pic.path %}" alt="avatar"> {{ request.user.username }}</a>
+            {% if details.userprofileinfo.profile_pic %}
+                <a href="#"><img src="{%static details.userprofileinfo.profile_pic.path %}" alt="avatar"> {{ request.session.username }}</a>
+            {% else %}
+                <a href="#"><img src="{%static 'Homepage/Homepage/github-logo.png' %}">{{ request.session.username }}</a>
+            {% endif %}
             <a href="#">add : {{ details.userprofileinfo.address }}</a>
             <a href="#">city : {{ details.userprofileinfo.city }}</a>
             <a href="#">Edit Profile</a>
@@ -65,7 +69,6 @@
             </th>
 
             {% if historyOrdered %}
-
                 <tr class="orders">
                     <th>Food Name</th>
                     <th>quantity</th>
@@ -83,13 +86,17 @@
                             <td>{{ food.quantity }}</td>
                             <td>{{ food.time }}</td>
                             <td>{{ food.date }}</td>
-                            <td>In prep.</td>
+                            <td>Delivered</td>
                             <td>{{ food.price }}</td>
                         </tr>
                     {% endfor %}
-                    <tr>
-                        <td><a href="{% url 'UserProfile:CancelOrder' token_id=key %}">Cancel order</a></td>
-                    </tr>
+                        {% if cancel%}
+                            <tr>
+                                <td><a href="{% url 'UserProfile:CancelOrder' token_id=key %}">Cancel order</a></td>
+                            </tr>
+                        {% else %}
+                            <tr><td>Cannot be cancelled</td></tr>
+                        {% endif %}
                 {% endfor %}
             {% else %}
                 <tr class="NoHistory"><td>Nothing to Show here !!!</td></tr>

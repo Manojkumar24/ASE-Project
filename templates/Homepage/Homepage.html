@@ -19,13 +19,13 @@
     </div>
     <div class = "Food">
         <h1>Things that are worth waiting!!</h1>
-        <div class="category">
+        <div>
             <button class="categorybtn">Category</button>
              <div class="category-content">
-                <a href="{% url 'Homepage:home' %}">All</a>
-                <a href="{% url 'Homepage:home1' %}">Breakfast</a>
-                <a href="{% url 'Homepage:home2' %}">Snack</a>
-                <a href="{% url 'Homepage:home3' %}">Starters</a>
+                <a href="{% url 'Homepage:home' category='all'%}">All</a>
+                <a href="{% url 'Homepage:home' category='Tiffin'%}">Breakfast</a>
+                <a href="{% url 'Homepage:home' category='Snack'%}">Snack</a>
+                <a href="{% url 'Homepage:home' category='Starter'%}">Starters</a>
              </div>
         </div>
         {% if food %}
