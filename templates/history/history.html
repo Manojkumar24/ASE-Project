@@ -6,16 +6,17 @@
 {% block body_block %}
 
 
-<body>
+<body style="background-color:#111">
 
 
-          <div class="jumbotron big-banner image-fluid">
 
-          <div  class="w3-container w3-center w3-animate-zoom">
-              <div class="c2">"You dont need silver fork to eat good food"</div>
+
+
+              <div class="c2 animated lightSpeedIn">"You dont need silver fork to eat good food"</div>
                   <br><br>
-              <div class="c3">-PAUL PRUDHOMME</div>
-         </div>
+              <div class="c3 animated lightSpeedIn">-PAUL PRUDHOMME</div>
+
+         <div class="c1 ">
          <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     CHECK YOUR HISTORY
@@ -25,8 +26,8 @@
     <a class="dropdown-item" href= "{% url 'Manager:history:analysis' %}">Analysis</a>
   </div>
 </div>
+</div>
 
-     </div>
 
  </body>
  {% endblock %}
