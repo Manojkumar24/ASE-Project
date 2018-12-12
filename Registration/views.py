@@ -333,7 +333,7 @@ def staff_logout(request):
         del request.session['employee_id']
     except KeyError:
         return HttpResponse("You are not logged in")
-    return HttpResponseRedirect(reverse('Homepage:home'))
+    return redirect('Homepage:home', category='all')
 
 
 #@login_required
@@ -441,8 +441,7 @@ def admin_logout(request):
     try:
         del request.session['admin_id']
     except KeyError:
-        return HttpResponse("You are not logged in")
-    return HttpResponseRedirect(reverse('Homepage:home'))
+        return redirect('Homepage:home',category="all")
 
 
 def change_staff_password(request):
@@ -472,3 +471,6 @@ def change_staff_password(request):
     else:
         form = PasswordResetForm()
         return render(request, 'Registration/password_reset_form.html', {'form': form, 'user': "2"})
+"""
+    return redirect('Homepage:home', category='all')
+    """

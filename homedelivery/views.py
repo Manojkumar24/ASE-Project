@@ -48,12 +48,8 @@ def submit(request):
     return render(request, 'homedelivery/shownew.html', context=context)
 
 
-def showonmap(request):
-    user = User.objects.get(username=request.user)
-    print(user)
-    tokenId = Order_User.objects.get(
-        mailId=user.email, status='in Delivery')
-    hd_address = HD_Address.objects.get(tokenId=tokenId)
+def showonmap(request, t_id):
+    hd_address = HD_Address.objects.get(tokenId__TokenId__exact=t_id)
     location = hd_address.dNo + ', ' + hd_address.street + ', ' + hd_address.town
     print(location)
     context = {'location': location, }
