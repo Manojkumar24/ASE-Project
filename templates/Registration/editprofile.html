@@ -10,7 +10,7 @@
     {% if match_failed %}
         <h1>{{message}}</h1>
     {% endif %}
-    <form enctype="multipart/form-data" action="{% url 'Registration:updateprofile'%}" method="post">
+    <form enctype="multipart/form-data" action="{% url 'Registration:updateprofile' user.username %}" method="post">
         {% csrf_token %}
           <div class="form-row">
             <div class="form-group col-md-6" >
@@ -31,11 +31,11 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="new_password">New Password</label>
-              <input name="new_password" type="new_password" class="form-control" id="new_password" placeholder="New Password" required>
+              <input name="new_password" type="new_password" class="form-control" id="new_password" placeholder="New Password">
             </div>
             <div class="form-group col-md-6">
               <label for="new_password_conf">Confirm New Password</label>
-              <input name="new_password_conf" type="password" class="form-control" id="new_password_conf" placeholder="Password" required>
+              <input name="new_password_conf" type="password" class="form-control" id="new_password_conf" placeholder="Password">
             </div>
           </div>
           <div class="form-row">

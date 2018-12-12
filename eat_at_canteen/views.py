@@ -123,7 +123,7 @@ def order(request, pk=None):
         print('added1')
 
         if 'username' in request.session:
-            username = request.session['username']
+            username = request.session.username
         else:
             return reverse('Registration:register')
         user = User.objects.get(username=username)

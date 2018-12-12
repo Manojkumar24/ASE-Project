@@ -42,7 +42,7 @@
                                     <input type="text" style="border: 0" value="Not Available" readonly>
                                 {% else %}
                                     {% if food.Food_Name in user_items %}
-                                        <a href="{% url 'eat_at_canteen:cart' %}"><input type="button" class="cart" value="Go to Cart" ></a>
+                                        <a href="{% url 'eat_at_canteen:cart' username=request.session.username %}"><input type="button" class="cart" value="Go to Cart" ></a>
                                     {% else %}
                                         <input type="submit"  class="cart" value = "add to cart">
                                     {% endif %}

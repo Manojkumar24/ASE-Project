@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'payment',
     'rest_framework',
     'django_nose',
+    'Crypto'
 ]
 
 MIDDLEWARE = [

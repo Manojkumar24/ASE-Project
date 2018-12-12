@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% extends "Registration/base.html" %}
+<head>
+    <title>Admin Details Edit</title>
+</head>
+    {% block body_block %}
+<div class="jumbotron">
+    <h3>Update the form:</h3>
+    <form enctype="multipart/form-data" action="{% url 'Registration:editadmin' admin_id%}" method="post">
+        {% csrf_token %}
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="Name">Name</label>
+              <input name="Name" type="name" class="form-control" id="Name" value="{{Name}}"placeholder="Name" readonly>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="password">Password</label>
+              <input name="password" type="password" class="form-control" id="password" placeholder="Password" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="email">Email</label>
+              <input name="email" type="email" class="form-control" id="email" value="{{email}}"placeholder="Email" readonly>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="canteen_name">Canteen Name</label>
+              <input name="canteen_name" type="text" class="form-control" id="canteen_name" value="{{canteen_name}}"   placeholder="Enter your canteen's name" readonly>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="canteen_street">Canteen Street</label>
+              <input name="canteen_street" type="text" class="form-control" id="canteen_street" readonly>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="canteen_pincode">Canteen Pincode</label>
+              <input name="canteen_pincode"  maxlength="6" minlength="6" type="text" class="form-control" id="canteen_pincode" readonly>
+            </div>
+          </div>
+          <div class="form-row col">
+            <button type="submit" class="btn btn-primary">Update Admin Again?</button>
+            </div>
+          </div>
+        </form>
+    {% endblock %}
+</div>
