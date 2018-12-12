@@ -6,66 +6,148 @@
 {% block body_block %}
 
 
-<body>
+<body style="background-color:#111">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-            <script type="text/javascript">
-
-            google.charts.load('current', {'packages':['corechart']});
-            google.charts.setOnLoadCallback(drawChart1);
-
-            function drawChart1() {
-              var data = google.visualization.arrayToDataTable([
-              ['Task', 'Hours per Day'],
-              {% for key,value in d1.items%}
-              ['{{key}}',{{value}}],
-              {%endfor%}
-            ]);
-            var options = {'title':'analysis of food items', 'width':300, 'height':200};
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 
-            var chart = new google.visualization.PieChart(document.getElementById('piechart1'));
-            chart.draw(data, options);
 
+          <div class="signupSection">
+<div class="info">
+  <h2 style="top:0px;left:3px;position:absolute;">your history is here</h2>
+
+ <div id="chart" class="bar">
+
+</div>
+<div id="chart1" class="pie">
+
+</div>
+
+</div>
+<form  method="POST" class="signupForm" name="signupform">
+  {% csrf_token %}
+  <h2>ANALYSIS</h2>
+  <ul class="noBullet">
+    <li>
+
+     FROM DATE : <input type="date" class="inputFields" id="fromdate"  name="fromdate"placeholder="from date" value=""  required/>
+    </li>
+    <li>
+
+       TO DATE : <input type="date" class="inputFields" id="todate" name="todate" placeholder="to date" value=""  required/>
+
+
+    </li>
+    <li >
+      <input type="submit" id="join-btn" name="submit" alt="submit" value="submit">
+    </li>
+  </ul>
+ <image  class="bar1" src = "{%static "history/bar.png" %}"style="width:50px;height:50px;right:40px;top:300px;position:absolute;" >
+  <image class="pie1" src = "{%static "history/bar1.png" %}  "style="width:50px;height:50px;left:320px;top:300px;position:absolute;">
+</form>
+<script>
+ var list1=[];
+ var list2=[];
+ var bar=0,gra=0
+ {% for key,value in d1.items%}
+     list1.push("{{key}}" );
+    list2.push({{value}})
+ {%endfor%}
+// console.log(list1);
+// console.log(list2);
+$(document).ready(function(){
+    $(".bar1").click(function(){
+       $("#chart1").hide();
+       $("#chart").show();
+       if(bar ==0){
+       Bgraph.render();
+       bar=1;
+     }
+
+    });
+    $(".pie1").click(function(){
+       $("#chart1").show();
+        $("#chart").hide();
+        if(gra ==0){
+        Pgraph.render();
+        gra=1;
+      }
+
+    });
+});
+
+var options = {
+    chart: {
+        width: 380,
+        type: 'pie',
+    },
+      labels:list1,
+      series:list2,
+            responsive: [{
+        breakpoint: 480,
+        options: {
+            chart: {
+                width: 200
+            },
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }]
+}
+var Pgraph = new ApexCharts(
+    document.querySelector("#chart1"),
+    options
+);
+
+
+ var colors = ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0', '#546E7A', '#26a69a', '#D10CE8'];
+ var options1 = {
+     chart: {
+         height: 350,
+         type: 'bar',
+         events: {
+             click: function(chart1, w, e) {
+                 console.log(chart1, w, e )
+             }
+         },
+     },
+     colors: colors,
+     plotOptions: {
+         bar: {
+             columnWidth: '45%',
+             distributed: true
          }
-          </script>
+     },
+     dataLabels: {
+         enabled: false,
+     },
+     series: [{
+         data:list2
+     }],
+     xaxis: {
+         categories: list1,
+         labels: {
+             style: {
+                 colors: colors,
+                 fontSize: '14px'
+             }
+         }
+     }
+ }
+
+ var Bgraph = new ApexCharts(
+     document.getElementById("chart"),
+     options1
+ );
+
+</script>
 
 
 
-          <div class="jumbotron big-banner image-fluid">
 
 
-
-              <div class="box2">
-                <h3 class="text2"> ANALYSIS OF BUSINESS</h3>
-                <br><br>
-
-                  <form method="POST" autocomplete="off">
-                    <div class="date2">
-                    {% csrf_token %}
-                    <table>
-                      <tr>
-                        <td>
-                    FROMDATE:<input type="date" name="fromdate" required id="fromdate">
-                       </td>
-                       <td>
-                    TODATE:<input type="date" name="todate" required id="todate">
-                       </td>
-                    </tr>
-                  </table>
-
-               </div>
-               <br><br><br>
-               <div id="piechart1"></div>
-               <div id="chartContainer" style="height: 370px; width: 10%;"></div>
-               <script src="https://canvasjs.com/assets/script/canvasjs.min.js"> </script>
-
-               <div class="button2">
-              <input type="submit" class="btn btn-primary " value="SUBMIT">
-             </div>
-           </form>
-            </div>
-            </div>
 
  </body>
  {% endblock %}

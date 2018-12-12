@@ -1,41 +1,5 @@
 <!Doctype html>
 {% extends 'Homepage/Header_Footer.html' %}
-{%  load static %}
-
-{% block content %}
-<div class="adjust">
-<h1> Please Login </h1>
-
-    <form action="{% url 'Registration:user_login' %}"  method="post" autocomplete="off">
-        {% csrf_token %}
-        <table>
-        <tr>
-            <td><label for="username">Username:</label></td>
-            <td><input type="text" name="username" placeholder="Enter Username" autofocus autocomplete="false"></td>
-        </tr>
-        <tr>
-            <td><label for="password">Password:</label></td>
-            <td><input type="password" name="password" autofocus placeholder="Enter password"><br></td>
-        </tr>
-        <tr>
-            <td><a href = "{% url 'Registration:fp' %}">Forgot password?</a></td>
-            <td><input type="submit" name="" value="Login"></td>
-        </tr>
-        </table>
-    </form>
-</div>
-    {% endblock %}
-
-
-{% comment %}<!DOCTYPE html>
-{% extends "Registration/base.html" %}
-    {% block body_block %}
-=======
-
-=======
->>>>>>> 4279d63a73a5300ad6981c8740c41d1d73be1ac0
-<!Doctype html>
-{% extends 'Homepage/Header_Footer.html' %}
 {%  load staticfiles %}
 {% block content %}
 <div class="adjust">
@@ -60,6 +24,7 @@
         <label>
             <input type="radio" onclick="location.href='{% url 'Registration:admin_login' %}'">
         </label> Admin
+ {% endblock %}
        {% comment %} <tr>
             <td><label for="username">Username:</label></td>
             <td><input type="text" name="username" placeholder="Enter Username" autofocus autocomplete="false"></td>
@@ -77,5 +42,4 @@
 {% comment %}<!DOCTYPE html>
 {% extends "Registration/base.html" %}
     {% block body_block %}
->>>>>>> 99800d28e3545e14b34ebb27622709c309adff60
 <div class="jumbotron">{% endcomment %}

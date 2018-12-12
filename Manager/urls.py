@@ -28,4 +28,5 @@ urlpatterns = [
     path('remove_image/', views.remove_image, name='remove_image'),
     path('staff_home/', views.staff_home, name='staff_home'),
     path('remove_staff/', views.remove_staff, name='remove_staff'),
+    path('check_address/<str:t_id>', views.check_address, name='check_address'),
 ]

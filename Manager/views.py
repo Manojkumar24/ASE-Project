@@ -12,11 +12,13 @@ from homedelivery.models import HD_Address
 def index(request, content=None):
     user_order_item = Order_User.objects.filter(status='ordered')
     user_pre_item = Order_User.objects.filter(status='in Preparation')
+    user_in_del_item  = Order_User.objects.filter(status='in Delivery')
     user_conorder_item = Order_User.objects.filter(status='User Conform')
     if content:
         content['user_order_item'] = user_order_item
         content['user_pre_item'] = user_pre_item
         content['user_conorder_item'] = user_conorder_item
+        content['user_in_del_item'] = user_in_del_item
     else:
         content = {'user_order_item': user_order_item, 'user_pre_item': user_pre_item,
                    'user_conorder_item': user_conorder_item}
@@ -359,3 +361,16 @@ def remove_staff(request):
     item = Staffdetails.objects.all()
     content = {'form': f2, 'item': item}
     return render(request, 'Manager/Remove_staff.html', content)
+
+
+def check_address(request, t_id=None):
+    if t_id:
+        try:
+            items = Order_Food.objects.filter(TokenId=t_id)
+            add = HD_Address.objects.get(tokenId__TokenId=t_id)
+            content = {'items': items, 'add': add}
+        except:
+            items = Order_Food.objects.filter(TokenId=t_id)
+            content = {'items': items}
+        return render(request, 'Manager/show_address.html', content)
+    return redirect('Manager:index')
