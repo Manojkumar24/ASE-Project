@@ -1,6 +1,8 @@
 {% extends "Manager/base.html" %}
 {% block body_block %}
     {{ block.super }}
+    {% if 'admin_id' in request.session or 'employee_id' in request.session %}
+    <div class="container">
     {% if error %}
         <h4 class="errormsg">{{ error }}</h4>
     {% endif %}
@@ -78,5 +80,7 @@
                 </tr>
         {% endfor %}
         </table>
+    {% endif %}
+    </div>
     {% endif %}
 {% endblock %}
