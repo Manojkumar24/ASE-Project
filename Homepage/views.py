@@ -18,8 +18,8 @@ from eat_at_canteen.forms import *
 
 def default(request, category):
     user_order_items = []
-    if request.user.is_authenticated:
-        username = request.user.username
+    if 'username' in request.session:
+        username = request.session['username']
         FoodList = Food_items.objects.all()
         CustomerFoodList = Order_User.objects.all()
         user = User.objects.get(username=username)
@@ -39,19 +39,19 @@ def default(request, category):
     if category != 'all':
         food = Food_items.objects.filter(Category=category)
 
-    contents = {'food': food}
+    contents = {'food': food,'user_items':user_order_items}
     background = Admin_Image.objects.filter(categories='background')
     canteen_pics = Admin_Image.objects.filter(categories='workplace')
     service_pics = Admin_Image.objects.filter(categories='service')
     if 'employee_id' in request.session:
         user = request.session['employee_id']
         staff = Staffdetails.objects.filter(employee_id=user)
-        content1 = {'staff': staff}
+        content1 = {'staff': staff,'user_items':user_order_items}
         return render(request, 'Homepage/category.html', contents, content1)
     else:
         return render(request, 'Homepage/Homepage.html',
                       {'background': background, 'canteen_pics': canteen_pics, 'service_pics': service_pics,
-                       'food': food})
+                       'food': food,'user_items':user_order_items})
 
 
 def search(request):
@@ -72,8 +72,8 @@ def itemdetailview(request, pk):
     user_order_items = []
     b = item_review.objects.all()
 
-    if request.user.is_authenticated:
-        username = request.user.username
+    if 'username' in request.session:
+        username = request.session['username']
         FoodList = Food_items.objects.all()
         CustomerFoodList = Order_User.objects.all()
         user = User.objects.get(username=username)
@@ -108,7 +108,6 @@ def itemdetailview(request, pk):
     return render(request, 'Homepage/itemdetail.html', contents)
 
 
-@login_required
 def reviewtext(request, pk):
     prod = Food_items.objects.get(Food_id=pk)
     if request.method == 'POST':

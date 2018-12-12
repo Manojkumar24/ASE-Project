@@ -15,24 +15,19 @@ import base64
 from .paytm_func import Checksum
 
 
-@login_required
-def address(request):
+#@login_required
+def address(request, username):
     context = {
         "Towns": []
     }
     for object in Available_Towns.objects.all().values():
         context["Towns"].append(object["Towns"])
-    print(context)
-    userprofileinfo = UserProfileInfo.objects.filter(
-        user__username=request.user).values()
-    context['userprofileinfo'] = userprofileinfo[0]
-    print(context['userprofileinfo'])
-    return render(request, 'homedelivery/address.html', context=context)
+    context['username'] = username
+    return render(request, 'homedelivery/address.html', context)
 
 
-@login_required
-def submit(request):
-    username = request.user.username
+#@login_required
+def submit(request, username):
     user = User.objects.get(username=username)
     email = user.email
     street = request.POST['street']
@@ -49,16 +44,12 @@ def submit(request):
     for items in customer_food:
         amount = amount + items.price
     context = {'customer_food': customer_food, 'amount': amount,
-               'username': username, 'token': tokenId, 'address': hd_address}
+               'username': username, 'token': tokenId, 'address': hd_address,'username': username}
     return render(request, 'homedelivery/shownew.html', context=context)
 
 
-def showonmap(request):
-    user = User.objects.get(username=request.user)
-    print(user)
-    tokenId = Order_User.objects.get(
-        mailId=user.email, status='in Delivery')
-    hd_address = HD_Address.objects.get(tokenId=tokenId)
+def showonmap(request, t_id):
+    hd_address = HD_Address.objects.get(tokenId__TokenId__exact=t_id)
     location = hd_address.dNo + ', ' + hd_address.street + ', ' + hd_address.town
     print(location)
     context = {'location': location, }
@@ -76,9 +67,8 @@ def orderdetails(request):
     return render(request, 'homedelivery/orderdetails.html', context)
 
 
-@login_required
-def confirm(request):
-    username = request.user.username
+#@login_required
+def confirm(request, username):
     user = User.objects.get(username=username)
     email = user.email
     current_user = Order_User.objects.get(mailId=email, status='draft')

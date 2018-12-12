@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'User',
     'bootstrapform',
     'payment',
+    'rest_framework',
+    'django_nose',
 ]
 
 MIDDLEWARE = [
@@ -86,8 +88,12 @@ WSGI_APPLICATION = 'Canteen_System_Automation.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'canteendb'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'canteendb',
+        'USER': 'root',
+        'PASSWORD': 'mysqlroot',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
@@ -184,3 +190,10 @@ if DEBUG:
     Password : Paytm12345
     This test wallet is topped-up to a balance of 7000 Rs. every 5 minutes.
     '''
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Tell nose to measure coverage on the 'foo' and 'bar' apps
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=registration',
+]

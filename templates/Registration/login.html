@@ -9,12 +9,12 @@
     <form action="{% url 'Registration:user_login' %}"  method="post" autocomplete="off">
         {% csrf_token %}
         <div class="inputbox">
-            <input type="text" name = "username" required="" autocomplete="false">
+            <input type="text" name = "username" required="" >
             <label>UserName</label>
         </div>
         <div class="inputbox">
-            <input type="password" name="password" required="" autocomplete="false">
-            <label>Password</label>
+            <input type="password" name="password" required="" >
+            <label>password</label>
         </div>
         <input type="submit" name="" value="Login"><br>
         <a href = "{% url 'Registration:fp' %}">Forgot password?</a><br>
@@ -24,8 +24,14 @@
         <label>
             <input type="radio" onclick="location.href='{% url 'Registration:admin_login' %}'">
         </label> Admin
+    </form>
+</div>
+</div>
  {% endblock %}
-       {% comment %} <tr>
+{% comment %}        <form action="{% url 'Registration:user_login' %}"  method="post" autocomplete="off">
+        {% csrf_token %}
+        <table>
+        <tr>
             <td><label for="username">Username:</label></td>
             <td><input type="text" name="username" placeholder="Enter Username" autofocus autocomplete="false"></td>
         </tr>
@@ -37,9 +43,6 @@
             <td><a href = "{% url 'Registration:fp' %}">Forgot password?</a></td>
             <td><input type="submit" name="" value="Login"></td>
         </tr>
-        </table>{% endcomment %}
-
-{% comment %}<!DOCTYPE html>
-{% extends "Registration/base.html" %}
-    {% block body_block %}
-<div class="jumbotron">{% endcomment %}
+        </table>
+</form>
+{% endblock %}{% endcomment %}

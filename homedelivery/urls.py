@@ -20,9 +20,9 @@ from . import views
 app_name = 'homedelivery'
 urlpatterns = [
 
-    path("address/", views.address, name='address'),
-    path("confirm/", views.confirm, name='confirm'),
-    path("submit/", views.submit, name='submit'),
-    path("showonmap/", views.showonmap, name='showonmap'),
+    path("address/<str:username>", views.address, name='address'),
+    path("confirm/<str:username>", views.confirm, name='confirm'),
+    path("submit/<str:username>", views.submit, name='submit'),
+    path("showonmap/<int:t_id>", views.showonmap, name='showonmap'),
     path("orderdetails/", views.orderdetails, name="orderdetails"),
 ]

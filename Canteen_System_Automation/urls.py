@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from Manager import views
 # from Registration import views
 
 urlpatterns = [
@@ -27,4 +27,7 @@ urlpatterns = [
     path('registration/', include('Registration.urls')),
     path('ec/', include('eat_at_canteen.urls')),
     path('payment/', include('payment.urls')),
+    path('api/eq1log/', views.Food_itemsListView.as_view()),
+    path('api/eq2log/', views.TownsListView.as_view()),
+    path('api/eq3log/', views.TablesListView.as_view()),
 ]

@@ -23,7 +23,7 @@ class Admin(models.Model):
     Name = models.CharField(max_length=225, blank=False)
     username = models.CharField(max_length=200, blank=False, null=True)
     email = models.EmailField(blank=False)
-    password = models.CharField(max_length=50, null=True)
+    password = models.CharField(max_length=500, null=True)
     canteen_name = models.CharField(max_length=200, null=True)
     canteen_street = models.CharField(max_length=200, null=True)
     canteen_city = models.CharField(max_length=200, null=True)

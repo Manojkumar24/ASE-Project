@@ -26,9 +26,11 @@ urlpatterns = [
     path('updateadmin/', views.updateadmin, name="updateadmin"),
     path('editstaff/', views.editstaff, name='editstaff'),
     path('updatestaff/', views.updatestaff, name="updatestaff"),
-    path('change_password/',views.change_user_password,name="change_user_password"),
+    path('change_password/>',views.change_user_password,name="change_user_password"),
+    path('change_staff_password/>',views.change_staff_password,name="change_staff_password"),
     path('reset/<uidb64>/<token>/',views.user_password_reset, name='user_password_reset'),
-    path('forgotpassword/',views.change_user_password,name='fp')
+    path('forgotpassword/',views.change_user_password,name='fp'),
+    path('forgotpassword1/',views.change_staff_password,name='fp1')
 
 
 ]
