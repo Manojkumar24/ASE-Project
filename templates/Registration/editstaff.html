@@ -6,7 +6,7 @@
     {% block body_block %}
 <div class="jumbotron">
     <h3>Update the form:</h3>
-    <form enctype="multipart/form-data" action="{% url 'Registration:updatestaff'%}" method="post">
+    <form enctype="multipart/form-data" action="{% url 'Registration:updatestaff' employee_id %}" method="post">
         {% csrf_token %}
           <div class="form-row">
             <div class="form-group col-md-6">

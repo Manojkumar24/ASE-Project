@@ -36,7 +36,6 @@
                             </li>
                             {% if 'username' in request.session %}
                                 <li class="user">
-                                    <!--a href="" class="proPic" src="#"> </a-->
                                     <a  href="{% url 'UserProfile:home' pk=request.session.username %}" >{{ request.session.username }}</a>
 
                                 </li>

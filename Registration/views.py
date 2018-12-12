@@ -133,10 +133,10 @@ def user_login(request):
         return render(request, 'Registration/login.html', {'user_logged_in':user_logged_in,'registered':registered})
 
 
-def get_editprofile_dict(request):
-    user = User.objects.filter(username=request.user)
+def get_editprofile_dict(request, username):
+    user = User.objects.filter(username=username)
     # print(user)
-    userId = User.objects.get(username=request.user).id
+    userId = User.objects.get(username=username).id
     # user = User.objects.filter(username=request.user)
     userprofileinfo = UserProfileInfo.objects.filter(id=userId)
     context = {
@@ -204,23 +204,27 @@ def user_password_reset(request, uidb64, token):
         return render(request, 'Registration/password_reset_confirm.html', {'form': form})
 
 
-def editprofile(request):
-    context = get_editprofile_dict(request)
+def editprofile(request, username):
+    context = get_editprofile_dict(request, username)
     return render(request, 'Registration/editprofile.html', context=context)
     # return HttpResponse("user")
 
 
-def change_profile_info(request):
+def change_profile_info(request, username):
     new_password = request.POST['new_password']
     new_password_conf = request.POST['new_password_conf']
     print(new_password)
     print(new_password_conf)
-    userprofileinfo = UserProfileInfo.objects.get(user__username=request.user)
+    userprofileinfo = UserProfileInfo.objects.get(user__username=username)
     old_password_check = userprofileinfo.user.check_password(
         request.POST['old_password'])
     print(userprofileinfo.user.check_password(request.POST['old_password']))
     if not (new_password == new_password_conf or old_password_check == True):
         return False
+    print(userprofileinfo.user.check_password(request.POST['old_password']))
+    if new_password != '':
+        if not(new_password == new_password_conf or old_password_check == True):
+            return False
     print("some")
     userprofileinfo.user.email = request.POST['email']
     userprofileinfo.user.first_name = request.POST['first_name']
@@ -231,22 +235,26 @@ def change_profile_info(request):
     if 'profile_pic' in request.FILES:
         print("profile pic exists")
         userprofileinfo.profile_pic = request.FILES['profile_pic']
-    userprofileinfo.user.set_password(request.POST['new_password'])
+    if new_password != '':
+        userprofileinfo.user.set_password(request.POST['new_password'])
+    userprofileinfo.user.save()
     userprofileinfo.save()
+    #userprofileinfo = UserProfileInfo.objects.get(user__username = username)
+    #print(userprofileinfo.user.username)
     return True
 
 
-# @login_required
-def updateprofile(request):
-    valid_profile_data = change_profile_info(request)
+#@login_required
+def updateprofile(request, username):
+    valid_profile_data = change_profile_info(request, username)
     # print(valid_profile_data)
     if valid_profile_data == False:
-        context = get_editprofile_dict(request)
+        context = get_editprofile_dict(request, username)
         context['match_failed'] = True
         context['message'] = "Your old password didn't match or your new passwords didn't match with each other"
         return render(request, 'Registration/editprofile.html', context=context)
     values = UserProfileInfo.objects.filter(
-        user__username=request.user)
+        user__username=username)
     print(values)
     context = {
         'user_id': values[0]
@@ -335,6 +343,23 @@ def staff_logout(request):
         return HttpResponse("You are not logged in")
     return redirect('Homepage:home', category='all')
 
+def test(request):
+    editadmin(request, 'ADMN001')
+
+
+def editadmin(request, admin_id):
+    admin = Admin.objects.filter(admin_id=admin_id)
+    context = {'admin': admin}
+    return render(request, 'Registration/editadmin.html', context)
+
+
+def change_admin_info(request, admin_id):
+    admin = Admin.objects.get(admin_id=admin_id)
+    print(check_password(request.POST['old_password'], admin.password))
+    if (check_password(request.POST['old_password'], admin.password) == False):
+        return False
+    if request.POST['new_password'] != request.POST['new_password_conf']:
+        return False
 
 # @login_required
 def editadmin(request):
@@ -349,27 +374,39 @@ def updateadmin(request):
     admin = Admin.objects.get(Name="test_admin")
     admin.Name = request.POST['Name']
     admin.email = request.POST['email']
-    admin.password = request.POST['password']
+    # updating password if the new password is not empty
+    if request.POST['new_password'] != '':
+        admin.password = make_password(request.POST['new_password'])
     admin.canteen_name = request.POST['canteen_name']
     admin.canteen_street = request.POST['canteen_street']
     admin.canteen_pincode = request.POST['canteen_pincode']
     admin.save()
-    return HttpResponse('Saved')
+    return True
 
 
-# @login_required
-def editstaff(request):
-    staff = Staffdetails.objects.filter(employee_id='1')
+def updateadmin(request, admin_id):
+    changed_status = change_admin_info(request, admin_id)
+    if changed_status:
+        context = Admin.objects.filter(admin_id=admin_id)
+        print(context)
+        return HttpResponse('Saved')
+        return render(request, 'Registration/updatedadmin.html', context=context)
+    return HttpResponse('Failed')
+
+
+#@login_required
+def editstaff(request, employee_id):
+    staff = Staffdetails.objects.filter(employee_id=employee_id)
     context = staff.values()
     context = context[0]
     print(context)
     return render(request, 'Registration/editstaff.html', context=context)
-    return HttpResponse('Saved')
+    #return HttpResponse('Saved')
 
 
-# @login_required
-def updatestaff(request):
-    staff = Staffdetails.objects.get(employee_id='1')
+
+def updatestaff(request, employee_id):
+    staff = Staffdetails.objects.get(employee_id=employee_id)
     staff['lastname'] = request.POST['lastname']
     staff['email'] = request.POST['email']
     staff['pincode'] = request.POST['pincode']
@@ -377,7 +414,7 @@ def updatestaff(request):
     staff['address'] = request.POST['address']
     staff['city'] = request.POST['city']
     staff.save()
-    return HttpResponse("Update Staff Page")
+    return HttpResponse("Updated Staff Page")
 
 
 def admin_register(request):

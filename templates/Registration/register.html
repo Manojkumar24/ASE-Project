@@ -1,7 +1,5 @@
-<!DOCTYPE html>
 {% extends "Homepage/Header_Footer.html" %}
 {% load crispy_forms_tags %}
-
 {% block content %}
 <div style = "margin-top: 5%;margin-left:15%;width:70%;margin-bottom:5%;color:black;font-size: larger;background-color: rgba(71,71,71,0.8)">
     {% if registered %}
@@ -44,41 +42,3 @@
     {% endif %}
 </div>
 {% endblock %}
-
-{% comment %}
-{% load bootstrap %}
-{% load staticfiles %}
-    {% block content %}
-<div class="jumbotron" style="width:60%;height:840px;margin-left: 20%;margin-top: 10%;margin-bottom: 5%;border:brown">
-<h1>WELCOME ! </h1>
-    {% if registered %}
-    <h1>Thank you for registering</h1>
-    {% else %}
-    <h1>Register Here!</h1>
-    <h3>Fill out the form:</h3>
-    <form enctype="multipart/form-data" method="post" style="width:60%;margin-left:20%">
-        {% csrf_token %}
-
-            {% for field in user_form %}
-                {{ field.label }}
-                {{field}}
-            {% endfor %}
-            {% for field in profile_form %}
-                {{ field.label }}
-                {{field}}
-            {% endfor %}
-            {% for radio in user_form %}
-                <div class="myradio">
-                    {{ radio.input }}
-                </div>
-            {% endfor %}
-
-        <input type="submit" name="" value="Register" class="myButton">
-    </form>
-    {% endif %}
-</div>
-    {% endblock %}
-{% endcomment %}
-{% comment %}
-{% load crispy_forms_tags %}{% endcomment %}
-
