@@ -15,19 +15,18 @@ from .paytm_func import Checksum
 
 
 #@login_required
-def address(request):
+def address(request, username):
     context = {
         "Towns": []
     }
     for object in Available_Towns.objects.all().values():
         context["Towns"].append(object["Towns"])
-    print(context)
-    return render(request, 'homedelivery/address.html', context=context)
+    context['username'] = username
+    return render(request, 'homedelivery/address.html', context)
 
 
 #@login_required
-def submit(request):
-    username = request.user.username
+def submit(request, username):
     user = User.objects.get(username=username)
     email = user.email
     street = request.POST['street']
@@ -44,7 +43,7 @@ def submit(request):
     for items in customer_food:
         amount = amount + items.price
     context = {'customer_food': customer_food, 'amount': amount,
-               'username': username, 'token': tokenId, 'address': hd_address}
+               'username': username, 'token': tokenId, 'address': hd_address,'username': username}
     return render(request, 'homedelivery/shownew.html', context=context)
 
 
@@ -68,8 +67,7 @@ def orderdetails(request):
 
 
 #@login_required
-def confirm(request):
-    username = request.user.username
+def confirm(request, username):
     user = User.objects.get(username=username)
     email = user.email
     current_user = Order_User.objects.get(mailId=email, status='draft')

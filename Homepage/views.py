@@ -39,19 +39,19 @@ def default(request, category):
     if category != 'all':
         food = Food_items.objects.filter(Category=category)
 
-    contents = {'food': food}
+    contents = {'food': food,'user_items':user_order_items}
     background = Admin_Image.objects.filter(categories='background')
     canteen_pics = Admin_Image.objects.filter(categories='workplace')
     service_pics = Admin_Image.objects.filter(categories='service')
     if 'employee_id' in request.session:
         user = request.session['employee_id']
         staff = Staffdetails.objects.filter(employee_id=user)
-        content1 = {'staff': staff}
+        content1 = {'staff': staff,'user_items':user_order_items}
         return render(request, 'Homepage/category.html', contents, content1)
     else:
         return render(request, 'Homepage/Homepage.html',
                       {'background': background, 'canteen_pics': canteen_pics, 'service_pics': service_pics,
-                       'food': food})
+                       'food': food,'user_items':user_order_items})
 
 
 def search(request):

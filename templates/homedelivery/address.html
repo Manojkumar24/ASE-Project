@@ -7,7 +7,7 @@
 {% block  body_block %}
     <div class = "jumbotron">
         <h1>Enter Address</h1>
-        <form action="{% url 'homedelivery:submit' %}" method="POST">
+        <form action="{% url 'homedelivery:submit' username=username %}" method="POST">
             {% csrf_token %}
           <div class="form-row">
             <div class="form-group col-md-2">
