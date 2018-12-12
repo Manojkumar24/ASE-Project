@@ -6,7 +6,6 @@
 body {
   margin: 0;
   padding: 0;
-  overflow: hidden;
   background: #111;
   background-repeat: no-repeat;
 }
@@ -101,7 +100,7 @@ body {
   position:absolute;
 }
 .dropdown-item{
-color::#0ab4b4 ;
+color:#0ab4b4 ;
 }
 .c2 {
   font-family: 'Open Sans', sans-serif;

@@ -32,6 +32,7 @@
 
   <body>
   <div>
+    {% if 'admin_id' in request.session or 'employee_id' in request.session %}
     <nav class=" navbar navbar-expand-sm bg-dark navbar-dark" >
         <ul class="navbar-nav mr-auto">
           <li class="navbar-brand"><a class="nav-link" href="{% url 'Manager:index' %}" id="Home"><i class="fas fa-home"></i>HOME</a></li>
@@ -62,6 +63,7 @@
             {% endif %}
         </ul>
     </nav>
+  {% endif %}
     </div>
       {% block body_block %}
       {% endblock %}

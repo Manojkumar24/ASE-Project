@@ -335,7 +335,7 @@ def staff_logout(request):
         del request.session['employee_id']
     except KeyError:
         return HttpResponse("You are not logged in")
-    return HttpResponseRedirect(reverse('Homepage:home'))
+    return redirect('Homepage:home', category='all')
 
 
 @login_required
@@ -442,4 +442,4 @@ def admin_logout(request):
         del request.session['admin_id']
     except KeyError:
         return HttpResponse("You are not logged in")
-    return HttpResponseRedirect(reverse('Homepage:home'))
+    return redirect('Homepage:home', category='all')
