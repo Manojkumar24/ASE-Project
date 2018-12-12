@@ -11,7 +11,6 @@ from datetime import date, timezone, datetime, time
 from eat_at_canteen.models import item_review
 
 
-@login_required
 def index(request, pk=None):
     user = User.objects.get(username=pk)
     email = user.email
@@ -19,10 +18,11 @@ def index(request, pk=None):
     print(date.today())
 
     popular = PopularFood()
+    print(popular)
     return render(request, "User/UserAccount.html",
                   {'details': user, 'historyDelivery': user_order_inDelivery, 'historyOrdered': user_order_inOrderd,
                    'historyPreparation': user_order_inPreparation, 'orders_delivered': orders_deliverd,
-                   'popular': popular, 'cancel': cancel})
+                   'popular': popular, 'cancel': cancel})  #
 
 
 def Order_history(email, cancelState):
@@ -78,7 +78,7 @@ def PopularFood():
     # foodId = []
     for k in food_sortBy_Rating:
         sort_food[k[0]] = Food_items.objects.filter(Food_id=k[0])
-    print(sort_food[1])
+    # print(sort_food)
     return sort_food
 
 

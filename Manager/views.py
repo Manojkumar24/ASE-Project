@@ -6,13 +6,17 @@ from django.core.mail import send_mail
 from django.conf import settings
 from User.models import Order_Food, Order_User
 from homedelivery.models import HD_Address
+from rest_framework.response import Response
+from Manager.serializers import *
+from rest_framework.views import APIView
+from rest_framework import status
 
 
 # Create your views here.
 def index(request, content=None):
     user_order_item = Order_User.objects.filter(status='ordered')
     user_pre_item = Order_User.objects.filter(status='in Preparation')
-    user_in_del_item  = Order_User.objects.filter(status='in Delivery')
+    user_in_del_item = Order_User.objects.filter(status='in Delivery')
     user_conorder_item = Order_User.objects.filter(status='User Conform')
     if content:
         content['user_order_item'] = user_order_item
@@ -21,7 +25,7 @@ def index(request, content=None):
         content['user_in_del_item'] = user_in_del_item
     else:
         content = {'user_order_item': user_order_item, 'user_pre_item': user_pre_item,
-                   'user_conorder_item': user_conorder_item}
+                   'user_conorder_item': user_conorder_item, 'user_in_del_item': user_in_del_item}
     return render(request, 'Manager/index.html', content)
 
 
@@ -310,7 +314,7 @@ def send_home_email(request, t_id=None):
 def image_home(request):
     items = Admin_Image.objects.all()
     content = {'item': items}
-    return render(request,'Manager/image_home.html', content)
+    return render(request, 'Manager/image_home.html', content)
 
 
 def add_image(request):
@@ -320,7 +324,7 @@ def add_image(request):
         if f1.is_valid():
             f1.save()
             return redirect('Manager:images_home')
-    return render(request, 'Manager/Add_image.html',{'form': f1})
+    return render(request, 'Manager/Add_image.html', {'form': f1})
 
 
 def remove_image(request):
@@ -374,3 +378,45 @@ def check_address(request, t_id=None):
             content = {'items': items}
         return render(request, 'Manager/show_address.html', content)
     return redirect('Manager:index')
+
+
+class Food_itemsListView(APIView):
+    def get(self, request):
+        fooditems = Food_items.objects.all()
+        serializer = Food_itemsSerializer(fooditems, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = Food_itemsSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+
+
+class TownsListView(APIView):
+    def get(self, request):
+        towns = Available_Towns.objects.all()
+        serializer = TownsSerializer(towns, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = TownsSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+
+
+class TablesListView(APIView):
+    def get(self, request):
+        tables = Dining_Tables.objects.all()
+        serializer = TablesSerializer(tables, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = TablesSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)

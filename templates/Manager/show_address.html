@@ -2,6 +2,7 @@
 {% block body_block %}
 {% if items %}
     <p>Token Id : {{ items.first.TokenId }}</p>
+    <a href="{% url 'homedelivery:showonmap' t_id=items.first.TokenId %}"><input type="button" class="btn btn-primary" value="Show In Map"></a>
     <table class="table table-bordered table-striped">
     <tr>
         <th>Food ID</th>
@@ -22,14 +23,15 @@
         </tr>
     {% endfor %}
     </table>
-    {% elif add %}
     <table class="table table-bordered table-striped">
     <tr>
+        <th>Door Number</th>
         <th>Town</th>
         <th>Street</th>
         <th>Phone Number</th>
     </tr>
     <tr>
+        <td>{{ add.dNo }}</td>
         <td>{{ add.town }}</td>
         <td>{{ add.street }}</td>
         <td>{{ add.phone_number }}</td>
