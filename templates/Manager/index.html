@@ -43,6 +43,24 @@
         {% endfor %}
         </table>
     {% endif %}
+    {% if user_in_del_item %}
+        <table class="table table-bordered table-striped">
+                <tr>
+                <td>Email Id</td>
+                <td>Token Id</td>
+                <td>Status</td>
+                <td>Total Price</td>
+                </tr>
+        {% for item in user_in_del_item %}
+                <tr>
+                <td>{{ item.mailId }}</td>
+                <td><a href="{% url 'Manager:check_address' t_id=item.TokenId %}">{{ item.TokenId }}</a></td>
+                <td>{{ item.status }}</td>
+                <td>{{ item.totalPrice }}</td>
+                </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
     {% if user_conorder_item %}
         <table class="table table-bordered table-striped">
                 <tr>
