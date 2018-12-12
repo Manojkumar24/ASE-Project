@@ -14,7 +14,7 @@ import base64
 from .paytm_func import Checksum
 
 
-@login_required
+#@login_required
 def address(request):
     context = {
         "Towns": []
@@ -25,7 +25,7 @@ def address(request):
     return render(request, 'homedelivery/address.html', context=context)
 
 
-@login_required
+#@login_required
 def submit(request):
     username = request.user.username
     user = User.objects.get(username=username)
@@ -67,7 +67,7 @@ def orderdetails(request):
     return render(request, 'homedelivery/orderdetails.html', context)
 
 
-@login_required
+#@login_required
 def confirm(request):
     username = request.user.username
     user = User.objects.get(username=username)

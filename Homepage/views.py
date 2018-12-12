@@ -18,8 +18,8 @@ from eat_at_canteen.forms import *
 
 def default(request, category):
     user_order_items = []
-    if request.user.is_authenticated:
-        username = request.user.username
+    if 'username' in request.session:
+        username = request.session['username']
         FoodList = Food_items.objects.all()
         CustomerFoodList = Order_User.objects.all()
         user = User.objects.get(username=username)
@@ -72,8 +72,8 @@ def itemdetailview(request, pk):
     user_order_items = []
     b = item_review.objects.all()
 
-    if request.user.is_authenticated:
-        username = request.user.username
+    if 'username' in request.session:
+        username = request.session['username']
         FoodList = Food_items.objects.all()
         CustomerFoodList = Order_User.objects.all()
         user = User.objects.get(username=username)
@@ -108,7 +108,6 @@ def itemdetailview(request, pk):
     return render(request, 'Homepage/itemdetail.html', contents)
 
 
-@login_required
 def reviewtext(request, pk):
     prod = Food_items.objects.get(Food_id=pk)
     if request.method == 'POST':

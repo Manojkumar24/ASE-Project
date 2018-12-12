@@ -17,12 +17,12 @@
             <label>Password</label>
         </div>
         <input type="submit" name="" value="Login"><br>
-        {% comment %}<a href = "{% url 'Registration:fp' %}">Forgot password?</a><br>{% endcomment %}
-        <label>
-            <input type="radio" onclick="location.href='{% url 'Registration:staff_login' %}'">
-        </label>Customer
+        <a href = "{% url 'Registration:fp1' %}">Forgot password?</a><br>
         <label>
             <input type="radio" onclick="location.href='{% url 'Registration:user_login' %}'">
+        </label>Customer
+        <label>
+            <input type="radio" onclick="location.href='{% url 'Registration:admin_login' %}'">
         </label> Admin
         </form>
 </div>

@@ -33,10 +33,10 @@
                             <li class="">
                                 <a class="" href="{% url 'eat_at_canteen:hotel_review' %}">Review</a>
                             </li>
-                            {% if user.is_authenticated %}
+                            {% if 'username' in request.session %}
                                 <li class="user">
                                     <!--a href="" class="proPic" src="#"> </a-->
-                                    <a  href="{% url 'UserProfile:home' pk=request.user.username %}" >{{ request.user.username }}</a>
+                                    <a  href="{% url 'UserProfile:home' pk=request.session.username %}" >{{ request.session.username }}</a>
 
                                 </li>
                                 <li>
@@ -85,10 +85,10 @@
             <ul>
                 <li><a href="{% url 'Homepage:home' category='all' %}">Home</a></li>
                 <li><a href="#Cont">Contact Us</a></li>
-            {% if user.is_authenticated %}
+            {% if 'username' in request.session %}
                 <li class="user">
                     <!--a href="" class="proPic" src="#"> </a-->
-                    <a  href="{% url 'UserProfile:home' pk=request.user.username %}" >{{ request.user.username }}</a>
+                    <a  href="{% url 'UserProfile:home' pk=request.session.username %}" >{{ request.session.username }}</a>
                 </li>
                 <li>
                     <a class="" href="{% url 'Registration:user_logout' %}">LogOut</a>

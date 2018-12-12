@@ -41,7 +41,7 @@ class ReviewView(APIView):
         return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
 
 
-@login_required
+#@login_required
 def table(request):
     t = Dining_Tables.objects.all()
 
@@ -49,12 +49,12 @@ def table(request):
     return render(request, 'eat_at_canteen/BOOKTABLE.html', context=t_dict)
 
 
-@login_required
+#@login_required
 def check(request):
     if request.method == 'POST':
         t = Dining_Tables.objects.all();
-        if request.user.is_authenticated:
-            username = request.user.username
+        if 'username' in request.session:
+            username = request.session['username']
         else:
             return reverse('Registration:register')
         user = User.objects.get(username=username)
@@ -89,11 +89,11 @@ def check(request):
         return render(request, 'eat_at_canteen/show.html', context=x)
 
 
-@login_required
+#@login_required
 def checkout(request):
     print('hii')
-    if request.user.is_authenticated:
-        username = request.user.username
+    if 'username' in request.session:
+        username = request.session['username']
     else:
         return reverse('Registration:register')
     user = User.objects.get(username=username)
@@ -110,7 +110,7 @@ def checkout(request):
     return render(request, 'eat_at_canteen/show.html', context=x)
 
 
-@login_required
+#@login_required
 def order(request, pk=None):
     if (request.method == 'POST'):
         FoodList = Order_Food.objects.all()
@@ -122,8 +122,8 @@ def order(request, pk=None):
         print(Food, Price)
         print('added1')
 
-        if request.user.is_authenticated:
-            username = request.user.username
+        if 'username' in request.session:
+            username = request.session['username']
         else:
             return reverse('Registration:register')
         user = User.objects.get(username=username)
@@ -193,8 +193,8 @@ def order(request, pk=None):
         print(Food, Price)
         print('added1')
 
-        if request.user.is_authenticated:
-            username = request.user.username
+        if 'username' in request.session:
+            username = request.session['username']
         else:
             return reverse('Registration:register')
         user = User.objects.get(username=username)
@@ -255,24 +255,24 @@ def order(request, pk=None):
         reverse('Homepage:specificitem', kwargs={'pk': pk})
 
 
-@login_required()
+# @login_required()
 def cart(request):
     FoodList = Order_Food.objects.all()
     CustomerFoodList = Order_User.objects.all()
-    if request.user.is_authenticated:
-        username = request.user.username
+    if 'username' in request.session:
+        username = request.session['username']
     else:
         return reverse('Registration:register')
     user = User.objects.get(username=username)
     email = user.email
     print(email)
-    j = 0;
+    j = 0
     token = ' '
     for i in CustomerFoodList:
         if i.mailId == email and i.status == 'draft':
-            j = 1;
+            j = 1
             token = i.TokenId
-            print('hiisdfsf');
+            print('hiisdfsf')
             print(token)
             break
     if j == 1:
@@ -281,20 +281,20 @@ def cart(request):
         for h in g:
             l = l + h.price
     else:
-        g = None;
+        g = None
         l = None
 
     x = {'items': g, 'l': l}
     return render(request, 'eat_at_canteen/cart.html', context=x)
 
 
-@login_required
+#@login_required
 def Delete(request):
     a = request.POST.get('food')
     f = Food_items.objects.get(Food_Name=a)
 
-    if request.user.is_authenticated:
-        username = request.user.username
+    if 'username' in request.session:
+        username = request.session['username']
     else:
         return reverse('Registration:register')
     user = User.objects.get(username=username)
@@ -308,10 +308,10 @@ def Delete(request):
     return redirect('eat_at_canteen:cart')
 
 
-@login_required
+#@login_required
 def confirm(request):
-    if request.user.is_authenticated:
-        username = request.user.username
+    if 'username' in request.session:
+        username = request.session['username']
     else:
         return reverse('Registration:register')
     user = User.objects.get(username=username)
@@ -333,7 +333,7 @@ def confirm(request):
     return redirect('Homepage:home', category='all')
 
 
-@login_required
+#@login_required
 def update(request):
     print('came to update top part')
     if request.method == 'POST':
@@ -357,7 +357,7 @@ def review(request):
     return render(request, 'eat_at_canteen/review.html', context=x)
 
 
-@login_required
+#@login_required
 def add_review(request):
     form = ReviewForm(request.POST)
     if form.is_valid():
@@ -389,4 +389,4 @@ def add_review(request):
 
         return HttpResponseRedirect(reverse('eat_at_canteen:hotel_review'))
 
-    return render(request, 'reviews/review.html', {'form': form})
+    return render(request, 'eat_at_canteen/review.html', {'form': form})

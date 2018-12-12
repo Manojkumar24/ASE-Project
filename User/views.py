@@ -11,12 +11,10 @@ import datetime
 from eat_at_canteen.models import item_review
 
 
-@login_required
 def index(request, pk=None):
     user = User.objects.get(username=pk)
     email = user.email
-    user_order_inOrderd, user_order_inPreparation, user_order_inDelivery, orders_deliverd, cancel = Order_history(email,
-                                                                                                                  True)
+    user_order_inOrderd, user_order_inPreparation, user_order_inDelivery, orders_deliverd, cancel = Order_history(email,True)
     popular = PopularFood()
     return render(request, "User/UserAccount.html",
                   {'details': user, 'historyDelivery': user_order_inDelivery, 'historyOrdered': user_order_inOrderd,
