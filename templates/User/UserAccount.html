@@ -180,13 +180,19 @@
                     <a href="{% url 'Homepage:specificitem' food.Food_id %}"><img class="CardImage" src="{% static food.image.path %}" alt="Avatar"></a>
                     <div class="container">
 
-                        <form method="post" action="{% url 'eat_at_canteen:order' %}">
+                        <form method="post" action="{% url 'eat_at_canteen:order' pk=food.Food_id page='user'%}">
                             {% csrf_token %}
-                            Name :<input type="text" value="{{ food.Food_Name }}" name="food" style="border: 0" readonly><br>
-                            Price : <input type="text" value="{{ food.Food_Price }}" name="price" style="border: 0" readonly><br>
+                            Name :<label>
+                            <input type="text" value="{{ food.Food_Name }}" name="food" style="border: 0" readonly>
+                            </label><br>
+                            Price : <label>
+                            <input type="text" value="{{ food.Food_Price }}" name="price" style="border: 0" readonly>
+                             </label><br>
 
                             {% if  food.quantity  == 0 %}
-                                <input type="text" style="border: 0" value="Not Available" readonly>
+                                <label>
+                                    <input type="text" style="border: 0" value="Not Available" readonly>
+                                </label>
                             {% else %}
                                 {% if food.Food_Name in user_items %}
                                     <a href="{% url 'eat_at_canteen:cart' %}"><input type="button" class="cart" value="Go to Cart" ></a>

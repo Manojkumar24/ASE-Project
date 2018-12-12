@@ -36,7 +36,7 @@ class Staffdetails(models.Model):
     lastname = models.CharField(max_length=200)
     employee_id = models.CharField(primary_key=True, max_length=10)
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=1000)
+    password = models.CharField(max_length=400)
     # password2 = models.CharField(max_length=50)
     address = models.CharField(max_length=250)
     city = models.CharField(max_length=150)

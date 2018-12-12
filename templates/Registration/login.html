@@ -4,6 +4,7 @@
 {% block content %}
 <div class="adjust">
 <div class="box">
+{% if user_logged_in and registered %}
 <h1> Please Login </h1>
 
     <form action="{% url 'Registration:user_login' %}"  method="post" autocomplete="off">
@@ -25,24 +26,16 @@
             <input type="radio" onclick="location.href='{% url 'Registration:admin_login' %}'">
         </label> Admin
     </form>
+{% elif not registered %}
+    <h4>Invalid login details or you may not have verified your email id.</h4><br>
+    <p>Enter details again or Verify your email id and then log in again</p>
+    <a href="{% url 'Registration:user_login' %}">click here</a>
+{% elif not registered and not user_logged_in %}
+    <h4>Your email is not verified</h4><br>
+{% else %}
+    <h4>This username is not registered.</h4><br>
+    <a href="{% url 'Registration:register' %}">click here</a>
+{% endif %}
 </div>
 </div>
  {% endblock %}
-{% comment %}        <form action="{% url 'Registration:user_login' %}"  method="post" autocomplete="off">
-        {% csrf_token %}
-        <table>
-        <tr>
-            <td><label for="username">Username:</label></td>
-            <td><input type="text" name="username" placeholder="Enter Username" autofocus autocomplete="false"></td>
-        </tr>
-        <tr>
-            <td><label for="password">Password:</label></td>
-            <td><input type="password" name="password" autofocus placeholder="Enter password"><br></td>
-        </tr>
-        <tr>
-            <td><a href = "{% url 'Registration:fp' %}">Forgot password?</a></td>
-            <td><input type="submit" name="" value="Login"></td>
-        </tr>
-        </table>
-</form>
-{% endblock %}{% endcomment %}

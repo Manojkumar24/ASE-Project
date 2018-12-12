@@ -12,6 +12,7 @@ urlpatterns = [
     path('admin_reg',views.admin_register,name='admin_reg'),
     path('staff_registration/', views.staff_registration, name='staff_registration'),
     path('admin_login/', views.admin_login, name='admin_login'),
+    #path('admin_not_log/', views.admin_login, name='admin_login'),
     path('admin_logout/', views.admin_logout, name='admin_logout'),
     path('user_login/', views.user_login, name='user_login'),
     path('staff_login/', views.staff_login, name='staff_login'),
@@ -28,10 +29,8 @@ urlpatterns = [
     path('editstaff/', views.editstaff, name='editstaff'),
     path('updatestaff/', views.updatestaff, name="updatestaff"),
     path('change_password/>',views.change_user_password,name="change_user_password"),
-    path('change_staff_password/>',views.change_staff_password,name="change_staff_password"),
     path('reset/<uidb64>/<token>/',views.user_password_reset, name='user_password_reset'),
     path('forgotpassword/',views.change_user_password,name='fp'),
-    path('forgotpassword1/',views.change_staff_password,name='fp1')
 
 
 ]

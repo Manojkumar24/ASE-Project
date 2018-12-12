@@ -7,15 +7,16 @@ from Registration.models import UserProfileInfo
 from django.contrib.auth.decorators import login_required
 # from Registration.views import user_login
 from User.models import Order_Food, Order_User
-import datetime
+from datetime import date, timezone, datetime, time
 from eat_at_canteen.models import item_review
 
 
 def index(request, pk=None):
     user = User.objects.get(username=pk)
     email = user.email
-    user_order_inOrderd, user_order_inPreparation, user_order_inDelivery, orders_deliverd, cancel = Order_history(email,
-                                                                                                                  True)
+    user_order_inOrderd, user_order_inPreparation, user_order_inDelivery, orders_deliverd, cancel = Order_history(email, True)
+    print(date.today())
+
     popular = PopularFood()
     print(popular)
     return render(request, "User/UserAccount.html",
@@ -96,15 +97,25 @@ def CompletedOrders(request, token_id):
 def CancelOrders(request, token_id):
     print('sadsdas')
     ordered = Order_User.objects.get(TokenId=token_id)
-    print('asdasdasd')
-    email = ordered.mailId
-    order = Order_Food.objects.get(TokenId=token_id)
-    if order.date == datetime.datetime.date and order.time - datetime.datetime.time == 30:
-        ordered.status = 'cancelled'
-        ordered.save()
-        print(ordered.status)
-        username = User.objects.get(email=email)
-        return index(request, username)
+    order = Order_Food.objects.filter(TokenId=token_id)
+    cancelStatus = ''
+    for m in order:
+        print('adsdawsda')
+        if m.date == date.today():
+            ordered.status = 'cancelled'
+            print(m.date)
+            # = datetime.now().strftime('%H:%M')
+            print(datetime.time)
+            cancelStatus = 'cancelled'
+            ordered.save()
+            print(ordered.status)
 
+        else:
+            cancelStatus = 'not Cancelled'
+    if cancelStatus == 'cancelled':
+
+        username = User.objects.get(email=ordered.mailId)
+        print('asdasdasd')
+        return index(request, username.username)
     else:
-        return Order_history(email, False)
+        return Order_history(ordered.mailId, False)

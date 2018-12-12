@@ -48,11 +48,12 @@ INSTALLED_APPS = [
     'User',
     'bootstrapform',
     'payment',
+    'crispy_forms',
     'rest_framework',
     'django_nose',
     'Crypto'
 ]
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -178,7 +179,7 @@ PAYTM_CALLBACK_URL = "/payment/check/"
 
 if DEBUG:
     PAYTM_MERCHANT_KEY = "T1GsewDpWX%z3BdZ"
-    PAYTM_MERCHANT_ID = "xNaORM51969003078152"
+    PAYTM_MERCHANT_ID = "xNaORM5196900307815r̥2"
     PAYTM_WEBSITE = 'WEBSTAGING'
     HOST_URL = 'http://localhost:8000'
     '''

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% extends 'Homepage/Header_Footer.html' %}
+{{ block.super }}
 {% load static %}
 {% block content %}
 <body>
@@ -33,7 +34,7 @@
                 <div class="card">
                     <a href="{% url 'Homepage:specificitem' food.Food_id %}"><img class="CardImage" src="{% static food.image.path %}" alt="Avatar"></a>
                     <div class="container">
-                        <form method="post" action="{% url 'eat_at_canteen:order' %}">
+                        <form method="post" action="{% url 'eat_at_canteen:order'   %}">
                             {% csrf_token %}
                             Name :<input type="text" value="{{ food.Food_Name }}" name="food" style="border: 0" readonly><br>
                                 Price : <input type="text" value="{{ food.Food_Price }}" name="price" style="border: 0" readonly><br>

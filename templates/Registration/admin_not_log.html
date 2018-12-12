@@ -1,0 +1,11 @@
+<!Doctype html>
+{% extends 'Homepage/Header_Footer.html' %}
+{%  load staticfiles %}
+{% block content %}
+<div class="adjust">
+<div class="box">
+Invalid login details.
+    <a href="{% url 'Registration:admin_login' %}">click here</a>
+</div>
+</div>
+{% endblock %}
