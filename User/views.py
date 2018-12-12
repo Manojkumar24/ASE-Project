@@ -7,8 +7,7 @@ from Registration.models import UserProfileInfo
 from django.contrib.auth.decorators import login_required
 # from Registration.views import user_login
 from User.models import Order_Food, Order_User
-
-# Create your views here.
+import datetime
 from eat_at_canteen.models import item_review
 
 
@@ -16,17 +15,21 @@ from eat_at_canteen.models import item_review
 def index(request, pk=None):
     user = User.objects.get(username=pk)
     email = user.email
-    user_order_inOrderd, user_order_inPreparation, user_order_inDelivery, orders_deliverd = Order_history(email)
-    popular=PopularFood()
-    return render(request, "User/UserAccount.html", {'details': user, 'historyDelivery': user_order_inDelivery, 'historyOrdered': user_order_inOrderd, 'historyPreparation': user_order_inPreparation, 'orders_delivered': orders_deliverd , 'popular': popular})
+    user_order_inOrderd, user_order_inPreparation, user_order_inDelivery, orders_deliverd, cancel = Order_history(email,
+                                                                                                                  True)
+    popular = PopularFood()
+    return render(request, "User/UserAccount.html",
+                  {'details': user, 'historyDelivery': user_order_inDelivery, 'historyOrdered': user_order_inOrderd,
+                   'historyPreparation': user_order_inPreparation, 'orders_delivered': orders_deliverd,
+                   'popular': popular, 'cancel': cancel})
 
 
-def Order_history(email):
+def Order_history(email, cancelState):
     orders_Delivery = {}
     orders_Ordered = {}
     orders_preparation = {}
     orders_delivered = {}
-
+    cancel = {}
     orders_inDelivery = Order_User.objects.filter(mailId=email, status='in Delivery')
     for m in orders_inDelivery:
         orders_Delivery[m.TokenId] = Order_Food.objects.filter(Status='conf', TokenId=m.TokenId)
@@ -34,6 +37,10 @@ def Order_history(email):
     orders_inOrdered = Order_User.objects.filter(mailId=email, status='ordered')
     for m in orders_inOrdered:
         orders_Ordered[m.TokenId] = Order_Food.objects.filter(Status='conf', TokenId=m.TokenId)
+        if cancelState:
+            cancel[m.TokenId] = True
+        else:
+            cancel[m.TokenId] = False
 
     orders_inPreparation = Order_User.objects.filter(mailId=email, status='in Preparation')
     for m in orders_inPreparation:
@@ -43,7 +50,7 @@ def Order_history(email):
     for m in orders_Delivered:
         orders_delivered[m.TokenId] = Order_Food.objects.filter(Status='conf', TokenId=m.TokenId)
 
-    return orders_Ordered, orders_preparation, orders_Delivery, orders_delivered
+    return orders_Ordered, orders_preparation, orders_Delivery, orders_delivered, cancel
 
 
 def PopularFood():
@@ -62,7 +69,7 @@ def PopularFood():
                 k = m.rating
                 item_count = 1
         ratings[m.Food_id] = k / item_count
-        m.rating = k/item_count
+        m.rating = k / item_count
         m.save()
     food_sortBy_Rating = sorted(ratings.items())
     print('adsda', ratings)
@@ -87,14 +94,17 @@ def CompletedOrders(request, token_id):
 
 
 def CancelOrders(request, token_id):
+    print('sadsdas')
     ordered = Order_User.objects.get(TokenId=token_id)
-    ordered.status = 'cancelled'
-    ordered.save()
-    print(ordered.status)
-    username = User.objects.get(email=ordered.mailId)
-    return index(request, username)
+    print('asdasdasd')
+    email = ordered.mailId
+    order = Order_Food.objects.get(TokenId=token_id)
+    if order.date == datetime.datetime.date and order.time - datetime.datetime.time == 30:
+        ordered.status = 'cancelled'
+        ordered.save()
+        print(ordered.status)
+        username = User.objects.get(email=email)
+        return index(request, username)
 
-
-def validate(request):
-    # if user.is_authentictaed
-    return None
+    else:
+        return Order_history(email, False)
