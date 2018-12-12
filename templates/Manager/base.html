@@ -47,14 +47,14 @@
         </ul>
         <ul class="nav navbar-nav navbar-right" style="padding-right: 20px">
             {% if 'admin_id' in request.session %}
-            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Name</a>
+            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">{{ request.session.admin_id }}</a>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="#">profile</a>
                     <a class="dropdown-item" href="{% url 'Registration:admin_logout' %}">Logout</a>
                 </div>
             </li>
             {% elif 'employee_id' in request.session %}
-             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Name</a>
+             <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">{{ request.session.employee_id }}</a>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="#">profile</a>
                     <a class="dropdown-item" href="{% url 'Registration:staff_logout' %}">Logout</a>
