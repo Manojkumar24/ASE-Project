@@ -14,7 +14,7 @@
 }
  
 #chart1{
-  background-color:rgba(20, 20, 20, 0.8);
+  background:color:rgba(20, 20, 20, 0.8);
   top:100px;
   left:30px;
   position:absolute;

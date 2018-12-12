@@ -6,47 +6,33 @@ from User.models import  Order_Food
 
 def users(request):
     return render(request,'history/history.html')
-
-
+def datespliting(Fromdate):
+    a=int(Fromdate[0:4])
+    a1=int(Fromdate[5:7])
+    a2=int(Fromdate[8:10])
+    return a,a1,a2
 def users1(request):
     dict1={}
     if request.method=='POST':
-        Fromdate = request.POST.get('Fromdate')
-        Todate = request.POST.get('Todate')
-
-
-        x=int(Fromdate[0:4])
-        x1=int(Fromdate[5:7])
-        x2=int(Fromdate[8:10])
-        y=int(Todate[0:4])
-        y1=int(Todate[5:7])
-        y2=int(Todate[8:10])
-        all_foodorders=Order_Food.objects.filter(Status='conf');
-
-
-
-
-
-
-
+        Fromdate = request.POST.get('fromdate')
+        Todate = request.POST.get('todate')
+        year1,month1,date1=datespliting(Fromdate);
+        year2,month2,date2=datespliting(Todate);
+        all_foodorders=Order_Food.objects.all();
         for fo in all_foodorders:
             z=fo.date.isoformat()
-            z1=int(z[0:4])
-            z2=int(z[5:7])
-            z3=int(z[8:10])
-            if z1>=x and z1<=y:
-                if z2>=x1 and z2<=y1:
-                    if z3>=x2 and z3<=y2:
+            year3,month3,date3=datespliting(z);
+            if year3>=year1 and year3<=year2:
+                if month3>=month1 and month3<=month2:
+                    if date3>=date1 and date3<=date2:
                         dict1[fo.FoodId]=0;
 
         for fo in all_foodorders:
             a4=fo.date.isoformat()
-            z4=int(a4[0:4])
-            z5=int(a4[5:7])
-            z6=int(a4[8:10])
-            if z4>=x and z4<=y:
-                if z5>=x1 and z5<=y1:
-                    if z6>=x2 and z6<=y2:
+            year4,month4,date4=datespliting(a4);
+            if year4>=year1 and year4<=year2:
+                if month4>=month1 and month4<=month2:
+                    if date4>=date1 and date4<=date2:
 
                        dict1[fo.FoodId]=dict1[fo.FoodId]+fo.quantity;
 
@@ -65,43 +51,28 @@ def users2(request):
        if request.method=='POST':
             fromdate=request.POST.get('fromdate')
             todate=request.POST.get('todate')
-            a=int(fromdate[0:4])
-            a1=int(fromdate[5:7])
-            a2=int(fromdate[8:10])
-            b=int(todate[0:4])
-            b1=int(todate[5:7])
-            b2=int(todate[8:10])
+            year5,month5,date5=datespliting(fromdate);
+            year6,month6,date6=datespliting(todate);
+
             all_foodorders=Order_Food.objects.filter(Status='conf');
-
-
             for i in all_foodorders:
               m=i.date.isoformat()
-              print(m)
-              m1=int(m[0:4])
-              m2=int(m[5:7])
-              m3=int(m[8:10])
-              if m1>=a and m1<=b:
-                  if m2>=a1 and m2<=b1:
-                      if m3>=b2 and m3<=b:
+              year7,month7,date7=datespliting(m);
+              if year7>=year5 and year7<=year6:
+                  if month7>=month5 and month7<=month6:
+                      if date7>=date5 and date7<=date6:
                               t=i.date.isoformat();
                               dict2[t]=0;
 
             for i in all_foodorders:
               b4=i.date.isoformat()
-              m4=int(b4[0:4])
-              m5=int(b4[5:7])
-              m6=int(b4[8:10])
-              if m4>=a and m4<=b:
-                  if m5>=a1 and m5<=b1:
-                      if m6>=a2 and m6<=b2:
+              year8,month8,date8=datespliting(b4)
+              if year8>=year5 and year8<=year6:
+                  if month8>=month5 and month8<=month6:
+                      if date8>=date5 and date8<=date6:
                          t=i.date.isoformat()
-                         print(t)
-                         print(type(t));
                          dict2[t]=i.price;
-
-
-            emp2=new2.objects.all()
-            emp2.delete()
+            new2.objects.all().delete()
 
             for key,value in dict2.items():
                print(key,value)
@@ -112,3 +83,6 @@ def users2(request):
 
             print(dict2)
        return render(request,'history/history1.html',context={'d1':dict2})
+
+def test(request):
+           return render(request,'history/test.html')

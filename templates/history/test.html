@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'Manager/base.html' %}
+{% load static %}
+{% block body_block %}
+
+<body style="background-color:#111">
+
+    
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <div class="signupSection">
+<div class="info">
+<h2>your history is here</h2>
+
+<div id="chart">
+</div>
+
+</div>
+<form  method="POST" class="signupForm" name="signupform">
+{% csrf_token %}
+<h2>ANALYSIS</h2>
+<ul class="noBullet">
+<li>
+
+FROM DATE : <input type="date" class="inputFields" id="fromdate"  name="fromdate"placeholder="from date" value=""  required/>
+</li>
+<li>
+
+ TO DATE : <input type="date" class="inputFields" id="todate" name="todate" placeholder="to date" value=""  required/>
+
+
+</li>
+<li >
+<input type="submit" id="join-btn" name="submit" alt="submit" value="submit">
+</li>
+</ul>
+</form>
+
+    <script>
+
+
+        var colors = ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0', '#546E7A', '#26a69a', '#D10CE8'];
+        var options1 = {
+            chart: {
+                height: 350,
+                type: 'bar',
+                events: {
+                    click: function(chart1, w, e) {
+                        console.log(chart1, w, e )
+                    }
+                },
+            },
+            colors: colors,
+            plotOptions: {
+                bar: {
+                    columnWidth: '45%',
+                    distributed: true
+                }
+            },
+            dataLabels: {
+                enabled: false,
+            },
+            series: [{
+                data: [21, 22, 10, 28, 16, 21, 13, 30]
+            }],
+            xaxis: {
+                categories: ['John', 'Joe', 'Jake', 'Amber', 'Peter', 'Mary', 'David', 'Lily'],
+                labels: {
+                    style: {
+                        colors: colors,
+                        fontSize: '14px'
+                    }
+                }
+            }
+        }
+
+        var chart1 = new ApexCharts(
+            document.getElementById("chart"),
+            options1
+        );
+chart1.render();
+
+    </script>
+</body>
+{% endblock %}
+ </html>
