@@ -40,18 +40,20 @@ def default(request, category):
         food = Food_items.objects.filter(Category=category)
 
     contents = {'food': food}
+    canteen_details = Admin.objects.all()
+    contents = {'food': food,'user_items':user_order_items}
     background = Admin_Image.objects.filter(categories='background')
     canteen_pics = Admin_Image.objects.filter(categories='workplace')
     service_pics = Admin_Image.objects.filter(categories='service')
     if 'employee_id' in request.session:
         user = request.session['employee_id']
         staff = Staffdetails.objects.filter(employee_id=user)
-        content1 = {'staff': staff}
+        content1 = {'staff': staff,'user_items':user_order_items}
         return render(request, 'Homepage/category.html', contents, content1)
     else:
         return render(request, 'Homepage/Homepage.html',
                       {'background': background, 'canteen_pics': canteen_pics, 'service_pics': service_pics,
-                       'food': food})
+                       'food': food, 'canteenDetails': canteen_details})
 
 
 def search(request):
@@ -68,6 +70,7 @@ def search(request):
 
 
 def itemdetailview(request, pk):
+    pK = int(pk)
     prod = Food_items.objects.get(Food_id=pk)
     user_order_items = []
     b = item_review.objects.all()
@@ -132,7 +135,7 @@ def reviewtext(request, pk):
             prod.rating = round(prod.rating, 1)
             prod.No_of_reviews = prod.No_of_reviews + 1
             prod.save()
-            return redirect('/' + str(pk) + '/')
+            return redirect('Homepage:specificitem', pk=pk)
     else:
         form = writereview()
     return render(request, 'Homepage/writereview.html', {'form': form})

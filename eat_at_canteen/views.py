@@ -112,7 +112,7 @@ def checkout(request):
 
 #@login_required
 def order(request, pk=None):
-    if (request.method == 'POST'):
+    if request.method == 'POST':
         FoodList = Order_Food.objects.all()
         CustomerFoodList = Order_User.objects.all()
 
@@ -182,7 +182,7 @@ def order(request, pk=None):
                 a.save()
                 c.save()
 
-        return redirect('Homepage:home', category='all')
+        return reverse('Homepage:home')
     elif request.method == 'GET':
         FoodList = Order_Food.objects.all()
         CustomerFoodList = Order_User.objects.all()
@@ -252,18 +252,17 @@ def order(request, pk=None):
                 a.totalPrice = a.totalPrice + float(Price)
                 a.save()
                 c.save()
-        reverse('Homepage:specificitem', kwargs={'pk': pk})
+        reverse('Homepage:Home')
 
 
 # @login_required()
-def cart(request):
+def cart(request, username):
     FoodList = Order_Food.objects.all()
     CustomerFoodList = Order_User.objects.all()
-    if 'username' in request.session:
-        username = request.session['username']
-    else:
-        return reverse('Registration:register')
-    user = User.objects.get(username=username)
+    try:
+        user = User.objects.get(username=username)
+    except:
+        return  redirect('Homepage:home')
     email = user.email
     print(email)
     j = 0
@@ -284,7 +283,7 @@ def cart(request):
         g = None
         l = None
 
-    x = {'items': g, 'l': l}
+    x = {'items': g, 'l': l, 'username': username}
     return render(request, 'eat_at_canteen/cart.html', context=x)
 
 
