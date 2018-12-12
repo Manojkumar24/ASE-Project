@@ -11,7 +11,8 @@ class UserProfileInfo(models.Model):
     address = models.CharField(max_length=200, default='')
     city = models.CharField(max_length=100, default='')
     pincode = models.CharField(max_length=6, default='')
-    profile_pic = models.ImageField(upload_to='static/registration/profile_pics', blank=True)
+    profile_pic = models.ImageField(
+        upload_to='static/Registration/profile_pics', blank=True)
     is_verified = models.BooleanField(default=False)
     """def __str__(self):
         return self.user.username
@@ -48,5 +49,6 @@ class Staffdetails(models.Model):
         max_char = 5
         # allchar = string.ascii_letters + string.punctuation + string.digits
         allchar = string.digits
-        emp_id = "CSA" + ("".join(choice(allchar) for x in range(randint(min_char, max_char))))
+        emp_id = "CSA" + ("".join(choice(allchar)
+                                  for x in range(randint(min_char, max_char))))
         return emp_id

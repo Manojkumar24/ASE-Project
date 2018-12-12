@@ -15,7 +15,7 @@
             <a href="#"><img src="{%static details.userprofileinfo.profile_pic.path %}" alt="avatar"> {{ request.user.username }}</a>
             <a href="#">add : {{ details.userprofileinfo.address }}</a>
             <a href="#">city : {{ details.userprofileinfo.city }}</a>
-            <a href="#">Edit Profile</a>
+            <a href="{% url 'Registration:editprofile' %}">Edit Profile</a>
         </div>
         {% endif %}
     </div>

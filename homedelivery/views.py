@@ -8,6 +8,7 @@ from Manager.models import Available_Towns
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from Registration.models import UserProfileInfo
+
 import json
 #import requests
 import base64
@@ -22,6 +23,10 @@ def address(request):
     for object in Available_Towns.objects.all().values():
         context["Towns"].append(object["Towns"])
     print(context)
+    userprofileinfo = UserProfileInfo.objects.filter(
+        user__username=request.user).values()
+    context['userprofileinfo'] = userprofileinfo[0]
+    print(context['userprofileinfo'])
     return render(request, 'homedelivery/address.html', context=context)
 
 
@@ -77,7 +82,7 @@ def confirm(request):
     user = User.objects.get(username=username)
     email = user.email
     current_user = Order_User.objects.get(mailId=email, status='draft')
-    current_user.status = 'in Delivery'
+    current_user.status = 'ordered'
     TokenId = current_user.TokenId
     current_user.save()
     current_order = Order_Food.objects.filter(TokenId=TokenId, Status='dr')

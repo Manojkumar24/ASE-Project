@@ -6,7 +6,11 @@ from rest_framework.utils import json
 from Canteen_System_Automation import settings
 from payment import Checksum
 from payment.Checksum import generate_checksum, verify_checksum, generate_checksum_by_str, verify_checksum_by_str
-from payment.models import PaytmTxnHistory as PaytmHistory
+from payment.models import PaytmTxnHistory0 as PaytmHistory
+
+
+def test(request):
+    return HttpResponse(";fhajsj;jfsda")
 
 
 @csrf_exempt
@@ -14,7 +18,8 @@ def pay(request):
 
     merchantMid = settings.PAYTM_MERCHANT_ID
     merchantKey = settings.PAYTM_MERCHANT_KEY
-    order_id = Checksum.__id_generator__()
+    #order_id = Checksum.__id_generator__()
+    order_id = '1'
     channelId = 'WEB'
     custId = "dfsvfdc"
     txnAmount = '10.00'

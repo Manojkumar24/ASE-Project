@@ -8,7 +8,7 @@
     <h1>Update Here!</h1>
     <h3>Fill out the form:</h3>
     {% if match_failed %}
-        <h1>{{message}}</h1>
+        <h4 style="color:red">{{message}}</h4>
     {% endif %}
     <form enctype="multipart/form-data" action="{% url 'Registration:updateprofile'%}" method="post">
         {% csrf_token %}
@@ -25,17 +25,17 @@
             </div>
             <div class="form-group col-md-6">
               <label for="old_password">Old Password</label>
-              <input name="old_password" type="password" class="form-control" id="old_password" placeholder="Old Password" required>
+              <input name="old_password" title="Input your old password to make changes" type="password" class="form-control" id="old_password" placeholder="Old Password" required>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="new_password">New Password</label>
-              <input name="new_password" type="new_password" class="form-control" id="new_password" placeholder="New Password" required>
+              <input name="new_password" title="Leave empty to not change your current password" type="password" class="form-control" id="new_password" placeholder="New Password">
             </div>
             <div class="form-group col-md-6">
               <label for="new_password_conf">Confirm New Password</label>
-              <input name="new_password_conf" type="password" class="form-control" id="new_password_conf" placeholder="Password" required>
+              <input name="new_password_conf" title="Leave empty to not change your current password" type="password" class="form-control" id="new_password_conf" placeholder="Password">
             </div>
           </div>
           <div class="form-row">
@@ -49,7 +49,7 @@
             </div>
           </div>
           <div class="form-row">
-            <div class="form-group col-md-6"
+            <div class="form-group col-md-6">
               <label for="email">Email</label>
               <input name="email" type="email" class="form-control" id="email" value="{{user.email}}"placeholder="Email" required>
             </div>
@@ -61,11 +61,11 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="city">City</label>
-              <input name="city" type="text" class="form-control" id="city" required>
+              <input name="city" type="text" class="form-control" id="city" value="{{userprofileinfo.city}}" required>
             </div>
             <div class="form-group col-md-6">
               <label for="pincode">Pincode</label>
-              <input name="pincode" type="text" class="form-control" id="pincode" required>
+              <input name="pincode" type="text" class="form-control" id="pincode" value="{{userprofileinfo.pincode}}" required>
             </div>
           </div>
           <div class="form-row col">
