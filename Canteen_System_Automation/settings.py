@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'User',
     'bootstrapform',
     'payment',
+    'rest_framework',
+    'django_nose',
 ]
 
 MIDDLEWARE = [
@@ -184,3 +186,10 @@ if DEBUG:
     Password : Paytm12345
     This test wallet is topped-up to a balance of 7000 Rs. every 5 minutes.
     '''
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Tell nose to measure coverage on the 'foo' and 'bar' apps
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=registration',
+]

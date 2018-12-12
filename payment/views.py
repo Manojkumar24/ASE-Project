@@ -15,6 +15,7 @@ def pay(request):
     merchantMid = settings.PAYTM_MERCHANT_ID
     merchantKey = settings.PAYTM_MERCHANT_KEY
     order_id = Checksum.__id_generator__()
+    #order_id = pk
     channelId = 'WEB'
     custId = "dfsvfdc"
     txnAmount = '10.00'

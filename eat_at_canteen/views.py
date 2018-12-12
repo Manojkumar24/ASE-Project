@@ -256,14 +256,13 @@ def order(request, pk=None):
 
 
 # @login_required()
-def cart(request):
+def cart(request, username):
     FoodList = Order_Food.objects.all()
     CustomerFoodList = Order_User.objects.all()
-    if 'username' in request.session:
-        username = request.session['username']
-    else:
-        return reverse('Registration:register')
-    user = User.objects.get(username=username)
+    try:
+        user = User.objects.get(username=username)
+    except:
+        return  redirect('Homepage:home')
     email = user.email
     print(email)
     j = 0
@@ -284,7 +283,7 @@ def cart(request):
         g = None
         l = None
 
-    x = {'items': g, 'l': l}
+    x = {'items': g, 'l': l, 'username': username}
     return render(request, 'eat_at_canteen/cart.html', context=x)
 
 

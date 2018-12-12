@@ -38,6 +38,8 @@
     {% endif %}
     <h2>Sub Total</h2>
     <h2>{{ l }}</h2>
+    <a href="{% url 'payment:pay' pk=token %}"><input type="button" name="" value="Make Payment"></a>
+
     <a href="{% url 'eat_at_canteen:confirm' %}"><input type="button" name="" value="Confirm"></a>
 
 

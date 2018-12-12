@@ -37,7 +37,7 @@
     Street:{{ address.street }}
     Town:{{ address.town }}
     Phone_No:{{ address.phone_number }}
-    <a href="{% url 'homedelivery:confirm' %}"><input type="button" name="" value="Confirm"></a>
+    <a href="{% url 'homedelivery:confirm' username=username %}"><input type="button" name="" value="Confirm"></a>
 
 
     {% endblock %}

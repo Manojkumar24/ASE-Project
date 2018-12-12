@@ -43,7 +43,7 @@
                                     <a class="" href="{% url 'Registration:user_logout' %}">LogOut</a>
                                 </li>
                                 <li>
-                                    <a  href="{% url 'eat_at_canteen:cart' %}">Cart</a>
+                                    <a  href="{% url 'eat_at_canteen:cart' username=request.session.username %}">Cart</a>
                                 </li>
                             {% else %}
                                 <li>
@@ -94,7 +94,7 @@
                     <a class="" href="{% url 'Registration:user_logout' %}">LogOut</a>
                 </li>
                 <li>
-                    <a  href="{% url 'eat_at_canteen:cart' %}">Cart</a>
+                    <a  href="{% url 'eat_at_canteen:cart' username=request.session.username %}">Cart</a>
                 </li>
             {% else %}
                 <li><a href="#about">About us</a></li>
