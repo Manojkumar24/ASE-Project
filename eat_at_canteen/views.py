@@ -111,7 +111,7 @@ def checkout(request):
 
 
 #@login_required
-def order(request, pk=None):
+def order(request, pk=None, username=None):
     if request.method == 'POST':
         FoodList = Order_Food.objects.all()
         CustomerFoodList = Order_User.objects.all()
@@ -121,18 +121,15 @@ def order(request, pk=None):
         Price = request.POST.get('price')
         print(Food, Price)
         print('added1')
-
-        if 'username' in request.session:
-            username = request.session.username
-        else:
-            return reverse('Registration:register')
-        user = User.objects.get(username=username)
+        try:
+            user = User.objects.get(username=username)
+        except:
+            return redirect('Homepage:home')
         email = user.email
         print(email)
         j = 0
         for i in CustomerFoodList:
             if i.mailId == email and i.status == 'draft':
-                print('fgdfgdgdgdg')
                 j = 1
                 break
         print(j)
@@ -182,7 +179,7 @@ def order(request, pk=None):
                 a.save()
                 c.save()
 
-        return reverse('Homepage:home')
+        return redirect('Homepage:home', category='all')
     elif request.method == 'GET':
         FoodList = Order_Food.objects.all()
         CustomerFoodList = Order_User.objects.all()
@@ -252,7 +249,7 @@ def order(request, pk=None):
                 a.totalPrice = a.totalPrice + float(Price)
                 a.save()
                 c.save()
-        reverse('Homepage:Home')
+        return redirect('Homepage:home', category='all')
 
 
 # @login_required()

@@ -1,5 +1,6 @@
 {% extends "Manager/base.html" %}
 {% block body_block %}
+    <div class="container">
     {% if error %}
     <p class="errormsg">{{ error }}</p>
     {% endif %}
@@ -23,4 +24,5 @@
         {% endfor %}
         </table>
     {% endif %}
+    </div>
 {% endblock %}

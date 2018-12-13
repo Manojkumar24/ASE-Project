@@ -17,16 +17,20 @@
     <div id ="about" class="About">
         <h1>About</h1>
         Our Service is Wonderful to experience....
-        {% if not service_pics %}
-            {% for pics in service_pics %}
-                <div class = "Slideshow">
-                    <img class = "slideimage" src = "{%static pics.image.path %}"  >
-                </div>
-            {% endfor %}
-                <a href="#" class="Prev" onclick="PlusSlides(-1)">&#10094;</a>
-                <a href="#" class="Next" onclick="PlusSlides(1)">&#10095;</a>
-        {% endif %}
+        <p>
+            Our founder, Charlie Doe, had an idea to create a restaurant that was more than a place that served great food. Charlie wanted to give locals a place where they'd always feel at home. A place where they could get no-nonsense food at down-to-earth prices, and where they'd be treated right by people who had a passion to serve.
 
+The culture at the Ninety Nine Restaurants was instilled by Charlie Doe long before a mission statement was ever written down on paper and is still evident today. At the Ninety Nine, guests, team members and community are all treated with respect.
+        </p>
+        <div class = "slideshow">
+        {% if service_pics %}
+            {% for pics in service_pics %}
+
+                        <img class = "slideimage" src = "{%static pics.image.path %}"  >
+
+            {% endfor %}
+        {% endif %}
+        </div>
     </div>
     <div class = "Food">
         <h1>Things that are worth waiting!!</h1>
@@ -42,9 +46,18 @@
         {% if food %}
             {% for food in food %}
                 <div class="card">
-                    <a href="{% url 'Homepage:specificitem' food.Food_id %}"><img class="CardImage" src="{% static food.image.path %}" alt="Avatar"></a>
+                    {% if 'username' in request.session %}
+                        <a href="{% url 'Homepage:specificitem' pk=food.Food_id username=request.session.username  %}"><img class="CardImage" src="{% static food.image.path %}" alt="Avatar"></a>
+                    {% else %}
+                        <a href="{% url 'Homepage:specificitem' pk=food.Food_id username=None  %}"><img class="CardImage" src="{% static food.image.path %}" alt="Avatar"></a>
+
+                    {% endif %}
                     <div class="container">
-                        <form method="post" action="{% url 'eat_at_canteen:order'   %}">
+                    {% if 'username' in request.session %}
+                        <form method="post" action=" {% url 'eat_at_canteen:order'  pk=0 username=request.session.username %}">
+                        {% else %}
+                        <form method="post" action=" {% url 'eat_at_canteen:order'  pk=0 username='asdf' %}">
+                        {% endif %}
                             {% csrf_token %}
                             Name :<input type="text" value="{{ food.Food_Name }}" name="food" style="border: 0" readonly><br>
                                 Price : <input type="text" value="{{ food.Food_Price }}" name="price" style="border: 0" readonly><br>
@@ -55,10 +68,11 @@
                                     {% if food.Food_Name in user_items %}
                                         <a href="{% url 'eat_at_canteen:cart' username=request.session.username %}"><input type="button" class="cart" value="Go to Cart" ></a>
                                     {% else %}
-                                        <input type="submit"  class="cart" value = "add to cart">
+                                        <input type="submit" value="add to cart" class="cart">
                                     {% endif %}
                                 {% endif %}
-                        </form>
+
+                            </form>
 
                     </div>
                 </div>
@@ -71,35 +85,26 @@
 </html>
 
 <script type = "text/javascript">
+
     $(document).ready(function () {
         $('.categorybtn').click(function () {
             $('.category-content').slideToggle("slow");
         });
-
     });
-    var SlideIndex = 1;
-    showSlides(SlideIndex);
-    function PlusSlides(n) {
-        ShowSlides(SlideIndex += n);
-    }
-    function CurrentSlide(n) {
-      ShowSlides(SlideIndex = n);
-    }
-    function ShowSlides(n) {
-          var i;
-          var slides = document.getElementsByClassName("Slideshow");
-          if (n > slides.length) {SlideIndex = 1}
-          if (n < 1) {SlideIndex = slides.length}
-          for (i = 0; i < slides.length; i++) {
-              slides[i].style.display = "none";
-          }
-          for (i = 0; i < dots.length; i++) {
-              dots[i].className = dots[i].className.replace(" active", "");
-          }
-          slides[SlideIndex-1].style.display = "block";
-          dots[SlideIndex-1].className += " active";
-    }
+    var SlideIndex = 0;
+    carousel();
 
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("slideimage");
+        for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";
+        }
+        SlideIndex++;
+        if (SlideIndex > x.length) {SlideIndex = 1}
+        x[SlideIndex-1].style.display = "block";
+        setTimeout(carousel, 2000); // Change image every 2 seconds
+    }
     var slideIndex = 1;
     showSlides(slideIndex);
     function plusSlides(n) {
@@ -123,7 +128,6 @@
           slides[slideIndex-1].style.display = "block";
           dots[slideIndex-1].className += " active";
     }
-
+    alert('{{ message1 }}');
 </script>
-
 {% endblock %}

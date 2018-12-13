@@ -15,66 +15,58 @@
 </head>
     <header>
         <nav class="navBar">
-                {% if canteenDetails %}
-                    {% for canteenDetails in canteenDetails %}
-              <div class="heading">{{ canteenDetails.canteen_name }}</div>
-                    {% endfor %}
-                {% else %}
-                    <div class="heading">Cafeteria</div>
-                {% endif %}
-                    <div class="Options">
-                        <form action="{% url 'Homepage:search' %}" class="search" method="POST">
-                            {% csrf_token %}
-                            <input class="searchInput" name="FoodRequest" type="text" placeholder=" food!!!" >
-                            <button class="searchBtn" type="submit">Search</button>
-                        </form>
-                        <ul>
-                            <li>
-                                <a href="{% url 'Homepage:home' category='all'%}">Home<span class=""></span></a>
-                            </li>
-                            <li class="cont">
-                                <a  href="#Cont">ContactUs</a>
-                            </li>
+            {% if canteenDetails %}
+                {% for canteenDetails in canteenDetails %}
+                     <div class="heading">{{ canteenDetails.canteen_name }}</div>
+                {% endfor %}
+            {% else %}
+                <div class="heading">Cafeteria</div>
+            {% endif %}
+            <div class="Options">
+                <form action="{% url 'Homepage:search' %}" class="search" method="POST">
+                    {% csrf_token %}
+                    <input class="searchInput" name="FoodRequest" type="text" placeholder=" food!!!" >
+                    <button class="searchBtn" type="submit">Search</button>
+                </form>
+                <ul>
+                    <li>
+                        <a href="{% url 'Homepage:home' category='all'%}">Home<span class=""></span></a>
+                    </li>
+                    <li class="cont">
+                        <a  href="#Cont">ContactUs</a>
+                    </li>
 
-                            <li class="">
-                                <a class="" href="{% url 'eat_at_canteen:hotel_review' %}">Review</a>
-                            </li>
-                            {% if 'username' in request.session %}
-                                <li class="user">
-                                    <a  href="{% url 'UserProfile:home' pk=request.session.username %}" >{{ request.session.username }}</a>
+                    <li class="">
+                        <a class="" href="{% url 'eat_at_canteen:hotel_review' %}">Review</a>
+                    </li>
+                    {% if 'username' in request.session %}
+                        <li class="user">
+                            <a  href="{% url 'UserProfile:home' pk=request.session.username %}" >{{ request.session.username }}</a>
 
-                                </li>
-                                <li>
-                                    <a class="" href="{% url 'Registration:user_logout' %}">LogOut</a>
-                                </li>
-                                <li>
-                                    <a  href="{% url 'eat_at_canteen:cart' username=request.session.username %}">Cart</a>
-                                </li>
-                            {% else %}
-                                <li>
-                                    <a href="#about">AboutUs</a>
-                                </li>
-                                <li>
-                                    <a class="" href="{%  url 'Registration:user_login' %}">LogIn</a>
-                                </li>
-                                <li>
-                                    <a class="" href="{% url 'Registration:register' %}">register</a>
-                                </li>
+                        </li>
+                        <li>
+                            <a class="" href="{% url 'Registration:user_logout' %}">LogOut</a>
+                        </li>
+                        <li>
+                            <a  href="{% url 'eat_at_canteen:cart' username=request.session.username %}">Cart</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="#about">AboutUs</a>
+                        </li>
+                        <li>
+                            <a class="" href="{%  url 'Registration:user_login' %}">LogIn</a>
+                        </li>
+                        <li>
+                            <a class="" href="{% url 'Registration:register' %}">register</a>
+                        </li>
 
-                            {% endif %}
+                    {% endif %}
 
-                            </ul>
-                    </div>
+                    </ul>
+                </div>
         </nav>
     </header>
-    <!--div class="Review">
-        <a href="#">User-Restaurant Review</a>
-        <div class="ReviewData">
-            hcsdgyflhdgsuvfVdkfkjj
-        </div>
-
-    </div-->
-
     {% block content %}
     {% endblock %}
     <footer id="Cont">
@@ -84,13 +76,13 @@
             </h4>
             {% if canteenDetails %}
                 {% for details in canteenDetails %}
-            <p>
-                {{ details.canteen_street }},{{ details.canteen_city }},{{ details.canteen_pincode }}
-            </p>
+                    <p>
+                        {{ details.canteen_street }},{{ details.canteen_city }},{{ details.canteen_pincode }}
+                    </p>
                 {% endfor %}
             {% else %}
                 <p>
-                mainroad,sri city,517546
+                mainroad,sri city,51754
                 </p>
             {% endif %}
             <ul>

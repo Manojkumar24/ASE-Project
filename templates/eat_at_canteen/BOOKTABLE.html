@@ -26,8 +26,8 @@
             <div class="column nature">
                 <div class="content">
                     <img src="{% static 'eat_at_canteen/images/8.jpg' %}" alt="Mountains" style="width:100%">
-                    <h4>Table_No:{{ acc.Table_No }}</h4>
-                    <h4>Max_size:{{ acc.Max_size }} category:{{ acc.category }} </h4>
+                    <h4>Table_No:{{ acc.Table_id }}</h4>
+                    <h4>Max_size:{{ acc.size }} category:{{ acc.category }} </h4>
                     {% if acc.availability == True %}
                         <input type="text" value="BOOK"><input type="checkbox" value="Book" name="{{ acc.Table_id }}">
                     {% else %}

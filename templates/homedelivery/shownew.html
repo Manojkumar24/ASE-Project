@@ -1,6 +1,6 @@
-{% extends "eat_at_canteen/base.html" %}
-    {% block body_block %}
-<div class="jumbotron">
+{% extends "Homepage/Header_Footer.html" %}
+    {% block content %}
+<div class="jumbotron" style="margin-left: 2%;width: 80%;margin-top: 10%">
 <h1> Your Order </h1>
     <h2>Order Details</h2>
     <h2>Username:{{ username }}</h2>
@@ -40,5 +40,6 @@
     <a href="{% url 'homedelivery:confirm' username=username %}"><input type="button" name="" value="Confirm"></a>
 
 
-    {% endblock %}
+
 </div>
+{% endblock %}

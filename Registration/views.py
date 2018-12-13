@@ -63,7 +63,8 @@ def register(request):
             print(user.email)
             send_mail(mail_subject, message, [
                 'csa.ase1@gmail.com'], [to_email])
-            return HttpResponse('Please confirm your email address to complete the registration')
+            message1 = "please verify your email"
+            return render(request,'Registration/alert.html',{'message1':message1})
         else:
             print(user_form.errors, profile_form.errors)
     else:
@@ -153,8 +154,11 @@ def change_user_password(request):
     if request.method == 'POST':
         form = PasswordResetForm(request.POST)
         if form.is_valid():
-            email = form.cleaned_data.get('Email')
-            user = User.objects.get(email=email)
+            try:
+                email = form.cleaned_data.get('Email')
+                user = User.objects.get(email=email)
+            except:
+                return redirect('Homepage:home',category='all')
             if user:
                 # socket.getaddrinfo('localhost', 8080)
                 current_site = get_current_site(request)
@@ -348,10 +352,13 @@ def test(request):
 
 
 def editadmin(request, admin_id):
-    admin = Admin.objects.filter(admin_id=admin_id)
+    try:
+        admin = Admin.objects.filter(admin_id=admin_id)
+    except:
+        return redirect('Manager:index')
     context = {'admin': admin}
     return render(request, 'Registration/editadmin.html', context)
-
+    #return HttpResponse(admin_id)
 
 def change_admin_info(request, admin_id):
     admin = Admin.objects.get(admin_id=admin_id)
@@ -360,18 +367,6 @@ def change_admin_info(request, admin_id):
         return False
     if request.POST['new_password'] != request.POST['new_password_conf']:
         return False
-
-# @login_required
-def editadmin(request):
-    admin = Admin.objects.filter(Name="test_admin")
-    context = admin.values()
-    context = context[0]
-    return render(request, 'Registration/editadmin.html', context=context)
-
-
-# @login_required
-def updateadmin(request):
-    admin = Admin.objects.get(Name="test_admin")
     admin.Name = request.POST['Name']
     admin.email = request.POST['email']
     # updating password if the new password is not empty
@@ -389,14 +384,19 @@ def updateadmin(request, admin_id):
     if changed_status:
         context = Admin.objects.filter(admin_id=admin_id)
         print(context)
-        return HttpResponse('Saved')
+        #return HttpResponse('Saved')
         return render(request, 'Registration/updatedadmin.html', context=context)
     return HttpResponse('Failed')
 
+def test2(request):
+    return HttpResponse('Hello')
 
 #@login_required
 def editstaff(request, employee_id):
-    staff = Staffdetails.objects.filter(employee_id=employee_id)
+    try:
+        staff = Staffdetails.objects.filter(employee_id=employee_id)
+    except:
+        return redirect('Manager:index')
     context = staff.values()
     context = context[0]
     print(context)
@@ -406,15 +406,23 @@ def editstaff(request, employee_id):
 
 
 def updatestaff(request, employee_id):
-    staff = Staffdetails.objects.get(employee_id=employee_id)
-    staff['lastname'] = request.POST['lastname']
-    staff['email'] = request.POST['email']
-    staff['pincode'] = request.POST['pincode']
-    staff['firstname'] = request.POST['firstname']
-    staff['address'] = request.POST['address']
-    staff['city'] = request.POST['city']
+    try:
+        staff = Staffdetails.objects.get(employee_id=employee_id)
+    except:
+        return redirect('Manager:index')
+    print(staff)
+    staff.lastname = request.POST['lastname']
+    staff.email = request.POST['email']
+    staff.pincode = request.POST['pincode']
+    staff.firstname = request.POST['firstname']
+    staff.address = request.POST['address']
+    staff.city  = request.POST['city']
     staff.save()
-    return HttpResponse("Updated Staff Page")
+    staff = Staffdetails.objects.filter(employee_id=employee_id)
+    context = staff.values()
+    context = context[0]
+    return render(request, 'Registration/updatedstaff.html', context=context )
+    #return HttpResponse("Updated Staff Page")
 
 
 def admin_register(request):

@@ -14,24 +14,29 @@
                                     <input type="text" style="border: 0" value="Not Available" >
                                 {% else %}
                                     {% if prod.Food_Name in user_items %}
-                                        <a href="{% url 'eat_at_canteen:cart' %}"><input type="button" class="cart" value="Go to Cart"></a>
+                                        <a href="{% url 'eat_at_canteen:cart' username=username %}"><input type="button" class="cart" value="Go to Cart"></a>
                                     {% else %}
-                                        <a href="{% url 'eat_at_canteen:orderagain' prod.Food_id %}"><input type="button" class="cart" value="Add to Cart"></a>
+                                        <a href="{% url 'eat_at_canteen:order' pk=prod.Food_id  username=username %}"><input type="button" class="cart" value="Add to Cart"></a>
                                     {% endif %}
                                 {% endif %}
                             </div>
                     </div>
             <br>
-    {% if list %}
+            <div class="reviewbtn"><a href="{% url 'Homepage:item_review'  pk=prod.Food_id username=username %}" >Write a Review</a></div>
+
+            {% if list %}
             <div class="adjuster">
-                Reviews:
-                {% if s %}
-                Rated {{ s }} by our customers
-                {% endif %}
-                <a name="review">
+
+                <a name="review" >
+                    <p style="background-color: white;font-size:20px">
+                    Reviews:
+                    {% if s %}
+                    Rated {{ s }} by our customers
+                    {% endif %}
+                    <br>
                   {% for review in list %}
 
-                    <p>{{ review.content }}</p>
+                    comment : {{ review.content }}</p>
                 <div class="star-rating">
                     <input id="star-5_{{ review.pk }}" type="radio" name="ratingnew_{{ review.pk }}" value="5" checked>
                     <label for="star-5_{{ review.pk }}" title="5 stars">
@@ -63,9 +68,9 @@
                 <div class = "blockquote-footer">by <cite>{{ review.customer }}</cite></div>
               {% endfor %}
               </a>
+
             {% endif %}
-                <span ><a href="{% url 'Homepage:item_review'  prod.Food_id  %}" >Write a Review</a></span>
-        </div>
+
     <div >
     </div>
 {% endblock %}

@@ -113,7 +113,7 @@ def CancelOrders(request, token_id):
         else:
             cancelStatus = 'not Cancelled'
     if cancelStatus == 'cancelled':
-
+        print(ordered.mailId)
         username = User.objects.get(email=ordered.mailId)
         print('asdasdasd')
         return index(request, username.username)

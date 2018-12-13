@@ -41,17 +41,11 @@ def default(request, category):
 
     contents = {'food': food}
     canteen_details = Admin.objects.all()
-    contents = {'food': food,'user_items':user_order_items}
+    contents = {'food': food, 'user_items': user_order_items}
     background = Admin_Image.objects.filter(categories='background')
     canteen_pics = Admin_Image.objects.filter(categories='workplace')
     service_pics = Admin_Image.objects.filter(categories='service')
-    if 'employee_id' in request.session:
-        user = request.session['employee_id']
-        staff = Staffdetails.objects.filter(employee_id=user)
-        content1 = {'staff': staff,'user_items':user_order_items}
-        return render(request, 'Homepage/category.html', contents, content1)
-    else:
-        return render(request, 'Homepage/Homepage.html',
+    return render(request, 'Homepage/Homepage.html',
                       {'background': background, 'canteen_pics': canteen_pics, 'service_pics': service_pics,
                        'food': food, 'canteenDetails': canteen_details})
 
@@ -69,16 +63,14 @@ def search(request):
     # return HttpResponse(details)
 
 
-def itemdetailview(request, pk):
+def itemdetailview(request, pk, username=None):
     pK = int(pk)
     prod = Food_items.objects.get(Food_id=pk)
     user_order_items = []
     b = item_review.objects.all()
-
-    if 'username' in request.session:
-        username = request.session['username']
-        FoodList = Food_items.objects.all()
-        CustomerFoodList = Order_User.objects.all()
+    FoodList = Food_items.objects.all()
+    CustomerFoodList = Order_User.objects.all()
+    if username:
         user = User.objects.get(username=username)
         email = user.email
 
@@ -93,7 +85,7 @@ def itemdetailview(request, pk):
             g = Order_Food.objects.filter(Status='dr', TokenId=token)
             for i in g:
                 user_order_items.append(i.FoodId.Food_Name)
-    j = 0
+        j = 0
     for i in b:
         if i.product == prod:
             j = 1
@@ -107,35 +99,38 @@ def itemdetailview(request, pk):
         s = str(prod.rating)
     listnew = []
 
-    contents = {'prod': prod, 'user_items': user_order_items, 'list': list, 's': s}
+    contents = {'prod': prod, 'user_items': user_order_items, 'list': list, 's': s,'username':username}
     return render(request, 'Homepage/itemdetail.html', contents)
 
 
-def reviewtext(request, pk):
+def reviewtext(request, pk,username):
     prod = Food_items.objects.get(Food_id=pk)
+
     if request.method == 'POST':
         form = writereview(request.POST)
         if form.is_valid():
             j = 0
             content = request.POST.get('content')
             rating = request.POST.get('ratingnew')
+            user=User.objects.get(username=username)
             d = item_review.objects.all()
+
             for i in d:
-                if i.customer == request.user and i.product == prod:
+                if i.customer == user and i.product == prod:
                     i.rating = rating
                     i.content = content
                     j = 1
                     i.save()
             if j == 0:
-                newreview = item_review.objects.create(product=prod, customer=request.user, content=content,
-                                                       rating=rating)
+                newreview = item_review.objects.create(product=prod, customer=user, content=content,
+                                                   rating=rating)
                 newreview.save()
 
             prod.rating = ((prod.rating * prod.No_of_reviews) + int(rating)) / (prod.No_of_reviews + 1)
             prod.rating = round(prod.rating, 1)
             prod.No_of_reviews = prod.No_of_reviews + 1
             prod.save()
-            return redirect('Homepage:specificitem', pk=pk)
+            return redirect('Homepage:specificitem', pk=pk,username=username)
     else:
         form = writereview()
     return render(request, 'Homepage/writereview.html', {'form': form})
