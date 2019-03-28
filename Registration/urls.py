@@ -22,15 +22,14 @@ urlpatterns = [
     path('activate_account/<uidb64>/<token>/',
          views.activate_account, name='activate_account'),
     # profile_edits
+    path('test2/', views.test2, name='test2'),
     path('editprofile/<str:username>', views.editprofile, name='editprofile'),
     path('updateprofile/<str:username>', views.updateprofile, name="updateprofile"),
-    path('editadmin/<str:admin_id>/', views.editadmin, name='editadmin'),
-    path('updateadmin/<str:admin_id>/', views.updateadmin, name="updateadmin"),
-    path('editstaff/', views.editstaff, name='editstaff'),
-    path('updatestaff/', views.updatestaff, name="updatestaff"),
+    path('editadmin/<str:admin_id>', views.editadmin, name='editadmin'),
+    path('updateadmin/<str:admin_id>', views.updateadmin, name="updateadmin"),
+    path('updatestaff/<str:employee_id>/', views.updatestaff, name="updatestaff"),
     path('change_password/>',views.change_user_password,name="change_user_password"),
     path('reset/<uidb64>/<token>/',views.user_password_reset, name='user_password_reset'),
     path('forgotpassword/',views.change_user_password,name='fp'),
-
-
+    path('editstaff/<str:employee_id>/', views.editstaff, name='editstaff'),
 ]

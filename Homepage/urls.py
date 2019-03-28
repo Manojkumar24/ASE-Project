@@ -6,6 +6,6 @@ app_name = "Homepage"
 urlpatterns = [
     path("<str:category>/", views.default, name="home"),
     path("searchdb", views.search, name='search'),
-    path("<int:pk>/", views.itemdetailview, name='specificitem'),
-    path('review/<int:pk>/', views.reviewtext, name='item_review'),
+    path("itemdetail/<int:pk>/<str:username>", views.itemdetailview, name='specificitem'),
+    path('review/<int:pk>/<str:username>', views.reviewtext, name='item_review'),
 ]
